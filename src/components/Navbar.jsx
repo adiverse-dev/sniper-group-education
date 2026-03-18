@@ -88,7 +88,7 @@ function Navbar() {
                 </button>
 
                 {/* Dropdown Panel */}
-                <div style={{ position: "absolute", top: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)", background: "white", borderRadius: "16px", padding: "10px", minWidth: "290px", boxShadow: "0 20px 60px rgba(13,27,62,0.15)", border: "1px solid #e8edf4", transition: "all 0.2s ease", opacity: dropOpen ? 1 : 0, transform: dropOpen ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(8px)", pointerEvents: dropOpen ? "auto" : "none", zIndex: 100 }}>
+                <div style={{ position: "absolute", top: "calc(100% + 8px)", left: "50%", background: "white", borderRadius: "16px", padding: "10px", minWidth: "290px", boxShadow: "0 20px 60px rgba(13,27,62,0.15)", border: "1px solid #e8edf4", transition: "all 0.2s ease", opacity: dropOpen ? 1 : 0, transform: dropOpen ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(8px)", pointerEvents: dropOpen ? "auto" : "none", zIndex: 100 }}>
                   <div style={{ fontSize: "10px", fontWeight: 700, color: "#94a3b8", letterSpacing: "2px", textTransform: "uppercase", padding: "0 10px 10px", borderBottom: "1px solid #f1f5f9", marginBottom: "6px" }}>Our Three Wings</div>
                   {wings.map((w) => {
                     const active = isActive(w.path);

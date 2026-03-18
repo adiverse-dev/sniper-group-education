@@ -151,4 +151,4 @@ export default function WhatsappButton() {
       <style>{`@keyframes wapulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }`}</style>
     </div>
   )
-}np
+}

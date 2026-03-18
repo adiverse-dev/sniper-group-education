@@ -8,7 +8,7 @@ import VideoSection from "../sections/VideoSection";
 import HeroSlider from "../sections/HeroSlider";
 import WhatAreYouLookingFor from "../sections/WhatAreYouLookingFor";
 import MarqueeStrip from "../sections/MarqueeStrip";
-import CallbackSection from "../sections/CallbackSection";
+
 
 const SectionTitle = ({ tag, title, subtitle }) => (
   <div className="text-center mb-14">
@@ -241,7 +241,6 @@ const HomePortal = () => {
         </div>
       </section>
 
-      <CallbackSection/>
 
     </div>
   );
