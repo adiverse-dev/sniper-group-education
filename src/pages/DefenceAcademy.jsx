@@ -9,6 +9,8 @@ const heroSlides = [
     stats: [{ val: "1,200+", lab: "Selections" }, { val: "15+", lab: "Years" }, { val: "98%", lab: "Success Rate" }, { val: "50+", lab: "Faculty" }],
     bg: "linear-gradient(135deg, #0d1b3e 0%, #1a3260 60%, #0d1b3e 100%)",
     glow: "rgba(255,153,0,0.15)",
+    // Unsplash free photo - NDA/defence cadet style student
+    photo: "./img/students/Untitledo.png",
   },
   {
     tag: "🏫 AISSEE",
@@ -18,6 +20,7 @@ const heroSlides = [
     stats: [{ val: "Class 6 & 9", lab: "Entry" }, { val: "350 Marks", lab: "Total" }, { val: "4 Subjects", lab: "Syllabus" }, { val: "1 Year", lab: "Course" }],
     bg: "linear-gradient(135deg, #0d1b3e 0%, #1a2d4e 60%, #0d1b3e 100%)",
     glow: "rgba(255,153,0,0.15)",
+    photo: "./img/students/AISSEE.png",
   },
   {
     tag: "⭐ UPSSEE",
@@ -27,15 +30,17 @@ const heroSlides = [
     stats: [{ val: "State Level", lab: "Exam" }, { val: "250 Marks", lab: "Total" }, { val: "4 Subjects", lab: "Syllabus" }, { val: "1 Year", lab: "Course" }],
     bg: "linear-gradient(135deg, #0d1b3e 0%, #1a2d1a 60%, #0d1b3e 100%)",
     glow: "rgba(255,153,0,0.12)",
+    photo: "./img/students/UPSSEE.png",
   },
   {
-    tag: "🎖️ RIMS",
+    tag: "🎖️ RMS",
     title: "Rashtriya Indian",
     highlight: "Military School",
     desc: "Elite military school preparation combining academic excellence with military discipline and viva voce coaching.",
     stats: [{ val: "400 Marks", lab: "Total" }, { val: "Written + Viva", lab: "Pattern" }, { val: "Class 6 & 9", lab: "Entry" }, { val: "1 Year", lab: "Course" }],
     bg: "linear-gradient(135deg, #0d1b3e 0%, #2d1b0e 60%, #0d1b3e 100%)",
     glow: "rgba(255,153,0,0.15)",
+    photo: "./img/students/rms.png",
   },
   {
     tag: "🏆 RIMC",
@@ -45,6 +50,7 @@ const heroSlides = [
     stats: [{ val: "500 Marks", lab: "Total" }, { val: "SHAPE-1", lab: "Medical" }, { val: "Age 11.5–13", lab: "Eligibility" }, { val: "1 Year", lab: "Course" }],
     bg: "linear-gradient(135deg, #0d1b3e 0%, #2d0d1b 60%, #0d1b3e 100%)",
     glow: "rgba(255,153,0,0.15)",
+    photo: "./img/students/RIMC.png",
   },
   {
     tag: "🛡️ CDS & NDA",
@@ -54,6 +60,7 @@ const heroSlides = [
     stats: [{ val: "UPSC", lab: "Conducting Body" }, { val: "SSB 5 Days", lab: "Interview" }, { val: "900 Marks", lab: "NDA Total" }, { val: "1–2 Years", lab: "Course" }],
     bg: "linear-gradient(135deg, #0d1b3e 0%, #1a1a3e 60%, #0d1b3e 100%)",
     glow: "rgba(255,153,0,0.18)",
+    photo: "./img/students/NDA.png",
   },
   {
     tag: "✈️ Air Force X & Y",
@@ -63,12 +70,15 @@ const heroSlides = [
     stats: [{ val: "Age 17.5–21", lab: "Eligibility" }, { val: "PFT + Written", lab: "Pattern" }, { val: "6 Months", lab: "Course" }, { val: "MCQ Based", lab: "Exam Type" }],
     bg: "linear-gradient(135deg, #0d1b3e 0%, #0d2d3e 60%, #0d1b3e 100%)",
     glow: "rgba(255,153,0,0.12)",
+    photo: "./img/students/XY.jpeg",
   },
 ];
 
 const courses = [
   {
     id: "aissee", name: "AISSEE", full: "All India Sainik School Entrance Exam", fee: "₹35,000", icon: "🏫",
+    // Unsplash free photo - young school student
+    photo: "./img/students/AISSEE.png",
     desc: "Comprehensive preparation for All India Sainik School Entrance Examination for Class 6 and Class 9 admissions across all Sainik Schools in India.",
     eligibility: ["Class 6 Entry: Age 10–12 years", "Class 9 Entry: Age 13–15 years", "Indian Nationals only", "Minimum 50% marks in previous class"],
     examPattern: [{ subject: "Mathematics", marks: "150", type: "MCQ" }, { subject: "General Knowledge", marks: "75", type: "MCQ" }, { subject: "Language (Hindi/English)", marks: "75", type: "MCQ" }, { subject: "Intelligence", marks: "50", type: "MCQ" }],
@@ -77,6 +87,7 @@ const courses = [
   },
   {
     id: "upssee", name: "UPSSEE", full: "Uttar Pradesh Sainik School Entrance Exam", fee: "₹30,000", icon: "⭐",
+    photo: "./img/students/UPSSEE.png",
     desc: "Specialized coaching for Uttar Pradesh Sainik School Entrance Examination — state level exam for admission to UP Sainik Schools.",
     eligibility: ["Class 6 Entry: Age 10–12 years", "Class 9 Entry: Age 13–15 years", "UP Domicile preferred", "Minimum 45% in previous class"],
     examPattern: [{ subject: "Mathematics", marks: "100", type: "MCQ" }, { subject: "General Knowledge", marks: "50", type: "MCQ" }, { subject: "Hindi", marks: "50", type: "MCQ" }, { subject: "Mental Ability", marks: "50", type: "MCQ" }],
@@ -84,7 +95,8 @@ const courses = [
     physical: ["Standard physical fitness", "Medical test by school authority", "No serious health conditions"],
   },
   {
-    id: "rims", name: "RIMS", full: "Rashtriya Indian Military School", fee: "₹38,000", icon: "🎖️",
+    id: "rims", name: "RMS", full: "Rashtriya  Military School", fee: "₹38,000", icon: "🎖️",
+    photo: "./img/students/rms.png",
     desc: "Expert coaching for RIMS entrance examination — one of India's premier military schools offering world-class education combined with military training.",
     eligibility: ["Class 6 Entry: Age 10–12 years", "Class 9 Entry: Age 13–15 years", "All Indian nationals", "Good academic record required"],
     examPattern: [{ subject: "Mathematics", marks: "200", type: "Written" }, { subject: "English", marks: "100", type: "Written" }, { subject: "General Knowledge", marks: "50", type: "Written" }, { subject: "Viva Voce", marks: "50", type: "Interview" }],
@@ -93,6 +105,7 @@ const courses = [
   },
   {
     id: "rimc", name: "RIMC", full: "Rashtriya Indian Military College", fee: "₹40,000", icon: "🏆",
+    photo: "./img/students/RIMC.png",
     desc: "Intensive preparation for RIMC Dehradun — the most prestigious military college in India, gateway to National Defence Academy.",
     eligibility: ["Age: 11.5 to 13 years", "Class 7 studying or passed", "Only male candidates", "Strong academic background needed"],
     examPattern: [{ subject: "Mathematics", marks: "200", type: "Written" }, { subject: "English", marks: "125", type: "Written" }, { subject: "GK & Current Affairs", marks: "75", type: "Written" }, { subject: "Viva Voce", marks: "100", type: "Interview" }],
@@ -101,6 +114,7 @@ const courses = [
   },
   {
     id: "cds-nda", name: "CDS & NDA", full: "Combined Defence Services & National Defence Academy", fee: "₹45,000", icon: "🛡️",
+    photo: "./img/students/NDA.png",
     desc: "Complete coaching for NDA and CDS — India's top defence entrance exams conducted by UPSC for Army, Navy and Air Force.",
     eligibility: ["NDA: Age 16.5–19.5 years, Class 12 passed/appearing", "CDS: Age 19–25 years, Graduate degree", "NDA: Male & Female both", "Indian Nationals only"],
     examPattern: [{ subject: "NDA — Mathematics", marks: "300", type: "Written" }, { subject: "NDA — GAT (English+GK)", marks: "600", type: "Written" }, { subject: "CDS — English", marks: "100", type: "Written" }, { subject: "CDS — GK + Math", marks: "200", type: "Written" }],
@@ -109,6 +123,7 @@ const courses = [
   },
   {
     id: "airforce", name: "Air Force X & Y", full: "Indian Air Force Group X & Y Examination", fee: "₹25,000", icon: "✈️",
+    photo: "./img/students/XY.jpeg",
     desc: "Focused coaching for Indian Air Force Agniveer Vayu Group X (Technical) and Group Y (Non-Technical) examination.",
     eligibility: ["Age: 17.5 to 21 years", "Group X: Class 12 with Physics & Math (60%)", "Group Y: Class 12 any stream (50%)", "Indian male nationals only"],
     examPattern: [{ subject: "English", marks: "20", type: "MCQ" }, { subject: "Physics (Group X)", marks: "25", type: "MCQ" }, { subject: "Mathematics (Group X)", marks: "25", type: "MCQ" }, { subject: "Reasoning & GK (Group Y)", marks: "30", type: "MCQ" }],
@@ -118,19 +133,50 @@ const courses = [
 ];
 
 const features = [
-  { icon: "🎯", title: "Expert Faculty",          desc: "Ex-defence officers and SSB interview coaches with 15+ years experience." },
-  { icon: "📚", title: "Complete Study Material",  desc: "Comprehensive, exam-focused study material updated every year." },
-  { icon: "💪", title: "Physical Training",        desc: "Regular PT sessions to build fitness levels required for defence services." },
-  { icon: "🧪", title: "Mock Tests Series",        desc: "Weekly mock tests and full-length practice papers to boost performance." },
-  { icon: "🏆", title: "SSB Guidance",             desc: "Dedicated SSB preparation with psychology tests and GTO tasks." },
-  { icon: "👨‍👩‍👧", title: "Personal Mentoring",     desc: "One-on-one mentoring sessions to identify and overcome weak areas." },
+  {
+    icon: "🎯", title: "Expert Faculty",
+    desc: "Ex-defence officers and SSB interview coaches with 15+ years experience.",
+    // Teacher explaining in classroom - Unsplash free
+    photo: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80&fit=crop&crop=center",
+  },
+  {
+    icon: "📚", title: "Complete Study Material",
+    desc: "Comprehensive, exam-focused study material updated every year.",
+    // Student studying books - Unsplash free
+    photo: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80&fit=crop&crop=center",
+  },
+  {
+    icon: "💪", title: "Physical Training",
+    desc: "Regular PT sessions to build fitness levels required for defence services.",
+    // Physical training / running - Unsplash free
+    photo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop&crop=center",
+  },
+  {
+    icon: "🧪", title: "Mock Tests Series",
+    desc: "Weekly mock tests and full-length practice papers to boost performance.",
+    // Students writing exam - Unsplash free
+    photo: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=80&fit=crop&crop=center",
+  },
+  {
+    icon: "🏆", title: "SSB Guidance",
+    desc: "Dedicated SSB preparation with psychology tests and GTO tasks.",
+    // Group discussion / teamwork - Unsplash free
+    photo: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&q=80&fit=crop&crop=center",
+  },
+  {
+    icon: "👨‍👩‍👧", title: "Personal Mentoring",
+    desc: "One-on-one mentoring sessions to identify and overcome weak areas.",
+    // Teacher student 1-on-1 - Unsplash free
+    photo: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80&fit=crop&crop=center",
+  },
 ];
 
 const DefenceAcademy = () => {
-  const [current, setCurrent]           = useState(0);
+  const [current, setCurrent]               = useState(0);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [activeDetail, setActiveDetail] = useState("eligibility");
-  const [animating, setAnimating]       = useState(false);
+  const [activeDetail, setActiveDetail]     = useState("eligibility");
+  const [animating, setAnimating]           = useState(false);
+  const [imgError, setImgError]             = useState({});
 
   const goTo = useCallback((index) => {
     setAnimating(true);
@@ -161,21 +207,120 @@ const DefenceAcademy = () => {
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
 
-      {/* ── HERO SLIDER ── */}
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
+
+        @keyframes heroPhotoIn {
+          from { opacity: 0; transform: translateY(30px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes cardPhotoZoom {
+          from { transform: scale(1.08); }
+          to   { transform: scale(1); }
+        }
+
+        .hero-photo-wrap {
+          position: relative;
+          width: 260px;
+          height: 320px;
+          flex-shrink: 0;
+        }
+        .hero-photo-wrap img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top center;
+          border-radius: 20px 20px 60px 20px;
+          display: block;
+          animation: heroPhotoIn 0.5s ease both;
+          box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+        }
+        /* Gold border glow around hero photo */
+        .hero-photo-wrap::before {
+          content: '';
+          position: absolute;
+          inset: -3px;
+          border-radius: 22px 22px 62px 22px;
+          background: linear-gradient(135deg, #FF9933, rgba(255,153,0,0.2), #FF9933);
+          z-index: -1;
+        }
+        /* Decorative badge on photo */
+        .hero-photo-badge {
+          position: absolute;
+          bottom: 16px;
+          left: -16px;
+          background: linear-gradient(135deg, #0d1b3e, #1a3260);
+          border: 1.5px solid rgba(255,153,0,0.5);
+          border-radius: 12px;
+          padding: 8px 14px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        /* Course card photo */
+        .course-card-photo {
+          position: relative;
+          height: 180px;
+          overflow: hidden;
+          border-radius: 14px 14px 0 0;
+        }
+        .course-card-photo img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top center;
+          display: block;
+          transition: transform 0.5s ease;
+          animation: cardPhotoZoom 0.6s ease both;
+        }
+        .course-card:hover .course-card-photo img {
+          transform: scale(1.06);
+        }
+        /* Fade photo into card */
+        .course-card-photo::after {
+          content: '';
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          height: 70px;
+          background: linear-gradient(to top, white, transparent);
+          pointer-events: none;
+        }
+        .course-card-photo-selected::after {
+          background: linear-gradient(to top, #1a3260, transparent) !important;
+        }
+        /* Fee badge on card photo */
+        .photo-fee-badge {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          padding: 5px 12px;
+          border-radius: 999px;
+          font-size: 13px;
+          font-weight: 700;
+          background: rgba(255,153,0,0.92);
+          color: white;
+          backdrop-filter: blur(4px);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+          z-index: 2;
+        }
+
         @media (max-width: 768px) {
           .hero-inner   { flex-direction: column !important; padding: 28px 20px 40px !important; gap: 20px !important; }
           .hero-left    { text-align: center !important; width: 100% !important; min-width: 0 !important; }
-          .hero-right   { display: none !important; }
+          .hero-photo-wrap { width: 180px !important; height: 220px !important; margin: 0 auto; }
           .hero-stats   { justify-content: center !important; }
           .cards-grid   { grid-template-columns: 1fr !important; }
           .detail-tabs  { overflow-x: auto; }
           .detail-body  { padding: 20px !important; }
           .detail-head  { padding: 20px !important; flex-direction: column !important; }
           .features-grid{ grid-template-columns: 1fr !important; }
+          .hero-photo-badge { left: 0 !important; }
         }
       `}</style>
 
+      {/* ── HERO SLIDER ── */}
       <div style={{ background: "#ffffff", padding: "20px 16px 24px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
           <div style={{
@@ -190,10 +335,18 @@ const DefenceAcademy = () => {
             {/* Glow */}
             <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "300px", height: "300px", borderRadius: "50%", background: `radial-gradient(circle, ${slide.glow}, transparent 70%)`, pointerEvents: "none", transition: "all 0.6s ease" }} />
 
-            {/* Content */}
-            <div className="hero-inner" style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", alignItems: "center", padding: "40px 56px 48px", opacity: animating ? 0 : 1, transform: animating ? "translateY(12px)" : "translateY(0)", transition: "all 0.3s ease", gap: "48px" }}>
+            {/* Content row */}
+            <div className="hero-inner" style={{
+              position: "relative", zIndex: 1, width: "100%",
+              display: "flex", alignItems: "center",
+              padding: "40px 56px 48px",
+              opacity: animating ? 0 : 1,
+              transform: animating ? "translateY(12px)" : "translateY(0)",
+              transition: "all 0.3s ease",
+              gap: "48px",
+            }}>
 
-              {/* Left */}
+              {/* Left text */}
               <div className="hero-left" style={{ flex: 1, minWidth: 0 }}>
                 <span style={{ display: "inline-block", padding: "5px 18px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "16px", border: "1px solid rgba(255,153,0,0.5)", color: "#FF9933", background: "rgba(255,153,0,0.12)" }}>
                   {slide.tag}
@@ -214,16 +367,26 @@ const DefenceAcademy = () => {
                 </div>
               </div>
 
-              {/* Right */}
-              <div className="hero-right" style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
-                <div style={{ width: "90px", height: "90px", borderRadius: "50%", background: "rgba(255,153,0,0.15)", border: "2px solid rgba(255,153,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "42px" }}>🛡️</div>
-                <div style={{ textAlign: "center" }}>
-                  <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: "6px" }}>OUR ACADEMY</p>
-                  <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900, fontSize: "clamp(20px, 2.4vw, 36px)", color: "white", lineHeight: 1.2, marginBottom: "4px" }}>Sniper</h2>
-                  <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900, fontSize: "clamp(20px, 2.4vw, 36px)", color: "#FF9933", lineHeight: 1.2, marginBottom: "6px" }}>Defence Academy</h2>
-                  <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", fontWeight: 500, letterSpacing: "1px" }}>NDA • CDS • SSB • Sainik School</p>
+              {/* ── RIGHT: STUDENT PHOTO ── */}
+              <div className="hero-photo-wrap">
+                <img
+                  key={slide.photo}
+                  src={slide.photo}
+                  alt="Defence student"
+                  onError={(e) => {
+                    e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&q=80&fit=crop&crop=top";
+                  }}
+                />
+                {/* Badge below photo */}
+                <div className="hero-photo-badge">
+                  <span style={{ fontSize: "18px" }}>🛡️</span>
+                  <div>
+                    <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)", letterSpacing: "1.5px", textTransform: "uppercase" }}>Since 2009</div>
+                    <div style={{ fontSize: "13px", fontWeight: 700, color: "#FF9933" }}>Sniper Defence</div>
+                  </div>
                 </div>
               </div>
+
             </div>
 
             {/* Arrows */}
@@ -261,20 +424,53 @@ const DefenceAcademy = () => {
             {courses.map((course) => {
               const isSelected = selectedCourse?.id === course.id;
               return (
-                <div key={course.id} onClick={() => handleCardClick(course)}
-                  style={{ background: isSelected ? "linear-gradient(135deg, #0d1b3e, #1a3260)" : "white", borderRadius: "16px", padding: "28px", border: isSelected ? "2px solid #FF9933" : "1.5px solid #eef1f8", borderTop: "4px solid #FF9933", cursor: "pointer", transition: "all 0.3s ease", boxShadow: isSelected ? "0 12px 36px rgba(255,153,0,0.2)" : "none" }}
-                  onMouseEnter={e => { if (!isSelected) { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 28px rgba(255,153,0,0.12)"; e.currentTarget.style.borderColor = "#FF9933"; }}}
-                  onMouseLeave={e => { if (!isSelected) { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "#eef1f8"; }}}
+                <div
+                  key={course.id}
+                  className="course-card"
+                  onClick={() => handleCardClick(course)}
+                  style={{
+                    background: isSelected ? "linear-gradient(135deg, #0d1b3e, #1a3260)" : "white",
+                    borderRadius: "16px",
+                    border: isSelected ? "2px solid #FF9933" : "1.5px solid #eef1f8",
+                    borderTop: "none",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    boxShadow: isSelected ? "0 12px 36px rgba(255,153,0,0.2)" : "0 2px 12px rgba(0,0,0,0.06)",
+                    overflow: "hidden",
+                  }}
+                  onMouseEnter={e => { if (!isSelected) { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 16px 36px rgba(255,153,0,0.14)"; e.currentTarget.style.borderColor = "#FF9933"; }}}
+                  onMouseLeave={e => { if (!isSelected) { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; e.currentTarget.style.borderColor = "#eef1f8"; }}}
                 >
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
-                    <div style={{ width: "56px", height: "56px", borderRadius: "14px", background: isSelected ? "rgba(255,153,0,0.15)" : "rgba(255,153,0,0.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "26px" }}>{course.icon}</div>
-                    <span style={{ padding: "5px 12px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, background: isSelected ? "rgba(255,153,0,0.2)" : "rgba(255,153,0,0.1)", color: "#FF9933" }}>{course.fee}</span>
+                  {/* ── PHOTO TOP ── */}
+                  <div className={`course-card-photo ${isSelected ? "course-card-photo-selected" : ""}`}
+                    style={{ background: isSelected ? "linear-gradient(to top, #1a3260, transparent)" : undefined }}
+                  >
+                    <img
+                      src={course.photo}
+                      alt={course.name}
+                      onError={(e) => {
+                        e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop";
+                      }}
+                    />
+                    {/* Gold top bar */}
+                    <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #FF9933, #ffb347)", zIndex: 3 }} />
+                    {/* Fee badge */}
+                    <div className="photo-fee-badge">{course.fee}</div>
                   </div>
-                  <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "20px", fontWeight: 700, color: isSelected ? "white" : "#0d1b3e", marginBottom: "4px", lineHeight: 1.3 }}>{course.name}</h3>
-                  <p style={{ fontSize: "15px", fontWeight: 700, color: "#FF9933", marginBottom: "12px" }}>{course.full}</p>
-                  <p style={{ fontSize: "15px", color: isSelected ? "rgba(255,255,255,0.8)" : "#334155", lineHeight: 1.7, marginBottom: "20px" }}>{course.desc}</p>
-                  <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "14px", fontWeight: 700, color: "#FF9933" }}>
-                    {isSelected ? "▲ Hide Details" : "▼ View Details"}
+
+                  {/* ── CARD BODY ── */}
+                  <div style={{ padding: "20px 24px 24px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
+                      <div style={{ width: "42px", height: "42px", borderRadius: "12px", background: isSelected ? "rgba(255,153,0,0.15)" : "rgba(255,153,0,0.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", flexShrink: 0 }}>{course.icon}</div>
+                      <div>
+                        <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "18px", fontWeight: 700, color: isSelected ? "white" : "#0d1b3e", margin: 0, lineHeight: 1.2 }}>{course.name}</h3>
+                        <p style={{ fontSize: "12px", fontWeight: 600, color: "#FF9933", margin: 0 }}>{course.full}</p>
+                      </div>
+                    </div>
+                    <p style={{ fontSize: "14px", color: isSelected ? "rgba(255,255,255,0.75)" : "#334155", lineHeight: 1.7, marginBottom: "16px" }}>{course.desc}</p>
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", fontWeight: 700, color: "#FF9933" }}>
+                      {isSelected ? "▲ Hide Details" : "▼ View Details"}
+                    </div>
                   </div>
                 </div>
               );
@@ -369,7 +565,6 @@ const DefenceAcademy = () => {
 
               <div style={{ padding: "20px 36px", background: "white", borderTop: "1px solid #f1e8d8", display: "flex", gap: "12px", flexWrap: "wrap" }}>
                 <a href="tel:+917060155711" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "linear-gradient(135deg, #FF9933, #ffb347)", color: "white", padding: "12px 24px", borderRadius: "999px", fontSize: "15px", fontWeight: 700, textDecoration: "none", boxShadow: "0 4px 12px rgba(255,153,0,0.3)" }}>📞 Enquire About {selectedCourse.name}</a>
-
               </div>
             </div>
           )}
@@ -385,22 +580,79 @@ const DefenceAcademy = () => {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
             {features.map((f, i) => (
-              <div key={i} style={{ background: "white", borderRadius: "16px", padding: "28px", border: "1.5px solid #eef1f8", transition: "all 0.25s ease", display: "flex", gap: "16px", alignItems: "flex-start" }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = "#FF9933"; e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(255,153,0,0.12)"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "#eef1f8"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+              <div key={i}
+                style={{
+                  background: "white",
+                  borderRadius: "16px",
+                  border: "1.5px solid #eef1f8",
+                  transition: "all 0.3s ease",
+                  overflow: "hidden",
+                  cursor: "default",
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = "#FF9933";
+                  e.currentTarget.style.transform = "translateY(-6px)";
+                  e.currentTarget.style.boxShadow = "0 16px 36px rgba(255,153,0,0.14)";
+                  e.currentTarget.querySelector(".feat-img").style.transform = "scale(1.06)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = "#eef1f8";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)";
+                  e.currentTarget.querySelector(".feat-img").style.transform = "scale(1)";
+                }}
               >
-                <div style={{ width: "48px", height: "48px", borderRadius: "12px", background: "rgba(255,153,0,0.1)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", flexShrink: 0 }}>{f.icon}</div>
-                <div>
-                  <h3 style={{ fontSize: "17px", fontWeight: 700, color: "#0d1b3e", marginBottom: "6px" }}>{f.title}</h3>
-                  <p style={{ fontSize: "15px", color: "#334155", lineHeight: 1.7, margin: 0 }}>{f.desc}</p>
+                {/* ── PHOTO TOP ── */}
+                <div style={{ position: "relative", height: "170px", overflow: "hidden" }}>
+                  {/* Gold top bar */}
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #FF9933, #ffb347)", zIndex: 3 }} />
+
+                  <img
+                    className="feat-img"
+                    src={f.photo}
+                    alt={f.title}
+                    style={{
+                      width: "100%", height: "100%",
+                      objectFit: "cover", objectPosition: "center",
+                      display: "block",
+                      transition: "transform 0.5s ease",
+                    }}
+                    onError={(e) => {
+                      e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop";
+                    }}
+                  />
+
+                  {/* Fade bottom */}
+                  <div style={{
+                    position: "absolute", bottom: 0, left: 0, right: 0,
+                    height: "60px",
+                    background: "linear-gradient(to top, white, transparent)",
+                    pointerEvents: "none",
+                  }} />
+
+                  {/* Icon badge on photo */}
+                  <div style={{
+                    position: "absolute", bottom: "10px", left: "16px",
+                    width: "44px", height: "44px", borderRadius: "12px",
+                    background: "rgba(255,153,0,0.92)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "20px",
+                    boxShadow: "0 4px 12px rgba(255,153,0,0.35)",
+                    zIndex: 2,
+                  }}>{f.icon}</div>
+                </div>
+
+                {/* ── CONTENT ── */}
+                <div style={{ padding: "14px 20px 22px" }}>
+                  <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0d1b3e", marginBottom: "7px" }}>{f.title}</h3>
+                  <p style={{ fontSize: "14px", color: "#334155", lineHeight: 1.7, margin: 0 }}>{f.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-
 
     </div>
   );
