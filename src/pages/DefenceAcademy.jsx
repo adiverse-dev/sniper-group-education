@@ -9,7 +9,6 @@ const heroSlides = [
     stats: [{ val: "1,200+", lab: "Selections" }, { val: "15+", lab: "Years" }, { val: "98%", lab: "Success Rate" }, { val: "50+", lab: "Faculty" }],
     bg: "linear-gradient(135deg, #0d1b3e 0%, #1a3260 60%, #0d1b3e 100%)",
     glow: "rgba(255,153,0,0.15)",
-    // Unsplash free photo - NDA/defence cadet style student
     photo: "./img/students/Untitledo.png",
   },
   {
@@ -77,8 +76,8 @@ const heroSlides = [
 const courses = [
   {
     id: "aissee", name: "AISSEE", full: "All India Sainik School Entrance Exam", fee: "₹35,000", icon: "🏫",
-    // Unsplash free photo - young school student
-    photo: "./img/students/AISSEE.png",
+    photo: "./img/students/AISSEE.png", cat: "School Level",
+    stats: [{ v: "Class 6 & 9", l: "Entry" }, { v: "350", l: "Total Marks" }, { v: "1 Year", l: "Course" }],
     desc: "Comprehensive preparation for All India Sainik School Entrance Examination for Class 6 and Class 9 admissions across all Sainik Schools in India.",
     eligibility: ["Class 6 Entry: Age 10–12 years", "Class 9 Entry: Age 13–15 years", "Indian Nationals only", "Minimum 50% marks in previous class"],
     examPattern: [{ subject: "Mathematics", marks: "150", type: "MCQ" }, { subject: "General Knowledge", marks: "75", type: "MCQ" }, { subject: "Language (Hindi/English)", marks: "75", type: "MCQ" }, { subject: "Intelligence", marks: "50", type: "MCQ" }],
@@ -87,7 +86,8 @@ const courses = [
   },
   {
     id: "upssee", name: "UPSSEE", full: "Uttar Pradesh Sainik School Entrance Exam", fee: "₹30,000", icon: "⭐",
-    photo: "./img/students/UPSSEE.png",
+    photo: "./img/students/UPSSEE.png", cat: "School Level",
+    stats: [{ v: "State Level", l: "Exam" }, { v: "250", l: "Total Marks" }, { v: "1 Year", l: "Course" }],
     desc: "Specialized coaching for Uttar Pradesh Sainik School Entrance Examination — state level exam for admission to UP Sainik Schools.",
     eligibility: ["Class 6 Entry: Age 10–12 years", "Class 9 Entry: Age 13–15 years", "UP Domicile preferred", "Minimum 45% in previous class"],
     examPattern: [{ subject: "Mathematics", marks: "100", type: "MCQ" }, { subject: "General Knowledge", marks: "50", type: "MCQ" }, { subject: "Hindi", marks: "50", type: "MCQ" }, { subject: "Mental Ability", marks: "50", type: "MCQ" }],
@@ -95,8 +95,9 @@ const courses = [
     physical: ["Standard physical fitness", "Medical test by school authority", "No serious health conditions"],
   },
   {
-    id: "rims", name: "RMS", full: "Rashtriya  Military School", fee: "₹38,000", icon: "🎖️",
-    photo: "./img/students/rms.png",
+    id: "rims", name: "RMS", full: "Rashtriya Military School", fee: "₹38,000", icon: "🎖️",
+    photo: "./img/students/rms.png", cat: "School Level",
+    stats: [{ v: "400", l: "Total Marks" }, { v: "Written+Viva", l: "Pattern" }, { v: "1 Year", l: "Course" }],
     desc: "Expert coaching for RIMS entrance examination — one of India's premier military schools offering world-class education combined with military training.",
     eligibility: ["Class 6 Entry: Age 10–12 years", "Class 9 Entry: Age 13–15 years", "All Indian nationals", "Good academic record required"],
     examPattern: [{ subject: "Mathematics", marks: "200", type: "Written" }, { subject: "English", marks: "100", type: "Written" }, { subject: "General Knowledge", marks: "50", type: "Written" }, { subject: "Viva Voce", marks: "50", type: "Interview" }],
@@ -105,7 +106,8 @@ const courses = [
   },
   {
     id: "rimc", name: "RIMC", full: "Rashtriya Indian Military College", fee: "₹40,000", icon: "🏆",
-    photo: "./img/students/RIMC.png",
+    photo: "./img/students/RIMC.png", cat: "College Level",
+    stats: [{ v: "500", l: "Total Marks" }, { v: "SHAPE-1", l: "Medical Std" }, { v: "Age 11.5–13", l: "Eligibility" }],
     desc: "Intensive preparation for RIMC Dehradun — the most prestigious military college in India, gateway to National Defence Academy.",
     eligibility: ["Age: 11.5 to 13 years", "Class 7 studying or passed", "Only male candidates", "Strong academic background needed"],
     examPattern: [{ subject: "Mathematics", marks: "200", type: "Written" }, { subject: "English", marks: "125", type: "Written" }, { subject: "GK & Current Affairs", marks: "75", type: "Written" }, { subject: "Viva Voce", marks: "100", type: "Interview" }],
@@ -114,7 +116,8 @@ const courses = [
   },
   {
     id: "cds-nda", name: "CDS & NDA", full: "Combined Defence Services & National Defence Academy", fee: "₹45,000", icon: "🛡️",
-    photo: "./img/students/NDA.png",
+    photo: "./img/students/NDA.png", cat: "National Level",
+    stats: [{ v: "UPSC", l: "Conducted By" }, { v: "900", l: "NDA Marks" }, { v: "1–2 Yrs", l: "Course" }],
     desc: "Complete coaching for NDA and CDS — India's top defence entrance exams conducted by UPSC for Army, Navy and Air Force.",
     eligibility: ["NDA: Age 16.5–19.5 years, Class 12 passed/appearing", "CDS: Age 19–25 years, Graduate degree", "NDA: Male & Female both", "Indian Nationals only"],
     examPattern: [{ subject: "NDA — Mathematics", marks: "300", type: "Written" }, { subject: "NDA — GAT (English+GK)", marks: "600", type: "Written" }, { subject: "CDS — English", marks: "100", type: "Written" }, { subject: "CDS — GK + Math", marks: "200", type: "Written" }],
@@ -123,7 +126,8 @@ const courses = [
   },
   {
     id: "airforce", name: "Air Force X & Y", full: "Indian Air Force Group X & Y Examination", fee: "₹25,000", icon: "✈️",
-    photo: "./img/students/XY.jpeg",
+    photo: "./img/students/XY.jpeg", cat: "Armed Forces",
+    stats: [{ v: "Age 17.5–21", l: "Eligibility" }, { v: "PFT+Written", l: "Pattern" }, { v: "6 Months", l: "Course" }],
     desc: "Focused coaching for Indian Air Force Agniveer Vayu Group X (Technical) and Group Y (Non-Technical) examination.",
     eligibility: ["Age: 17.5 to 21 years", "Group X: Class 12 with Physics & Math (60%)", "Group Y: Class 12 any stream (50%)", "Indian male nationals only"],
     examPattern: [{ subject: "English", marks: "20", type: "MCQ" }, { subject: "Physics (Group X)", marks: "25", type: "MCQ" }, { subject: "Mathematics (Group X)", marks: "25", type: "MCQ" }, { subject: "Reasoning & GK (Group Y)", marks: "30", type: "MCQ" }],
@@ -136,47 +140,488 @@ const features = [
   {
     icon: "🎯", title: "Expert Faculty",
     desc: "Ex-defence officers and SSB interview coaches with 15+ years experience.",
-    // Teacher explaining in classroom - Unsplash free
     photo: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80&fit=crop&crop=center",
   },
   {
     icon: "📚", title: "Complete Study Material",
     desc: "Comprehensive, exam-focused study material updated every year.",
-    // Student studying books - Unsplash free
     photo: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80&fit=crop&crop=center",
   },
   {
     icon: "💪", title: "Physical Training",
     desc: "Regular PT sessions to build fitness levels required for defence services.",
-    // Physical training / running - Unsplash free
     photo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop&crop=center",
   },
   {
     icon: "🧪", title: "Mock Tests Series",
     desc: "Weekly mock tests and full-length practice papers to boost performance.",
-    // Students writing exam - Unsplash free
     photo: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=80&fit=crop&crop=center",
   },
   {
     icon: "🏆", title: "SSB Guidance",
     desc: "Dedicated SSB preparation with psychology tests and GTO tasks.",
-    // Group discussion / teamwork - Unsplash free
     photo: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&q=80&fit=crop&crop=center",
   },
   {
     icon: "👨‍👩‍👧", title: "Personal Mentoring",
     desc: "One-on-one mentoring sessions to identify and overcome weak areas.",
-    // Teacher student 1-on-1 - Unsplash free
     photo: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80&fit=crop&crop=center",
   },
 ];
 
+// ── COURSE DETAIL PANEL ──
+const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
+  const tabs = [
+    { key: "eligibility", label: "📋 Eligibility" },
+    { key: "exam", label: "📝 Exam Pattern" },
+    { key: "selection", label: "🏆 Selection Process" },
+    { key: "physical", label: "💪 Physical" },
+  ];
+
+  return (
+    <div
+      id="course-detail"
+      style={{
+        borderRadius: "20px",
+        overflow: "hidden",
+        border: "2px solid rgba(255,153,0,0.35)",
+        background: "#fffbf5",
+        marginTop: "8px",
+        marginBottom: "8px",
+      }}
+    >
+      {/* Header */}
+      <div
+        style={{
+          background: "linear-gradient(135deg, #0d1b3e, #1a3260)",
+          padding: "22px 28px",
+          display: "flex",
+          alignItems: "center",
+          gap: "16px",
+          flexWrap: "wrap",
+        }}
+      >
+        <div
+          style={{
+            width: "52px", height: "52px", borderRadius: "14px",
+            background: "rgba(255,153,0,0.15)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "26px", flexShrink: 0,
+          }}
+        >
+          {course.icon}
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: "16px", fontWeight: 700, color: "white", lineHeight: 1.3 }}>
+            {course.name} — {course.full}
+          </div>
+          <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginTop: "3px" }}>
+            {course.desc}
+          </div>
+        </div>
+        <div
+          style={{
+            padding: "10px 18px", background: "rgba(255,153,0,0.15)",
+            borderRadius: "10px", textAlign: "center", flexShrink: 0,
+          }}
+        >
+          <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.55)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "2px" }}>
+            Course Fee
+          </div>
+          <div style={{ fontSize: "20px", fontWeight: 800, color: "#FF9933" }}>{course.fee}</div>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div style={{ display: "flex", background: "white", borderBottom: "1px solid #f1e8d8", overflowX: "auto" }}>
+        {tabs.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={(e) => { e.stopPropagation(); setActiveDetail(tab.key); }}
+            style={{
+              padding: "14px 20px", fontSize: "13px", fontWeight: 600,
+              border: "none", background: "transparent", cursor: "pointer",
+              whiteSpace: "nowrap", transition: "all 0.2s",
+              borderBottom: activeDetail === tab.key ? "3px solid #FF9933" : "3px solid transparent",
+              color: activeDetail === tab.key ? "#FF9933" : "#64748b",
+            }}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: "28px 32px" }} onClick={(e) => e.stopPropagation()}>
+        {activeDetail === "eligibility" && (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px" }}>
+            {course.eligibility.map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex", alignItems: "flex-start", gap: "12px",
+                  padding: "14px 16px", background: "white",
+                  borderRadius: "12px", border: "1px solid #f1e8d8",
+                }}
+              >
+                <div
+                  style={{
+                    width: "26px", height: "26px", borderRadius: "50%",
+                    background: "rgba(255,153,0,0.15)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "13px", color: "#FF9933", flexShrink: 0, fontWeight: 700,
+                  }}
+                >
+                  ✓
+                </div>
+                <span style={{ fontSize: "14px", color: "#1e293b", fontWeight: 500, lineHeight: 1.6 }}>{item}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeDetail === "exam" && (
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: "380px" }}>
+              <thead>
+                <tr style={{ background: "rgba(255,153,0,0.08)" }}>
+                  <th style={{ padding: "12px 18px", textAlign: "left", fontSize: "12px", fontWeight: 700, color: "#0d1b3e", textTransform: "uppercase", letterSpacing: "1px" }}>Subject</th>
+                  <th style={{ padding: "12px 18px", textAlign: "center", fontSize: "12px", fontWeight: 700, color: "#0d1b3e", textTransform: "uppercase", letterSpacing: "1px" }}>Marks</th>
+                  <th style={{ padding: "12px 18px", textAlign: "center", fontSize: "12px", fontWeight: 700, color: "#0d1b3e", textTransform: "uppercase", letterSpacing: "1px" }}>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {course.examPattern.map((row, i) => (
+                  <tr key={i} style={{ borderBottom: "1px solid #f1e8d8", background: i % 2 === 0 ? "white" : "#fffbf5" }}>
+                    <td style={{ padding: "14px 18px", fontSize: "15px", color: "#1e293b", fontWeight: 500 }}>{row.subject}</td>
+                    <td style={{ padding: "14px 18px", textAlign: "center", fontSize: "17px", fontWeight: 800, color: "#FF9933" }}>{row.marks}</td>
+                    <td style={{ padding: "14px 18px", textAlign: "center" }}>
+                      <span style={{ padding: "4px 12px", borderRadius: "999px", fontSize: "12px", fontWeight: 600, background: "rgba(255,153,0,0.1)", color: "#FF9933" }}>{row.type}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {activeDetail === "selection" && (
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {course.selection.map((step, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "18px" }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
+                  <div
+                    style={{
+                      width: "44px", height: "44px", borderRadius: "50%",
+                      background: "linear-gradient(135deg, #FF9933, #ffb347)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: "16px", fontWeight: 800, color: "white",
+                    }}
+                  >
+                    {i + 1}
+                  </div>
+                  {i < course.selection.length - 1 && (
+                    <div style={{ width: "2px", height: "44px", background: "rgba(255,153,0,0.25)" }} />
+                  )}
+                </div>
+                <div style={{ paddingTop: "10px", paddingBottom: i < course.selection.length - 1 ? "28px" : "0" }}>
+                  <p style={{ fontSize: "15px", fontWeight: 600, color: "#1e293b", margin: 0 }}>{step}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeDetail === "physical" && (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px" }}>
+            {course.physical.map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex", alignItems: "flex-start", gap: "12px",
+                  padding: "14px 16px", background: "white",
+                  borderRadius: "12px", border: "1px solid #f1e8d8",
+                }}
+              >
+                <div style={{ fontSize: "20px", flexShrink: 0 }}>💪</div>
+                <span style={{ fontSize: "14px", color: "#1e293b", fontWeight: 500, lineHeight: 1.6 }}>{item}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* CTA */}
+      <div style={{ padding: "16px 32px", background: "white", borderTop: "1px solid #f1e8d8", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+        <a
+          href="tel:+917060155711"
+          style={{
+            display: "inline-flex", alignItems: "center", gap: "8px",
+            background: "linear-gradient(135deg, #FF9933, #ffb347)",
+            color: "white", padding: "11px 22px", borderRadius: "999px",
+            fontSize: "14px", fontWeight: 700, textDecoration: "none",
+            boxShadow: "0 4px 12px rgba(255,153,0,0.3)",
+          }}
+        >
+          📞 Enquire About {course.name}
+        </a>
+      </div>
+    </div>
+  );
+};
+
+// ── COURSE ROW (zigzag) ──
+const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDetail, setActiveDetail }) => {
+  const isReverse = index % 2 === 1;
+  const isSelected = selectedCourse?.id === course.id;
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const rowDirection = isMobile ? "column" : (isReverse ? "row-reverse" : "row");
+
+  const handleClick = () => {
+    if (isSelected) {
+      setSelectedCourse(null);
+    } else {
+      setSelectedCourse(course);
+      setActiveDetail("eligibility");
+      setTimeout(() => {
+        document.getElementById("course-detail")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  };
+
+  return (
+    <div style={{ marginBottom: "24px" }}>
+      {/* Row card */}
+      <div
+        onClick={handleClick}
+        style={{
+          display: "flex",
+          flexDirection: rowDirection,
+          borderRadius: "20px",
+          overflow: "hidden",
+          border: isSelected ? "2px solid #FF9933" : "1.5px solid #eef1f8",
+          background: "white",
+          cursor: "pointer",
+          transition: "border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease",
+          boxShadow: isSelected ? "0 12px 36px rgba(255,153,0,0.18)" : "0 2px 12px rgba(0,0,0,0.06)",
+        }}
+        onMouseEnter={(e) => {
+          if (!isSelected) {
+            e.currentTarget.style.borderColor = "#FF9933";
+            e.currentTarget.style.transform = "translateY(-4px)";
+            e.currentTarget.style.boxShadow = "0 16px 40px rgba(255,153,0,0.14)";
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isSelected) {
+            e.currentTarget.style.borderColor = "#eef1f8";
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)";
+          }
+        }}
+      >
+        {/* ── IMAGE SIDE ── */}
+        <div
+          style={{
+            width: isMobile ? "100%" : "42%",
+            flexShrink: 0,
+            position: "relative",
+            overflow: "hidden",
+            minHeight: isMobile ? "220px" : "260px",
+          }}
+        >
+          <img
+            src={course.photo}
+            alt={course.name}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "top center",
+              display: "block",
+              transition: "transform 0.5s ease",
+            }}
+            onError={(e) => {
+              e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop";
+            }}
+          />
+
+          {/* Gold top bar */}
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #FF9933, #ffb347)", zIndex: 3 }} />
+
+          {/* Fee badge — always top right on mobile */}
+          <div
+            style={{
+              position: "absolute", top: "14px", right: "14px",
+              background: "#FF9933", color: "white", fontSize: "13px",
+              fontWeight: 700, padding: "5px 14px", borderRadius: "999px",
+              zIndex: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+            }}
+          >
+            {course.fee}
+          </div>
+
+          {/* Category badge — always bottom left on mobile */}
+          <div
+            style={{
+              position: "absolute", bottom: "14px", left: "14px",
+              background: "rgba(13,27,62,0.85)", color: "white",
+              fontSize: "11px", fontWeight: 600, padding: "4px 12px",
+              borderRadius: "999px", zIndex: 2, letterSpacing: "0.5px",
+            }}
+          >
+            {course.cat}
+          </div>
+
+          {/* Fade edge — desktop only */}
+          {!isMobile && (
+            <div
+              style={{
+                position: "absolute", top: 0, bottom: 0, width: "80px",
+                ...(isReverse ? { left: 0, background: "linear-gradient(to right, white, transparent)" } : { right: 0, background: "linear-gradient(to left, white, transparent)" }),
+                pointerEvents: "none", zIndex: 1,
+              }}
+            />
+          )}
+        </div>
+
+        {/* ── CONTENT SIDE ── */}
+        <div
+          style={{
+            flex: 1,
+            padding: isMobile ? "20px 18px" : "32px 36px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            position: "relative",
+            background: isSelected ? "linear-gradient(135deg, #0d1b3e, #1a3260)" : "white",
+            transition: "background 0.3s ease",
+          }}
+        >
+          {/* Accent bar — desktop only */}
+          {!isMobile && (
+            <div
+              style={{
+                position: "absolute", top: 0, bottom: 0, width: "4px",
+                background: "linear-gradient(to bottom, #FF9933, #ffb347)",
+                ...(isReverse ? { right: 0 } : { left: 0 }),
+              }}
+            />
+          )}
+
+          {/* Icon + Name */}
+          <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "10px" }}>
+            <div
+              style={{
+                width: "52px", height: "52px", borderRadius: "14px",
+                background: isSelected ? "rgba(255,153,0,0.15)" : "rgba(255,153,0,0.08)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "26px", flexShrink: 0,
+              }}
+            >
+              {course.icon}
+            </div>
+            <div>
+              <div
+                style={{
+                  fontSize: "20px", fontWeight: 800,
+                  fontFamily: "'Playfair Display', Georgia, serif",
+                  color: isSelected ? "white" : "#0d1b3e",
+                  lineHeight: 1.2,
+                }}
+              >
+                {course.name}
+              </div>
+              <div style={{ fontSize: "12px", fontWeight: 600, color: "#FF9933", marginTop: "2px" }}>
+                {course.full}
+              </div>
+            </div>
+          </div>
+
+          {/* Description */}
+          <p
+            style={{
+              fontSize: "14px",
+              color: isSelected ? "rgba(255,255,255,0.75)" : "#334155",
+              lineHeight: 1.75,
+              marginBottom: "18px",
+            }}
+          >
+            {course.desc}
+          </p>
+
+          {/* Stats */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              border: `1px solid ${isSelected ? "rgba(255,153,0,0.3)" : "#eef1f8"}`,
+              borderRadius: "12px",
+              overflow: "hidden",
+              marginBottom: "18px",
+            }}
+          >
+            {course.stats.map((s, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: "10px 8px",
+                  textAlign: "center",
+                  borderRight: i < course.stats.length - 1 ? `1px solid ${isSelected ? "rgba(255,153,0,0.2)" : "#eef1f8"}` : "none",
+                }}
+              >
+                <div style={{ fontSize: "13px", fontWeight: 700, color: isSelected ? "white" : "#0d1b3e", lineHeight: 1.2 }}>
+                  {s.v}
+                </div>
+                <div style={{ fontSize: "10px", color: isSelected ? "rgba(255,255,255,0.5)" : "#94a3b8", textTransform: "uppercase", letterSpacing: "0.8px", marginTop: "2px" }}>
+                  {s.l}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* View details button */}
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "6px",
+                fontSize: "13px", fontWeight: 700, color: "#FF9933",
+                background: "rgba(255,153,0,0.1)",
+                border: "1px solid rgba(255,153,0,0.3)",
+                padding: "7px 16px", borderRadius: "999px",
+              }}
+            >
+              {isSelected ? "▲ Hide Details" : "▼ View Details"}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── DETAIL PANEL (opens below row) ── */}
+      {isSelected && (
+        <CourseDetail
+          course={course}
+          activeDetail={activeDetail}
+          setActiveDetail={setActiveDetail}
+        />
+      )}
+    </div>
+  );
+};
+
+// ── MAIN COMPONENT ──
 const DefenceAcademy = () => {
-  const [current, setCurrent]               = useState(0);
+  const [current, setCurrent] = useState(0);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [activeDetail, setActiveDetail]     = useState("eligibility");
-  const [animating, setAnimating]           = useState(false);
-  const [imgError, setImgError]             = useState({});
+  const [activeDetail, setActiveDetail] = useState("eligibility");
+  const [animating, setAnimating] = useState(false);
 
   const goTo = useCallback((index) => {
     setAnimating(true);
@@ -192,18 +637,6 @@ const DefenceAcademy = () => {
 
   const slide = heroSlides[current];
 
-  const handleCardClick = (course) => {
-    if (selectedCourse?.id === course.id) {
-      setSelectedCourse(null);
-    } else {
-      setSelectedCourse(course);
-      setActiveDetail("eligibility");
-      setTimeout(() => {
-        document.getElementById("course-detail")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
-    }
-  };
-
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
 
@@ -214,108 +647,39 @@ const DefenceAcademy = () => {
           from { opacity: 0; transform: translateY(30px) scale(0.97); }
           to   { opacity: 1; transform: translateY(0) scale(1); }
         }
-        @keyframes cardPhotoZoom {
-          from { transform: scale(1.08); }
-          to   { transform: scale(1); }
-        }
 
         .hero-photo-wrap {
-          position: relative;
-          width: 260px;
-          height: 320px;
-          flex-shrink: 0;
+          position: relative; width: 260px; height: 320px; flex-shrink: 0;
         }
         .hero-photo-wrap img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: top center;
-          border-radius: 20px 20px 60px 20px;
-          display: block;
+          width: 100%; height: 100%; object-fit: cover; object-position: top center;
+          border-radius: 20px 20px 60px 20px; display: block;
           animation: heroPhotoIn 0.5s ease both;
           box-shadow: 0 16px 40px rgba(0,0,0,0.35);
         }
-        /* Gold border glow around hero photo */
         .hero-photo-wrap::before {
-          content: '';
-          position: absolute;
-          inset: -3px;
+          content: ''; position: absolute; inset: -3px;
           border-radius: 22px 22px 62px 22px;
           background: linear-gradient(135deg, #FF9933, rgba(255,153,0,0.2), #FF9933);
           z-index: -1;
         }
-        /* Decorative badge on photo */
         .hero-photo-badge {
-          position: absolute;
-          bottom: 16px;
-          left: -16px;
+          position: absolute; bottom: 16px; left: -16px;
           background: linear-gradient(135deg, #0d1b3e, #1a3260);
-          border: 1.5px solid rgba(255,153,0,0.5);
-          border-radius: 12px;
-          padding: 8px 14px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
+          border: 1.5px solid rgba(255,153,0,0.5); border-radius: 12px;
+          padding: 8px 14px; display: flex; align-items: center; gap: 8px;
           box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
-
-        /* Course card photo */
-        .course-card-photo {
-          position: relative;
-          height: 180px;
-          overflow: hidden;
-          border-radius: 14px 14px 0 0;
-        }
-        .course-card-photo img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: top center;
-          display: block;
-          transition: transform 0.5s ease;
-          animation: cardPhotoZoom 0.6s ease both;
-        }
-        .course-card:hover .course-card-photo img {
-          transform: scale(1.06);
-        }
-        /* Fade photo into card */
-        .course-card-photo::after {
-          content: '';
-          position: absolute;
-          bottom: 0; left: 0; right: 0;
-          height: 70px;
-          background: linear-gradient(to top, white, transparent);
-          pointer-events: none;
-        }
-        .course-card-photo-selected::after {
-          background: linear-gradient(to top, #1a3260, transparent) !important;
-        }
-        /* Fee badge on card photo */
-        .photo-fee-badge {
-          position: absolute;
-          top: 12px;
-          right: 12px;
-          padding: 5px 12px;
-          border-radius: 999px;
-          font-size: 13px;
-          font-weight: 700;
-          background: rgba(255,153,0,0.92);
-          color: white;
-          backdrop-filter: blur(4px);
-          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-          z-index: 2;
-        }
+        .course-row-img:hover img { transform: scale(1.05); }
 
         @media (max-width: 768px) {
           .hero-inner   { flex-direction: column !important; padding: 28px 20px 40px !important; gap: 20px !important; }
           .hero-left    { text-align: center !important; width: 100% !important; min-width: 0 !important; }
           .hero-photo-wrap { width: 180px !important; height: 220px !important; margin: 0 auto; }
           .hero-stats   { justify-content: center !important; }
-          .cards-grid   { grid-template-columns: 1fr !important; }
-          .detail-tabs  { overflow-x: auto; }
-          .detail-body  { padding: 20px !important; }
-          .detail-head  { padding: 20px !important; flex-direction: column !important; }
-          .features-grid{ grid-template-columns: 1fr !important; }
+          .course-zigzag-row { flex-direction: column !important; }
+          .course-zigzag-img { width: 100% !important; min-height: 200px !important; }
+          .features-grid { grid-template-columns: 1fr !important; }
           .hero-photo-badge { left: 0 !important; }
         }
       `}</style>
@@ -329,13 +693,9 @@ const DefenceAcademy = () => {
             background: slide.bg, transition: "background 0.6s ease",
             boxShadow: "0 4px 24px rgba(0,0,0,0.18)",
           }}>
-            {/* Grid overlay */}
             <div style={{ position: "absolute", inset: 0, opacity: 0.04, backgroundImage: "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "44px 44px", pointerEvents: "none" }} />
-
-            {/* Glow */}
             <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "300px", height: "300px", borderRadius: "50%", background: `radial-gradient(circle, ${slide.glow}, transparent 70%)`, pointerEvents: "none", transition: "all 0.6s ease" }} />
 
-            {/* Content row */}
             <div className="hero-inner" style={{
               position: "relative", zIndex: 1, width: "100%",
               display: "flex", alignItems: "center",
@@ -345,8 +705,6 @@ const DefenceAcademy = () => {
               transition: "all 0.3s ease",
               gap: "48px",
             }}>
-
-              {/* Left text */}
               <div className="hero-left" style={{ flex: 1, minWidth: 0 }}>
                 <span style={{ display: "inline-block", padding: "5px 18px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "16px", border: "1px solid rgba(255,153,0,0.5)", color: "#FF9933", background: "rgba(255,153,0,0.12)" }}>
                   {slide.tag}
@@ -367,17 +725,13 @@ const DefenceAcademy = () => {
                 </div>
               </div>
 
-              {/* ── RIGHT: STUDENT PHOTO ── */}
               <div className="hero-photo-wrap">
                 <img
                   key={slide.photo}
                   src={slide.photo}
                   alt="Defence student"
-                  onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&q=80&fit=crop&crop=top";
-                  }}
+                  onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&q=80&fit=crop&crop=top"; }}
                 />
-                {/* Badge below photo */}
                 <div className="hero-photo-badge">
                   <span style={{ fontSize: "18px" }}>🛡️</span>
                   <div>
@@ -386,16 +740,13 @@ const DefenceAcademy = () => {
                   </div>
                 </div>
               </div>
-
             </div>
 
-            {/* Arrows */}
             <button onClick={() => goTo((current - 1 + heroSlides.length) % heroSlides.length)}
               style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", zIndex: 10, width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "1.5px solid rgba(255,255,255,0.25)", color: "white", fontSize: "18px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>‹</button>
             <button onClick={() => goTo((current + 1) % heroSlides.length)}
               style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", zIndex: 10, width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "1.5px solid rgba(255,255,255,0.25)", color: "white", fontSize: "18px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>›</button>
 
-            {/* Dots */}
             <div style={{ position: "absolute", bottom: "14px", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "7px", zIndex: 10 }}>
               {heroSlides.map((_, i) => (
                 <button key={i} onClick={() => goTo(i)}
@@ -406,168 +757,34 @@ const DefenceAcademy = () => {
         </div>
       </div>
 
-      {/* ── COURSES CARDS ── */}
+      {/* ── COURSES SECTION — ZIGZAG ── */}
       <section style={{ background: "#ffffff", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(255,153,0,0.3)", color: "#FF9933", background: "rgba(255,153,0,0.07)" }}>📋 Our Courses</span>
+          {/* Section heading */}
+          <div style={{ textAlign: "center", marginBottom: "52px" }}>
+            <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(255,153,0,0.3)", color: "#FF9933", background: "rgba(255,153,0,0.07)" }}>
+              📋 Our Courses
+            </span>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 36px)", color: "#0d1b3e", marginBottom: "10px" }}>
               Defence <span style={{ color: "#FF9933" }}>Programs</span>
             </h2>
-            <p style={{ color: "#334155", fontSize: "16px", maxWidth: "500px", margin: "0 auto" }}>
-              Click on any course card to view full details
+            <p style={{ color: "#334155", fontSize: "15px", maxWidth: "480px", margin: "0 auto" }}>
+              India's most trusted defence coaching since 2009 — click any course to explore details
             </p>
           </div>
 
-          {/* Cards Grid */}
-          <div className="cards-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", marginBottom: "40px" }}>
-            {courses.map((course) => {
-              const isSelected = selectedCourse?.id === course.id;
-              return (
-                <div
-                  key={course.id}
-                  className="course-card"
-                  onClick={() => handleCardClick(course)}
-                  style={{
-                    background: isSelected ? "linear-gradient(135deg, #0d1b3e, #1a3260)" : "white",
-                    borderRadius: "16px",
-                    border: isSelected ? "2px solid #FF9933" : "1.5px solid #eef1f8",
-                    borderTop: "none",
-                    cursor: "pointer",
-                    transition: "all 0.3s ease",
-                    boxShadow: isSelected ? "0 12px 36px rgba(255,153,0,0.2)" : "0 2px 12px rgba(0,0,0,0.06)",
-                    overflow: "hidden",
-                  }}
-                  onMouseEnter={e => { if (!isSelected) { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 16px 36px rgba(255,153,0,0.14)"; e.currentTarget.style.borderColor = "#FF9933"; }}}
-                  onMouseLeave={e => { if (!isSelected) { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; e.currentTarget.style.borderColor = "#eef1f8"; }}}
-                >
-                  {/* ── PHOTO TOP ── */}
-                  <div className={`course-card-photo ${isSelected ? "course-card-photo-selected" : ""}`}
-                    style={{ background: isSelected ? "linear-gradient(to top, #1a3260, transparent)" : undefined }}
-                  >
-                    <img
-                      src={course.photo}
-                      alt={course.name}
-                      onError={(e) => {
-                        e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop";
-                      }}
-                    />
-                    {/* Gold top bar */}
-                    <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #FF9933, #ffb347)", zIndex: 3 }} />
-                    {/* Fee badge */}
-                    <div className="photo-fee-badge">{course.fee}</div>
-                  </div>
-
-                  {/* ── CARD BODY ── */}
-                  <div style={{ padding: "20px 24px 24px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
-                      <div style={{ width: "42px", height: "42px", borderRadius: "12px", background: isSelected ? "rgba(255,153,0,0.15)" : "rgba(255,153,0,0.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", flexShrink: 0 }}>{course.icon}</div>
-                      <div>
-                        <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "18px", fontWeight: 700, color: isSelected ? "white" : "#0d1b3e", margin: 0, lineHeight: 1.2 }}>{course.name}</h3>
-                        <p style={{ fontSize: "12px", fontWeight: 600, color: "#FF9933", margin: 0 }}>{course.full}</p>
-                      </div>
-                    </div>
-                    <p style={{ fontSize: "14px", color: isSelected ? "rgba(255,255,255,0.75)" : "#334155", lineHeight: 1.7, marginBottom: "16px" }}>{course.desc}</p>
-                    <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", fontWeight: 700, color: "#FF9933" }}>
-                      {isSelected ? "▲ Hide Details" : "▼ View Details"}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* ── EXPANDED DETAIL ── */}
-          {selectedCourse && (
-            <div id="course-detail" style={{ background: "#fffbf5", borderRadius: "20px", border: "2px solid rgba(255,153,0,0.3)", boxShadow: "0 16px 48px rgba(255,153,0,0.1)", overflow: "hidden" }}>
-              <div style={{ background: "linear-gradient(135deg, #0d1b3e, #1a3260)", padding: "28px 36px", display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
-                <div style={{ width: "64px", height: "64px", borderRadius: "16px", background: "rgba(255,153,0,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "32px", flexShrink: 0 }}>{selectedCourse.icon}</div>
-                <div style={{ flex: 1 }}>
-                  <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "22px", fontWeight: 800, color: "white", marginBottom: "4px" }}>{selectedCourse.full}</h3>
-                  <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", margin: 0 }}>{selectedCourse.desc}</p>
-                </div>
-                <div style={{ padding: "10px 20px", background: "rgba(255,153,0,0.15)", borderRadius: "10px", textAlign: "center", flexShrink: 0 }}>
-                  <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", marginBottom: "2px", textTransform: "uppercase", letterSpacing: "1px" }}>Course Fee</div>
-                  <div style={{ fontSize: "20px", fontWeight: 800, color: "#FF9933" }}>{selectedCourse.fee}</div>
-                </div>
-              </div>
-
-              <div style={{ display: "flex", borderBottom: "1px solid #f1e8d8", background: "white", overflowX: "auto" }}>
-                {[{ key: "eligibility", label: "📋 Eligibility" }, { key: "exam", label: "📝 Exam Pattern" }, { key: "selection", label: "🏆 Selection Process" }, { key: "physical", label: "💪 Physical Requirements" }].map((tab) => (
-                  <button key={tab.key} onClick={(e) => { e.stopPropagation(); setActiveDetail(tab.key); }}
-                    style={{ padding: "16px 22px", fontSize: "14px", fontWeight: 600, border: "none", borderBottom: activeDetail === tab.key ? "3px solid #FF9933" : "3px solid transparent", background: "transparent", color: activeDetail === tab.key ? "#FF9933" : "#64748b", cursor: "pointer", transition: "all 0.2s", whiteSpace: "nowrap" }}>
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-
-              <div style={{ padding: "36px" }} onClick={(e) => e.stopPropagation()}>
-                {activeDetail === "eligibility" && (
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "14px" }}>
-                    {selectedCourse.eligibility.map((item, i) => (
-                      <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px", padding: "18px", background: "white", borderRadius: "12px", border: "1px solid #f1e8d8" }}>
-                        <div style={{ width: "30px", height: "30px", borderRadius: "50%", background: "rgba(255,153,0,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", color: "#FF9933", flexShrink: 0, fontWeight: 700 }}>✓</div>
-                        <span style={{ fontSize: "15px", color: "#1e293b", fontWeight: 500, lineHeight: 1.6 }}>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {activeDetail === "exam" && (
-                  <div style={{ overflowX: "auto" }}>
-                    <table style={{ width: "100%", borderCollapse: "collapse", minWidth: "400px" }}>
-                      <thead>
-                        <tr style={{ background: "rgba(255,153,0,0.08)" }}>
-                          <th style={{ padding: "14px 20px", textAlign: "left", fontSize: "13px", fontWeight: 700, color: "#0d1b3e", textTransform: "uppercase", letterSpacing: "1px" }}>Subject</th>
-                          <th style={{ padding: "14px 20px", textAlign: "center", fontSize: "13px", fontWeight: 700, color: "#0d1b3e", textTransform: "uppercase", letterSpacing: "1px" }}>Marks</th>
-                          <th style={{ padding: "14px 20px", textAlign: "center", fontSize: "13px", fontWeight: 700, color: "#0d1b3e", textTransform: "uppercase", letterSpacing: "1px" }}>Type</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {selectedCourse.examPattern.map((row, i) => (
-                          <tr key={i} style={{ borderBottom: "1px solid #f1e8d8", background: i % 2 === 0 ? "white" : "#fffbf5" }}>
-                            <td style={{ padding: "16px 20px", fontSize: "16px", color: "#1e293b", fontWeight: 500 }}>{row.subject}</td>
-                            <td style={{ padding: "16px 20px", textAlign: "center", fontSize: "18px", fontWeight: 800, color: "#FF9933" }}>{row.marks}</td>
-                            <td style={{ padding: "16px 20px", textAlign: "center" }}>
-                              <span style={{ padding: "5px 14px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, background: "rgba(255,153,0,0.1)", color: "#FF9933" }}>{row.type}</span>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-                {activeDetail === "selection" && (
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    {selectedCourse.selection.map((step, i) => (
-                      <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "20px" }}>
-                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
-                          <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: "linear-gradient(135deg, #FF9933, #ffb347)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", fontWeight: 800, color: "white" }}>{i + 1}</div>
-                          {i < selectedCourse.selection.length - 1 && <div style={{ width: "2px", height: "48px", background: "rgba(255,153,0,0.3)" }} />}
-                        </div>
-                        <div style={{ paddingTop: "10px", paddingBottom: i < selectedCourse.selection.length - 1 ? "32px" : "0" }}>
-                          <p style={{ fontSize: "16px", fontWeight: 600, color: "#1e293b", margin: 0 }}>{step}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {activeDetail === "physical" && (
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "14px" }}>
-                    {selectedCourse.physical.map((item, i) => (
-                      <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px", padding: "18px", background: "white", borderRadius: "12px", border: "1px solid #f1e8d8" }}>
-                        <div style={{ fontSize: "22px", flexShrink: 0 }}>💪</div>
-                        <span style={{ fontSize: "15px", color: "#1e293b", fontWeight: 500, lineHeight: 1.6 }}>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div style={{ padding: "20px 36px", background: "white", borderTop: "1px solid #f1e8d8", display: "flex", gap: "12px", flexWrap: "wrap" }}>
-                <a href="tel:+917060155711" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "linear-gradient(135deg, #FF9933, #ffb347)", color: "white", padding: "12px 24px", borderRadius: "999px", fontSize: "15px", fontWeight: 700, textDecoration: "none", boxShadow: "0 4px 12px rgba(255,153,0,0.3)" }}>📞 Enquire About {selectedCourse.name}</a>
-              </div>
-            </div>
-          )}
+          {/* Zigzag rows */}
+          {courses.map((course, index) => (
+            <CourseRow
+              key={course.id}
+              course={course}
+              index={index}
+              selectedCourse={selectedCourse}
+              setSelectedCourse={setSelectedCourse}
+              activeDetail={activeDetail}
+              setActiveDetail={setActiveDetail}
+            />
+          ))}
         </div>
       </section>
 
@@ -578,72 +795,22 @@ const DefenceAcademy = () => {
             <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(255,153,0,0.3)", color: "#FF9933", background: "rgba(255,153,0,0.07)" }}>🏆 Why Choose Us</span>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 36px)", color: "#0d1b3e" }}>The Sniper <span style={{ color: "#FF9933" }}>Advantage</span></h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
+          <div className="features-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
             {features.map((f, i) => (
               <div key={i}
-                style={{
-                  background: "white",
-                  borderRadius: "16px",
-                  border: "1.5px solid #eef1f8",
-                  transition: "all 0.3s ease",
-                  overflow: "hidden",
-                  cursor: "default",
-                  boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = "#FF9933";
-                  e.currentTarget.style.transform = "translateY(-6px)";
-                  e.currentTarget.style.boxShadow = "0 16px 36px rgba(255,153,0,0.14)";
-                  e.currentTarget.querySelector(".feat-img").style.transform = "scale(1.06)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = "#eef1f8";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)";
-                  e.currentTarget.querySelector(".feat-img").style.transform = "scale(1)";
-                }}
+                style={{ background: "white", borderRadius: "16px", border: "1.5px solid #eef1f8", transition: "all 0.3s ease", overflow: "hidden", cursor: "default", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "#FF9933"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 16px 36px rgba(255,153,0,0.14)"; e.currentTarget.querySelector(".feat-img").style.transform = "scale(1.06)"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "#eef1f8"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; e.currentTarget.querySelector(".feat-img").style.transform = "scale(1)"; }}
               >
-                {/* ── PHOTO TOP ── */}
                 <div style={{ position: "relative", height: "170px", overflow: "hidden" }}>
-                  {/* Gold top bar */}
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #FF9933, #ffb347)", zIndex: 3 }} />
-
-                  <img
-                    className="feat-img"
-                    src={f.photo}
-                    alt={f.title}
-                    style={{
-                      width: "100%", height: "100%",
-                      objectFit: "cover", objectPosition: "center",
-                      display: "block",
-                      transition: "transform 0.5s ease",
-                    }}
-                    onError={(e) => {
-                      e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop";
-                    }}
+                  <img className="feat-img" src={f.photo} alt={f.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", transition: "transform 0.5s ease" }}
+                    onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
                   />
-
-                  {/* Fade bottom */}
-                  <div style={{
-                    position: "absolute", bottom: 0, left: 0, right: 0,
-                    height: "60px",
-                    background: "linear-gradient(to top, white, transparent)",
-                    pointerEvents: "none",
-                  }} />
-
-                  {/* Icon badge on photo */}
-                  <div style={{
-                    position: "absolute", bottom: "10px", left: "16px",
-                    width: "44px", height: "44px", borderRadius: "12px",
-                    background: "rgba(255,153,0,0.92)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: "20px",
-                    boxShadow: "0 4px 12px rgba(255,153,0,0.35)",
-                    zIndex: 2,
-                  }}>{f.icon}</div>
+                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "60px", background: "linear-gradient(to top, white, transparent)", pointerEvents: "none" }} />
+                  <div style={{ position: "absolute", bottom: "10px", left: "16px", width: "44px", height: "44px", borderRadius: "12px", background: "rgba(255,153,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", boxShadow: "0 4px 12px rgba(255,153,0,0.35)", zIndex: 2 }}>{f.icon}</div>
                 </div>
-
-                {/* ── CONTENT ── */}
                 <div style={{ padding: "14px 20px 22px" }}>
                   <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0d1b3e", marginBottom: "7px" }}>{f.title}</h3>
                   <p style={{ fontSize: "14px", color: "#334155", lineHeight: 1.7, margin: 0 }}>{f.desc}</p>
