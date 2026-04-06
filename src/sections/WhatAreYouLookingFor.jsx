@@ -1,176 +1,182 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
-const cards = [
+const AnimatedSection = ({ children, className = "", delay = 0 }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const wings = [
   {
-    tag: "Wing 01",
-    icon: "🛡️",
+    num: "WING 01",
     name: "Sniper Defence Academy",
     tagline: "Forge the Warrior Within",
     desc: "Elite coaching for NDA, CDS, Sainik School & all defence entrance examinations. Rigorous academics meets physical excellence.",
-    highlights: ["NDA / CDS Coaching", "Physical Training", "SSB Interview Prep"],
+    bullets: ["NDA / CDS Coaching", "Physical Training", "SSB Interview Prep"],
     link: "/defence",
-    color: "#FF9933",
-    bgColor: "#fff8f0",
-    iconBg: "#fff3e0",
+    color: "#e8420a",
+    border: "#e8420a",
+    bg: "rgba(232,66,10,0.05)",
+    tagColor: "#e8420a",
+    // Photo — defence cadets / NDA
+    photo: "/img/wings/defence-wing.jpg",
+    photoBg:"/img/students/W1.png"
+
   },
   {
-    tag: "Wing 02",
-    icon: "📚",
+    num: "WING 02",
     name: "Sniper Public School",
     tagline: "Nurturing Young Minds",
     desc: "CBSE affiliated school from Nursery to Class 8. A holistic learning environment that blends discipline and creativity.",
-    highlights: ["CBSE Curriculum", "Smart Classrooms", "Activity-Based Learning"],
+    bullets: ["CBSE Curriculum", "Smart Classrooms", "Activity-Based Learning"],
     link: "/school",
     color: "#10b981",
-    bgColor: "#f0fdf4",
-    iconBg: "#d1fae5",
+    border: "#10b981",
+    bg: "rgba(16,185,129,0.05)",
+    tagColor: "#10b981",
+    photo: "/img/wings/school-wing.jpg",
+    photoBg: "/img/students/W2.png",
   },
   {
-    tag: "Wing 03",
-    icon: "🎓",
+    num: "WING 03",
     name: "Sniper Classes",
     tagline: "Crack Every Exam",
     desc: "Specialized coaching for Class 9–12, IIT JEE, NEET & NDA Foundation programs. Expert faculty, proven results.",
-    highlights: ["IIT JEE / NEET", "NDA Foundation", "Board Excellence (9–12)"],
+    bullets: ["IIT JEE / NEET", "NDA Foundation", "Board Excellence (9–12)"],
     link: "/classes",
     color: "#7c3aed",
-    bgColor: "#faf5ff",
-    iconBg: "#ede9fe",
+    border: "#7c3aed",
+    bg: "rgba(124,58,237,0.05)",
+    tagColor: "#7c3aed",
+    photo: "/img/wings/classes-wing.jpg",
+    photoBg:"/img/students/W3.png"
   },
 ];
 
-function WhatAreYouLookingFor() {
+const WhatAreYouLookingFor = () => {
   return (
-    <section style={{ background: "#f5f7fa", padding: "72px 20px" }}>
-      <div style={{ maxWidth: "1180px", margin: "0 auto" }}>
+    <section className="py-24 px-4" style={{ background: "#f5f7fa" }}>
+      <div className="max-w-7xl mx-auto">
 
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "48px" }}>
-          <span style={{
-            display: "inline-block", padding: "4px 14px", borderRadius: "999px",
-            fontSize: "10.5px", fontWeight: 700, letterSpacing: "2.5px",
-            textTransform: "uppercase", marginBottom: "12px",
-            border: "1px solid rgba(232,66,10,0.3)",
-            color: "#e8420a", background: "rgba(232,66,10,0.07)",
-          }}>
-            Our Wings
-          </span>
-          <h2 style={{
-            fontFamily: "Georgia, serif", fontWeight: 800,
-            fontSize: "clamp(26px, 3vw, 40px)",
-            color: "#0d1b3e", marginBottom: "10px",
-          }}>
-            What Are You Looking For?
-          </h2>
-          <p style={{ color: "#64748b", fontSize: "15px", maxWidth: "520px", margin: "0 auto" }}>
-            Three specialized divisions, united by one purpose — your success.
-          </p>
-          {/* Divider */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginTop: "18px" }}>
-            <div style={{ height: "1px", width: "60px", background: "linear-gradient(to right, transparent, #e8420a)" }} />
-            <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#e8420a" }} />
-            <div style={{ height: "1px", width: "60px", background: "linear-gradient(to left, transparent, #e8420a)" }} />
+        {/* Heading */}
+        <AnimatedSection>
+          <div className="text-center mb-14">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.25em] uppercase mb-4 border border-[#e8420a]/30 text-[#e8420a] bg-[#e8420a]/10">
+              Our Wings
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[#0d1b3e]">
+              What Are You Looking For?
+            </h2>
+            <p className="mt-4 text-[#0d1b3e]/55 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              Three specialized divisions, united by one purpose — your success.
+            </p>
+            <div className="mt-6 flex items-center justify-center gap-3">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#e8420a]" />
+              <div className="w-2 h-2 rounded-full bg-[#e8420a]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#e8420a]" />
+            </div>
           </div>
-        </div>
+        </AnimatedSection>
 
-        {/* Cards */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "20px",
-        }}>
-          {cards.map((c) => (
-            <Link key={c.link} to={c.link} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+        {/* Wing Cards */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {wings.map((wing, i) => (
+            <AnimatedSection key={wing.name} delay={i * 0.12}>
               <div
+                className="group rounded-3xl overflow-hidden border-2 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full"
                 style={{
-                  background: c.bgColor, borderRadius: "16px",
-                  border: `1px solid #e8e8e8`,
-                  borderTop: `4px solid ${c.color}`,
-                  padding: "32px", height: "100%",
-                  transition: "all 0.3s ease",
-                  cursor: "pointer",
+                  borderColor: wing.border,
+                  background: "white",
+                  boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
                 }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.transform = "translateY(-6px)";
-                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.12)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = `0 20px 48px ${wing.color}25`; }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 16px rgba(0,0,0,0.06)"; }}
               >
-                {/* Tag */}
-                <span style={{
-                  fontSize: "11px", fontFamily: "monospace",
-                  letterSpacing: "3px", textTransform: "uppercase",
-                  color: c.color, opacity: 0.7,
-                }}>
-                  {c.tag}
-                </span>
+                {/* ── PHOTO TOP ── */}
+                <div style={{ position: "relative", height: "200px", overflow: "hidden", flexShrink: 0 }}>
+                  {/* Colored top bar */}
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: wing.color, zIndex: 3 }} />
 
-                {/* Icon */}
-                <div style={{
-                  marginTop: "16px", marginBottom: "20px",
-                  width: "56px", height: "56px", borderRadius: "14px",
-                  background: c.iconBg, display: "flex",
-                  alignItems: "center", justifyContent: "center",
-                  fontSize: "26px",
-                }}>
-                  {c.icon}
+                  <img
+                    src={wing.photo}
+                    alt={wing.name}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    onError={e => { e.target.src = wing.photoBg; }}
+                  />
+
+                  {/* Fade bottom into card */}
+                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "80px", background: "linear-gradient(to top, white, transparent)", pointerEvents: "none", zIndex: 1 }} />
+
+                  {/* Wing number badge — top left */}
+                  <div
+                    style={{
+                      position: "absolute", top: "14px", left: "14px",
+                      background: "rgba(13,27,62,0.75)",
+                      backdropFilter: "blur(6px)",
+                      color: "white", fontSize: "10px", fontWeight: 700,
+                      padding: "4px 10px", borderRadius: "999px",
+                      letterSpacing: "2px", textTransform: "uppercase",
+                      zIndex: 2,
+                    }}
+                  >
+                    {wing.num}
+                  </div>
                 </div>
 
-                {/* Name */}
-                <h3 style={{
-                  fontSize: "18px", fontWeight: 700,
-                  fontFamily: "Georgia, serif",
-                  color: "#0d1b3e", marginBottom: "4px",
-                }}>
-                  {c.name}
-                </h3>
+                {/* ── CARD BODY ── */}
+                <div className="flex flex-col flex-1 p-7 pt-4">
+                  {/* Name & tagline */}
+                  <h3 className="font-serif text-xl font-bold text-[#0d1b3e] mb-1 mt-1">
+                    {wing.name}
+                  </h3>
+                  <p className="text-sm font-semibold mb-3" style={{ color: wing.tagColor }}>
+                    {wing.tagline}
+                  </p>
 
-                {/* Tagline */}
-                <p style={{ fontSize: "13px", fontWeight: 600, color: c.color, marginBottom: "14px" }}>
-                  {c.tagline}
-                </p>
+                  {/* Description */}
+                  <p className="text-[#0d1b3e]/55 text-sm leading-relaxed mb-5">
+                    {wing.desc}
+                  </p>
 
-                {/* Desc */}
-                <p style={{ fontSize: "13px", color: "rgba(13,27,62,0.55)", lineHeight: 1.7, marginBottom: "20px" }}>
-                  {c.desc}
-                </p>
+                  {/* Bullets */}
+                  <ul className="space-y-2 mb-6 flex-1">
+                    {wing.bullets.map(b => (
+                      <li key={b} className="flex items-center gap-2 text-sm text-[#0d1b3e]/70">
+                        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: wing.color }} />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
 
-                {/* Highlights */}
-                <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px 0" }}>
-                  {c.highlights.map((h) => (
-                    <li key={h} style={{
-                      display: "flex", alignItems: "center", gap: "8px",
-                      fontSize: "12px", color: "rgba(13,27,62,0.6)",
-                      marginBottom: "6px",
-                    }}>
-                      <div style={{
-                        width: "6px", height: "6px", borderRadius: "50%",
-                        background: c.color, flexShrink: 0,
-                      }} />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Explore link */}
-                <div style={{
-                  fontSize: "13px", fontWeight: 700,
-                  color: c.color, display: "flex",
-                  alignItems: "center", gap: "6px",
-                }}>
-                  Explore Wing →
+                  {/* CTA */}
+                  <Link
+                    to={wing.link}
+                    className="inline-flex items-center gap-1.5 text-sm font-bold transition-all duration-200 hover:gap-3"
+                    style={{ color: wing.tagColor }}
+                  >
+                    Explore Wing →
+                  </Link>
                 </div>
               </div>
-            </Link>
+            </AnimatedSection>
           ))}
         </div>
-
       </div>
     </section>
   );
-}
+};
 
 export default WhatAreYouLookingFor;

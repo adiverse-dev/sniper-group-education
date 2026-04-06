@@ -8,13 +8,13 @@ const wings = [
 ];
 
 const navLinks = [
-  { label: "Home",          path: "/" },
-  { label: "Our Institutes",path: null, dropdown: true },
-  { label: "About",         path: "/about" },
-  { label: "Result",        path: "/results" },
-  { label: "Fee Structure", path: "/fee-structure" },
-  { label: "Gallery",       path: "/gallery" },
-  { label: "Contact",       path: "/contact" },
+  { label: "Home",           path: "/" },
+  { label: "Our Institutes", path: null, dropdown: true },
+  { label: "About",          path: "/about" },
+  { label: "Result",         path: "/results" },
+  { label: "Fee Structure",  path: "/fee-structure" },
+  { label: "Gallery",        path: "/gallery" },
+  { label: "Contact",        path: "/contact" },
 ];
 
 function Navbar() {
@@ -27,8 +27,8 @@ function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      const scrollTop    = window.scrollY;
-      const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       setScrolled(scrollTop > 50);
       setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
     };
@@ -54,12 +54,29 @@ function Navbar() {
 
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px", height: scrolled ? "60px" : "68px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", transition: "height 0.3s ease" }}>
 
-        {/* ── Logo ── */}
-        <Link to="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none", flexShrink: 0 }}>
-          <div style={{ width: "40px", height: "40px", background: "linear-gradient(135deg, #0d1b3e, #1a3260)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 800, fontSize: "18px", fontFamily: "'Playfair Display', Georgia, serif", flexShrink: 0 }}>S</div>
-          <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, color: "#0d1b3e", fontSize: "15px", lineHeight: 1.2 }}>
-            SNIPER
-            <small style={{ display: "block", fontSize: "9px", fontFamily: "'Poppins', system-ui, sans-serif", color: "#94a3b8", fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase" }}>Group of Education</small>
+        {/* ── LOGO ── */}
+        <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
+          <img
+            src="/img/students/1.svg"
+            alt="Sniper Group of Education"
+            style={{
+              height: scrolled ? "50px" : "70px",
+              width: "auto",
+              objectFit: "contain",
+              transition: "height 0.3s ease",
+            }}
+            onError={(e) => {
+              e.target.style.display = "none";
+              e.target.nextSibling.style.display = "flex";
+            }}
+          />
+          {/* Fallback agar logo load na ho */}
+          <div style={{ display: "none", alignItems: "center", gap: "10px" }}>
+            <div style={{ width: "40px", height: "40px", background: "linear-gradient(135deg, #0d1b3e, #1a3260)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 800, fontSize: "18px", fontFamily: "'Playfair Display', Georgia, serif" }}>S</div>
+            <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, color: "#0d1b3e", fontSize: "15px", lineHeight: 1.2 }}>
+              SNIPER
+              <small style={{ display: "block", fontSize: "9px", fontFamily: "'Poppins', system-ui, sans-serif", color: "#94a3b8", fontWeight: 600, letterSpacing: "2.5px", textTransform: "uppercase" }}>Group of Education</small>
+            </div>
           </div>
         </Link>
 
@@ -76,7 +93,6 @@ function Navbar() {
 
                 <button style={{ display: "flex", alignItems: "center", gap: "4px", padding: "7px 12px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, fontFamily: "'Poppins', sans-serif", border: "none", background: wingActive ? `${activeWing?.accent}12` : "transparent", color: wingActive ? activeWing?.accent : "#0d1b3e", cursor: "pointer", transition: "all 0.2s" }}>
                   Our Institutes
-                  {/* Active wing indicator */}
                   {activeWing && (
                     <span style={{ fontSize: "10px", padding: "1px 7px", borderRadius: "999px", background: "rgba(232,66,10,0.1)", color: "#e8420a", fontWeight: 700 }}>
                       {activeWing.icon}
@@ -99,7 +115,7 @@ function Navbar() {
                           <div style={{ fontSize: "13.5px", fontWeight: 700, color: active ? w.accent : "#0d1b3e" }}>{w.name}</div>
                           <div style={{ fontSize: "11px", color: "#94a3b8" }}>{w.desc}</div>
                         </div>
-                        {active && <span style={{ fontSize: "11px", fontWeight: 700, color: w.accent }}>●</span>}
+                        {active  && <span style={{ fontSize: "11px", fontWeight: 700, color: w.accent }}>●</span>}
                         {!active && <span style={{ color: "#cbd5e1", fontSize: "14px" }}>→</span>}
                       </Link>
                     );
@@ -110,7 +126,6 @@ function Navbar() {
             ) : (
               <Link key={link.path} to={link.path} style={{ position: "relative", padding: "7px 12px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, fontFamily: "'Poppins', sans-serif", textDecoration: "none", color: isActive(link.path) ? "#e8420a" : "#0d1b3e", background: isActive(link.path) ? "rgba(232,66,10,0.06)" : "transparent", transition: "all 0.2s" }}>
                 {link.label}
-                {/* Active underline */}
                 {isActive(link.path) && (
                   <span style={{ position: "absolute", bottom: "2px", left: "12px", right: "12px", height: "2px", background: "linear-gradient(to right, #e8420a, #FF9933)", borderRadius: "999px" }} />
                 )}
@@ -121,7 +136,8 @@ function Navbar() {
 
         {/* ── Right Side ── */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
-          <a href="tel:+917060155711" style={{ display: "flex", alignItems: "center", gap: "6px", color: "#0d1b3e", fontSize: "12.5px", fontWeight: 600, textDecoration: "none", padding: "7px 12px", borderRadius: "8px", border: "1.5px solid #e2e8f0", transition: "all 0.2s" }}
+          <a href="tel:+917060155711"
+            style={{ display: "flex", alignItems: "center", gap: "6px", color: "#0d1b3e", fontSize: "12.5px", fontWeight: 600, textDecoration: "none", padding: "7px 12px", borderRadius: "8px", border: "1.5px solid #e2e8f0", transition: "all 0.2s" }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = "#e8420a"; e.currentTarget.style.color = "#e8420a"; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = "#e2e8f0"; e.currentTarget.style.color = "#0d1b3e"; }}
             className="hidden-mobile">
@@ -132,16 +148,19 @@ function Navbar() {
             <span style={{ position: "absolute", top: "-8px", right: "-6px", background: "#10b981", color: "white", fontSize: "8px", fontWeight: 800, letterSpacing: "0.5px", padding: "2px 6px", borderRadius: "999px", whiteSpace: "nowrap", zIndex: 10, animation: "blink 1.5s ease-in-out infinite" }}>
               ● OPEN
             </span>
-            <Link to="/contact" style={{ background: "linear-gradient(135deg, #e8420a, #ff6b35)", color: "white", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, textDecoration: "none", boxShadow: "0 4px 12px rgba(232,66,10,0.3)", transition: "all 0.2s", whiteSpace: "nowrap", display: "block" }}
+            <Link to="/contact"
+              style={{ background: "linear-gradient(135deg, #e8420a, #ff6b35)", color: "white", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, textDecoration: "none", boxShadow: "0 4px 12px rgba(232,66,10,0.3)", transition: "all 0.2s", whiteSpace: "nowrap", display: "block" }}
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 16px rgba(232,66,10,0.4)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(232,66,10,0.3)"; }}>
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)";    e.currentTarget.style.boxShadow = "0 4px 12px rgba(232,66,10,0.3)"; }}>
               Apply Now
             </Link>
           </div>
 
           {/* Hamburger */}
-          <button onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", flexDirection: "column", gap: "5px", padding: "4px", background: "transparent", border: "none", cursor: "pointer" }} className="show-mobile" aria-label="Toggle menu">
-            <span style={{ display: "block", width: "22px", height: "2px", background: "#0d1b3e", borderRadius: "2px", transition: "all 0.25s", transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none" }} />
+          <button onClick={() => setMenuOpen(!menuOpen)}
+            style={{ display: "none", flexDirection: "column", gap: "5px", padding: "4px", background: "transparent", border: "none", cursor: "pointer" }}
+            className="show-mobile" aria-label="Toggle menu">
+            <span style={{ display: "block", width: "22px", height: "2px", background: "#0d1b3e", borderRadius: "2px", transition: "all 0.25s", transform: menuOpen ? "translateY(7px) rotate(45deg)"  : "none" }} />
             <span style={{ display: "block", width: "22px", height: "2px", background: "#0d1b3e", borderRadius: "2px", transition: "all 0.25s", opacity: menuOpen ? 0 : 1 }} />
             <span style={{ display: "block", width: "22px", height: "2px", background: "#0d1b3e", borderRadius: "2px", transition: "all 0.25s", transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none" }} />
           </button>
@@ -164,7 +183,8 @@ function Navbar() {
                 {mobileInstitutes && (
                   <div style={{ paddingLeft: "14px", display: "flex", flexDirection: "column", gap: "4px", marginBottom: "4px" }}>
                     {wings.map((w) => (
-                      <Link key={w.path} to={w.path} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 14px", borderRadius: "10px", textDecoration: "none", background: isActive(w.path) ? `${w.accent}10` : "transparent", color: isActive(w.path) ? w.accent : "#0d1b3e", fontSize: "13.5px", fontWeight: 600 }}>
+                      <Link key={w.path} to={w.path}
+                        style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 14px", borderRadius: "10px", textDecoration: "none", background: isActive(w.path) ? `${w.accent}10` : "transparent", color: isActive(w.path) ? w.accent : "#0d1b3e", fontSize: "13.5px", fontWeight: 600 }}>
                         {w.icon} {w.name}
                       </Link>
                     ))}
@@ -172,18 +192,22 @@ function Navbar() {
                 )}
               </div>
             ) : (
-              <Link key={link.path} to={link.path} style={{ padding: "10px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, textDecoration: "none", background: isActive(link.path) ? "rgba(232,66,10,0.06)" : "transparent", color: isActive(link.path) ? "#e8420a" : "#0d1b3e" }}>
+              <Link key={link.path} to={link.path}
+                style={{ padding: "10px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, textDecoration: "none", background: isActive(link.path) ? "rgba(232,66,10,0.06)" : "transparent", color: isActive(link.path) ? "#e8420a" : "#0d1b3e" }}>
                 {link.label}
               </Link>
             )
           )}
-          <a href="tel:+917060155711" style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, color: "#0d1b3e", textDecoration: "none", border: "1.5px solid #e2e8f0", marginTop: "8px" }}>
+          <a href="tel:+917060155711"
+            style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, color: "#0d1b3e", textDecoration: "none", border: "1.5px solid #e2e8f0", marginTop: "8px" }}>
             📞 Call: 7060155711
           </a>
-          <a href="https://wa.me/917060155711" target="_blank" rel="noreferrer" style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, color: "#25d366", textDecoration: "none", border: "1.5px solid #25d36630", background: "#25d36608", marginTop: "4px" }}>
+          <a href="https://wa.me/917060155711" target="_blank" rel="noreferrer"
+            style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, color: "#25d366", textDecoration: "none", border: "1.5px solid #25d36630", background: "#25d36608", marginTop: "4px" }}>
             💬 WhatsApp: 7060155711
           </a>
-          <Link to="/contact" style={{ display: "block", textAlign: "center", padding: "12px", background: "linear-gradient(135deg, #e8420a, #ff6b35)", color: "white", borderRadius: "999px", fontSize: "14px", fontWeight: 700, textDecoration: "none", marginTop: "6px" }}>
+          <Link to="/contact"
+            style={{ display: "block", textAlign: "center", padding: "12px", background: "linear-gradient(135deg, #e8420a, #ff6b35)", color: "white", borderRadius: "999px", fontSize: "14px", fontWeight: 700, textDecoration: "none", marginTop: "6px" }}>
             Apply Now
           </Link>
         </div>

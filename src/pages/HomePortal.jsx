@@ -1,38 +1,34 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState, useEffect, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import {
-  Users, Trophy, Star, Award, Target, Zap, ArrowRight,
+  Users, Trophy, Star, Award, Quote,
+  ChevronLeft, ChevronRight,
 } from "lucide-react";
-import VideoSection from "../sections/VideoSection";
-import HeroSlider from "../sections/HeroSlider";
 import WhatAreYouLookingFor from "../sections/WhatAreYouLookingFor";
-import MarqueeStrip from "../sections/MarqueeStrip";
 
+// ─────────────────────────────────────────────────────────
+// BANNER PHOTOS
+// ─────────────────────────────────────────────────────────
+const bannerPhotos = [
+  { src: "/img/students/D.jpg", label: "Defence Wing",   bg: "#1a2a3a" },
+  { src: "/img/students/RIMC.png", label: "School Wing",    bg: "#1a3a2e" },
+  { src: "/img/students/AB.jpeg", label: "Sniper Classes", bg: "#1e1a3a" },
+  { src: "/img/students/Y.jpg", label: "Defence Wing",   bg: "#2a1a1a" },
+  { src: "/img/students/s6.png", label: "School Wing",    bg: "#1a1e2a" },
+];
 
-const SectionTitle = ({ tag, title, subtitle }) => (
-  <div className="text-center mb-14">
-    {tag && (
-      <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.25em] uppercase mb-4 border border-[#e8420a]/30 text-[#e8420a] bg-[#e8420a]/10">
-        {tag}
-      </span>
-    )}
-    <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[#0d1b3e]">
-      {title}
-    </h2>
-    {subtitle && (
-      <p className="mt-4 text-[#0d1b3e]/55 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-        {subtitle}
-      </p>
-    )}
-    <div className="mt-6 flex items-center justify-center gap-3">
-      <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#e8420a]" />
-      <div className="w-2 h-2 rounded-full bg-[#e8420a]" />
-      <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#e8420a]" />
-    </div>
-  </div>
-);
+const bannerStats = [
+  { value: "1,200+", label: "Defence Selections", color: "#e8420a" },
+  { value: "5,000+", label: "Students Trained",   color: "#10b981" },
+  { value: "3",      label: "Wings / Institutes", color: "#7c3aed" },
+  { value: "15+",    label: "Years Excellence",   color: "#f59e0b" },
+  { value: "98%",    label: "Board Result Rate",  color: "#3b82f6" },
+];
 
+// ─────────────────────────────────────────────────────────
+// ANIMATED SECTION
+// ─────────────────────────────────────────────────────────
 const AnimatedSection = ({ children, className = "", delay = 0 }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -49,7 +45,258 @@ const AnimatedSection = ({ children, className = "", delay = 0 }) => {
   );
 };
 
+// ─────────────────────────────────────────────────────────
+// HERO BANNER
+// ─────────────────────────────────────────────────────────
+const HeroBanner = () => (
+  <div style={{ width: "100%" }}>
+    
+    {/* HERO SECTION */}
+    <div style={{ 
+      position: "relative", 
+      height: "550px", 
+      display: "flex", 
+      overflow: "hidden" 
+    }}>
+      
+      {bannerPhotos.map((p, i) => (
+        <div key={i} style={{ flex: 1, position: "relative", overflow: "hidden", background: p.bg }}>
+          <img
+            src={p.src}
+            alt={p.label}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center"
+            }}
+          />
+        </div>
+      ))}
 
+      {/* DARK OVERLAY */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        background: "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7))",
+        zIndex: 2
+      }} />
+
+      {/* CENTER CONTENT */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 3,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        padding: "0 20px"
+      }}>
+
+        {/* TOP TAG */}
+        <div style={{
+          padding: "8px 20px",
+          borderRadius: "999px",
+          background: "rgba(255,255,255,0.15)",
+          border: "1px solid rgba(255,255,255,0.3)",
+          color: "#fff",
+          fontSize: "13px",
+          marginBottom: "20px",
+          backdropFilter: "blur(6px)"
+        }}>
+          Your dreams are our dreams
+        </div>
+
+        {/* MAIN HEADING */}
+        <h1 style={{
+          fontSize: "clamp(30px, 5vw, 56px)",
+          fontWeight: 700,
+          color: "#fff",
+          lineHeight: 1.2,
+          fontFamily: "Georgia, serif",
+          margin: 0
+        }}>
+          Inspiring Young Minds and <br />
+          Empowering Dreams since 2009
+        </h1>
+
+        {/* SUB TEXT */}
+        <p style={{
+          marginTop: "14px",
+          fontSize: "15px",
+          color: "rgba(255,255,255,0.8)"
+        }}>
+          Sniper Group of Education — Meerut, U.P.
+        </p>
+
+      </div>
+    </div>
+
+    {/* 🔥 STATS BAR WITH OVERLAP */}
+    <div style={{
+      marginTop: "-80px",  // 👈 overlap effect
+      padding: "0 20px",
+      position: "relative",
+      zIndex: 5
+    }}>
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+        gap: "16px",
+        background: "#ffffff",
+        borderRadius: "20px",
+        padding: "20px",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.15)"
+      }}>
+        {bannerStats.map((s, i) => (
+          <div key={i} style={{
+            textAlign: "center"
+          }}>
+            <div style={{
+              fontSize: "22px",
+              fontWeight: 700,
+              color: s.color
+            }}>
+              {s.value}
+            </div>
+            <div style={{
+              fontSize: "12px",
+              color: "rgba(13,27,62,0.5)",
+              marginTop: "5px"
+            }}>
+              {s.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+);
+
+// ─────────────────────────────────────────────────────────
+// HERO SLIDER
+// ─────────────────────────────────────────────────────────
+const sliderSlides = [
+  { img: "/img/students/1.jpg", wingLabel: "Defence Academy", wingColor: "#e8420a", heading: "Crack Every Defence Exam",  sub: "AISSEE · RMS · RIMC · NDA · CDS · Air Force",    link: "/defence" },
+  { img: "/img/students/4.jpg", wingLabel: "Public School",   wingColor: "#10b981", heading: "Quality CBSE Education",    sub: "Nursery to Class 8 — Building strong foundations", link: "/school"  },
+  { img: "/img/students/5.jpg", wingLabel: "Sniper Classes",  wingColor: "#7c3aed", heading: "Crack Every Exam You Face", sub: "IIT JEE · NEET · 9th to 12th Foundation",          link: "/classes" },
+  { img: "/img/students/6.jpg", wingLabel: "Sniper Group",    wingColor: "#e8420a", heading: "One Trust. Three Wings.",   sub: "Comprehensive education ecosystem since 2009",       link: "/"        },
+];
+
+const HeroSlider = () => {
+  const navigate = useNavigate();
+  const [current, setCurrent] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const total = sliderSlides.length;
+
+  const goTo = useCallback((index) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrent(index);
+    setTimeout(() => setIsTransitioning(false), 600);
+  }, [isTransitioning]);
+
+  const prev = useCallback(() => { goTo((current - 1 + total) % total); }, [current, total, goTo]);
+  const next = useCallback(() => { goTo((current + 1) % total); }, [current, total, goTo]);
+
+  useEffect(() => {
+    const timer = setInterval(() => { next(); }, 4000);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  const slide = sliderSlides[current];
+
+  return (
+    <div style={{ position: "relative", width: "100%", height: "420px", overflow: "hidden", background: "#0d1b3e" }}>
+      {sliderSlides.map((s, i) => (
+        <div key={i} style={{ position: "absolute", inset: 0, transition: "opacity 0.6s ease", opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0 }}>
+          <img src={s.img} alt={s.heading} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} onError={e => { e.target.style.display = "none"; }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.2) 100%)" }} />
+        </div>
+      ))}
+
+      <div style={{ position: "absolute", inset: 0, zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 60px" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: `${slide.wingColor}22`, border: `1.5px solid ${slide.wingColor}`, color: slide.wingColor, fontSize: "11px", fontWeight: 700, padding: "5px 14px", borderRadius: "999px", letterSpacing: "1px", textTransform: "uppercase", width: "fit-content", marginBottom: "20px", backdropFilter: "blur(4px)" }}>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: slide.wingColor, flexShrink: 0 }} />
+          {slide.wingLabel}
+        </div>
+        <h2 style={{ color: "#fff", fontFamily: "Georgia, serif", fontSize: "clamp(24px, 3.5vw, 44px)", fontWeight: 700, lineHeight: 1.2, margin: "0 0 12px", textShadow: "0 2px 16px rgba(0,0,0,0.5)", maxWidth: "600px" }}>
+          {slide.heading}
+        </h2>
+        <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "15px", marginBottom: "28px", letterSpacing: "0.3px", maxWidth: "500px" }}>{slide.sub}</p>
+
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <button
+            onClick={() => navigate(slide.link)}
+            style={{ padding: "11px 24px", borderRadius: "8px", background: slide.wingColor, color: "white", border: "none", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.2s", boxShadow: `0 4px 16px ${slide.wingColor}44` }}
+            onMouseEnter={e => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.opacity = "1";    e.currentTarget.style.transform = "translateY(0)"; }}>
+            Explore Courses →
+          </button>
+          <button
+            onClick={() => navigate("/contact")}
+            style={{ padding: "11px 24px", borderRadius: "8px", background: "transparent", color: "white", border: "1.5px solid rgba(255,255,255,0.6)", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.2s", backdropFilter: "blur(4px)" }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
+            Apply Now
+          </button>
+        </div>
+      </div>
+
+      {/* Prev / Next */}
+      <button onClick={prev} style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", zIndex: 3, width: "44px", height: "44px", borderRadius: "50%", background: "rgba(0,0,0,0.45)", border: "1.5px solid rgba(255,255,255,0.3)", color: "white", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s", backdropFilter: "blur(4px)" }}
+        onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.7)"; }}
+        onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,0,0,0.45)"; }}>
+        <ChevronLeft size={20} />
+      </button>
+      <button onClick={next} style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", zIndex: 3, width: "44px", height: "44px", borderRadius: "50%", background: "rgba(0,0,0,0.45)", border: "1.5px solid rgba(255,255,255,0.3)", color: "white", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s", backdropFilter: "blur(4px)" }}
+        onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.7)"; }}
+        onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,0,0,0.45)"; }}>
+        <ChevronRight size={20} />
+      </button>
+
+      {/* Dots */}
+      <div style={{ position: "absolute", bottom: "18px", left: "50%", transform: "translateX(-50%)", zIndex: 3, display: "flex", gap: "8px", alignItems: "center" }}>
+        {sliderSlides.map((s, i) => (
+          <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? "22px" : "8px", height: "8px", borderRadius: "999px", background: i === current ? slide.wingColor : "rgba(255,255,255,0.4)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.35s ease" }} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────
+// SECTION TITLE
+// ─────────────────────────────────────────────────────────
+const SectionTitle = ({ tag, title, subtitle, dark = false }) => (
+  <div className="text-center mb-14">
+    {tag && (
+      <span style={{ display: "inline-block", padding: "6px 18px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", marginBottom: "16px", border: "1px solid rgba(232,66,10,0.3)", color: "#e8420a", background: "rgba(232,66,10,0.1)" }}>
+        {tag}
+      </span>
+    )}
+    <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(26px, 3.5vw, 44px)", fontWeight: 700, lineHeight: 1.2, color: dark ? "#ffffff" : "#0d1b3e", margin: 0 }}>
+      {title}
+    </h2>
+    {subtitle && (
+      <p style={{ marginTop: "14px", color: dark ? "rgba(255,255,255,0.55)" : "rgba(13,27,62,0.55)", fontSize: "15px", maxWidth: "600px", margin: "14px auto 0", lineHeight: 1.7 }}>
+        {subtitle}
+      </p>
+    )}
+    <div style={{ marginTop: "20px", display: "flex", alignItems: "center", justifyContent: "center", gap: "12px" }}>
+      <div style={{ height: "1px", width: "64px", background: "linear-gradient(to right, transparent, #e8420a)" }} />
+      <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#e8420a" }} />
+      <div style={{ height: "1px", width: "64px", background: "linear-gradient(to left, transparent, #e8420a)" }} />
+    </div>
+  </div>
+);
+
+// ─────────────────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────────────────
 const stats = [
   { icon: Users,  value: "5,000+", label: "Students Trained",    color: "#e8420a" },
   { icon: Trophy, value: "1,200+", label: "Defence Selections",  color: "#10b981" },
@@ -58,144 +305,206 @@ const stats = [
 ];
 
 const testimonials = [
-  { name: "Aniket Kumar", role: "Sainik School - Puruliya", avatar: "AK", avatarBg: "#FF9933",
-    photo: "/images/students/aniket.jpg",
-    quote: "Sniper Defence Academy ne mujhe sirf padhai nahi, ek soldier ki soch di. Yahan se mera safar shuru hua." },
-  { name: "Harsh Chahal", role: "Sainik School - Gurukul Kurukshetra", avatar: "HC", avatarBg: "#10b981",
-    photo: "/images/students/harsh.jpg",
-    quote: "Yahan ki training aur discipline ne mujhe Sainik School ke liye taiyaar kiya. Best decision of my life." },
-  { name: "Aditya Nagar", role: "Sainik School - Gurukul Kurukshetra", avatar: "AN", avatarBg: "#0d1b3e",
-    photo: "/images/students/aditya.jpg",
-    quote: "Faculty bahut dedicated hai. Har student par personally dhyan diya jaata hai. Results khud bolta hai." },
-  { name: "Adarsh Hoon", role: "Sainik School - Amravathi Nagar", avatar: "AH", avatarBg: "#7c3aed",
-    photo: "/images/students/adarsh.jpg",
-    quote: "Sniper Group ka mahaul aur guidance ne mera sapna sach kar diya. Bahut grateful hoon." },
+  { name: "Suryansh Rathore", role: "Sainik School - Puruliya",            avatar: "SR", avatarBg: "#FF9933", photo: "/img/students/Suryansh Rathore.jpg", quote: "Sniper Defence Academy ne mujhe sirf padhai nahi, ek soldier ki soch di. Yahan se mera safar shuru hua.", wingColor: "#e8420a", wingLabel: "Defence Academy" },
+  { name: "Sameer Parmar",    role: "Sainik School - Gurukul Kurukshetra", avatar: "SP", avatarBg: "#10b981", photo: "/img/students/Sameer Parmar.jpg",     quote: "Yahan ki training aur discipline ne mujhe Sainik School ke liye taiyaar kiya. Best decision of my life.",  wingColor: "#10b981", wingLabel: "Defence Academy" },
+  { name: "Abhinav Thakur",   role: "Sainik School - Gurukul Kurukshetra", avatar: "AT", avatarBg: "#0d1b3e", photo: "/img/students/Abhinav Thakur.jpg",    quote: "Faculty bahut dedicated hai. Har student par personally dhyan diya jaata hai. Results khud bolta hai.",   wingColor: "#7c3aed", wingLabel: "Sniper Classes" },
+  { name: "Aaradhya Rath",    role: "Sainik School - Amravathi Nagar",     avatar: "AR", avatarBg: "#7c3aed", photo: "/img/students/Aaradhya Rathi.jpg",    quote: "Sniper Group ka mahaul aur guidance ne mera sapna sach kar diya. Bahut grateful hoon.",                   wingColor: "#FF9933", wingLabel: "Defence Academy" },
 ];
 
-const HomePortal = () => {
-  const [videoMuted, setVideoMuted] = useState(true);
+// ─────────────────────────────────────────────────────────
+// MARQUEE STRIP
+// ─────────────────────────────────────────────────────────
+const MarqueeStrip = () => {
+  const items = ["AISSEE", "RMS", "RIMC", "NDA", "CDS", "Air Force", "IIT JEE", "NEET", "Class 9-12", "CBSE Board", "Sainik School", "Military School", "Defence Academy"];
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: "#f5f7fa" }}>
+    <div style={{ background: "#e8420a", overflow: "hidden", padding: "12px 0", width: "100%" }}>
+      <div style={{ display: "flex", gap: "60px", animation: "marquee 30s linear infinite", whiteSpace: "nowrap", width: "max-content" }}>
+        {[...items, ...items, ...items].map((item, i) => (
+          <span key={i} style={{ color: "white", fontSize: "13px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "60px" }}>
+            {item}
+            {i < items.length * 3 - 1 && <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "rgba(255,255,255,0.5)", display: "inline-block" }} />}
+          </span>
+        ))}
+      </div>
+      <style>{`@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }`}</style>
+    </div>
+  );
+};
 
-      {/* ── 1. HERO SLIDER ── */}
+// ─────────────────────────────────────────────────────────
+// STUDENT PHOTO BANNER
+// ─────────────────────────────────────────────────────────
+const StudentPhotoBanner = () => (
+  <div style={{ width: "100%", overflow: "hidden", lineHeight: 0 }}>
+    <img
+      src="/img/students/2.jpg"
+      alt="Our Students — Sniper Group of Education"
+      style={{
+        width: "100%",
+        display: "block",
+        objectFit: "cover",
+        maxHeight: "240px",
+        objectPosition: "center top",
+      }}
+    />
+  </div>
+);
+
+// ─────────────────────────────────────────────────────────
+// MAIN PAGE
+// ─────────────────────────────────────────────────────────
+const HomePortal = () => {
+  return (
+    <div style={{ minHeight: "100vh", overflowX: "hidden", background: "#f5f7fa" }}>
+
+      {/* 1. HERO BANNER */}
+<div style={{ marginBottom: "40px" }}>
+  <HeroBanner />
+</div>
+
+      {/* 2. HERO SLIDER */}
       <HeroSlider />
 
-      {/* ── 2. VIDEO SECTION ── */}
-      <VideoSection />
-
-      {/* ── 3. WHAT ARE YOU LOOKING FOR ── */}
+      {/* 3. WHAT ARE YOU LOOKING FOR */}
       <WhatAreYouLookingFor />
-
-      {/* ── 4. MARQUEE ── */}
+{/* 6. MARQUEE */}
       <MarqueeStrip />
+
       
+      {/* 5. DIRECTOR'S WORD + OUR TRUST */}
+<section style={{ padding: "80px 16px", background: "#f5f7fa" }}>
+  <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "40px" }}>
 
-      {/* ── 5. ABOUT ── */}
-      <section id="about" className="py-24 px-4" style={{ background: "#ffffff" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <AnimatedSection>
-              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.25em] uppercase mb-5 border border-[#e8420a]/30 text-[#e8420a] bg-[#e8420a]/10">
-                About Us
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0d1b3e] leading-tight mb-6">
-                A Legacy Built on <span style={{ color: "#e8420a" }}>Discipline</span> &{" "}
-                <span style={{ color: "#e8420a" }}>Excellence</span>
-              </h2>
-              <p className="text-[#0d1b3e]/60 text-base leading-relaxed mb-5">
-                Sniper Group of Education was founded with a singular mission — to create a
-                comprehensive educational ecosystem where every student receives world-class guidance.
-              </p>
-              <p className="text-[#0d1b3e]/60 text-base leading-relaxed mb-8">
-                From preparing future Army officers to nurturing young school children and
-                competitive exam aspirants, we bring the same rigor and commitment to every classroom.
-              </p>
-              <div className="grid grid-cols-2 gap-5">
-                {[
-                  { icon: Target, label: "Vision", text: "To be India's most trusted multi-wing educational institution" },
-                  { icon: Zap, label: "Mission", text: "Empowering students with knowledge, discipline, and purpose" },
-                ].map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={item.label} className="p-5 rounded-2xl border hover:shadow-md transition-all duration-300"
-                      style={{ background: "#f5f7fa", borderColor: "#eef1f8" }}>
-                      <Icon size={22} style={{ color: "#e8420a" }} className="mb-3" />
-                      <p className="text-[#0d1b3e] font-semibold text-sm mb-1">{item.label}</p>
-                      <p className="text-[#0d1b3e]/50 text-xs leading-relaxed">{item.text}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </AnimatedSection>
+      <AnimatedSection>
+        <div style={{ background: "#ffffff", borderRadius: "20px", padding: "40px", border: "1px solid #eef1f8", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", height: "100%" }}>
+          
+          <span style={{ display: "inline-block", padding: "5px 16px", borderRadius: "999px", background: "rgba(232,66,10,0.1)", border: "1px solid rgba(232,66,10,0.3)", color: "#e8420a", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "20px" }}>
+            A Word from Our Director
+          </span>
 
-            <AnimatedSection delay={0.15}>
-              <div className="relative">
-                <div className="rounded-3xl overflow-hidden aspect-[4/3] border shadow-xl" style={{ borderColor: "#eef1f8" }}>
-                  <video
-                    id="about-video"
-                    src="/video/about-sniper.mp4"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Sound toggle button */}
-                  <button
-                    onClick={() => {
-                      const v = document.getElementById("about-video");
-                      v.muted = !v.muted;
-                      v.play();
-                      setVideoMuted(v.muted);
-                    }}
-                    style={{
-                      position: "absolute", bottom: "16px", right: "16px",
-                      width: "42px", height: "42px", borderRadius: "50%",
-                      background: "rgba(0,0,0,0.55)", border: "1.5px solid rgba(255,255,255,0.4)",
-                      color: "white", fontSize: "18px", cursor: "pointer",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      backdropFilter: "blur(6px)", transition: "all 0.2s", zIndex: 5,
-                    }}
-                    title="Toggle Sound"
-                  >
-                    {videoMuted ? "🔇" : "🔊"}
-                  </button>
-                </div>
-                <div className="absolute -bottom-6 -left-6 px-6 py-4 rounded-2xl shadow-2xl border"
-                  style={{ background: "#ffffff", borderColor: "#eef1f8" }}>
-                  <p className="font-serif text-3xl font-bold" style={{ color: "#e8420a" }}>5+</p>
-                  <p className="text-[#0d1b3e]/50 text-xs tracking-wider mt-0.5">Years of Excellence</p>
-                </div>
-              </div>
-            </AnimatedSection>
+          <div style={{ width: "40px", height: "4px", background: "#e8420a", borderRadius: "2px", marginBottom: "24px" }} />
+
+          <blockquote style={{ 
+            fontFamily: "Georgia, serif", 
+            fontSize: "clamp(15px, 1.8vw, 17px)", 
+            color: "#0d1b3e", 
+            lineHeight: 1.8, 
+            fontStyle: "italic", 
+            borderLeft: "3px solid #e8420a", 
+            paddingLeft: "20px", 
+            margin: "0 0 24px 0" 
+          }}>
+            "At Sniper Group of Education, we do not just teach — we transform. Every student who walks through our doors carries within them the potential to serve the nation, excel academically, and rise beyond their circumstances."
+          </blockquote>
+
+          {/* ✅ YOUTUBE VIDEO */}
+          <div style={{
+            position: "relative",
+            width: "100%",
+            paddingBottom: "56.25%",
+            borderRadius: "16px",
+            overflow: "hidden",
+            marginBottom: "24px",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.1)"
+          }}>
+            <iframe
+              src="https://www.youtube.com/embed/eD2-DaF1zAM?start=7"
+              title="Sniper Group Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%"
+              }}
+            ></iframe>
           </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+            <div style={{ width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg, #e8420a, #0d1b3e)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700, fontSize: "18px", flexShrink: 0 }}>
+              D
+            </div>
+            <div>
+              <p style={{ fontWeight: 700, color: "#0d1b3e", fontSize: "15px", margin: 0 }}>
+                Director, Sniper Group of Education
+              </p>
+              <p style={{ color: "rgba(13,27,62,0.5)", fontSize: "12px", margin: "3px 0 0" }}>
+                Meerut, Uttar Pradesh · Est. 2009
+              </p>
+            </div>
+          </div>
+
         </div>
-      </section>
+      </AnimatedSection>
 
+      <AnimatedSection delay={0.15}>
+        <div style={{ background: "#0d1b3e", borderRadius: "20px", padding: "40px", height: "100%", boxShadow: "0 2px 16px rgba(13,27,62,0.25)" }}>
+          
+          <span style={{ display: "inline-block", padding: "5px 16px", borderRadius: "999px", background: "rgba(232,66,10,0.2)", border: "1px solid rgba(232,66,10,0.4)", color: "#ff7043", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "20px" }}>
+            Our Trust
+          </span>
 
-      {/* ── 6. STATS ── */}
-      <section className="py-20 px-4" style={{ background: "#0d1b3e" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.25em] uppercase mb-4 border border-[#e8420a]/40 bg-[#e8420a]/15"
-              style={{ color: "#ff6b35" }}>By The Numbers</span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              Our Impact in Numbers
-            </h2>
+          <div style={{ width: "40px", height: "4px", background: "#e8420a", borderRadius: "2px", marginBottom: "20px" }} />
+
+          <h3 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(17px, 2vw, 22px)", fontWeight: 700, color: "#fff", lineHeight: 1.4, marginBottom: "18px" }}>
+            Bhagwan Parshuram Education &amp; Charitable Trust
+          </h3>
+
+          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", lineHeight: 1.75, marginBottom: "24px" }}>
+            Registered under the Societies Registration Act, our trust is the legal backbone of all three wings. Committed to making quality education accessible, affordable, and excellence-driven for every child across Meerut and beyond.
+          </p>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+            {[
+              { label: "Registered Trust", value: "Since 2009" },
+              { label: "Three Wings", value: "One Mission" },
+              { label: "Registered City", value: "Meerut, U.P." },
+              { label: "Students Served", value: "5,000+" },
+            ].map(item => (
+              <div key={item.label} style={{ background: "rgba(255,255,255,0.07)", borderRadius: "12px", padding: "14px 16px", border: "1px solid rgba(255,255,255,0.1)" }}>
+                <p style={{ color: "#e8420a", fontSize: "15px", fontWeight: 700, margin: 0 }}>{item.value}</p>
+                <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "11px", margin: "3px 0 0" }}>{item.label}</p>
+              </div>
+            ))}
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+
+        </div>
+      </AnimatedSection>
+
+    </div>
+  </div>
+</section>
+
+{/* 4. STUDENT PHOTO BANNER — shown after "What Are You Looking For?" */}
+      <StudentPhotoBanner />
+
+      {/* 6. MARQUEE */}
+      <MarqueeStrip />
+
+      {/* 7. STATS */}
+      <section style={{ padding: "80px 16px", background: "#0d1b3e" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <AnimatedSection>
+            <SectionTitle tag="By The Numbers" title="Our Impact in Numbers" dark={true} />
+          </AnimatedSection>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "24px" }}>
             {stats.map((stat, i) => {
               const Icon = stat.icon;
               return (
                 <AnimatedSection key={stat.label} delay={i * 0.1}>
-                  <div className="text-center group p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all"
-                    style={{ background: "rgba(255,255,255,0.05)" }}>
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
-                      style={{ background: stat.color + "25" }}>
-                      <Icon size={22} style={{ color: stat.color }} />
+                  <div style={{ textAlign: "center", padding: "36px 24px", borderRadius: "18px", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.04)", transition: "all 0.3s" }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                    <div style={{ width: "54px", height: "54px", borderRadius: "16px", background: `${stat.color}25`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+                      <Icon size={24} style={{ color: stat.color }} />
                     </div>
-                    <p className="font-serif text-4xl sm:text-5xl font-bold mb-2" style={{ color: stat.color }}>{stat.value}</p>
-                    <p className="text-white/50 text-sm tracking-wide">{stat.label}</p>
+                    <p style={{ fontFamily: "Georgia, serif", fontSize: "clamp(34px, 4vw, 48px)", fontWeight: 700, color: stat.color, margin: "0 0 8px", lineHeight: 1 }}>{stat.value}</p>
+                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", letterSpacing: "0.5px" }}>{stat.label}</p>
                   </div>
                 </AnimatedSection>
               );
@@ -204,34 +513,39 @@ const HomePortal = () => {
         </div>
       </section>
 
-      {/* ── 8. TESTIMONIALS ── */}
-      <section className="py-24 px-4" style={{ background: "#ffffff" }}>
-        <div className="max-w-7xl mx-auto">
+      {/* 8. TESTIMONIALS */}
+      <section style={{ padding: "80px 16px", background: "#f5f7fa" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
           <AnimatedSection>
-            <SectionTitle tag="Student Stories" title="Words from Our Warriors"
-              subtitle="Real students. Real results. Hear what our community has to say." />
+            <SectionTitle tag="Student Stories" title="Words from Our Warriors" subtitle="Real students. Real results." />
           </AnimatedSection>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px" }}>
             {testimonials.map((t, i) => (
               <AnimatedSection key={t.name} delay={i * 0.12}>
-                <div className="p-8 h-full flex flex-col rounded-2xl border hover:shadow-lg transition-all duration-300"
-                  style={{ background: "#f5f7fa", borderColor: "#eef1f8" }}>
-                  <div className="flex gap-1 mb-5">
-                    {[...Array(5)].map((_, j) => (
-                      <Star key={j} size={13} style={{ color: "#e8420a", fill: "#e8420a" }} />
-                    ))}
-                  </div>
-                  <p className="text-[#0d1b3e]/60 text-sm leading-relaxed italic flex-1 mb-6">"{t.quote}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 overflow-hidden"
-                      style={{ background: t.avatarBg }}>
-                      {t.photo
-                        ? <img src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                        : t.avatar}
+                <div style={{ borderRadius: "18px", overflow: "hidden", border: "1px solid #eef1f8", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.06)", transition: "all 0.3s", display: "flex", flexDirection: "column", height: "100%" }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = t.wingColor; e.currentTarget.style.boxShadow = `0 16px 40px ${t.wingColor}22`; e.currentTarget.style.transform = "translateY(-6px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "#eef1f8"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  <div style={{ position: "relative", height: "220px", overflow: "hidden", flexShrink: 0 }}>
+                    <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: t.wingColor, zIndex: 3 }} />
+                    <img src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", background: "#e2e8f0" }} onError={e => { e.target.onerror = null; e.target.style.display = "none"; }} />
+                    <div style={{ position: "absolute", top: "14px", right: "12px", background: t.wingColor, color: "white", fontSize: "9px", fontWeight: 700, padding: "3px 10px", borderRadius: "999px", letterSpacing: "1px", textTransform: "uppercase", zIndex: 2 }}>{t.wingLabel}</div>
+                    <div style={{ position: "absolute", bottom: "10px", left: "14px", width: "36px", height: "36px", borderRadius: "10px", background: "white", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: `0 4px 10px ${t.wingColor}30`, zIndex: 2 }}>
+                      <Quote size={16} style={{ color: t.wingColor }} />
                     </div>
-                    <div>
-                      <p className="text-[#0d1b3e] font-semibold text-sm">{t.name}</p>
-                      <p className="text-[#0d1b3e]/40 text-xs">{t.role}</p>
+                  </div>
+                  <div style={{ padding: "20px", display: "flex", flexDirection: "column", flex: 1 }}>
+                    <div style={{ display: "flex", gap: "2px", marginBottom: "12px" }}>
+                      {[...Array(5)].map((_, j) => <Star key={j} size={13} style={{ color: t.wingColor, fill: t.wingColor }} />)}
+                    </div>
+                    <p style={{ color: "rgba(13,27,62,0.65)", fontSize: "12.5px", lineHeight: 1.75, fontStyle: "italic", flex: 1, marginBottom: "16px" }}>"{t.quote}"</p>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", paddingTop: "12px", borderTop: `1px solid ${t.wingColor}25` }}>
+                      <div style={{ width: "38px", height: "38px", borderRadius: "50%", overflow: "hidden", flexShrink: 0, border: `2px solid ${t.wingColor}40`, background: t.avatarBg, display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "12px", fontWeight: 700 }}>
+                        <img src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: 700, color: "#0d1b3e", fontSize: "12.5px", margin: 0 }}>{t.name}</p>
+                        <p style={{ fontSize: "11px", color: `${t.wingColor}cc`, margin: "2px 0 0" }}>{t.role}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -240,7 +554,6 @@ const HomePortal = () => {
           </div>
         </div>
       </section>
-
 
     </div>
   );
