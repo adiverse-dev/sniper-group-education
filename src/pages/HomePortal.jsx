@@ -1,21 +1,21 @@
-import { useRef, useState, useEffect, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import {
   Users, Trophy, Star, Award, Quote,
-  ChevronLeft, ChevronRight,
 } from "lucide-react";
 import WhatAreYouLookingFor from "../sections/WhatAreYouLookingFor";
+import HeroSlider from "../sections/HeroSlider";
 
 // ─────────────────────────────────────────────────────────
 // BANNER PHOTOS
 // ─────────────────────────────────────────────────────────
 const bannerPhotos = [
-  { src: "/img/students/D.jpg", label: "Defence Wing",   bg: "#1a2a3a" },
+  { src: "/img/students/D.jpg",    label: "Defence Wing",   bg: "#1a2a3a" },
   { src: "/img/students/RIMC.png", label: "School Wing",    bg: "#1a3a2e" },
-  { src: "/img/students/AB.jpeg", label: "Sniper Classes", bg: "#1e1a3a" },
-  { src: "/img/students/Y.jpg", label: "Defence Wing",   bg: "#2a1a1a" },
-  { src: "/img/students/s6.png", label: "School Wing",    bg: "#1a1e2a" },
+  { src: "/img/students/AB.jpeg",  label: "Sniper Classes", bg: "#1e1a3a" },
+  { src: "/img/students/Y.jpg",    label: "Defence Wing",   bg: "#2a1a1a" },
+  { src: "/img/students/s6.png",   label: "School Wing",    bg: "#1a1e2a" },
 ];
 
 const bannerStats = [
@@ -24,6 +24,52 @@ const bannerStats = [
   { value: "3",      label: "Wings / Institutes", color: "#7c3aed" },
   { value: "15+",    label: "Years Excellence",   color: "#f59e0b" },
   { value: "98%",    label: "Board Result Rate",  color: "#3b82f6" },
+];
+
+// ─────────────────────────────────────────────────────────
+// HOME SLIDER SLIDES
+// ─────────────────────────────────────────────────────────
+const homeSlides = [
+  {
+    img: "/img/students/1.jpg",
+    imgPos: "center top",
+    tag: "Defence Academy",
+    accent: "#e8420a",
+    heading: "Crack Every Defence Exam",
+    sub: "AISSEE · RMS · RIMC · NDA · CDS · Air Force",
+    btn: "Explore Courses",
+    link: "/defence",
+  },
+  {
+    img: "/img/students/4.jpg",
+    imgPos: "center",
+    tag: "Public School",
+    accent: "#10b981",
+    heading: "Quality CBSE Education",
+    sub: "Nursery to Class 8 — Building strong foundations",
+    btn: "Explore School",
+    link: "/school",
+  },
+  {
+    img: "/img/students/5.jpg",
+    imgPos: "center",
+    tag: "Sniper Classes",
+    accent: "#7c3aed",
+    heading: "Crack Every Exam You Face",
+    sub: "IIT JEE · NEET · 9th to 12th Foundation",
+    btn: "Explore Classes",
+    link: "/classes",
+  },
+  {
+    img: "/img/students/6.jpg",
+    imgPos: "center",
+    tag: "Sniper Group",
+    accent: "#e8420a",
+    heading: "One Trust. Three Wings.",
+    sub: "Comprehensive education ecosystem since 2009",
+    btn: "Know More",
+    link: "/",
+  },
 ];
 
 // ─────────────────────────────────────────────────────────
@@ -50,223 +96,74 @@ const AnimatedSection = ({ children, className = "", delay = 0 }) => {
 // ─────────────────────────────────────────────────────────
 const HeroBanner = () => (
   <div style={{ width: "100%" }}>
-    
-    {/* HERO SECTION */}
-    <div style={{ 
-      position: "relative", 
-      height: "550px", 
-      display: "flex", 
-      overflow: "hidden" 
+    <div style={{
+      position: "relative",
+      height: "550px",
+      display: "flex",
+      overflow: "hidden",
     }}>
-      
       {bannerPhotos.map((p, i) => (
         <div key={i} style={{ flex: 1, position: "relative", overflow: "hidden", background: p.bg }}>
           <img
             src={p.src}
             alt={p.label}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center"
-            }}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
           />
         </div>
       ))}
-
-      {/* DARK OVERLAY */}
       <div style={{
-        position: "absolute",
-        inset: 0,
+        position: "absolute", inset: 0,
         background: "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7))",
-        zIndex: 2
+        zIndex: 2,
       }} />
-
-      {/* CENTER CONTENT */}
       <div style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 3,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        padding: "0 20px"
+        position: "absolute", inset: 0, zIndex: 3,
+        display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center",
+        textAlign: "center", padding: "0 20px",
       }}>
-
-        {/* TOP TAG */}
         <div style={{
-          padding: "8px 20px",
-          borderRadius: "999px",
+          padding: "8px 20px", borderRadius: "999px",
           background: "rgba(255,255,255,0.15)",
           border: "1px solid rgba(255,255,255,0.3)",
-          color: "#fff",
-          fontSize: "13px",
-          marginBottom: "20px",
-          backdropFilter: "blur(6px)"
+          color: "#fff", fontSize: "13px",
+          marginBottom: "20px", backdropFilter: "blur(6px)",
         }}>
           Your dreams are our dreams
         </div>
-
-        {/* MAIN HEADING */}
         <h1 style={{
-          fontSize: "clamp(30px, 5vw, 56px)",
-          fontWeight: 700,
-          color: "#fff",
-          lineHeight: 1.2,
-          fontFamily: "Georgia, serif",
-          margin: 0
+          fontSize: "clamp(30px, 5vw, 56px)", fontWeight: 700,
+          color: "#fff", lineHeight: 1.2,
+          fontFamily: "Georgia, serif", margin: 0,
         }}>
           Inspiring Young Minds and <br />
           Empowering Dreams since 2009
         </h1>
-
-        {/* SUB TEXT */}
-        <p style={{
-          marginTop: "14px",
-          fontSize: "15px",
-          color: "rgba(255,255,255,0.8)"
-        }}>
+        <p style={{ marginTop: "14px", fontSize: "15px", color: "rgba(255,255,255,0.8)" }}>
           Sniper Group of Education — Meerut, U.P.
         </p>
-
       </div>
     </div>
 
-    {/* 🔥 STATS BAR WITH OVERLAP */}
-    <div style={{
-      marginTop: "-80px",  // 👈 overlap effect
-      padding: "0 20px",
-      position: "relative",
-      zIndex: 5
-    }}>
+    {/* STATS BAR */}
+    <div style={{ marginTop: "-80px", padding: "0 20px", position: "relative", zIndex: 5 }}>
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-        gap: "16px",
-        background: "#ffffff",
-        borderRadius: "20px",
-        padding: "20px",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.15)"
+        gap: "16px", background: "#ffffff",
+        borderRadius: "20px", padding: "20px",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
       }}>
         {bannerStats.map((s, i) => (
-          <div key={i} style={{
-            textAlign: "center"
-          }}>
-            <div style={{
-              fontSize: "22px",
-              fontWeight: 700,
-              color: s.color
-            }}>
-              {s.value}
-            </div>
-            <div style={{
-              fontSize: "12px",
-              color: "rgba(13,27,62,0.5)",
-              marginTop: "5px"
-            }}>
-              {s.label}
-            </div>
+          <div key={i} style={{ textAlign: "center" }}>
+            <div style={{ fontSize: "22px", fontWeight: 700, color: s.color }}>{s.value}</div>
+            <div style={{ fontSize: "12px", color: "rgba(13,27,62,0.5)", marginTop: "5px" }}>{s.label}</div>
           </div>
         ))}
       </div>
     </div>
-
   </div>
 );
-
-// ─────────────────────────────────────────────────────────
-// HERO SLIDER
-// ─────────────────────────────────────────────────────────
-const sliderSlides = [
-  { img: "/img/students/1.jpg", wingLabel: "Defence Academy", wingColor: "#e8420a", heading: "Crack Every Defence Exam",  sub: "AISSEE · RMS · RIMC · NDA · CDS · Air Force",    link: "/defence" },
-  { img: "/img/students/4.jpg", wingLabel: "Public School",   wingColor: "#10b981", heading: "Quality CBSE Education",    sub: "Nursery to Class 8 — Building strong foundations", link: "/school"  },
-  { img: "/img/students/5.jpg", wingLabel: "Sniper Classes",  wingColor: "#7c3aed", heading: "Crack Every Exam You Face", sub: "IIT JEE · NEET · 9th to 12th Foundation",          link: "/classes" },
-  { img: "/img/students/6.jpg", wingLabel: "Sniper Group",    wingColor: "#e8420a", heading: "One Trust. Three Wings.",   sub: "Comprehensive education ecosystem since 2009",       link: "/"        },
-];
-
-const HeroSlider = () => {
-  const navigate = useNavigate();
-  const [current, setCurrent] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const total = sliderSlides.length;
-
-  const goTo = useCallback((index) => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrent(index);
-    setTimeout(() => setIsTransitioning(false), 600);
-  }, [isTransitioning]);
-
-  const prev = useCallback(() => { goTo((current - 1 + total) % total); }, [current, total, goTo]);
-  const next = useCallback(() => { goTo((current + 1) % total); }, [current, total, goTo]);
-
-  useEffect(() => {
-    const timer = setInterval(() => { next(); }, 4000);
-    return () => clearInterval(timer);
-  }, [next]);
-
-  const slide = sliderSlides[current];
-
-  return (
-    <div style={{ position: "relative", width: "100%", height: "420px", overflow: "hidden", background: "#0d1b3e" }}>
-      {sliderSlides.map((s, i) => (
-        <div key={i} style={{ position: "absolute", inset: 0, transition: "opacity 0.6s ease", opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0 }}>
-          <img src={s.img} alt={s.heading} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} onError={e => { e.target.style.display = "none"; }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.2) 100%)" }} />
-        </div>
-      ))}
-
-      <div style={{ position: "absolute", inset: 0, zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 60px" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: `${slide.wingColor}22`, border: `1.5px solid ${slide.wingColor}`, color: slide.wingColor, fontSize: "11px", fontWeight: 700, padding: "5px 14px", borderRadius: "999px", letterSpacing: "1px", textTransform: "uppercase", width: "fit-content", marginBottom: "20px", backdropFilter: "blur(4px)" }}>
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: slide.wingColor, flexShrink: 0 }} />
-          {slide.wingLabel}
-        </div>
-        <h2 style={{ color: "#fff", fontFamily: "Georgia, serif", fontSize: "clamp(24px, 3.5vw, 44px)", fontWeight: 700, lineHeight: 1.2, margin: "0 0 12px", textShadow: "0 2px 16px rgba(0,0,0,0.5)", maxWidth: "600px" }}>
-          {slide.heading}
-        </h2>
-        <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "15px", marginBottom: "28px", letterSpacing: "0.3px", maxWidth: "500px" }}>{slide.sub}</p>
-
-        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          <button
-            onClick={() => navigate(slide.link)}
-            style={{ padding: "11px 24px", borderRadius: "8px", background: slide.wingColor, color: "white", border: "none", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.2s", boxShadow: `0 4px 16px ${slide.wingColor}44` }}
-            onMouseEnter={e => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-            onMouseLeave={e => { e.currentTarget.style.opacity = "1";    e.currentTarget.style.transform = "translateY(0)"; }}>
-            Explore Courses →
-          </button>
-          <button
-            onClick={() => navigate("/contact")}
-            style={{ padding: "11px 24px", borderRadius: "8px", background: "transparent", color: "white", border: "1.5px solid rgba(255,255,255,0.6)", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.2s", backdropFilter: "blur(4px)" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
-            Apply Now
-          </button>
-        </div>
-      </div>
-
-      {/* Prev / Next */}
-      <button onClick={prev} style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", zIndex: 3, width: "44px", height: "44px", borderRadius: "50%", background: "rgba(0,0,0,0.45)", border: "1.5px solid rgba(255,255,255,0.3)", color: "white", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s", backdropFilter: "blur(4px)" }}
-        onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.7)"; }}
-        onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,0,0,0.45)"; }}>
-        <ChevronLeft size={20} />
-      </button>
-      <button onClick={next} style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", zIndex: 3, width: "44px", height: "44px", borderRadius: "50%", background: "rgba(0,0,0,0.45)", border: "1.5px solid rgba(255,255,255,0.3)", color: "white", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s", backdropFilter: "blur(4px)" }}
-        onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.7)"; }}
-        onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,0,0,0.45)"; }}>
-        <ChevronRight size={20} />
-      </button>
-
-      {/* Dots */}
-      <div style={{ position: "absolute", bottom: "18px", left: "50%", transform: "translateX(-50%)", zIndex: 3, display: "flex", gap: "8px", alignItems: "center" }}>
-        {sliderSlides.map((s, i) => (
-          <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? "22px" : "8px", height: "8px", borderRadius: "999px", background: i === current ? slide.wingColor : "rgba(255,255,255,0.4)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.35s ease" }} />
-        ))}
-      </div>
-    </div>
-  );
-};
 
 // ─────────────────────────────────────────────────────────
 // SECTION TITLE
@@ -274,15 +171,31 @@ const HeroSlider = () => {
 const SectionTitle = ({ tag, title, subtitle, dark = false }) => (
   <div className="text-center mb-14">
     {tag && (
-      <span style={{ display: "inline-block", padding: "6px 18px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", marginBottom: "16px", border: "1px solid rgba(232,66,10,0.3)", color: "#e8420a", background: "rgba(232,66,10,0.1)" }}>
+      <span style={{
+        display: "inline-block", padding: "6px 18px", borderRadius: "999px",
+        fontSize: "11px", fontWeight: 700, letterSpacing: "0.25em",
+        textTransform: "uppercase", marginBottom: "16px",
+        border: "1px solid rgba(232,66,10,0.3)",
+        color: "#e8420a", background: "rgba(232,66,10,0.1)",
+      }}>
         {tag}
       </span>
     )}
-    <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(26px, 3.5vw, 44px)", fontWeight: 700, lineHeight: 1.2, color: dark ? "#ffffff" : "#0d1b3e", margin: 0 }}>
+    <h2 style={{
+      fontFamily: "Georgia, serif",
+      fontSize: "clamp(26px, 3.5vw, 44px)",
+      fontWeight: 700, lineHeight: 1.2,
+      color: dark ? "#ffffff" : "#0d1b3e", margin: 0,
+    }}>
       {title}
     </h2>
     {subtitle && (
-      <p style={{ marginTop: "14px", color: dark ? "rgba(255,255,255,0.55)" : "rgba(13,27,62,0.55)", fontSize: "15px", maxWidth: "600px", margin: "14px auto 0", lineHeight: 1.7 }}>
+      <p style={{
+        marginTop: "14px",
+        color: dark ? "rgba(255,255,255,0.55)" : "rgba(13,27,62,0.55)",
+        fontSize: "15px", maxWidth: "600px",
+        margin: "14px auto 0", lineHeight: 1.7,
+      }}>
         {subtitle}
       </p>
     )}
@@ -322,7 +235,9 @@ const MarqueeStrip = () => {
         {[...items, ...items, ...items].map((item, i) => (
           <span key={i} style={{ color: "white", fontSize: "13px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "60px" }}>
             {item}
-            {i < items.length * 3 - 1 && <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "rgba(255,255,255,0.5)", display: "inline-block" }} />}
+            {i < items.length * 3 - 1 && (
+              <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "rgba(255,255,255,0.5)", display: "inline-block" }} />
+            )}
           </span>
         ))}
       </div>
@@ -339,13 +254,7 @@ const StudentPhotoBanner = () => (
     <img
       src="/img/students/2.jpg"
       alt="Our Students — Sniper Group of Education"
-      style={{
-        width: "100%",
-        display: "block",
-        objectFit: "cover",
-        maxHeight: "240px",
-        objectPosition: "center top",
-      }}
+      style={{ width: "100%", display: "block", objectFit: "cover", maxHeight: "240px", objectPosition: "center top" }}
     />
   </div>
 );
@@ -358,135 +267,93 @@ const HomePortal = () => {
     <div style={{ minHeight: "100vh", overflowX: "hidden", background: "#f5f7fa" }}>
 
       {/* 1. HERO BANNER */}
-<div style={{ marginBottom: "40px" }}>
-  <HeroBanner />
-</div>
+      <div style={{ marginBottom: "40px" }}>
+        <HeroBanner />
+      </div>
 
       {/* 2. HERO SLIDER */}
-      <HeroSlider />
+      <HeroSlider slides={homeSlides} />
 
       {/* 3. WHAT ARE YOU LOOKING FOR */}
       <WhatAreYouLookingFor />
-{/* 6. MARQUEE */}
+
+      {/* 4. MARQUEE */}
       <MarqueeStrip />
 
-      
       {/* 5. DIRECTOR'S WORD + OUR TRUST */}
-<section style={{ padding: "80px 16px", background: "#f5f7fa" }}>
-  <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "40px" }}>
-
-      <AnimatedSection>
-        <div style={{ background: "#ffffff", borderRadius: "20px", padding: "40px", border: "1px solid #eef1f8", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", height: "100%" }}>
-          
-          <span style={{ display: "inline-block", padding: "5px 16px", borderRadius: "999px", background: "rgba(232,66,10,0.1)", border: "1px solid rgba(232,66,10,0.3)", color: "#e8420a", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "20px" }}>
-            A Word from Our Director
-          </span>
-
-          <div style={{ width: "40px", height: "4px", background: "#e8420a", borderRadius: "2px", marginBottom: "24px" }} />
-
-          <blockquote style={{ 
-            fontFamily: "Georgia, serif", 
-            fontSize: "clamp(15px, 1.8vw, 17px)", 
-            color: "#0d1b3e", 
-            lineHeight: 1.8, 
-            fontStyle: "italic", 
-            borderLeft: "3px solid #e8420a", 
-            paddingLeft: "20px", 
-            margin: "0 0 24px 0" 
-          }}>
-            "At Sniper Group of Education, we do not just teach — we transform. Every student who walks through our doors carries within them the potential to serve the nation, excel academically, and rise beyond their circumstances."
-          </blockquote>
-
-          {/* ✅ YOUTUBE VIDEO */}
-          <div style={{
-            position: "relative",
-            width: "100%",
-            paddingBottom: "56.25%",
-            borderRadius: "16px",
-            overflow: "hidden",
-            marginBottom: "24px",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.1)"
-          }}>
-            <iframe
-              src="https://www.youtube.com/embed/eD2-DaF1zAM?start=7"
-              title="Sniper Group Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%"
-              }}
-            ></iframe>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-            <div style={{ width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg, #e8420a, #0d1b3e)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700, fontSize: "18px", flexShrink: 0 }}>
-              D
-            </div>
-            <div>
-              <p style={{ fontWeight: 700, color: "#0d1b3e", fontSize: "15px", margin: 0 }}>
-                Director, Sniper Group of Education
-              </p>
-              <p style={{ color: "rgba(13,27,62,0.5)", fontSize: "12px", margin: "3px 0 0" }}>
-                Meerut, Uttar Pradesh · Est. 2009
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection delay={0.15}>
-        <div style={{ background: "#0d1b3e", borderRadius: "20px", padding: "40px", height: "100%", boxShadow: "0 2px 16px rgba(13,27,62,0.25)" }}>
-          
-          <span style={{ display: "inline-block", padding: "5px 16px", borderRadius: "999px", background: "rgba(232,66,10,0.2)", border: "1px solid rgba(232,66,10,0.4)", color: "#ff7043", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "20px" }}>
-            Our Trust
-          </span>
-
-          <div style={{ width: "40px", height: "4px", background: "#e8420a", borderRadius: "2px", marginBottom: "20px" }} />
-
-          <h3 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(17px, 2vw, 22px)", fontWeight: 700, color: "#fff", lineHeight: 1.4, marginBottom: "18px" }}>
-            Bhagwan Parshuram Education &amp; Charitable Trust
-          </h3>
-
-          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", lineHeight: 1.75, marginBottom: "24px" }}>
-            Registered under the Societies Registration Act, our trust is the legal backbone of all three wings. Committed to making quality education accessible, affordable, and excellence-driven for every child across Meerut and beyond.
-          </p>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-            {[
-              { label: "Registered Trust", value: "Since 2009" },
-              { label: "Three Wings", value: "One Mission" },
-              { label: "Registered City", value: "Meerut, U.P." },
-              { label: "Students Served", value: "5,000+" },
-            ].map(item => (
-              <div key={item.label} style={{ background: "rgba(255,255,255,0.07)", borderRadius: "12px", padding: "14px 16px", border: "1px solid rgba(255,255,255,0.1)" }}>
-                <p style={{ color: "#e8420a", fontSize: "15px", fontWeight: 700, margin: 0 }}>{item.value}</p>
-                <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "11px", margin: "3px 0 0" }}>{item.label}</p>
+      <section style={{ padding: "80px 16px", background: "#f5f7fa" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "40px" }}>
+            <AnimatedSection>
+              <div style={{ background: "#ffffff", borderRadius: "20px", padding: "40px", border: "1px solid #eef1f8", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", height: "100%" }}>
+                <span style={{ display: "inline-block", padding: "5px 16px", borderRadius: "999px", background: "rgba(232,66,10,0.1)", border: "1px solid rgba(232,66,10,0.3)", color: "#e8420a", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "20px" }}>
+                  A Word from Our Director
+                </span>
+                <div style={{ width: "40px", height: "4px", background: "#e8420a", borderRadius: "2px", marginBottom: "24px" }} />
+                <blockquote style={{ fontFamily: "Georgia, serif", fontSize: "clamp(15px, 1.8vw, 17px)", color: "#0d1b3e", lineHeight: 1.8, fontStyle: "italic", borderLeft: "3px solid #e8420a", paddingLeft: "20px", margin: "0 0 24px 0" }}>
+                  "At Sniper Group of Education, we do not just teach — we transform. Every student who walks through our doors carries within them the potential to serve the nation, excel academically, and rise beyond their circumstances."
+                </blockquote>
+                <div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", borderRadius: "16px", overflow: "hidden", marginBottom: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
+                  <iframe
+                    src="https://www.youtube.com/embed/eD2-DaF1zAM?start=7"
+                    title="Sniper Group Video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                  <div style={{ width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg, #e8420a, #0d1b3e)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700, fontSize: "18px", flexShrink: 0 }}>
+                    D
+                  </div>
+                  <div>
+                    <p style={{ fontWeight: 700, color: "#0d1b3e", fontSize: "15px", margin: 0 }}>Director, Sniper Group of Education</p>
+                    <p style={{ color: "rgba(13,27,62,0.5)", fontSize: "12px", margin: "3px 0 0" }}>Meerut, Uttar Pradesh · Est. 2009</p>
+                  </div>
+                </div>
               </div>
-            ))}
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.15}>
+              <div style={{ background: "#0d1b3e", borderRadius: "20px", padding: "40px", height: "100%", boxShadow: "0 2px 16px rgba(13,27,62,0.25)" }}>
+                <span style={{ display: "inline-block", padding: "5px 16px", borderRadius: "999px", background: "rgba(232,66,10,0.2)", border: "1px solid rgba(232,66,10,0.4)", color: "#ff7043", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "20px" }}>
+                  Our Trust
+                </span>
+                <div style={{ width: "40px", height: "4px", background: "#e8420a", borderRadius: "2px", marginBottom: "20px" }} />
+                <h3 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(17px, 2vw, 22px)", fontWeight: 700, color: "#fff", lineHeight: 1.4, marginBottom: "18px" }}>
+                  Bhagwan Parshuram Education &amp; Charitable Trust
+                </h3>
+                <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", lineHeight: 1.75, marginBottom: "24px" }}>
+                  Registered under the Societies Registration Act, our trust is the legal backbone of all three wings. Committed to making quality education accessible, affordable, and excellence-driven for every child across Meerut and beyond.
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                  {[
+                    { label: "Registered Trust", value: "Since 2009" },
+                    { label: "Three Wings",       value: "One Mission" },
+                    { label: "Registered City",   value: "Meerut, U.P." },
+                    { label: "Students Served",   value: "5,000+" },
+                  ].map(item => (
+                    <div key={item.label} style={{ background: "rgba(255,255,255,0.07)", borderRadius: "12px", padding: "14px 16px", border: "1px solid rgba(255,255,255,0.1)" }}>
+                      <p style={{ color: "#e8420a", fontSize: "15px", fontWeight: 700, margin: 0 }}>{item.value}</p>
+                      <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "11px", margin: "3px 0 0" }}>{item.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
           </div>
-
         </div>
-      </AnimatedSection>
+      </section>
 
-    </div>
-  </div>
-</section>
-
-{/* 4. STUDENT PHOTO BANNER — shown after "What Are You Looking For?" */}
+      {/* 6. STUDENT PHOTO BANNER */}
       <StudentPhotoBanner />
 
-      {/* 6. MARQUEE */}
+      {/* 7. MARQUEE */}
       <MarqueeStrip />
 
-      {/* 7. STATS */}
+      {/* 8. STATS */}
       <section style={{ padding: "80px 16px", background: "#0d1b3e" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
           <AnimatedSection>
@@ -497,9 +364,11 @@ const HomePortal = () => {
               const Icon = stat.icon;
               return (
                 <AnimatedSection key={stat.label} delay={i * 0.1}>
-                  <div style={{ textAlign: "center", padding: "36px 24px", borderRadius: "18px", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.04)", transition: "all 0.3s" }}
+                  <div
+                    style={{ textAlign: "center", padding: "36px 24px", borderRadius: "18px", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.04)", transition: "all 0.3s" }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.transform = "translateY(0)"; }}
+                  >
                     <div style={{ width: "54px", height: "54px", borderRadius: "16px", background: `${stat.color}25`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
                       <Icon size={24} style={{ color: stat.color }} />
                     </div>
@@ -513,7 +382,7 @@ const HomePortal = () => {
         </div>
       </section>
 
-      {/* 8. TESTIMONIALS */}
+      {/* 9. TESTIMONIALS */}
       <section style={{ padding: "80px 16px", background: "#f5f7fa" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
           <AnimatedSection>
@@ -522,9 +391,11 @@ const HomePortal = () => {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px" }}>
             {testimonials.map((t, i) => (
               <AnimatedSection key={t.name} delay={i * 0.12}>
-                <div style={{ borderRadius: "18px", overflow: "hidden", border: "1px solid #eef1f8", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.06)", transition: "all 0.3s", display: "flex", flexDirection: "column", height: "100%" }}
+                <div
+                  style={{ borderRadius: "18px", overflow: "hidden", border: "1px solid #eef1f8", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.06)", transition: "all 0.3s", display: "flex", flexDirection: "column", height: "100%" }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = t.wingColor; e.currentTarget.style.boxShadow = `0 16px 40px ${t.wingColor}22`; e.currentTarget.style.transform = "translateY(-6px)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = "#eef1f8"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "#eef1f8"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; e.currentTarget.style.transform = "translateY(0)"; }}
+                >
                   <div style={{ position: "relative", height: "220px", overflow: "hidden", flexShrink: 0 }}>
                     <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: t.wingColor, zIndex: 3 }} />
                     <img src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", background: "#e2e8f0" }} onError={e => { e.target.onerror = null; e.target.style.display = "none"; }} />

@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
+import HeroSlider from "../sections/HeroSlider";
 
+// ─────────────────────────────────────────────────────────
+// HERO SLIDER SLIDES
+// ─────────────────────────────────────────────────────────
 const heroSlides = [
   {
-    type: "stats",
-    tag: "🏫 About Us",
-    title: "15+ Years of",
-    highlight: "Excellence",
-    title2: "& Legacy",
+    img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1400&q=80&fit=crop&crop=center",
+    imgPos: "center center",
+    tag: "About Us",
+    accent: "#e8420a",
+    heading: "15+ Years of Excellence & Legacy",
     sub: "Sniper Group of Education — a comprehensive educational ecosystem empowering students from Nursery to National Defence.",
     stats: [
       { val: "5,000+", lab: "Students" },
@@ -14,13 +18,15 @@ const heroSlides = [
       { val: "3",      lab: "Wings" },
       { val: "1,200+", lab: "Selections" },
     ],
+    btn: "Our Story",
+    link: "/about",
   },
   {
-    type: "stats",
-    tag: "🏆 Our Achievement",
-    title: "Trusted by",
-    highlight: "5,000+",
-    title2: "Families",
+    img: "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80&fit=crop&crop=center",
+    imgPos: "center center",
+    tag: "Our Achievement",
+    accent: "#e8420a",
+    heading: "Trusted by 5,000+ Families",
     sub: "From defence aspirants to school children and competitive exam students — Sniper Group has transformed thousands of lives across the region.",
     stats: [
       { val: "1,200+", lab: "Defence Selections" },
@@ -28,78 +34,45 @@ const heroSlides = [
       { val: "350+",   lab: "JEE/NEET Qualifiers" },
       { val: "15+",    lab: "Years" },
     ],
+    btn: "View Results",
+    link: "/about",
   },
   {
-    type: "trust",
-    tag: "🙏 Our Trust",
-    title: "Bhagwan Parshuram",
-    highlight: "Education",
-    title2: "& Charitable Trust",
+    img: "https://images.unsplash.com/photo-1544717305-2782549b5136?w=1400&q=80&fit=crop&crop=center",
+    imgPos: "center center",
+    tag: "Our Trust",
+    accent: "#e8420a",
+    heading: "Bhagwan Parshuram Education & Charitable Trust",
     sub: "Committed to making quality education accessible to every child regardless of background.",
+    btn: "Know More",
+    link: "/about",
   },
 ];
 
+// ─────────────────────────────────────────────────────────
+// MAIN COMPONENT
+// ─────────────────────────────────────────────────────────
 const About = () => {
-  const [cur, setCur] = useState(0);
-  const [fade, setFade] = useState(true);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setFade(false);
-      setTimeout(() => { setCur((c) => (c + 1) % heroSlides.length); setFade(true); }, 300);
-    }, 5500);
-    return () => clearInterval(timer);
-  }, []);
-
-  function goTo(n) {
-    if (n === cur) return;
-    setFade(false);
-    setTimeout(() => { setCur(n); setFade(true); }, 300);
-  }
-
-  const s = heroSlides[cur];
-
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
+        @media (max-width: 768px) {
+          .about-story-grid     { grid-template-columns: 1fr !important; }
+          .about-principal-grid { grid-template-columns: 1fr !important; text-align: center; }
+          .about-vm-grid        { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .about-vm-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
 
       {/* ── 1. HERO SLIDER ── */}
-      <div style={{ background: "#ffffff", padding: "20px 16px 24px" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
-          <div style={{ borderRadius: "20px", overflow: "hidden", position: "relative", minHeight: "320px", display: "flex", alignItems: "center", background: "linear-gradient(135deg, #0d1b3e 0%, #1a3260 60%, #0d1b3e 100%)", boxShadow: "0 4px 24px rgba(0,0,0,0.18)" }}>
-            <div style={{ position: "absolute", inset: 0, opacity: 0.04, backgroundImage: "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "44px 44px", pointerEvents: "none" }} />
-            <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "280px", height: "280px", borderRadius: "50%", background: "radial-gradient(circle, rgba(232,66,10,0.13), transparent 70%)", pointerEvents: "none" }} />
-            <div style={{ position: "relative", zIndex: 1, width: "100%", padding: "40px 56px 48px", opacity: fade ? 1 : 0, transform: fade ? "translateY(0)" : "translateY(12px)", transition: "opacity 0.3s ease, transform 0.3s ease", textAlign: "center" }}>
-              <span style={{ display: "inline-block", padding: "4px 16px", borderRadius: "999px", fontSize: "10.5px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "16px", border: "1px solid rgba(232,66,10,0.5)", color: "#ff6b35", background: "rgba(232,66,10,0.12)" }}>{s.tag}</span>
-              <h1 style={{ fontFamily: "Georgia, serif", fontWeight: 800, fontSize: "clamp(22px, 3vw, 42px)", color: "white", lineHeight: 1.2, marginBottom: "12px" }}>
-                {s.title} <span style={{ color: "#ff6b35" }}>{s.highlight}</span> {s.title2}
-              </h1>
-              <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "14px", lineHeight: 1.8, maxWidth: "520px", margin: "0 auto 24px" }}>{s.sub}</p>
-              {s.type === "stats" && (
-                <div style={{ display: "flex", justifyContent: "center", gap: "36px", flexWrap: "wrap" }}>
-                  {s.stats.map((st) => (
-                    <div key={st.lab} style={{ textAlign: "center" }}>
-                      <div style={{ fontFamily: "Georgia, serif", fontSize: "26px", fontWeight: 800, color: "#ff6b35" }}>{st.val}</div>
-                      <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px", marginTop: "3px" }}>{st.lab}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {s.type === "trust" && <div style={{ fontSize: "44px" }}>🙏</div>}
-              <div style={{ display: "flex", justifyContent: "center", gap: "7px", marginTop: "28px" }}>
-                {heroSlides.map((_, i) => (
-                  <button key={i} onClick={() => goTo(i)} style={{ height: "7px", borderRadius: "4px", border: "none", cursor: "pointer", width: i === cur ? "22px" : "7px", background: i === cur ? "#ff6b35" : "rgba(255,255,255,0.3)", transition: "all 0.3s ease", padding: 0 }} />
-                ))}
-              </div>
-            </div>
-            <button onClick={() => goTo((cur - 1 + heroSlides.length) % heroSlides.length)} style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "1.5px solid rgba(255,255,255,0.25)", color: "white", fontSize: "18px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>‹</button>
-            <button onClick={() => goTo((cur + 1) % heroSlides.length)} style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "1.5px solid rgba(255,255,255,0.25)", color: "white", fontSize: "18px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>›</button>
-          </div>
-        </div>
-      </div>
+      <HeroSlider slides={heroSlides} />
 
       {/* ── 2. OUR STORY ── */}
       <section style={{ background: "#ffffff", padding: "72px 20px" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center" }}>
+        <div className="about-story-grid" style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center" }}>
           <div>
             <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "14px", border: "1px solid rgba(232,66,10,0.3)", color: "#e8420a", background: "rgba(232,66,10,0.07)" }}>📖 Our Story</span>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 34px)", color: "#0d1b3e", marginBottom: "16px", lineHeight: 1.25 }}>
@@ -111,10 +84,10 @@ const About = () => {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             {[
-              { year: "2009", title: "Foundation", desc: "Started as Sniper Defence Academy with 50 students", color: "#FF9933" },
-              { year: "2013", title: "School Wing", desc: "Launched Sniper Public School — CBSE affiliated", color: "#10b981" },
-              { year: "2017", title: "Classes Wing", desc: "Opened Sniper Classes for JEE, NEET & board coaching", color: "#7c3aed" },
-              { year: "2024", title: "5000+ Students", desc: "Milestone — 1,200+ defence selections achieved", color: "#e8420a" },
+              { year: "2009", title: "Foundation",     desc: "Started as Sniper Defence Academy with 50 students",   color: "#FF9933" },
+              { year: "2013", title: "School Wing",    desc: "Launched Sniper Public School — CBSE affiliated",      color: "#10b981" },
+              { year: "2017", title: "Classes Wing",   desc: "Opened Sniper Classes for JEE, NEET & board coaching", color: "#7c3aed" },
+              { year: "2024", title: "5000+ Students", desc: "Milestone — 1,200+ defence selections achieved",       color: "#e8420a" },
             ].map((t, i) => (
               <div key={i} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
                 <div style={{ width: "52px", height: "52px", borderRadius: "12px", background: `${t.color}15`, border: `2px solid ${t.color}40`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "15px", fontWeight: 800, color: t.color, flexShrink: 0 }}>{t.year}</div>
@@ -137,7 +110,6 @@ const About = () => {
               Bhagwan Parshuram Education & <span style={{ color: "#e8420a" }}>Charitable Trust</span>
             </h2>
           </div>
-
           <div style={{ background: "linear-gradient(135deg, #0d1b3e, #1a3260)", borderRadius: "20px", overflow: "hidden", position: "relative", boxShadow: "0 16px 48px rgba(13,27,62,0.2)" }}>
             <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #e8420a, #ff6b35, #e8420a)" }} />
             <div style={{ padding: "48px" }}>
@@ -164,7 +136,7 @@ const About = () => {
             <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(232,66,10,0.3)", color: "#e8420a", background: "rgba(232,66,10,0.07)" }}>🎓 Leadership</span>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 34px)", color: "#0d1b3e" }}>Principal's <span style={{ color: "#e8420a" }}>Message</span></h2>
           </div>
-          <div style={{ background: "white", borderRadius: "20px", padding: "48px", border: "1.5px solid #eef1f8", boxShadow: "0 8px 32px rgba(13,27,62,0.06)", display: "grid", gridTemplateColumns: "200px 1fr", gap: "40px", alignItems: "start" }}>
+          <div className="about-principal-grid" style={{ background: "white", borderRadius: "20px", padding: "48px", border: "1.5px solid #eef1f8", boxShadow: "0 8px 32px rgba(13,27,62,0.06)", display: "grid", gridTemplateColumns: "200px 1fr", gap: "40px", alignItems: "start" }}>
             <div style={{ textAlign: "center" }}>
               <div style={{ width: "140px", height: "140px", borderRadius: "50%", background: "linear-gradient(135deg, #0d1b3e, #1a3260)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "48px", margin: "0 auto 14px", border: "4px solid rgba(232,66,10,0.2)" }}>👨‍💼</div>
               <h4 style={{ fontSize: "15px", fontWeight: 700, color: "#0d1b3e", marginBottom: "4px" }}>Sanjeev Parashar</h4>
@@ -189,14 +161,15 @@ const About = () => {
             <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(232,66,10,0.4)", color: "#ff6b35", background: "rgba(232,66,10,0.12)" }}>🎯 Our Purpose</span>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 34px)", color: "white" }}>Vision & <span style={{ color: "#ff6b35" }}>Mission</span></h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
+          <div className="about-vm-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
             {[
-              { icon: "🔭", title: "Our Vision",      color: "#FF9933", desc: "To be India's most trusted multi-wing educational institution — nurturing students from their first classroom to their proudest achievement." },
-              { icon: "🚀", title: "Our Mission",     color: "#10b981", desc: "To empower every student with world-class knowledge, unbreakable discipline, and unwavering purpose — making excellence accessible to all." },
-              { icon: "💎", title: "Our Values",      color: "#7c3aed", desc: "Discipline, integrity, perseverance, and compassion form the foundation of everything we do at Sniper Group of Education." },
-              { icon: "🏆", title: "Our Commitment",  color: "#e8420a", desc: "Every student receives personalized attention, expert guidance, and the support needed to achieve their full potential." },
+              { icon: "🔭", title: "Our Vision",     color: "#FF9933", desc: "To be India's most trusted multi-wing educational institution — nurturing students from their first classroom to their proudest achievement." },
+              { icon: "🚀", title: "Our Mission",    color: "#10b981", desc: "To empower every student with world-class knowledge, unbreakable discipline, and unwavering purpose — making excellence accessible to all." },
+              { icon: "💎", title: "Our Values",     color: "#7c3aed", desc: "Discipline, integrity, perseverance, and compassion form the foundation of everything we do at Sniper Group of Education." },
+              { icon: "🏆", title: "Our Commitment", color: "#e8420a", desc: "Every student receives personalized attention, expert guidance, and the support needed to achieve their full potential." },
             ].map((item, i) => (
-              <div key={i} style={{ background: "rgba(255,255,255,0.05)", borderRadius: "16px", padding: "28px", border: "1px solid rgba(255,255,255,0.1)", transition: "all 0.25s ease" }}
+              <div key={i}
+                style={{ background: "rgba(255,255,255,0.05)", borderRadius: "16px", padding: "28px", border: "1px solid rgba(255,255,255,0.1)", transition: "all 0.25s ease" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.09)"; e.currentTarget.style.borderColor = item.color + "55"; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
               >
@@ -208,7 +181,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
     </div>
   );
 };

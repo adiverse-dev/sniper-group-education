@@ -12,7 +12,7 @@ const navLinks = [
   { label: "Our Institutes", path: null, dropdown: true },
   { label: "About",          path: "/about" },
   { label: "Result",         path: "/results" },
-  { label: "Fee Structure",  path: "/fee-structure" },
+  { label: "Fee Structure",  path: "/fees" },
   { label: "Gallery",        path: "/gallery" },
   { label: "Contact",        path: "/contact" },
 ];
