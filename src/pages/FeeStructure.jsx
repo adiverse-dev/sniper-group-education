@@ -1,6 +1,5 @@
 import { useState } from "react";
 import HeroSlider from "../sections/HeroSlider";
-
 // ─────────────────────────────────────────────────────────
 // FEE PAGE SLIDER SLIDES
 // ─────────────────────────────────────────────────────────
@@ -36,7 +35,6 @@ const feeSlides = [
     link: "/fees",
   },
 ];
-
 // ─────────────────────────────────────────────────────────
 // TABS
 // ─────────────────────────────────────────────────────────
@@ -45,7 +43,6 @@ const tabs = [
   { id: "defence", label: "🛡️ Defence Academy", color: "#FF9933", bg: "#fff8f0" },
   { id: "classes", label: "🎓 Sniper Classes",  color: "#7c3aed", bg: "#faf5ff" },
 ];
-
 // ─────────────────────────────────────────────────────────
 // FEE DATA
 // ─────────────────────────────────────────────────────────
@@ -53,7 +50,7 @@ const feeData = {
   school: {
     color: "#10b981",
     bg: "#f0fdf4",
-    note: "Session 2026–27 | Reg. Fee ₹1,500 alag se lagegi (Grand Total mein shamil nahi). Transport & hostel charges extra.",
+    note: "Session 2026–27 | Registration Fee ₹1,500 will be charged separately (not included in Grand Total). Transport & hostel charges are extra.",
     showTable: true,
     tableData: [
       { cls: "NUR.",   admOld: 2750,  admNew: 5500,  qrt: 4500, total: 18000, grandOld: 20750, grandNew: 23500 },
@@ -69,32 +66,31 @@ const feeData = {
       { cls: "8th",    admOld: 5750,  admNew: 11500, qrt: 9000, total: 36000, grandOld: 41750, grandNew: 47500 },
     ],
     discounts: [
-      "Staff Ward, Army Personnel & Siblings — 20% Discount on Admission Fee",
+      "Staff Wards, Army Personnel & Siblings — 20% Discount on Admission Fee",
       "Old Students — 50% Discount on Admission Fee (Books & Uniform on payment)",
-      "Verbal / unofficial discount valid nahi hoga",
-      "Discount ke baad fee non-refundable & non-adjustable hai",
+      "Verbal or unofficial discounts will not be considered valid",
+      "Fees are non-refundable & non-adjustable after discount has been applied",
     ],
     policies: [
-      "Reg. Fee ₹1,500 (New Students) alag se charged hogi — Grand Total mein shamil nahi",
-      "Admission confirm hone ke baad fee non-negotiable & non-refundable hai",
+      "Registration Fee ₹1,500 (New Students) will be charged separately — not included in Grand Total",
+      "Once admission is confirmed, the fee is non-negotiable & non-refundable",
     ],
   },
   defence: {
     color: "#FF9933",
     bg: "#fff8f0",
-    note: "Defence Academy ki exact fee ke liye humse sampark karein. PDF update hone par yahan dikhegi.",
+    note: "Please contact us directly for Defence Academy fee details. The fee structure will be displayed here once the PDF is updated.",
     showTable: false,
     courses: [],
   },
   classes: {
     color: "#7c3aed",
     bg: "#faf5ff",
-    note: "Sniper Classes ki exact fee ke liye humse sampark karein. PDF update hone par yahan dikhegi.",
+    note: "Please contact us directly for Sniper Classes fee details. The fee structure will be displayed here once the PDF is updated.",
     showTable: false,
     courses: [],
   },
 };
-
 // ─────────────────────────────────────────────────────────
 // PAYMENT STEPS
 // ─────────────────────────────────────────────────────────
@@ -104,7 +100,6 @@ const paymentSteps = [
   { num: "03", icon: "📄", title: "Form Submission",  desc: "Fill the admission form and submit required documents." },
   { num: "04", icon: "💳", title: "Fee Payment",      desc: "Pay fees via cash, UPI, NEFT, or easy EMI options available." },
 ];
-
 // ─────────────────────────────────────────────────────────
 // SCHOOL FEE TABLE
 // ─────────────────────────────────────────────────────────
@@ -136,11 +131,9 @@ const SchoolFeeTable = ({ data }) => (
         </tbody>
       </table>
     </div>
-
     <div style={{ background: "#fefce8", border: "1px solid #fde68a", borderRadius: "10px", padding: "12px 18px", fontSize: "13px", color: "#92400e", fontWeight: 600, marginBottom: "24px" }}>
-      ⚠️ Reg. Fee ₹1,500 (New Students) alag se lagegi — yeh Grand Total mein shamil nahi hai.
+      ⚠️ Registration Fee ₹1,500 (New Students) will be charged separately — not included in Grand Total.
     </div>
-
     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
       <div style={{ background: "white", borderRadius: "14px", padding: "24px", border: "1.5px solid #d1fae5" }}>
         <h4 style={{ fontSize: "13px", fontWeight: 800, color: "#10b981", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
@@ -171,7 +164,6 @@ const SchoolFeeTable = ({ data }) => (
     </div>
   </div>
 );
-
 // ─────────────────────────────────────────────────────────
 // COMING SOON CARD
 // ─────────────────────────────────────────────────────────
@@ -182,30 +174,26 @@ const ComingSoonCard = ({ data }) => (
       Fee Structure Coming Soon
     </h3>
     <p style={{ color: "#64748b", fontSize: "15px", lineHeight: 1.7, maxWidth: "400px", margin: "0 auto 24px" }}>
-      Is wing ki fee PDF update hone par yahan automatically dikhai degi. Abhi ke liye humse directly sampark karein.
+      The fee structure for this wing will be displayed here once the PDF is updated. Please contact us directly for the latest details.
     </p>
     <a href="tel:+917060155711" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: data.color, color: "white", padding: "12px 28px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, textDecoration: "none" }}>
       📞 Call for Fee Details
     </a>
   </div>
 );
-
 // ─────────────────────────────────────────────────────────
 // MAIN COMPONENT
 // ─────────────────────────────────────────────────────────
 const FeeStructure = () => {
   const [active, setActive] = useState("school");
   const data = feeData[active];
-
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap');
       `}</style>
-
       {/* ── 1. HERO SLIDER ── */}
       <HeroSlider slides={feeSlides} />
-
       {/* ── 2. STICKY TABS ── */}
       <section style={{ background: "#ffffff", padding: "0 20px", borderBottom: "1px solid #eef1f8", position: "sticky", top: 0, zIndex: 10 }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", gap: "4px", overflowX: "auto" }}>
@@ -222,7 +210,6 @@ const FeeStructure = () => {
           ))}
         </div>
       </section>
-
       {/* ── 3. FEE SECTION ── */}
       <section style={{ background: "#f5f7fa", padding: "56px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -236,7 +223,6 @@ const FeeStructure = () => {
           }
         </div>
       </section>
-
       {/* ── 4. ADMISSION PROCESS ── */}
       <section style={{ background: "#ffffff", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -266,7 +252,6 @@ const FeeStructure = () => {
           </div>
         </div>
       </section>
-
       {/* ── 5. CTA ── */}
       <section style={{ background: "#0d1b3e", padding: "60px 20px", textAlign: "center" }}>
         <div style={{ maxWidth: "600px", margin: "0 auto" }}>
@@ -289,5 +274,4 @@ const FeeStructure = () => {
     </div>
   );
 };
-
 export default FeeStructure;

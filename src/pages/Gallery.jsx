@@ -1,7 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import HeroSlider from "../sections/HeroSlider";
 
 const heroSlides = [
   {
+    img: "/img/students/1.jpg",
+    imgPos: "center top",
+    accent: "#e8420a",
     type: "stats",
     tag: "📸 Gallery",
     title: "Our Moments,",
@@ -14,8 +18,13 @@ const heroSlides = [
       { val: "1,200+",lab: "Defence Selections" },
       { val: "5,000+",lab: "Students" },
     ],
+    btn: "Explore Gallery",
+    link: "/gallery",
   },
   {
+    img: "/img/students/4.jpg",
+    imgPos: "center",
+    accent: "#10b981",
     type: "stats",
     tag: "🎖️ Events & Ceremonies",
     title: "Celebrating",
@@ -28,8 +37,13 @@ const heroSlides = [
       { val: "15+",  lab: "Years" },
       { val: "3",    lab: "Wings" },
     ],
+    btn: "View Events",
+    link: "/gallery",
   },
   {
+    img: "/img/students/5.jpg",
+    imgPos: "center",
+    accent: "#7c3aed",
     type: "stats",
     tag: "🏆 Achievements",
     title: "Proud",
@@ -42,6 +56,8 @@ const heroSlides = [
       { val: "350+",   lab: "JEE/NEET Qualifiers" },
       { val: "5,000+", lab: "Students" },
     ],
+    btn: "See Achievements",
+    link: "/gallery",
   },
 ];
 
@@ -87,7 +103,7 @@ const wingMeta = {
 };
 
 // ── 3D Reel Carousel Component ──
-const ReelCarousel = ({ videos, onPlay }) => {
+const ReelCarousel = ({ videos }) => {
   const [center, setCenter] = useState(0);
   const [dragStartX, setDragStartX] = useState(null);
   const [hovered, setHovered] = useState(false);
@@ -228,25 +244,6 @@ const Gallery = () => {
   const [wing, setWing]         = useState("All");
   const [cat, setCat]           = useState("All");
   const [lightbox, setLightbox] = useState(null);
-  const [playingVideo, setPlayingVideo] = useState(null);
-  const [cur, setCur]           = useState(0);
-  const [fade, setFade]         = useState(true);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setFade(false);
-      setTimeout(() => { setCur((c) => (c + 1) % heroSlides.length); setFade(true); }, 300);
-    }, 5500);
-    return () => clearInterval(timer);
-  }, []);
-
-  function goTo(n) {
-    if (n === cur) return;
-    setFade(false);
-    setTimeout(() => { setCur(n); setFade(true); }, 300);
-  }
-
-  const s = heroSlides[cur];
 
   const filtered = photos.filter(p =>
     (wing === "All" || p.wing === wing) &&
@@ -283,39 +280,7 @@ const Gallery = () => {
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
 
       {/* ── 1. HERO SLIDER ── */}
-      <div style={{ background: "#ffffff", padding: "20px 16px 24px" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
-          <div style={{ borderRadius: "20px", overflow: "hidden", position: "relative", minHeight: "320px", display: "flex", alignItems: "center", background: "linear-gradient(135deg, #0d1b3e 0%, #1a3260 60%, #0d1b3e 100%)", boxShadow: "0 4px 24px rgba(0,0,0,0.18)" }}>
-            <div style={{ position: "absolute", inset: 0, opacity: 0.04, backgroundImage: "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "44px 44px", pointerEvents: "none" }} />
-            <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "280px", height: "280px", borderRadius: "50%", background: "radial-gradient(circle, rgba(232,66,10,0.13), transparent 70%)", pointerEvents: "none" }} />
-            <div style={{ position: "relative", zIndex: 1, width: "100%", padding: "40px 56px 48px", opacity: fade ? 1 : 0, transform: fade ? "translateY(0)" : "translateY(12px)", transition: "opacity 0.3s ease, transform 0.3s ease", textAlign: "center" }}>
-              <span style={{ display: "inline-block", padding: "4px 16px", borderRadius: "999px", fontSize: "10.5px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "16px", border: "1px solid rgba(232,66,10,0.5)", color: "#ff6b35", background: "rgba(232,66,10,0.12)" }}>{s.tag}</span>
-              <h1 style={{ fontFamily: "Georgia, serif", fontWeight: 800, fontSize: "clamp(22px, 3vw, 42px)", color: "white", lineHeight: 1.2, marginBottom: "12px" }}>
-                {s.title} <span style={{ color: "#ff6b35" }}>{s.highlight}</span> {s.title2}
-              </h1>
-              <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "14px", lineHeight: 1.8, maxWidth: "520px", margin: "0 auto 24px" }}>{s.sub}</p>
-              {s.type === "stats" && (
-                <div style={{ display: "flex", justifyContent: "center", gap: "36px", flexWrap: "wrap" }}>
-                  {s.stats.map((st) => (
-                    <div key={st.lab} style={{ textAlign: "center" }}>
-                      <div style={{ fontFamily: "Georgia, serif", fontSize: "26px", fontWeight: 800, color: "#ff6b35" }}>{st.val}</div>
-                      <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "1px", marginTop: "3px" }}>{st.lab}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              <div style={{ display: "flex", justifyContent: "center", gap: "7px", marginTop: "28px" }}>
-                {heroSlides.map((_, i) => (
-                  <button key={i} onClick={() => goTo(i)} style={{ height: "7px", borderRadius: "4px", border: "none", cursor: "pointer", width: i === cur ? "22px" : "7px", background: i === cur ? "#ff6b35" : "rgba(255,255,255,0.3)", transition: "all 0.3s ease", padding: 0 }} />
-                ))}
-              </div>
-            </div>
-            <button onClick={() => goTo((cur - 1 + heroSlides.length) % heroSlides.length)} style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "1.5px solid rgba(255,255,255,0.25)", color: "white", fontSize: "18px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>‹</button>
-            <button onClick={() => goTo((cur + 1) % heroSlides.length)} style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "1.5px solid rgba(255,255,255,0.25)", color: "white", fontSize: "18px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>›</button>
-          </div>
-        </div>
-      </div>
-
+      <HeroSlider slides={heroSlides} />
       {/* ── 2. FILTERS ── */}
       <section style={{ background: "#ffffff", padding: "24px 20px", borderBottom: "1px solid #eef1f8", position: "sticky", top: 0, zIndex: 10, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", gap: "24px", alignItems: "center", flexWrap: "wrap" }}>
@@ -379,7 +344,7 @@ const Gallery = () => {
             </h2>
             <p style={{ color: "rgba(13,27,62,0.45)", fontSize: "14px", marginTop: "8px" }}>Center card plays • Use arrows to browse</p>
           </div>
-          <ReelCarousel videos={videos} onPlay={setPlayingVideo} />
+          <ReelCarousel videos={videos} />
         </div>
       </section>
 
