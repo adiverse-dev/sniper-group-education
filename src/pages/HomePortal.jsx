@@ -11,11 +11,11 @@ import HeroSlider from "../sections/HeroSlider";
 // BANNER PHOTOS
 // ─────────────────────────────────────────────────────────
 const bannerPhotos = [
-  { src: "/img/students/D.jpg",    label: "Defence Wing",   bg: "#1a2a3a" },
-  { src: "/img/students/RIMC.png", label: "School Wing",    bg: "#1a3a2e" },
-  { src: "/img/students/AB.jpeg",  label: "Sniper Classes", bg: "#1e1a3a" },
-  { src: "/img/students/Y.jpg",    label: "Defence Wing",   bg: "#2a1a1a" },
-  { src: "/img/students/s6.png",   label: "School Wing",    bg: "#1a1e2a" },
+  { src: "/img/students/1.png",    label: "Defence Wing",   bg: "#1a2a3a" },
+  { src: "/img/students/3.png", label: "School Wing",    bg: "#1a3a2e" },
+  { src: "/img/students/4.png",  label: "Sniper Classes", bg: "#1e1a3a" },
+  { src: "/img/students/5.png",    label: "Defence Wing",   bg: "#2a1a1a" },
+  { src: "/img/students/2.png",   label: "School Wing",    bg: "#1a1e2a" },
 ];
 
 const bannerStats = [
