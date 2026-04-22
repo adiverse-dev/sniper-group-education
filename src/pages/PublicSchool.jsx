@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import HeroSlider from "../sections/HeroSlider";
-
 // ─────────────────────────────────────────────────────────
 // SCHOOL SLIDER SLIDES
 // ─────────────────────────────────────────────────────────
@@ -45,12 +44,11 @@ const schoolSlides = [
     accent: "#10b981",
     heading: "Science, Math & Academic Excellence",
     sub: "Middle school education with science labs, mathematics focus, English communication and competitive exam foundation building.",
-    stats: [{ val: "Class 6–8", lab: "Level" }, { val: "Science Lab", lab: "Included" }, { val: "Math Focus", lab: "Special" }, { val: "₹30,000", lab: "Per Year" }],
+    stats: [{ val: "Class 6–8", lab: "Level" }, { val: "Science Lab", lab: "Included" }, { val: "Math Focus", lab: "Special" }, { val: "₹36,000", lab: "Per Year" }],
     btn: "Know More",
     link: "/school",
   },
 ];
-
 // ─────────────────────────────────────────────────────────
 // COURSES DATA
 // ─────────────────────────────────────────────────────────
@@ -99,7 +97,7 @@ const courses = [
     id: "class68",
     name: "Class 6 – 8",
     full: "Class 6 to 8 — Middle School Excellence",
-    fee: "₹30,000/yr",
+    fee: "₹36,000/yr",
     icon: "🔬",
     photo: "./img_course_card/Class 6-8.jpg",
     cat: "Middle School",
@@ -116,7 +114,6 @@ const courses = [
     includes: ["Science Lab Sessions", "Math Special Focus", "English Communication", "Sports & Co-curricular"],
   },
 ];
-
 // ─────────────────────────────────────────────────────────
 // FEATURES DATA
 // ─────────────────────────────────────────────────────────
@@ -128,7 +125,6 @@ const features = [
   { icon: "👨‍👩‍👧", title: "Parent Connect",      desc: "Regular PTMs and parent-teacher communication for student progress.",                        photo: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&q=80&fit=crop&crop=center" },
   { icon: "🏆", title: "Merit Scholarships",   desc: "Fee concessions and scholarships for top-performing students.",                               photo: "https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?w=600&q=80&fit=crop&crop=center" },
 ];
-
 // ─────────────────────────────────────────────────────────
 // COURSE DETAIL PANEL
 // ─────────────────────────────────────────────────────────
@@ -235,7 +231,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
     </div>
   );
 };
-
 // ─────────────────────────────────────────────────────────
 // COURSE ROW (zigzag)
 // ─────────────────────────────────────────────────────────
@@ -243,15 +238,12 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
   const isReverse = index % 2 === 1;
   const isSelected = selectedCourse?.id === course.id;
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   const rowDirection = isMobile ? "column" : (isReverse ? "row-reverse" : "row");
-
   const handleClick = () => {
     if (isSelected) {
       setSelectedCourse(null);
@@ -263,7 +255,6 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
       }, 100);
     }
   };
-
   return (
     <div style={{ marginBottom: "24px" }}>
       <div
@@ -321,14 +312,12 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
     </div>
   );
 };
-
 // ─────────────────────────────────────────────────────────
 // MAIN COMPONENT
 // ─────────────────────────────────────────────────────────
 const PublicSchool = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [activeDetail, setActiveDetail]     = useState("eligibility");
-
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
       <style>{`
@@ -343,10 +332,8 @@ const PublicSchool = () => {
           .student-life-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
-
       {/* ── HERO SLIDER ── */}
       <HeroSlider slides={schoolSlides} />
-
       {/* ── CLASSES SECTION — ZIGZAG ── */}
       <section style={{ background: "#ffffff", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -374,7 +361,6 @@ const PublicSchool = () => {
           ))}
         </div>
       </section>
-
       {/* ── FEATURES ── */}
       <section style={{ background: "#f5f7fa", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -413,7 +399,6 @@ const PublicSchool = () => {
           </div>
         </div>
       </section>
-
       {/* ── STUDENT LIFE ── */}
       <section style={{ background: "#ffffff", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -465,5 +450,4 @@ const PublicSchool = () => {
     </div>
   );
 };
-
 export default PublicSchool;

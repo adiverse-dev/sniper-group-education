@@ -23,6 +23,7 @@ const defenceSlides = [
     accent: "#FF9933",
     heading: "All India Sainik School Entrance Exam",
     sub: "Comprehensive preparation for Class 6 & 9 admissions across all Sainik Schools in India.",
+    // Fee removed from stats — contact academy for details
     stats: [{ val: "Class 6 & 9", lab: "Entry" }, { val: "350 Marks", lab: "Total" }, { val: "4 Subjects", lab: "Syllabus" }, { val: "1 Year", lab: "Course" }],
     btn: "Know More",
     link: "/defence",
@@ -85,11 +86,11 @@ const defenceSlides = [
 ];
 
 // ─────────────────────────────────────────────────────────
-// COURSES DATA
+// COURSES DATA — fee field removed intentionally
 // ─────────────────────────────────────────────────────────
 const courses = [
   {
-    id: "aissee", name: "AISSEE", full: "All India Sainik School Entrance Exam", fee: "₹35,000", icon: "🏫",
+    id: "aissee", name: "AISSEE", full: "All India Sainik School Entrance Exam", icon: "🏫",
     photo: "./img_course_card/AISSEE.jpg", cat: "School Level",
     stats: [{ v: "Class 6 & 9", l: "Entry" }, { v: "350", l: "Total Marks" }, { v: "1 Year", l: "Course" }],
     desc: "Comprehensive preparation for All India Sainik School Entrance Examination for Class 6 and Class 9 admissions across all Sainik Schools in India.",
@@ -99,7 +100,7 @@ const courses = [
     physical: ["Good physical health required", "No major physical disability", "Medical fitness as per Sainik School norms"],
   },
   {
-    id: "upssee", name: "UPSSEE", full: "Uttar Pradesh Sainik School Entrance Exam", fee: "₹30,000", icon: "⭐",
+    id: "upssee", name: "UPSSEE", full: "Uttar Pradesh Sainik School Entrance Exam", icon: "⭐",
     photo: "./img_course_card/UPSSEE.jpg", cat: "School Level",
     stats: [{ v: "State Level", l: "Exam" }, { v: "250", l: "Total Marks" }, { v: "1 Year", l: "Course" }],
     desc: "Specialized coaching for Uttar Pradesh Sainik School Entrance Examination — state level exam for admission to UP Sainik Schools.",
@@ -109,7 +110,7 @@ const courses = [
     physical: ["Standard physical fitness", "Medical test by school authority", "No serious health conditions"],
   },
   {
-    id: "rims", name: "RMS", full: "Rashtriya Military School", fee: "₹38,000", icon: "🎖️",
+    id: "rims", name: "RMS", full: "Rashtriya Military School", icon: "🎖️",
     photo: "./img_course_card/RIMS.jpg", cat: "School Level",
     stats: [{ v: "400", l: "Total Marks" }, { v: "Written+Viva", l: "Pattern" }, { v: "1 Year", l: "Course" }],
     desc: "Expert coaching for RIMS entrance examination — one of India's premier military schools offering world-class education combined with military training.",
@@ -119,7 +120,7 @@ const courses = [
     physical: ["Physical fitness test", "Height & weight standards", "Vision standards", "Medical board clearance"],
   },
   {
-    id: "rimc", name: "RIMC", full: "Rashtriya Indian Military College", fee: "₹40,000", icon: "🏆",
+    id: "rimc", name: "RIMC", full: "Rashtriya Indian Military College", icon: "🏆",
     photo: "./img_course_card/RIMC.jpg", cat: "College Level",
     stats: [{ v: "500", l: "Total Marks" }, { v: "SHAPE-1", l: "Medical Std" }, { v: "Age 11.5–13", l: "Eligibility" }],
     desc: "Intensive preparation for RIMC Dehradun — the most prestigious military college in India, gateway to National Defence Academy.",
@@ -129,7 +130,7 @@ const courses = [
     physical: ["SHAPE-1 medical standard", "Height min 152 cm", "Good vision required", "No physical disability"],
   },
   {
-    id: "cds-nda", name: "CDS & NDA", full: "Combined Defence Services & National Defence Academy", fee: "₹45,000", icon: "🛡️",
+    id: "cds-nda", name: "CDS & NDA", full: "Combined Defence Services & National Defence Academy", icon: "🛡️",
     photo: "./img_course_card/CDS & NDA.jpg", cat: "National Level",
     stats: [{ v: "UPSC", l: "Conducted By" }, { v: "900", l: "NDA Marks" }, { v: "1–2 Yrs", l: "Course" }],
     desc: "Complete coaching for NDA and CDS — India's top defence entrance exams conducted by UPSC for Army, Navy and Air Force.",
@@ -139,7 +140,7 @@ const courses = [
     physical: ["Height: 157 cm (Army), 162 cm (Navy/AF)", "Weight proportional to height", "Vision: 6/6 or correctable", "Full medical fitness required"],
   },
   {
-    id: "airforce", name: "Air Force X & Y", full: "Indian Air Force Group X & Y Examination", fee: "₹25,000", icon: "✈️",
+    id: "airforce", name: "Air Force X & Y", full: "Indian Air Force Group X & Y Examination", icon: "✈️",
     photo: "./img_course_card/Airforce X&Y.jpg", cat: "Armed Forces",
     stats: [{ v: "Age 17.5–21", l: "Eligibility" }, { v: "PFT+Written", l: "Pattern" }, { v: "6 Months", l: "Course" }],
     desc: "Focused coaching for Indian Air Force Agniveer Vayu Group X (Technical) and Group Y (Non-Technical) examination.",
@@ -187,7 +188,7 @@ const features = [
 ];
 
 // ─────────────────────────────────────────────────────────
-// COURSE DETAIL PANEL
+// COURSE DETAIL PANEL — fee badge removed from header
 // ─────────────────────────────────────────────────────────
 const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
   const tabs = [
@@ -198,7 +199,7 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
   ];
   return (
     <div id="course-detail" style={{ borderRadius: "20px", overflow: "hidden", border: "2px solid rgba(255,153,0,0.35)", background: "#fffbf5", marginTop: "8px", marginBottom: "8px" }}>
-      {/* Header */}
+      {/* Header — no fee displayed */}
       <div style={{ background: "linear-gradient(135deg, #0d1b3e, #1a3260)", padding: "22px 28px", display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
         <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: "rgba(255,153,0,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "26px", flexShrink: 0 }}>
           {course.icon}
@@ -206,10 +207,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: "16px", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{course.name} — {course.full}</div>
           <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginTop: "3px" }}>{course.desc}</div>
-        </div>
-        <div style={{ padding: "10px 18px", background: "rgba(255,153,0,0.15)", borderRadius: "10px", textAlign: "center", flexShrink: 0 }}>
-          <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.55)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "2px" }}>Course Fee</div>
-          <div style={{ fontSize: "20px", fontWeight: 800, color: "#FF9933" }}>{course.fee}</div>
         </div>
       </div>
       {/* Tabs */}
@@ -294,21 +291,18 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
 };
 
 // ─────────────────────────────────────────────────────────
-// COURSE ROW (zigzag)
+// COURSE ROW (zigzag) — fee badge on image removed
 // ─────────────────────────────────────────────────────────
 const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDetail, setActiveDetail }) => {
   const isReverse = index % 2 === 1;
   const isSelected = selectedCourse?.id === course.id;
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   const rowDirection = isMobile ? "column" : (isReverse ? "row-reverse" : "row");
-
   const handleClick = () => {
     if (isSelected) {
       setSelectedCourse(null);
@@ -320,7 +314,6 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
       }, 100);
     }
   };
-
   return (
     <div style={{ marginBottom: "24px" }}>
       <div
@@ -335,8 +328,9 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block", transition: "transform 0.5s ease" }}
             onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
           />
+          {/* Top accent bar */}
           <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #FF9933, #ffb347)", zIndex: 3 }} />
-          <div style={{ position: "absolute", top: "14px", right: "14px", background: "#FF9933", color: "white", fontSize: "13px", fontWeight: 700, padding: "5px 14px", borderRadius: "999px", zIndex: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>{course.fee}</div>
+          {/* Category badge — fee badge removed */}
           <div style={{ position: "absolute", bottom: "14px", left: "14px", background: "rgba(13,27,62,0.85)", color: "white", fontSize: "11px", fontWeight: 600, padding: "4px 12px", borderRadius: "999px", zIndex: 2, letterSpacing: "0.5px" }}>{course.cat}</div>
           {!isMobile && (
             <div style={{ position: "absolute", top: 0, bottom: 0, width: "80px", ...(isReverse ? { left: 0, background: "linear-gradient(to right, white, transparent)" } : { right: 0, background: "linear-gradient(to left, white, transparent)" }), pointerEvents: "none", zIndex: 1 }} />
@@ -385,7 +379,6 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
 const DefenceAcademy = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [activeDetail, setActiveDetail] = useState("eligibility");
-
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
       <style>{`
@@ -395,11 +388,9 @@ const DefenceAcademy = () => {
           .features-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
-
-      {/* ── HERO SLIDER ── */}
+      {/* Hero Slider */}
       <HeroSlider slides={defenceSlides} />
-
-      {/* ── COURSES SECTION — ZIGZAG ── */}
+      {/* Courses Section — zigzag layout */}
       <section style={{ background: "#ffffff", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "52px" }}>
@@ -426,8 +417,7 @@ const DefenceAcademy = () => {
           ))}
         </div>
       </section>
-
-      {/* ── WHY CHOOSE US ── */}
+      {/* Why Choose Us Section */}
       <section style={{ background: "#f5f7fa", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "48px" }}>

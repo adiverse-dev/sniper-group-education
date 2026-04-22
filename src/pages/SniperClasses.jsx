@@ -4,7 +4,6 @@ import HeroSlider from "../sections/HeroSlider";
 // ─────────────────────────────────────────────────────────
 // HERO SLIDER SLIDES
 // ─────────────────────────────────────────────────────────
-
 const heroSlides = [
   {
     img: "/img/students/5.jpg",
@@ -75,14 +74,13 @@ const heroSlides = [
 ];
 
 // ─────────────────────────────────────────────────────────
-// COURSES DATA
+// COURSES DATA — fee field removed intentionally
 // ─────────────────────────────────────────────────────────
 const courses = [
   {
     id: "jee",
     name: "IIT JEE",
     full: "IIT JEE Mains & Advanced",
-    fee: "₹75,000",
     icon: "⚛️",
     photo: "./img_course_card/IIT JEE.jpg",
     cat: "Engineering Entrance",
@@ -102,7 +100,6 @@ const courses = [
     id: "neet",
     name: "NEET",
     full: "NEET UG Complete Coaching",
-    fee: "₹70,000",
     icon: "🩺",
     photo: "../img_course_card/NEET.jpg",
     cat: "Medical Entrance",
@@ -122,7 +119,6 @@ const courses = [
     id: "class1112",
     name: "11th & 12th PCM/PCB",
     full: "Class 11th & 12th PCM / PCB Coaching",
-    fee: "₹32,000",
     icon: "📗",
     photo: "./img_course_card/11_12 PCM, PCB.jpg",
     cat: "Senior Secondary",
@@ -142,7 +138,6 @@ const courses = [
     id: "class910",
     name: "9th & 10th Foundation",
     full: "Class 9th & 10th All Subjects Foundation",
-    fee: "₹22,000",
     icon: "📘",
     photo: "./img_course_card/9th_10th foundation.jpg",
     cat: "Secondary Foundation",
@@ -162,7 +157,6 @@ const courses = [
     id: "class68",
     name: "Class 6 – 8",
     full: "Class 6 to 8 All Subjects — Hindi & CBSE",
-    fee: "₹18,000",
     icon: "📙",
     photo: "./img_course_card/class 6 & 8 foundation.jpg",
     cat: "Middle School",
@@ -193,7 +187,7 @@ const features = [
 ];
 
 // ─────────────────────────────────────────────────────────
-// COURSE DETAIL PANEL
+// COURSE DETAIL PANEL — fee badge removed from header
 // ─────────────────────────────────────────────────────────
 const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
   const tabs = [
@@ -202,7 +196,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
     { key: "selection",   label: "🏆 Selection Process" },
     { key: "includes",    label: "✅ What's Included" },
   ];
-
   return (
     <div
       id="course-detail"
@@ -215,7 +208,7 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
         marginBottom: "8px",
       }}
     >
-      {/* Header */}
+      {/* Header — no fee displayed */}
       <div style={{ background: "linear-gradient(135deg, #0d1b3e, #2d1b69)", padding: "22px 28px", display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
         <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: "rgba(167,139,250,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "26px", flexShrink: 0 }}>
           {course.icon}
@@ -224,12 +217,7 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
           <div style={{ fontSize: "16px", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{course.name} — {course.full}</div>
           <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginTop: "3px" }}>{course.desc}</div>
         </div>
-        <div style={{ padding: "10px 18px", background: "rgba(167,139,250,0.15)", borderRadius: "10px", textAlign: "center", flexShrink: 0 }}>
-          <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.55)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "2px" }}>Course Fee</div>
-          <div style={{ fontSize: "20px", fontWeight: 800, color: "#a78bfa" }}>{course.fee}</div>
-        </div>
       </div>
-
       {/* Tabs */}
       <div style={{ display: "flex", background: "white", borderBottom: "1px solid #ede8f8", overflowX: "auto" }}>
         {tabs.map((tab) => (
@@ -239,7 +227,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
           </button>
         ))}
       </div>
-
       {/* Body */}
       <div style={{ padding: "28px 32px" }} onClick={(e) => e.stopPropagation()}>
         {activeDetail === "eligibility" && (
@@ -252,7 +239,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
             ))}
           </div>
         )}
-
         {activeDetail === "exam" && (
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: "380px" }}>
@@ -277,7 +263,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
             </table>
           </div>
         )}
-
         {activeDetail === "selection" && (
           <div style={{ display: "flex", flexDirection: "column" }}>
             {course.selection.map((step, i) => (
@@ -293,7 +278,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
             ))}
           </div>
         )}
-
         {activeDetail === "includes" && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px" }}>
             {course.includes.map((item, i) => (
@@ -305,7 +289,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
           </div>
         )}
       </div>
-
       {/* CTA */}
       <div style={{ padding: "16px 32px", background: "white", borderTop: "1px solid #ede8f8" }}>
         <a href="tel:+917060155711"
@@ -318,21 +301,18 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
 };
 
 // ─────────────────────────────────────────────────────────
-// COURSE ROW (zigzag)
+// COURSE ROW (zigzag) — fee badge on image removed
 // ─────────────────────────────────────────────────────────
 const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDetail, setActiveDetail }) => {
   const isReverse = index % 2 === 1;
   const isSelected = selectedCourse?.id === course.id;
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   const rowDirection = isMobile ? "column" : (isReverse ? "row-reverse" : "row");
-
   const handleClick = () => {
     if (isSelected) {
       setSelectedCourse(null);
@@ -344,7 +324,6 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
       }, 100);
     }
   };
-
   return (
     <div style={{ marginBottom: "24px" }}>
       <div
@@ -359,14 +338,14 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block", transition: "transform 0.5s ease" }}
             onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
           />
+          {/* Top accent bar */}
           <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #7c3aed, #a78bfa)", zIndex: 3 }} />
-          <div style={{ position: "absolute", top: "14px", right: "14px", background: "#7c3aed", color: "white", fontSize: "13px", fontWeight: 700, padding: "5px 14px", borderRadius: "999px", zIndex: 2, boxShadow: "0 2px 8px rgba(124,58,237,0.4)" }}>{course.fee}</div>
+          {/* Category badge — fee badge removed */}
           <div style={{ position: "absolute", bottom: "14px", left: "14px", background: "rgba(13,27,62,0.85)", color: "white", fontSize: "11px", fontWeight: 600, padding: "4px 12px", borderRadius: "999px", zIndex: 2, letterSpacing: "0.5px" }}>{course.cat}</div>
           {!isMobile && (
             <div style={{ position: "absolute", top: 0, bottom: 0, width: "80px", ...(isReverse ? { left: 0, background: "linear-gradient(to right, white, transparent)" } : { right: 0, background: "linear-gradient(to left, white, transparent)" }), pointerEvents: "none", zIndex: 1 }} />
           )}
         </div>
-
         {/* CONTENT SIDE */}
         <div style={{ flex: 1, padding: isMobile ? "20px 18px" : "32px 36px", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", background: isSelected ? "linear-gradient(135deg, #0d1b3e, #2d1b69)" : "white", transition: "background 0.3s ease" }}>
           {!isMobile && (
@@ -397,7 +376,6 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
           </div>
         </div>
       </div>
-
       {isSelected && (
         <CourseDetail course={course} activeDetail={activeDetail} setActiveDetail={setActiveDetail} />
       )}
@@ -411,7 +389,6 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
 const SniperClasses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [activeDetail, setActiveDetail]     = useState("eligibility");
-
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
       <style>{`
@@ -421,11 +398,9 @@ const SniperClasses = () => {
           .features-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
-
-      {/* ── HERO SLIDER ── */}
+      {/* Hero Slider */}
       <HeroSlider slides={heroSlides} />
-
-      {/* ── COURSES SECTION — ZIGZAG ── */}
+      {/* Courses Section — zigzag layout */}
       <section style={{ background: "#ffffff", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "52px" }}>
@@ -452,8 +427,7 @@ const SniperClasses = () => {
           ))}
         </div>
       </section>
-
-      {/* ── WHY CHOOSE US ── */}
+      {/* Why Choose Us Section */}
       <section style={{ background: "#f5f7fa", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "48px" }}>
