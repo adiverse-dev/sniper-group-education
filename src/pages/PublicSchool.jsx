@@ -6,7 +6,7 @@ import HeroSlider from "../sections/HeroSlider";
 // ─────────────────────────────────────────────────────────
 const schoolSlides = [
   {
-    img: "./img/students/school_main.png",
+    img: "./img/students/4.jpg",
     imgPos: "top center",
     tag: "Sniper Public School",
     accent: "#10b981",
@@ -17,7 +17,7 @@ const schoolSlides = [
     link: "/school",
   },
   {
-    img: "./img/students/nursery.png",
+    img: "./img/heroS/Nursery KG.png",
     imgPos: "top center",
     tag: "Nursery – KG",
     accent: "#10b981",
@@ -28,7 +28,7 @@ const schoolSlides = [
     link: "/school",
   },
   {
-    img: "./img/students/class15.png",
+    img: "./img/heroS/Class 1-5.png",
     imgPos: "top center",
     tag: "Class 1 – 5",
     accent: "#10b981",
@@ -39,7 +39,7 @@ const schoolSlides = [
     link: "/school",
   },
   {
-    img: "./img/students/class68school.png",
+    img: "./img/heroS/Class 6-8.png",
     imgPos: "top center",
     tag: "Class 6 – 8",
     accent: "#10b981",
@@ -61,7 +61,7 @@ const courses = [
     full: "Nursery to Kindergarten — Early Childhood Education",
     fee: "₹18,000/yr",
     icon: "🌱",
-    photo: "./img/students/nursery.png",
+    photo: "./img_course_card/Nursery KG.jpg",
     cat: "Early Childhood",
     stats: [{ v: "Age 3–6", l: "Eligibility" }, { v: "Activity Based", l: "Learning" }, { v: "1 Year", l: "Duration" }],
     desc: "Activity-based early childhood education focusing on foundational skills, creativity, basic phonics and social development.",
@@ -81,7 +81,7 @@ const courses = [
     full: "Class 1 to 5 — CBSE Foundation",
     fee: "₹24,000/yr",
     icon: "📖",
-    photo: "./img/students/class15.png",
+    photo: "./img_course_card/Class 1-5.jpg",
     cat: "Primary School",
     stats: [{ v: "Class 1–5", l: "Level" }, { v: "CBSE", l: "Curriculum" }, { v: "1 Year", l: "Duration" }],
     desc: "Strong foundational education following CBSE curriculum with focus on conceptual clarity, computer lab and all-round development.",
@@ -101,7 +101,7 @@ const courses = [
     full: "Class 6 to 8 — Middle School Excellence",
     fee: "₹30,000/yr",
     icon: "🔬",
-    photo: "./img/students/class68school.png",
+    photo: "./img_course_card/Class 6-8.jpg",
     cat: "Middle School",
     stats: [{ v: "Class 6–8", l: "Level" }, { v: "Science Lab", l: "Facility" }, { v: "1 Year", l: "Duration" }],
     desc: "Middle school education with science labs, mathematics focus, English communication and competitive exam foundation building.",

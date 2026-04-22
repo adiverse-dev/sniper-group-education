@@ -4,9 +4,10 @@ import HeroSlider from "../sections/HeroSlider";
 // ─────────────────────────────────────────────────────────
 // HERO SLIDER SLIDES
 // ─────────────────────────────────────────────────────────
+
 const heroSlides = [
   {
-    img: "./img/students/jee.png",
+    img: "/img/students/5.jpg",
     imgPos: "top center",
     tag: "Sniper Classes",
     accent: "#7c3aed",
@@ -17,7 +18,7 @@ const heroSlides = [
     link: "/classes",
   },
   {
-    img: "./img/students/jee.png",
+    img: "./img/heroS/IIT JEE.png",
     imgPos: "top center",
     tag: "IIT JEE",
     accent: "#7c3aed",
@@ -28,7 +29,7 @@ const heroSlides = [
     link: "/classes",
   },
   {
-    img: "./img/students/neet.png",
+    img: "./img/heroS/NEET.png",
     imgPos: "top center",
     tag: "NEET",
     accent: "#7c3aed",
@@ -39,7 +40,7 @@ const heroSlides = [
     link: "/classes",
   },
   {
-    img: "./img/students/class1112.png",
+    img: "./img/heroS/11_12 PCM, PCB.png",
     imgPos: "top center",
     tag: "Class 11th & 12th",
     accent: "#7c3aed",
@@ -50,7 +51,7 @@ const heroSlides = [
     link: "/classes",
   },
   {
-    img: "./img/students/class910.png",
+    img: "./img/heroS/9th_10th foundation.png",
     imgPos: "top center",
     tag: "Class 9th & 10th",
     accent: "#7c3aed",
@@ -61,7 +62,7 @@ const heroSlides = [
     link: "/classes",
   },
   {
-    img: "./img/students/class68.png",
+    img: "./img/heroS/class 6 & 8 foundation.png",
     imgPos: "top center",
     tag: "Class 6 – 8",
     accent: "#7c3aed",
@@ -83,7 +84,7 @@ const courses = [
     full: "IIT JEE Mains & Advanced",
     fee: "₹75,000",
     icon: "⚛️",
-    photo: "./img/students/jee.png",
+    photo: "./img_course_card/IIT JEE.jpg",
     cat: "Engineering Entrance",
     stats: [{ v: "Class 11–12", l: "Eligibility" }, { v: "300", l: "Total Marks" }, { v: "2 Years", l: "Course" }],
     desc: "Comprehensive JEE preparation covering Physics, Chemistry and Mathematics with IITian faculty, daily practice problems and full mock test series.",
@@ -103,7 +104,7 @@ const courses = [
     full: "NEET UG Complete Coaching",
     fee: "₹70,000",
     icon: "🩺",
-    photo: "./img/students/neet.png",
+    photo: "../img_course_card/NEET.jpg",
     cat: "Medical Entrance",
     stats: [{ v: "Class 12 PCB", l: "Eligibility" }, { v: "720", l: "Total Marks" }, { v: "2 Years", l: "Course" }],
     desc: "NCERT-focused NEET preparation with Biology, Chemistry and Physics. Extensive practice tests, lab practicals and revision sessions.",
@@ -123,7 +124,7 @@ const courses = [
     full: "Class 11th & 12th PCM / PCB Coaching",
     fee: "₹32,000",
     icon: "📗",
-    photo: "./img/students/class1112.png",
+    photo: "./img_course_card/11_12 PCM, PCB.jpg",
     cat: "Senior Secondary",
     stats: [{ v: "Class 10 Passed", l: "Eligibility" }, { v: "PCM / PCB", l: "Streams" }, { v: "1 Year", l: "Course" }],
     desc: "Senior secondary coaching combining board exam preparation with JEE/NEET entrance foundation. Science stream subjects with regular doubt sessions.",
@@ -143,7 +144,7 @@ const courses = [
     full: "Class 9th & 10th All Subjects Foundation",
     fee: "₹22,000",
     icon: "📘",
-    photo: "./img/students/class910.png",
+    photo: "./img_course_card/9th_10th foundation.jpg",
     cat: "Secondary Foundation",
     stats: [{ v: "Class 8–9 Passed", l: "Eligibility" }, { v: "All Subjects", l: "Coverage" }, { v: "1 Year", l: "Course" }],
     desc: "Strong foundation coaching for Class 9 & 10 with all subjects. Board exam focused with weekly tests, doubt sessions and parent progress reports.",
@@ -163,7 +164,7 @@ const courses = [
     full: "Class 6 to 8 All Subjects — Hindi & CBSE",
     fee: "₹18,000",
     icon: "📙",
-    photo: "./img/students/class68.png",
+    photo: "./img_course_card/class 6 & 8 foundation.jpg",
     cat: "Middle School",
     stats: [{ v: "Class 5–7 Passed", l: "Eligibility" }, { v: "Hindi + CBSE", l: "Medium" }, { v: "1 Year", l: "Course" }],
     desc: "Complete coaching for Class 6 to 8 in all subjects covering both Hindi Medium and CBSE English Medium with strong conceptual base building.",

@@ -6,7 +6,7 @@ import HeroSlider from "../sections/HeroSlider";
 // ─────────────────────────────────────────────────────────
 const defenceSlides = [
   {
-    img: "./img_heroslider/AISSEE.jpg",
+    img: "/img/students/1.jpg",
     imgPos: "top center",
     tag: "Sniper Defence Academy",
     accent: "#FF9933",
@@ -17,7 +17,7 @@ const defenceSlides = [
     link: "/defence",
   },
   {
-    img: "./img_heroslider/AISSEE.jpg",
+    img: "./img/heroS/AISSEE.png",
     imgPos: "top center",
     tag: "AISSEE",
     accent: "#FF9933",
@@ -28,7 +28,7 @@ const defenceSlides = [
     link: "/defence",
   },
   {
-    img: "./img_heroslider/UPSSEE.jpg",
+    img: "./img/heroS/UPSSEE.png",
     imgPos: "top center",
     tag: "UPSSEE",
     accent: "#FF9933",
@@ -39,7 +39,7 @@ const defenceSlides = [
     link: "/defence",
   },
   {
-    img: "./img_heroslider/RIMS.jpg",
+    img: "./img/heroS/RIMS.png",
     imgPos: "top center",
     tag: "RMS",
     accent: "#FF9933",
@@ -50,7 +50,7 @@ const defenceSlides = [
     link: "/defence",
   },
   {
-    img: "./img_heroslider/RIMC.jpg",
+    img: "./img/heroS/RIMC.png",
     imgPos: "top center",
     tag: "RIMC",
     accent: "#FF9933",
@@ -61,7 +61,7 @@ const defenceSlides = [
     link: "/defence",
   },
   {
-    img: "./img_heroslider/CDS & NDA.jpg",
+    img: "./img/heroS/CDS & NDA.png",
     imgPos: "top center",
     tag: "CDS & NDA",
     accent: "#FF9933",
@@ -72,7 +72,7 @@ const defenceSlides = [
     link: "/defence",
   },
   {
-    img: "./img_heroslider/Airforce X&Y.jpg",
+    img: "./img/heroS/Airforce X&Y.png",
     imgPos: "top center",
     tag: "Air Force X & Y",
     accent: "#FF9933",
