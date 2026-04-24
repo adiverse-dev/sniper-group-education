@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+﻿import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import {
@@ -6,80 +6,83 @@ import {
 } from "lucide-react";
 import WhatAreYouLookingFor from "../sections/WhatAreYouLookingFor";
 import HeroSlider from "../sections/HeroSlider";
+import { IMAGE_PATHS } from "../config/imagePaths";
+import { COMPANY_PROFILE, COMPANY_TEXT } from "../config/companyProfile";
 
-// ─────────────────────────────────────────────────────────
+
 // BANNER PHOTOS
-// ─────────────────────────────────────────────────────────
+
 const bannerPhotos = [
-  { src: "/img/students/1.png",    label: "Defence Wing",   bg: "#1a2a3a" },
-  { src: "/img/students/3.png", label: "School Wing",    bg: "#1a3a2e" },
-  { src: "/img/students/4.png",  label: "Sniper Classes", bg: "#1e1a3a" },
-  { src: "/img/students/5.png",    label: "Defence Wing",   bg: "#2a1a1a" },
-  { src: "/img/students/2.png",   label: "School Wing",    bg: "#1a1e2a" },
+  { src: IMAGE_PATHS.home.banner.defenceWing, label: "Defence Wing",   bg: "#1a2a3a" },
+  { src: IMAGE_PATHS.home.banner.schoolWing,  label: "School Wing",    bg: "#1a3a2e" },
+  { src: IMAGE_PATHS.home.banner.classesWing, label: "Sniper Classes", bg: "#1e1a3a" },
+  { src: IMAGE_PATHS.home.banner.achievers,   label: "Achievements",   bg: "#2a1a1a" },
+  { src: IMAGE_PATHS.home.banner.campus,      label: "Campus Life",    bg: "#1a1e2a" },
 ];
 
 const bannerStats = [
-  { value: "1,200+", label: "Defence Selections", color: "#e8420a" },
-  { value: "5,000+", label: "Students Trained",   color: "#10b981" },
+  { value: "200+", label: "Defence Selections", color: "#e8420a" },
+  { value: "1200+", label: "Students Trained",   color: "#10b981" },
   { value: "3",      label: "Wings / Institutes", color: "#7c3aed" },
-  { value: "15+",    label: "Years Excellence",   color: "#f59e0b" },
+  { value: COMPANY_TEXT.yearsPlus, label: "Years Excellence",   color: "#f59e0b" },
   { value: "98%",    label: "Board Result Rate",  color: "#3b82f6" },
 ];
 
-// ─────────────────────────────────────────────────────────
+
 // HOME SLIDER SLIDES
-// ─────────────────────────────────────────────────────────
+
 const homeSlides = [
   {
-    img: "/img/students/1.jpg",
+    img: IMAGE_PATHS.home.hero.defence,
     imgPos: "center top",
     tag: "Defence Academy",
     accent: "#e8420a",
     heading: "Crack Every Defence Exam",
-    sub: "AISSEE · RMS · RIMC · NDA · CDS · Air Force",
+    sub: "AISSEE Â· RMS Â· RIMC Â· NDA Â· CDS Â· Air Force",
     btn: "Explore Courses",
     link: "/defence",
   },
   {
-    img: "/img/students/4.jpg",
+    img: IMAGE_PATHS.home.hero.school,
     imgPos: "center",
     tag: "Public School",
     accent: "#10b981",
     heading: "Quality CBSE Education",
-    sub: "Nursery to Class 8 — Building strong foundations",
+    sub: "Nursery to Class 8 â€” Building strong foundations",
     btn: "Explore School",
     link: "/school",
   },
   {
-    img: "/img/students/5.jpg",
+    img: IMAGE_PATHS.home.hero.classes,
     imgPos: "center",
     tag: "Sniper Classes",
     accent: "#7c3aed",
     heading: "Crack Every Exam You Face",
-    sub: "IIT JEE · NEET · 9th to 12th Foundation",
+    sub: "IIT JEE Â· NEET Â· 9th to 12th Foundation",
     btn: "Explore Classes",
     link: "/classes",
   },
   {
-    img: "/img/students/6.jpg",
+    img: IMAGE_PATHS.home.hero.group,
     imgPos: "center",
     tag: "Sniper Group",
     accent: "#e8420a",
     heading: "One Trust. Three Wings.",
-    sub: "Comprehensive education ecosystem since 2009",
+    sub: `Comprehensive education ecosystem ${COMPANY_TEXT.sinceFounded}`,
     btn: "Know More",
     link: "/",
   },
 ];
 
-// ─────────────────────────────────────────────────────────
+
 // ANIMATED SECTION
-// ─────────────────────────────────────────────────────────
+
 const AnimatedSection = ({ children, className = "", delay = 0 }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const MotionDiv = motion.div;
   return (
-    <motion.div
+    <MotionDiv
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -87,13 +90,13 @@ const AnimatedSection = ({ children, className = "", delay = 0 }) => {
       className={className}
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 };
 
-// ─────────────────────────────────────────────────────────
+
 // HERO BANNER
-// ─────────────────────────────────────────────────────────
+
 const HeroBanner = () => (
   <div style={{ width: "100%" }}>
     <div style={{
@@ -108,6 +111,7 @@ const HeroBanner = () => (
             src={p.src}
             alt={p.label}
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            onError={(e) => { e.currentTarget.src = IMAGE_PATHS.home.banner.campus; }}
           />
         </div>
       ))}
@@ -137,10 +141,10 @@ const HeroBanner = () => (
           fontFamily: "Georgia, serif", margin: 0,
         }}>
           Inspiring Young Minds and <br />
-          Empowering Dreams since 2009
+          {`Empowering Dreams ${COMPANY_TEXT.sinceFounded}`}
         </h1>
         <p style={{ marginTop: "14px", fontSize: "15px", color: "rgba(255,255,255,0.8)" }}>
-          Sniper Group of Education — Meerut, U.P.
+          {`Sniper Group of Education â€” ${COMPANY_TEXT.cityTierText}`}
         </p>
       </div>
     </div>
@@ -165,9 +169,9 @@ const HeroBanner = () => (
   </div>
 );
 
-// ─────────────────────────────────────────────────────────
+
 // SECTION TITLE
-// ─────────────────────────────────────────────────────────
+
 const SectionTitle = ({ tag, title, subtitle, dark = false }) => (
   <div className="text-center mb-14">
     {tag && (
@@ -207,26 +211,26 @@ const SectionTitle = ({ tag, title, subtitle, dark = false }) => (
   </div>
 );
 
-// ─────────────────────────────────────────────────────────
+
 // DATA
-// ─────────────────────────────────────────────────────────
+
 const stats = [
-  { icon: Users,  value: "5,000+", label: "Students Trained",    color: "#e8420a" },
-  { icon: Trophy, value: "1,200+", label: "Defence Selections",  color: "#10b981" },
-  { icon: Star,   value: "15+",    label: "Years of Excellence", color: "#f59e0b" },
+  { icon: Users,  value: "200+", label: "Students Trained",    color: "#e8420a" },
+  { icon: Trophy, value: "1200+", label: "Defence Selections",  color: "#10b981" },
+  { icon: Star,   value: COMPANY_TEXT.yearsPlus, label: "Years of Excellence", color: "#f59e0b" },
   { icon: Award,  value: "98%",    label: "Board Result Rate",   color: "#7c3aed" },
 ];
 
 const testimonials = [
-  { name: "Suryansh Rathore", role: "Sainik School - Puruliya",            avatar: "SR", avatarBg: "#FF9933", photo: "/img/students/Suryansh Rathore.jpg", quote: "Sniper Defence Academy ne mujhe sirf padhai nahi, ek soldier ki soch di. Yahan se mera safar shuru hua.", wingColor: "#e8420a", wingLabel: "Defence Academy" },
-  { name: "Sameer Parmar",    role: "Sainik School - Gurukul Kurukshetra", avatar: "SP", avatarBg: "#10b981", photo: "/img/students/Sameer Parmar.jpg",     quote: "Yahan ki training aur discipline ne mujhe Sainik School ke liye taiyaar kiya. Best decision of my life.",  wingColor: "#10b981", wingLabel: "Defence Academy" },
-  { name: "Abhinav Thakur",   role: "Sainik School - Gurukul Kurukshetra", avatar: "AT", avatarBg: "#0d1b3e", photo: "/img/students/Abhinav Thakur.jpg",    quote: "Faculty bahut dedicated hai. Har student par personally dhyan diya jaata hai. Results khud bolta hai.",   wingColor: "#7c3aed", wingLabel: "Sniper Classes" },
-  { name: "Aaradhya Rath",    role: "Sainik School - Amravathi Nagar",     avatar: "AR", avatarBg: "#7c3aed", photo: "/img/students/Aaradhya Rathi.jpg",    quote: "Sniper Group ka mahaul aur guidance ne mera sapna sach kar diya. Bahut grateful hoon.",                   wingColor: "#FF9933", wingLabel: "Defence Academy" },
+  { name: "Suryansh Rathore", role: "Sainik School - Puruliya",            avatar: "SR", avatarBg: "#FF9933", photo: IMAGE_PATHS.home.testimonials.suryanshRathore, quote: "Sniper Defence Academy ne mujhe sirf padhai nahi, ek soldier ki soch di. Yahan se mera safar shuru hua.", wingColor: "#e8420a", wingLabel: "Defence Academy" },
+  { name: "Sameer Parmar",    role: "Sainik School - Gurukul Kurukshetra", avatar: "SP", avatarBg: "#10b981", photo: IMAGE_PATHS.home.testimonials.sameerParmar,    quote: "Yahan ki training aur discipline ne mujhe Sainik School ke liye taiyaar kiya. Best decision of my life.",  wingColor: "#10b981", wingLabel: "Defence Academy" },
+  { name: "Abhinav Thakur",   role: "Sainik School - Gurukul Kurukshetra", avatar: "AT", avatarBg: "#0d1b3e", photo: IMAGE_PATHS.home.testimonials.abhinavThakur,   quote: "Faculty bahut dedicated hai. Har student par personally dhyan diya jaata hai. Results khud bolta hai.",   wingColor: "#7c3aed", wingLabel: "Sniper Classes" },
+  { name: "Aaradhya Rath",    role: "Sainik School - Amravathi Nagar",     avatar: "AR", avatarBg: "#7c3aed", photo: IMAGE_PATHS.home.testimonials.aaradhyaRathi,   quote: "Sniper Group ka mahaul aur guidance ne mera sapna sach kar diya. Bahut grateful hoon.",                   wingColor: "#FF9933", wingLabel: "Defence Academy" },
 ];
 
-// ─────────────────────────────────────────────────────────
+
 // MARQUEE STRIP
-// ─────────────────────────────────────────────────────────
+
 const MarqueeStrip = () => {
   const items = ["AISSEE", "RMS", "RIMC", "NDA", "CDS", "Air Force", "IIT JEE", "NEET", "Class 9-12", "CBSE Board", "Sainik School", "Military School", "Defence Academy"];
   return (
@@ -246,22 +250,22 @@ const MarqueeStrip = () => {
   );
 };
 
-// ─────────────────────────────────────────────────────────
+
 // STUDENT PHOTO BANNER
-// ─────────────────────────────────────────────────────────
+
 const StudentPhotoBanner = () => (
   <div style={{ width: "100%", overflow: "hidden", lineHeight: 0 }}>
     <img
-      src="/img/students/2.jpg"
-      alt="Our Students — Sniper Group of Education"
+      src={IMAGE_PATHS.home.studentBanner.group}
+      alt="Our Students â€” Sniper Group of Education"
       style={{ width: "100%", display: "block", objectFit: "cover", maxHeight: "240px", objectPosition: "center top" }}
     />
   </div>
 );
 
-// ─────────────────────────────────────────────────────────
+
 // MAIN PAGE
-// ─────────────────────────────────────────────────────────
+
 const HomePortal = () => {
   return (
     <div style={{ minHeight: "100vh", overflowX: "hidden", background: "#f5f7fa" }}>
@@ -291,7 +295,7 @@ const HomePortal = () => {
                 </span>
                 <div style={{ width: "40px", height: "4px", background: "#e8420a", borderRadius: "2px", marginBottom: "24px" }} />
                 <blockquote style={{ fontFamily: "Georgia, serif", fontSize: "clamp(15px, 1.8vw, 17px)", color: "#0d1b3e", lineHeight: 1.8, fontStyle: "italic", borderLeft: "3px solid #e8420a", paddingLeft: "20px", margin: "0 0 24px 0" }}>
-                  "At Sniper Group of Education, we do not just teach — we transform. Every student who walks through our doors carries within them the potential to serve the nation, excel academically, and rise beyond their circumstances."
+                  "At Sniper Group of Education, we do not just teach â€” we transform. Every student who walks through our doors carries within them the potential to serve the nation, excel academically, and rise beyond their circumstances."
                 </blockquote>
                 <div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", borderRadius: "16px", overflow: "hidden", marginBottom: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
                   <iframe
@@ -310,7 +314,7 @@ const HomePortal = () => {
                   </div>
                   <div>
                     <p style={{ fontWeight: 700, color: "#0d1b3e", fontSize: "15px", margin: 0 }}>Director, Sniper Group of Education</p>
-                    <p style={{ color: "rgba(13,27,62,0.5)", fontSize: "12px", margin: "3px 0 0" }}>Meerut, Uttar Pradesh · Est. 2009</p>
+                    <p style={{ color: "rgba(13,27,62,0.5)", fontSize: "12px", margin: "3px 0 0" }}>{`${COMPANY_TEXT.cityTierText} Â· ${COMPANY_TEXT.estText}`}</p>
                   </div>
                 </div>
               </div>
@@ -326,14 +330,14 @@ const HomePortal = () => {
                   Bhagwan Parshuram Education &amp; Charitable Trust
                 </h3>
                 <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", lineHeight: 1.75, marginBottom: "24px" }}>
-                  Registered under the Societies Registration Act, our trust is the legal backbone of all three wings. Committed to making quality education accessible, affordable, and excellence-driven for every child across Meerut and beyond.
+                  Registered under the Societies Registration Act, our trust is the legal backbone of all three wings. Based in {COMPANY_PROFILE.city} â€” a {COMPANY_PROFILE.cityTier} â€” we are committed to making quality education accessible, affordable, and excellence-driven for every child.
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                   {[
-                    { label: "Registered Trust", value: "Since 2009" },
+                    { label: "Registered Trust", value: COMPANY_TEXT.trustSinceText },
                     { label: "Three Wings",       value: "One Mission" },
                     { label: "Registered City",   value: "Meerut, U.P." },
-                    { label: "Students Served",   value: "5,000+" },
+                    { label: "Students Served",   value: "200+" },
                   ].map(item => (
                     <div key={item.label} style={{ background: "rgba(255,255,255,0.07)", borderRadius: "12px", padding: "14px 16px", border: "1px solid rgba(255,255,255,0.1)" }}>
                       <p style={{ color: "#e8420a", fontSize: "15px", fontWeight: 700, margin: 0 }}>{item.value}</p>

@@ -1,3 +1,5 @@
+import { COMPANY_TEXT } from "../config/companyProfile";
+
 const results = [
   {
     name: "Cadet Arjun Singh",
@@ -50,7 +52,7 @@ const stats = [
   { val: "1,200+", lab: "Defence Selections", color: "#FF9933" },
   { val: "98%",    lab: "Board Pass Rate",    color: "#10b981" },
   { val: "350+",   lab: "JEE/NEET Qualifiers",color: "#7c3aed" },
-  { val: "15+",    lab: "Years of Results",   color: "#e8420a" },
+  { val: COMPANY_TEXT.yearsPlus, lab: "Years of Results", color: "#e8420a" },
 ];
 
 function ResultsSection() {

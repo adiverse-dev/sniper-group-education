@@ -1,171 +1,269 @@
 import { Link } from "react-router-dom";
 
+const FacebookIcon = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+    <rect width="24" height="24" rx="6" fill="#1877F2"/>
+    <path d="M16.5 12H13.5V9.75C13.5 9.12 13.872 8.625 14.625 8.625H16.5V6H14.25C12.18 6 10.5 7.5 10.5 9.75V12H8.25V15H10.5V21.75H13.5V15H15.75L16.5 12Z" fill="white"/>
+  </svg>
+);
+
+const InstagramIcon = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+    <defs>
+      <radialGradient id="ig-grad1" cx="30%" cy="107%" r="130%">
+        <stop offset="0%" stopColor="#fdf497"/>
+        <stop offset="45%" stopColor="#fd5949"/>
+        <stop offset="60%" stopColor="#d6249f"/>
+        <stop offset="90%" stopColor="#285AEB"/>
+      </radialGradient>
+    </defs>
+    <rect width="24" height="24" rx="6" fill="url(#ig-grad1)"/>
+    <rect x="6.5" y="6.5" width="11" height="11" rx="3.5" stroke="white" strokeWidth="1.6"/>
+    <circle cx="12" cy="12" r="2.8" stroke="white" strokeWidth="1.6"/>
+    <circle cx="16.2" cy="7.8" r="0.9" fill="white"/>
+  </svg>
+);
+
+const YouTubeIcon = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+    <rect width="24" height="24" rx="6" fill="#FF0000"/>
+    <path d="M19.8 8.2C19.6 7.5 19 6.9 18.3 6.7C17 6.4 12 6.4 12 6.4C12 6.4 7 6.4 5.7 6.7C5 6.9 4.4 7.5 4.2 8.2C3.9 9.5 3.9 12 3.9 12C3.9 12 3.9 14.5 4.2 15.8C4.4 16.5 5 17.1 5.7 17.3C7 17.6 12 17.6 12 17.6C12 17.6 17 17.6 18.3 17.3C19 17.1 19.6 16.5 19.8 15.8C20.1 14.5 20.1 12 20.1 12C20.1 12 20.1 9.5 19.8 8.2Z" fill="white"/>
+    <polygon points="10.2,14.6 14.8,12 10.2,9.4" fill="#FF0000"/>
+  </svg>
+);
+
+const WhatsAppIcon = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+    <rect width="24" height="24" rx="6" fill="#25D366"/>
+    <path d="M12 4.5C7.858 4.5 4.5 7.858 4.5 12C4.5 13.38 4.878 14.676 5.532 15.786L4.5 19.5L8.316 18.48C9.396 19.08 10.656 19.5 12 19.5C16.142 19.5 19.5 16.142 19.5 12C19.5 7.858 16.142 4.5 12 4.5Z" fill="white"/>
+  </svg>
+);
+
 const Footer = () => {
-  const year = new Date().getFullYear();
+const year = new Date().getFullYear();
 
-  return (
-    <>
-      {/* ── SVG WAVE — footer ── */}
-      <div style={{ lineHeight: 0, overflow: "hidden", background: "#f5f7fa" }}>
-        <svg
-          viewBox="0 0 1440 100"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-          style={{ display: "block", width: "100%", height: "100px" }}
-        >
-          {/* Soft double-wave — fills into footer dark bg */}
-          <path
-            d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,100 L0,100 Z"
-            fill="#0a1628"
-            opacity="0.4"
-          />
-          <path
-            d="M0,40 C200,85 400,10 600,50 C800,90 1000,15 1200,55 C1320,78 1400,45 1440,35 L1440,100 L0,100 Z"
-            fill="#0a1628"
-          />
-        </svg>
-      </div>
+const socialLinks = [
+{ label:"Facebook", href:"https://www.facebook.com/sanjeevparashar.sda", Icon:FacebookIcon },
+{ label:"Instagram", href:"https://www.instagram.com/sniperdefenceacademy?igsh=MW9ocGE1eHZkanJybA==", Icon:InstagramIcon },
+{ label:"YouTube", href:"https://www.youtube.com/@sniperdefenceacademymeerut4694", Icon:YouTubeIcon },
+{ label:"WhatsApp", href:"https://wa.me/917060155711", Icon:WhatsAppIcon },
+];
 
-      <footer style={{ background: "#0a1628", color: "white", fontFamily: "'Poppins', sans-serif" }}>
+return (
+<>
+<div style={{lineHeight:0,overflow:"hidden",background:"#f5f7fa"}}>
+<svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+style={{display:"block",width:"100%",height:"100px"}}>
+<path
+d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,100 L0,100 Z"
+fill="#0a1628"
+opacity="0.4"
+/>
+<path
+d="M0,40 C200,85 400,10 600,50 C800,90 1000,15 1200,55 C1320,78 1400,45 1440,35 L1440,100 L0,100 Z"
+fill="#0a1628"
+/>
+</svg>
+</div>
 
-        {/* ── TOP BAND ── */}
-        <div style={{ background: "linear-gradient(90deg, #e8420a, #ff6b35)", padding: "18px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
-          <p style={{ margin: 0, fontWeight: 700, fontSize: "15px", letterSpacing: "0.5px" }}>
-            🎓 Admissions Open 2025–26 — Limited Seats Available!
-          </p>
-          <a href="https://wa.me/917060155711" target="_blank" rel="noreferrer"
-            style={{ background: "white", color: "#e8420a", padding: "8px 22px", borderRadius: "999px", fontWeight: 700, fontSize: "14px", textDecoration: "none", whiteSpace: "nowrap" }}>
-            Enquire Now →
-          </a>
-        </div>
+<footer style={{
+background:"#0a1628",
+color:"#fff",
+fontFamily:"Poppins,sans-serif"
+}}>
 
-        {/* ── MAIN FOOTER ── */}
-        <div className="footer-grid" style={{ maxWidth: "1180px", margin: "0 auto", padding: "60px 40px 40px", display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: "40px" }}>
+<div style={{
+background:"linear-gradient(90deg,#e8420a,#ff6b35)",
+padding:"18px 24px",
+display:"flex",
+justifyContent:"space-between",
+flexWrap:"wrap",
+gap:"12px"
+}}>
+<p style={{margin:0,fontWeight:700}}>
+🎓 Admissions Open 2025–26 — Limited Seats Available!
+</p>
 
-          {/* COL 1 — Brand */}
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
-              {/* ── LOGO SVG ── */}
-              <img
-                src="/img/students/2.svg"
-                alt="Sniper Group of Education Logo"
-                style={{ height: "52px", width: "auto", objectFit: "contain" }}
-              />
-            </div>
+<a
+href="https://wa.me/917060155711"
+target="_blank"
+rel="noreferrer"
+style={{
+background:"#fff",
+color:"#e8420a",
+padding:"8px 22px",
+borderRadius:"999px",
+fontWeight:"700",
+textDecoration:"none"
+}}
+>
+Enquire Now →
+</a>
+</div>
 
-            <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", lineHeight: 1.85, marginBottom: "20px" }}>
-              Governed by <strong style={{ color: "rgba(255,255,255,0.85)" }}>Bhagwan Parshuram Education & Charitable Trust</strong>. Empowering youth through quality education and defence training since 2009.
-            </p>
+<div
+className="footer-grid"
+style={{
+maxWidth:"1180px",
+margin:"0 auto",
+padding:"60px 40px 40px",
+display:"grid",
+gridTemplateColumns:"1.4fr 1fr 1fr 1fr",
+gap:"40px"
+}}
+>
 
-            {/* Social icons */}
-            <div style={{ display: "flex", gap: "10px" }}>
-              {[
-                { icon: "📘", label: "Facebook",  href: "#" },
-                { icon: "📸", label: "Instagram", href: "#" },
-                { icon: "▶️", label: "YouTube",   href: "#" },
-                { icon: "💬", label: "WhatsApp",  href: "https://wa.me/917060155711" },
-              ].map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" title={s.label}
-                  style={{ width: "36px", height: "36px", borderRadius: "8px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px", textDecoration: "none", transition: "all 0.2s" }}
-                  onMouseEnter={e => e.currentTarget.style.background = "rgba(232,66,10,0.3)"}
-                  onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.08)"}>
-                  {s.icon}
-                </a>
-              ))}
-            </div>
-          </div>
+<div>
+<img
+src="/img/branding/Flogo.svg"
+alt="logo"
+style={{height:"52px",marginBottom:"18px"}}
+/>
 
-          {/* COL 2 — Our Institutes */}
-          <div>
-            <h4 style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#e8420a", marginBottom: "20px" }}>Our Institutes</h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
-              {[
-                { label: "🛡️ Defence Academy", path: "/defence" },
-                { label: "📚 Public School",    path: "/school"  },
-                { label: "🎓 Sniper Classes",   path: "/classes" },
-              ].map((item) => (
-                <li key={item.path}>
-                  <Link to={item.path}
-                    style={{ color: "rgba(255,255,255,0.65)", fontSize: "14px", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px", transition: "color 0.2s" }}
-                    onMouseEnter={e => e.currentTarget.style.color = "white"}
-                    onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.65)"}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+<p style={{
+fontSize:"14px",
+color:"rgba(255,255,255,.65)",
+lineHeight:"1.9",
+marginBottom:"22px"
+}}>
+<strong style={{color:"#fff"}}>
+Sniper Group of Education 
+</strong>, governed by{" "}
+<strong style={{color:"#fff"}}>
+Bhagwan Parshuram Education & Charitable Trust
+</strong>, is dedicated to empowering students through quality education and
+defence training. Since 2020, we have been committed to building discipline,
+confidence, and a strong foundation for future success.
+</p>
 
-          {/* COL 3 — Quick Links */}
-          <div>
-            <h4 style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#e8420a", marginBottom: "20px" }}>Quick Links</h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
-              {[
-                { label: "About Us",      path: "/about"        },
-                { label: "Results",       path: "/results"      },
-                { label: "Fee Structure", path: "/fee-structure" },
-                { label: "Gallery",       path: "/gallery"      },
-                { label: "Contact Us",    path: "/contact"      },
-              ].map((item) => (
-                <li key={item.path}>
-                  <Link to={item.path}
-                    style={{ color: "rgba(255,255,255,0.65)", fontSize: "14px", textDecoration: "none", transition: "color 0.2s" }}
-                    onMouseEnter={e => e.currentTarget.style.color = "white"}
-                    onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.65)"}>
-                    → {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+<div style={{display:"flex",gap:"10px"}}>
+{socialLinks.map(({label,href,Icon})=>(
+<a
+key={label}
+href={href}
+target="_blank"
+rel="noreferrer"
+style={{
+width:"40px",
+height:"40px",
+borderRadius:"10px",
+background:"rgba(255,255,255,.08)",
+display:"flex",
+alignItems:"center",
+justifyContent:"center",
+textDecoration:"none"
+}}
+>
+<Icon/>
+</a>
+))}
+</div>
+</div>
 
-          {/* COL 4 — Contact */}
-          <div>
-            <h4 style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#e8420a", marginBottom: "20px" }}>Contact Us</h4>
-            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-              {[
-                { icon: "📍", text: "GP-4, Near PNB, Divider Road, Ganganagar, Meerut City (U.P)" },
-                { icon: "📞", text: "+91 7060155711" },
-                { icon: "🕐", text: "Mon–Sat: 8:00 AM – 7:00 PM" },
-              ].map((item, i) => (
-                <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                  <span style={{ fontSize: "16px", flexShrink: 0, marginTop: "1px" }}>{item.icon}</span>
-                  <span style={{ fontSize: "13.5px", color: "rgba(255,255,255,0.65)", lineHeight: 1.6 }}>{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+<div>
+<h4 style={{
+fontSize:"13px",
+letterSpacing:"2px",
+textTransform:"uppercase",
+color:"#e8420a",
+marginBottom:"20px"
+}}>
+Our Institutes
+</h4>
 
-        </div>
+<ul style={{listStyle:"none",padding:0,display:"grid",gap:"12px"}}>
+<li><Link to="/defence" style={{color:"#bbb",textDecoration:"none"}}>🛡 Defence Academy</Link></li>
+<li><Link to="/school" style={{color:"#bbb",textDecoration:"none"}}>📚 Public School</Link></li>
+<li><Link to="/classes" style={{color:"#bbb",textDecoration:"none"}}>🎓 Sniper Classes</Link></li>
+</ul>
+</div>
 
-        {/* ── DIVIDER ── */}
-        <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "0 40px" }}>
-          <div style={{ height: "1px", background: "rgba(255,255,255,0.08)" }} />
-        </div>
+<div>
+<h4 style={{
+fontSize:"13px",
+letterSpacing:"2px",
+textTransform:"uppercase",
+color:"#e8420a",
+marginBottom:"20px"
+}}>
+Quick Links
+</h4>
 
-        {/* ── BOTTOM BAR ── */}
-        <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "20px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "10px" }}>
-          <p style={{ margin: 0, fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>
-            © {year} Sniper Group of Education. All rights reserved.
-          </p>
-          <p style={{ margin: 0, fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>
-            Bhagwan Parshuram Education & Charitable Trust
-          </p>
-        </div>
+<ul style={{listStyle:"none",padding:0,display:"grid",gap:"12px"}}>
+<li><Link to="/about" style={{color:"#bbb",textDecoration:"none"}}>About Us</Link></li>
+<li><Link to="/results" style={{color:"#bbb",textDecoration:"none"}}>Results</Link></li>
+<li><Link to="/fees" style={{color:"#bbb",textDecoration:"none"}}>Fee Structure</Link></li>
+<li><Link to="/gallery" style={{color:"#bbb",textDecoration:"none"}}>Gallery</Link></li>
+<li><Link to="/contact" style={{color:"#bbb",textDecoration:"none"}}>Contact Us</Link></li>
+</ul>
+</div>
 
-        {/* Mobile responsive */}
-        <style>{`
-          @media (max-width: 900px) {
-            .footer-grid { grid-template-columns: 1fr 1fr !important; padding: 40px 20px !important; gap: 32px !important; }
-          }
-          @media (max-width: 480px) {
-            .footer-grid { grid-template-columns: 1fr !important; padding: 32px 20px !important; }
-          }
-        `}</style>
+<div>
+<h4 style={{
+fontSize:"13px",
+letterSpacing:"2px",
+textTransform:"uppercase",
+color:"#e8420a",
+marginBottom:"20px"
+}}>
+Contact Us
+</h4>
 
-      </footer>
-    </>
-  );
+<div style={{display:"grid",gap:"14px"}}>
+<div>📍 NH 34, Rajpura Road, Mawana Rd, opposite HP Petrol Pump, Meerut, Uttar Pradesh 250001</div>
+<div>📞 +91 7060155711</div>
+<div>🕐 Mon–Sat: 8:00 AM – 7:00 PM</div>
+</div>
+
+</div>
+</div>
+
+<div style={{
+maxWidth:"1180px",
+margin:"0 auto",
+padding:"0 40px"
+}}>
+<div style={{
+height:"1px",
+background:"rgba(255,255,255,.08)"
+}}/>
+</div>
+
+<div style={{
+maxWidth:"1180px",
+margin:"0 auto",
+padding:"20px 24px",
+display:"flex",
+justifyContent:"space-between",
+flexWrap:"wrap"
+}}>
+<p style={{fontSize:"13px",color:"rgba(255,255,255,.45)"}}>
+© {year} Sniper Group of Education. All rights reserved.
+</p>
+
+<p style={{fontSize:"13px",color:"rgba(255,255,255,.45)"}}>
+Designed & Developed by Finofits Consulting.
+</p>
+</div>
+
+<style>{`
+@media(max-width:900px){
+.footer-grid{
+grid-template-columns:1fr 1fr !important;
+padding:40px 20px !important;
+}
+}
+@media(max-width:480px){
+.footer-grid{
+grid-template-columns:1fr !important;
+}
+}
+`}
+</style>
+
+</footer>
+</>
+);
 };
 
 export default Footer;

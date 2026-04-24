@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import { IMAGE_PATHS } from "../config/imagePaths";
 
 const AnimatedSection = ({ children, className = "", delay = 0 }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const MotionDiv = motion.div;
   return (
-    <motion.div
+    <MotionDiv
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -15,7 +17,7 @@ const AnimatedSection = ({ children, className = "", delay = 0 }) => {
       className={className}
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 };
 
@@ -32,8 +34,8 @@ const wings = [
     bg: "rgba(232,66,10,0.05)",
     tagColor: "#e8420a",
     // Photo — defence cadets / NDA
-    photo: "/img/wings/defence-wing.jpg",
-    photoBg:"/img/students/W1.png"
+    photo: IMAGE_PATHS.wings.defence,
+    photoBg: IMAGE_PATHS.wings.defence,
 
   },
   {
@@ -47,8 +49,8 @@ const wings = [
     border: "#10b981",
     bg: "rgba(16,185,129,0.05)",
     tagColor: "#10b981",
-    photo: "/img/wings/school-wing.jpg",
-    photoBg: "/img/students/W2.png",
+    photo: IMAGE_PATHS.wings.school,
+    photoBg: IMAGE_PATHS.wings.school,
   },
   {
     num: "WING 03",
@@ -61,8 +63,8 @@ const wings = [
     border: "#7c3aed",
     bg: "rgba(124,58,237,0.05)",
     tagColor: "#7c3aed",
-    photo: "/img/wings/classes-wing.jpg",
-    photoBg:"/img/students/W3.png"
+    photo: IMAGE_PATHS.wings.classes,
+    photoBg: IMAGE_PATHS.wings.classes,
   },
 ];
 

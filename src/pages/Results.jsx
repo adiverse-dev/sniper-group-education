@@ -1,12 +1,13 @@
 import { useState } from "react";
 import HeroSlider from "../sections/HeroSlider";
+import { IMAGE_PATHS } from "../config/imagePaths";
 
 // ─────────────────────────────────────────────────────────
 // HERO SLIDER SLIDES
 // ─────────────────────────────────────────────────────────
 const heroSlides = [
   {
-    img: "/img/students/1.jpg",
+    img: IMAGE_PATHS.results.hero.defence,
     imgPos: "center top",
     tag: "Fee Structure 2026–27",
     accent: "#e8420a",
@@ -16,7 +17,7 @@ const heroSlides = [
     link: "/fees",
   },
   {
-    img: "/img/students/4.jpg",
+    img: IMAGE_PATHS.results.hero.school,
     imgPos: "center",
     tag: "Public School Fees",
     accent: "#10b981",
@@ -26,7 +27,7 @@ const heroSlides = [
     link: "/fees",
   },
   {
-    img: "/img/students/5.jpg",
+    img: IMAGE_PATHS.results.hero.classes,
     imgPos: "center",
     tag: "Scholarships Available",
     accent: "#7c3aed",
@@ -40,6 +41,27 @@ const heroSlides = [
 // ─────────────────────────────────────────────────────────
 // RESULTS DATA
 // ─────────────────────────────────────────────────────────
+const resultPhotoMap = {
+  "Arjun Singh": IMAGE_PATHS.results.cards.arjunSingh,
+  "Vikram Yadav": IMAGE_PATHS.results.cards.vikramYadav,
+  "Amit Rawat": IMAGE_PATHS.results.cards.amitRawat,
+  "Rahul Tomar": IMAGE_PATHS.results.cards.rahulTomar,
+  "Sanjay Bisht": IMAGE_PATHS.results.cards.sanjayBisht,
+  "Deepak Negi": IMAGE_PATHS.results.cards.deepakNegi,
+  "Priya Sharma": IMAGE_PATHS.results.cards.priyaSharma,
+  "Ananya Verma": IMAGE_PATHS.results.cards.ananyaVerma,
+  "Kavya Joshi": IMAGE_PATHS.results.cards.kavyaJoshi,
+  "Ritika Singh": IMAGE_PATHS.results.cards.ritikaSingh,
+  "Harsh Pandey": IMAGE_PATHS.results.cards.harshPandey,
+  "Pooja Rawat": IMAGE_PATHS.results.cards.poojaRawat,
+  "Rohan Mehta": IMAGE_PATHS.results.cards.rohanMehta,
+  "Sneha Gupta": IMAGE_PATHS.results.cards.snehaGupta,
+  "Tushar Malik": IMAGE_PATHS.results.cards.tusharMalik,
+  "Neha Chauhan": IMAGE_PATHS.results.cards.nehaChauhan,
+  "Shubham Rana": IMAGE_PATHS.results.cards.shubhamRana,
+  "Divya Negi": IMAGE_PATHS.results.cards.divyaNegi,
+};
+
 const allResults = [
   // ── DEFENCE SELECTIONS ──
   { name: "Arjun Singh",    achievement: "NDA Selected — 148th Course",    wing: "Defence", score: "AIR 47",   scoreLabel: "All India Rank", year: "2024", color: "#FF9933", bg: "#fff8f0" },
@@ -64,7 +86,10 @@ const allResults = [
   { name: "Neha Chauhan",   achievement: "NEET Qualified — BDS Seat",      wing: "Classes", score: "620/720",  scoreLabel: "NEET Score",     year: "2023", color: "#7c3aed", bg: "#faf5ff" },
   { name: "Shubham Rana",   achievement: "JEE Advanced Qualified",         wing: "Classes", score: "AIR 580",  scoreLabel: "JEE Advanced",   year: "2022", color: "#7c3aed", bg: "#faf5ff" },
   { name: "Divya Negi",     achievement: "NEET Qualified — MBBS Seat",     wing: "Classes", score: "638/720",  scoreLabel: "NEET Score",     year: "2022", color: "#7c3aed", bg: "#faf5ff" },
-];
+].map((result) => ({
+  ...result,
+  photo: resultPhotoMap[result.name],
+}));
 
 const years = ["All", "2024", "2023", "2022"];
 const wings = ["All", "Defence", "School", "Classes"];
@@ -151,8 +176,15 @@ const Results = () => {
                   onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "#eef1f8"; }}
                 >
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-                    <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: `linear-gradient(135deg, ${r.color}, ${r.color}99)`, display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "14px", fontWeight: 700 }}>
-                      {getInitials(r.name)}
+                    <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: `linear-gradient(135deg, ${r.color}, ${r.color}99)`, position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "14px", fontWeight: 700 }}>
+                      <span>{getInitials(r.name)}</span>
+                      <img
+                        src={r.photo}
+                        alt={r.name}
+                        loading="lazy"
+                        onError={(e) => { e.currentTarget.style.display = "none"; }}
+                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                      />
                     </div>
                     <div style={{ background: r.bg, borderRadius: "10px", padding: "6px 12px", textAlign: "center", border: `1px solid ${r.color}33` }}>
                       <div style={{ fontSize: "15px", fontWeight: 800, color: r.color, fontFamily: "'Playfair Display', Georgia, serif" }}>{r.score}</div>

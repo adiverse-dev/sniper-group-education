@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { BRANDING_ASSETS } from "../config/brandingAssets";
 
 const wings = [
   { icon: "🛡️", name: "Defence Academy", desc: "NDA • CDS • SSB Coaching",       path: "/defence", bg: "bg-orange-50",  accent: "#FF9933" },
@@ -36,11 +37,11 @@ function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
+  const closeAllMenus = () => {
     setMenuOpen(false);
     setDropOpen(false);
     setMobileInstitutes(false);
-  }, [location.pathname]);
+  };
 
   const isActive   = (path) => location.pathname === path;
   const wingActive = wings.some((w) => isActive(w.path));
@@ -55,9 +56,9 @@ function Navbar() {
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px", height: scrolled ? "60px" : "68px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", transition: "height 0.3s ease" }}>
 
         {/* ── LOGO ── */}
-        <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
+        <Link to="/" onClick={closeAllMenus} style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
           <img
-            src="/img/students/1.svg"
+            src={BRANDING_ASSETS.navbarLogo}
             alt="Sniper Group of Education"
             style={{
               height: scrolled ? "50px" : "70px",
@@ -109,7 +110,7 @@ function Navbar() {
                   {wings.map((w) => {
                     const active = isActive(w.path);
                     return (
-                      <Link key={w.path} to={w.path} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px", borderRadius: "12px", textDecoration: "none", background: active ? `${w.accent}10` : "transparent", border: active ? `1.5px solid ${w.accent}30` : "1.5px solid transparent", transition: "all 0.2s", marginBottom: "4px" }}>
+                      <Link key={w.path} to={w.path} onClick={closeAllMenus} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px", borderRadius: "12px", textDecoration: "none", background: active ? `${w.accent}10` : "transparent", border: active ? `1.5px solid ${w.accent}30` : "1.5px solid transparent", transition: "all 0.2s", marginBottom: "4px" }}>
                         <div style={{ width: "38px", height: "38px", borderRadius: "10px", background: active ? `${w.accent}15` : "#f8fafc", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", flexShrink: 0 }}>{w.icon}</div>
                         <div style={{ flex: 1 }}>
                           <div style={{ fontSize: "13.5px", fontWeight: 700, color: active ? w.accent : "#0d1b3e" }}>{w.name}</div>
@@ -124,7 +125,7 @@ function Navbar() {
               </div>
 
             ) : (
-              <Link key={link.path} to={link.path} style={{ position: "relative", padding: "7px 12px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, fontFamily: "'Poppins', sans-serif", textDecoration: "none", color: isActive(link.path) ? "#e8420a" : "#0d1b3e", background: isActive(link.path) ? "rgba(232,66,10,0.06)" : "transparent", transition: "all 0.2s" }}>
+              <Link key={link.path} to={link.path} onClick={closeAllMenus} style={{ position: "relative", padding: "7px 12px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, fontFamily: "'Poppins', sans-serif", textDecoration: "none", color: isActive(link.path) ? "#e8420a" : "#0d1b3e", background: isActive(link.path) ? "rgba(232,66,10,0.06)" : "transparent", transition: "all 0.2s" }}>
                 {link.label}
                 {isActive(link.path) && (
                   <span style={{ position: "absolute", bottom: "2px", left: "12px", right: "12px", height: "2px", background: "linear-gradient(to right, #e8420a, #FF9933)", borderRadius: "999px" }} />
@@ -148,7 +149,7 @@ function Navbar() {
             <span style={{ position: "absolute", top: "-8px", right: "-6px", background: "#10b981", color: "white", fontSize: "8px", fontWeight: 800, letterSpacing: "0.5px", padding: "2px 6px", borderRadius: "999px", whiteSpace: "nowrap", zIndex: 10, animation: "blink 1.5s ease-in-out infinite" }}>
               ● OPEN
             </span>
-            <Link to="/contact"
+            <Link to="/contact" onClick={closeAllMenus}
               style={{ background: "linear-gradient(135deg, #e8420a, #ff6b35)", color: "white", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, textDecoration: "none", boxShadow: "0 4px 12px rgba(232,66,10,0.3)", transition: "all 0.2s", whiteSpace: "nowrap", display: "block" }}
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 16px rgba(232,66,10,0.4)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)";    e.currentTarget.style.boxShadow = "0 4px 12px rgba(232,66,10,0.3)"; }}>
@@ -183,7 +184,7 @@ function Navbar() {
                 {mobileInstitutes && (
                   <div style={{ paddingLeft: "14px", display: "flex", flexDirection: "column", gap: "4px", marginBottom: "4px" }}>
                     {wings.map((w) => (
-                      <Link key={w.path} to={w.path}
+                      <Link key={w.path} to={w.path} onClick={closeAllMenus}
                         style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 14px", borderRadius: "10px", textDecoration: "none", background: isActive(w.path) ? `${w.accent}10` : "transparent", color: isActive(w.path) ? w.accent : "#0d1b3e", fontSize: "13.5px", fontWeight: 600 }}>
                         {w.icon} {w.name}
                       </Link>
@@ -192,7 +193,7 @@ function Navbar() {
                 )}
               </div>
             ) : (
-              <Link key={link.path} to={link.path}
+              <Link key={link.path} to={link.path} onClick={closeAllMenus}
                 style={{ padding: "10px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, textDecoration: "none", background: isActive(link.path) ? "rgba(232,66,10,0.06)" : "transparent", color: isActive(link.path) ? "#e8420a" : "#0d1b3e" }}>
                 {link.label}
               </Link>
@@ -206,7 +207,7 @@ function Navbar() {
             style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, color: "#25d366", textDecoration: "none", border: "1.5px solid #25d36630", background: "#25d36608", marginTop: "4px" }}>
             💬 WhatsApp: 7060155711
           </a>
-          <Link to="/contact"
+          <Link to="/contact" onClick={closeAllMenus}
             style={{ display: "block", textAlign: "center", padding: "12px", background: "linear-gradient(135deg, #e8420a, #ff6b35)", color: "white", borderRadius: "999px", fontSize: "14px", fontWeight: 700, textDecoration: "none", marginTop: "6px" }}>
             Apply Now
           </Link>

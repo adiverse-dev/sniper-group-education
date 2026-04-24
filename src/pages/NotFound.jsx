@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Home, ArrowLeft, Shield, BookOpen, GraduationCap } from "lucide-react";
 
 const NotFound = () => {
@@ -26,11 +25,7 @@ const NotFound = () => {
 
       <div className="relative z-10 max-w-lg mx-auto">
         {/* 404 Number */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div>
           <p
             className="font-serif font-black leading-none mb-2"
             style={{
@@ -43,28 +38,19 @@ const NotFound = () => {
           >
             404
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
+        <div>
           <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-3">
             Page Not Found
           </h1>
           <p className="text-white/45 text-sm sm:text-base leading-relaxed mb-10">
             The page you're looking for doesn't exist or has been moved. Head back home or explore one of our wings.
           </p>
-        </motion.div>
+        </div>
 
         {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="flex flex-col sm:flex-row gap-3 justify-center mb-12"
-        >
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12">
           <Link
             to="/"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-[#05130b] text-sm tracking-wider hover:scale-105 transition-transform"
@@ -81,14 +67,10 @@ const NotFound = () => {
             <ArrowLeft size={15} />
             Go Back
           </button>
-        </motion.div>
+        </div>
 
         {/* Wing links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-        >
+        <div>
           <p className="text-white/25 text-xs tracking-widest uppercase mb-4">
             Or explore our wings
           </p>
@@ -97,18 +79,18 @@ const NotFound = () => {
               { icon: Shield, label: "Defence Academy", route: "/defence", color: "text-amber-400" },
               { icon: BookOpen, label: "Public School", route: "/school", color: "text-emerald-400" },
               { icon: GraduationCap, label: "Sniper Classes", route: "/classes", color: "text-sky-400" },
-            ].map(({ icon: Icon, label, route, color }) => (
+            ].map((item) => (
               <Link
-                key={route}
-                to={route}
+                key={item.route}
+                to={item.route}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-white/5 hover:border-[#dca646]/40 hover:bg-white/10 transition-all text-sm text-white/60 hover:text-white"
               >
-                <Icon size={14} className={color} />
-                {label}
+                <item.icon size={14} className={item.color} />
+                {item.label}
               </Link>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </main>
   );

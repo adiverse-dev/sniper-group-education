@@ -17,7 +17,7 @@ function App() {
 
   // Har page change pe scroll to top
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname]);
 
   // Fade-in on scroll — global observer

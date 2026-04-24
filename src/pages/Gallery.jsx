@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import HeroSlider from "../sections/HeroSlider";
+import { IMAGE_PATHS } from "../config/imagePaths";
+import { COMPANY_TEXT } from "../config/companyProfile";
 
 const heroSlides = [
   {
-    img: "/img/students/1.jpg",
+    img: IMAGE_PATHS.gallery.hero.slide1,
     imgPos: "center top",
     accent: "#e8420a",
     type: "stats",
@@ -13,7 +15,7 @@ const heroSlides = [
     title2: "",
     sub: "A glimpse into life at Sniper Group — achievements, events, and proud moments.",
     stats: [
-      { val: "15+",   lab: "Years of Memories" },
+      { val: COMPANY_TEXT.yearsPlus, lab: "Years of Memories" },
       { val: "3",     lab: "Wings" },
       { val: "1,200+",lab: "Defence Selections" },
       { val: "5,000+",lab: "Students" },
@@ -22,7 +24,7 @@ const heroSlides = [
     link: "/gallery",
   },
   {
-    img: "/img/students/4.jpg",
+    img: IMAGE_PATHS.gallery.hero.slide2,
     imgPos: "center",
     accent: "#10b981",
     type: "stats",
@@ -34,14 +36,14 @@ const heroSlides = [
     stats: [
       { val: "50+",  lab: "Events Conducted" },
       { val: "100+", lab: "Ceremonies" },
-      { val: "15+",  lab: "Years" },
+      { val: COMPANY_TEXT.yearsPlus, lab: "Years" },
       { val: "3",    lab: "Wings" },
     ],
     btn: "View Events",
     link: "/gallery",
   },
   {
-    img: "/img/students/5.jpg",
+    img: IMAGE_PATHS.gallery.hero.slide3,
     imgPos: "center",
     accent: "#7c3aed",
     type: "stats",
@@ -61,23 +63,30 @@ const heroSlides = [
   },
 ];
 
-const photos = [
-  { id: 1,  wing: "Defence", category: "Events",       title: "NDA Selection Ceremony",      emoji: "🎖️",  color: "#FF9933", height: 260 },
-  { id: 2,  wing: "School",  category: "Achievements", title: "Annual Prize Distribution",    emoji: "🏆",  color: "#10b981", height: 200 },
-  { id: 3,  wing: "Classes", category: "Events",       title: "JEE Results Celebration",      emoji: "🎉",  color: "#7c3aed", height: 220 },
-  { id: 4,  wing: "Defence", category: "Achievements", title: "CDS Batch 2024 Selections",    emoji: "⭐",  color: "#FF9933", height: 240 },
-  { id: 5,  wing: "School",  category: "Events",       title: "Sports Day 2024",               emoji: "🏅",  color: "#10b981", height: 280 },
-  { id: 6,  wing: "Classes", category: "Achievements", title: "NEET Toppers Felicitation",    emoji: "👨‍⚕️", color: "#7c3aed", height: 200 },
-  { id: 7,  wing: "Defence", category: "Events",       title: "Republic Day Parade Practice", emoji: "🇮🇳", color: "#FF9933", height: 210 },
-  { id: 8,  wing: "School",  category: "Achievements", title: "Board Topper 2024",             emoji: "📚",  color: "#10b981", height: 240 },
-  { id: 9,  wing: "Classes", category: "Events",       title: "Orientation Day 2024",         emoji: "🎓",  color: "#7c3aed", height: 260 },
-  { id: 10, wing: "Defence", category: "Achievements", title: "Sainik School Selections",     emoji: "🛡️",  color: "#FF9933", height: 200 },
-  { id: 11, wing: "School",  category: "Events",       title: "Annual Function 2024",         emoji: "🎭",  color: "#10b981", height: 220 },
-  { id: 12, wing: "Classes", category: "Achievements", title: "IIT JEE Advanced Results",     emoji: "🔬",  color: "#7c3aed", height: 240 },
-  { id: 13, wing: "Defence", category: "Events",       title: "Physical Training Session",    emoji: "💪",  color: "#FF9933", height: 260 },
-  { id: 14, wing: "School",  category: "Events",       title: "Science Exhibition",           emoji: "🧪",  color: "#10b981", height: 200 },
-  { id: 15, wing: "Classes", category: "Events",       title: "Parent Teacher Meet",          emoji: "👪",  color: "#7c3aed", height: 220 },
-];
+const photoWings = ["Defence", "School", "Classes"];
+const photoCategories = ["Events", "Achievements"];
+const photoHeights = [260, 200, 220, 240, 280, 210];
+const photoColors = {
+  Defence: "#FF9933",
+  School: "#10b981",
+  Classes: "#7c3aed",
+};
+
+const photos = IMAGE_PATHS.gallery.photos.map((photoPath, index) => {
+  const id = index + 1;
+  const wing = photoWings[index % photoWings.length];
+  const category = photoCategories[index % photoCategories.length];
+
+  return {
+    id,
+    wing,
+    category,
+    title: `Gallery Photo ${String(id).padStart(3, "0")}`,
+    color: photoColors[wing],
+    height: photoHeights[index % photoHeights.length],
+    photo: photoPath,
+  };
+});
 
 const videos = [
   { youtubeId: "To9gCVO-E0g",  embed: "https://www.youtube.com/embed/To9gCVO-E0g?autoplay=1&rel=0&modestbranding=1&playsinline=1&loop=1&playlist=To9gCVO-E0g" },
@@ -318,8 +327,15 @@ const Gallery = () => {
                       onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.02)"; e.currentTarget.style.boxShadow = `0 12px 28px ${photo.color}30`; e.currentTarget.style.borderColor = photo.color; e.currentTarget.querySelector(".overlay").style.opacity = "1"; }}
                       onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "#eef1f8"; e.currentTarget.querySelector(".overlay").style.opacity = "0"; }}
                     >
-                      <div style={{ fontSize: "48px", marginBottom: "12px" }}>{photo.emoji}</div>
-                      <p style={{ fontSize: "15px", fontWeight: 600, color: photo.color, textAlign: "center", padding: "0 16px" }}>{photo.title}</p>
+                      <img
+                        src={photo.photo}
+                        alt={photo.title}
+                        loading="lazy"
+                        onError={(e) => { e.currentTarget.style.display = "none"; }}
+                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,27,62,0.05) 0%, rgba(13,27,62,0.72) 100%)" }} />
+                      <p style={{ position: "absolute", left: "14px", right: "14px", bottom: "12px", fontSize: "14px", fontWeight: 700, color: "white", lineHeight: 1.4, textShadow: "0 2px 6px rgba(0,0,0,0.45)" }}>{photo.title}</p>
                       <div style={{ position: "absolute", top: "12px", left: "12px", padding: "3px 10px", borderRadius: "999px", background: "rgba(255,255,255,0.9)", fontSize: "14px", fontWeight: 700, color: photo.color, border: `1px solid ${photo.color}33` }}>{wingMeta[photo.wing].label}</div>
                       <div style={{ position: "absolute", top: "12px", right: "12px", padding: "3px 10px", borderRadius: "999px", background: photo.color, color: "white", fontSize: "14px", fontWeight: 700 }}>{photo.category}</div>
                       <div className="overlay" style={{ position: "absolute", inset: 0, background: "rgba(13,27,62,0.6)", display: "flex", alignItems: "center", justifyContent: "center", opacity: 0, transition: "opacity 0.25s ease", borderRadius: "12px" }}>
@@ -364,8 +380,15 @@ const Gallery = () => {
             onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.22)"; e.currentTarget.style.transform = "translateY(-50%) scale(1.1)"; }}
             onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; e.currentTarget.style.transform = "translateY(-50%) scale(1)"; }}> › </button>
           <div onClick={e => e.stopPropagation()} style={{ background: "white", borderRadius: "24px", maxWidth: "520px", width: "100%", overflow: "hidden", boxShadow: "0 40px 80px rgba(0,0,0,0.6)", animation: "popIn 0.25s ease" }}>
-            <div style={{ height: "320px", background: `linear-gradient(135deg, ${activePhoto.color}20, ${activePhoto.color}45)`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
-              <div style={{ fontSize: "88px", filter: "drop-shadow(0 8px 16px rgba(0,0,0,0.15))" }}>{activePhoto.emoji}</div>
+            <div style={{ height: "320px", background: `linear-gradient(135deg, ${activePhoto.color}20, ${activePhoto.color}45)`, position: "relative" }}>
+              <img
+                src={activePhoto.photo}
+                alt={activePhoto.title}
+                loading="lazy"
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,27,62,0.15) 0%, rgba(13,27,62,0.55) 100%)" }} />
               <div style={{ position: "absolute", top: "14px", left: "14px", padding: "4px 12px", borderRadius: "999px", background: "rgba(255,255,255,0.92)", fontSize: "13px", fontWeight: 700, color: activePhoto.color, border: `1px solid ${activePhoto.color}33` }}>{wingMeta[activePhoto.wing].label}</div>
               <div style={{ position: "absolute", top: "14px", right: "14px", padding: "4px 12px", borderRadius: "999px", background: activePhoto.color, color: "white", fontSize: "13px", fontWeight: 700 }}>{activePhoto.category}</div>
             </div>
@@ -392,3 +415,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+

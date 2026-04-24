@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import HeroSlider from "../sections/HeroSlider";
+import { IMAGE_PATHS } from "../config/imagePaths";
 // ─────────────────────────────────────────────────────────
 // SCHOOL SLIDER SLIDES
 // ─────────────────────────────────────────────────────────
 const schoolSlides = [
   {
-    img: "./img/students/4.jpg",
+    img: IMAGE_PATHS.school.hero.intro,
     imgPos: "top center",
     tag: "Sniper Public School",
     accent: "#10b981",
@@ -16,7 +17,7 @@ const schoolSlides = [
     link: "/school",
   },
   {
-    img: "./img/heroS/Nursery KG.png",
+    img: IMAGE_PATHS.school.hero.nurseryKg,
     imgPos: "top center",
     tag: "Nursery – KG",
     accent: "#10b981",
@@ -27,7 +28,7 @@ const schoolSlides = [
     link: "/school",
   },
   {
-    img: "./img/heroS/Class 1-5.png",
+    img: IMAGE_PATHS.school.hero.class15,
     imgPos: "top center",
     tag: "Class 1 – 5",
     accent: "#10b981",
@@ -38,7 +39,7 @@ const schoolSlides = [
     link: "/school",
   },
   {
-    img: "./img/heroS/Class 6-8.png",
+    img: IMAGE_PATHS.school.hero.class68,
     imgPos: "top center",
     tag: "Class 6 – 8",
     accent: "#10b981",
@@ -59,7 +60,7 @@ const courses = [
     full: "Nursery to Kindergarten — Early Childhood Education",
     fee: "₹18,000/yr",
     icon: "🌱",
-    photo: "./img_course_card/Nursery KG.jpg",
+    photo: IMAGE_PATHS.school.cards.nurseryKg,
     cat: "Early Childhood",
     stats: [{ v: "Age 3–6", l: "Eligibility" }, { v: "Activity Based", l: "Learning" }, { v: "1 Year", l: "Duration" }],
     desc: "Activity-based early childhood education focusing on foundational skills, creativity, basic phonics and social development.",
@@ -79,7 +80,7 @@ const courses = [
     full: "Class 1 to 5 — CBSE Foundation",
     fee: "₹24,000/yr",
     icon: "📖",
-    photo: "./img_course_card/Class 1-5.jpg",
+    photo: IMAGE_PATHS.school.cards.class15,
     cat: "Primary School",
     stats: [{ v: "Class 1–5", l: "Level" }, { v: "CBSE", l: "Curriculum" }, { v: "1 Year", l: "Duration" }],
     desc: "Strong foundational education following CBSE curriculum with focus on conceptual clarity, computer lab and all-round development.",
@@ -99,7 +100,7 @@ const courses = [
     full: "Class 6 to 8 — Middle School Excellence",
     fee: "₹36,000/yr",
     icon: "🔬",
-    photo: "./img_course_card/Class 6-8.jpg",
+    photo: IMAGE_PATHS.school.cards.class68,
     cat: "Middle School",
     stats: [{ v: "Class 6–8", l: "Level" }, { v: "Science Lab", l: "Facility" }, { v: "1 Year", l: "Duration" }],
     desc: "Middle school education with science labs, mathematics focus, English communication and competitive exam foundation building.",
@@ -118,12 +119,12 @@ const courses = [
 // FEATURES DATA
 // ─────────────────────────────────────────────────────────
 const features = [
-  { icon: "🏫", title: "CBSE Affiliated",      desc: "Fully affiliated with CBSE board ensuring national standard curriculum.",                    photo: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80&fit=crop&crop=center" },
-  { icon: "🔬", title: "Modern Labs",           desc: "Well-equipped science, computer and language labs for hands-on learning.",                   photo: "https://images.unsplash.com/photo-1532094349884-543559373729?w=600&q=80&fit=crop&crop=center" },
-  { icon: "⚽", title: "Sports & Activities",  desc: "Cricket, football, athletics and indoor games for physical development.",                     photo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop&crop=center" },
-  { icon: "📚", title: "Experienced Teachers", desc: "Qualified and dedicated faculty with years of teaching experience.",                          photo: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80&fit=crop&crop=center" },
-  { icon: "👨‍👩‍👧", title: "Parent Connect",      desc: "Regular PTMs and parent-teacher communication for student progress.",                        photo: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&q=80&fit=crop&crop=center" },
-  { icon: "🏆", title: "Merit Scholarships",   desc: "Fee concessions and scholarships for top-performing students.",                               photo: "https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?w=600&q=80&fit=crop&crop=center" },
+  { icon: "🏫", title: "CBSE Affiliated",      desc: "Fully affiliated with CBSE board ensuring national standard curriculum.",                    photo: IMAGE_PATHS.school.features.cbseAffiliated },
+  { icon: "🔬", title: "Modern Labs",           desc: "Well-equipped science, computer and language labs for hands-on learning.",                   photo: IMAGE_PATHS.school.features.modernLabs },
+  { icon: "⚽", title: "Sports & Activities",  desc: "Cricket, football, athletics and indoor games for physical development.",                     photo: IMAGE_PATHS.school.features.sportsActivities },
+  { icon: "📚", title: "Experienced Teachers", desc: "Qualified and dedicated faculty with years of teaching experience.",                          photo: IMAGE_PATHS.school.features.experiencedTeachers },
+  { icon: "👨‍👩‍👧", title: "Parent Connect",      desc: "Regular PTMs and parent-teacher communication for student progress.",                        photo: IMAGE_PATHS.school.features.parentConnect },
+  { icon: "🏆", title: "Merit Scholarships",   desc: "Fee concessions and scholarships for top-performing students.",                               photo: IMAGE_PATHS.school.features.meritScholarships },
 ];
 // ─────────────────────────────────────────────────────────
 // COURSE DETAIL PANEL
@@ -415,12 +416,12 @@ const PublicSchool = () => {
           </div>
           <div className="student-life-grid">
             {[
-              { emoji: "🎨", title: "Art & Craft",       desc: "Creative activities that develop fine motor skills and imagination in young learners.",      color: "#FF9933", photo: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80&fit=crop&crop=center" },
-              { emoji: "📖", title: "Story Time",         desc: "Daily reading sessions to build language skills, vocabulary and love for books.",           color: "#10b981", photo: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80&fit=crop&crop=center" },
-              { emoji: "⚽", title: "Sports & Play",     desc: "Structured outdoor play and sports to build teamwork, fitness and confidence.",             color: "#7c3aed", photo: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80&fit=crop&crop=center" },
-              { emoji: "🔬", title: "Science Activities", desc: "Fun experiments and activities that spark curiosity and scientific thinking from Class 3+.", color: "#e8420a", photo: "https://images.unsplash.com/photo-1532094349884-543559373729?w=600&q=80&fit=crop&crop=center" },
-              { emoji: "🎵", title: "Music & Dance",      desc: "Cultural activities that nurture creativity, rhythm and self-expression in children.",       color: "#10b981", photo: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80&fit=crop&crop=center" },
-              { emoji: "🏅", title: "Annual Events",      desc: "Sports day, annual function, science fair and cultural events for holistic development.",    color: "#FF9933", photo: "https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?w=600&q=80&fit=crop&crop=center" },
+              { emoji: "🎨", title: "Art & Craft",       desc: "Creative activities that develop fine motor skills and imagination in young learners.",      color: "#FF9933", photo: IMAGE_PATHS.school.studentLife.artCraft },
+              { emoji: "📖", title: "Story Time",         desc: "Daily reading sessions to build language skills, vocabulary and love for books.",           color: "#10b981", photo: IMAGE_PATHS.school.studentLife.storyTime },
+              { emoji: "⚽", title: "Sports & Play",     desc: "Structured outdoor play and sports to build teamwork, fitness and confidence.",             color: "#7c3aed", photo: IMAGE_PATHS.school.studentLife.sportsPlay },
+              { emoji: "🔬", title: "Science Activities", desc: "Fun experiments and activities that spark curiosity and scientific thinking from Class 3+.", color: "#e8420a", photo: IMAGE_PATHS.school.studentLife.scienceActivities },
+              { emoji: "🎵", title: "Music & Dance",      desc: "Cultural activities that nurture creativity, rhythm and self-expression in children.",       color: "#10b981", photo: IMAGE_PATHS.school.studentLife.musicDance },
+              { emoji: "🏅", title: "Annual Events",      desc: "Sports day, annual function, science fair and cultural events for holistic development.",    color: "#FF9933", photo: IMAGE_PATHS.school.studentLife.annualEvents },
             ].map((item, i) => (
               <div key={i}
                 style={{ background: "white", borderRadius: "16px", border: "1.5px solid #eef1f8", overflow: "hidden", transition: "all 0.3s ease", boxShadow: "0 2px 12px rgba(0,0,0,0.06)", cursor: "default" }}

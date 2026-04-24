@@ -1,23 +1,25 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import HeroSlider from "../sections/HeroSlider";
+import { IMAGE_PATHS } from "../config/imagePaths";
+import { COMPANY_TEXT } from "../config/companyProfile";
 
 // ─────────────────────────────────────────────────────────
 // HERO SLIDER SLIDES
 // ─────────────────────────────────────────────────────────
 const heroSlides = [
   {
-    img: "/img/students/5.jpg",
+    img: IMAGE_PATHS.classes.hero.intro,
     imgPos: "top center",
     tag: "Sniper Classes",
     accent: "#7c3aed",
     heading: "Crack Every Exam with Expert Guidance",
-    sub: "Result-oriented coaching for IIT JEE, NEET, Board Exams and Foundation courses — with expert faculty and proven methods since 2009.",
-    stats: [{ val: "350+", lab: "JEE/NEET Qualifiers" }, { val: "99.1%", lab: "Top Percentile" }, { val: "15+", lab: "Years Experience" }, { val: "30+", lab: "Expert Faculty" }],
+    sub: `Result-oriented coaching for IIT JEE, NEET, Board Exams and Foundation courses — with expert faculty and proven methods ${COMPANY_TEXT.sinceFounded}.`,
+    stats: [{ val: "350+", lab: "JEE/NEET Qualifiers" }, { val: "99.1%", lab: "Top Percentile" }, { val: COMPANY_TEXT.yearsPlus, lab: "Years Experience" }, { val: "30+", lab: "Expert Faculty" }],
     btn: "Explore Courses",
     link: "/classes",
   },
   {
-    img: "./img/heroS/IIT JEE.png",
+    img: IMAGE_PATHS.classes.hero.iitJee,
     imgPos: "top center",
     tag: "IIT JEE",
     accent: "#7c3aed",
@@ -28,7 +30,7 @@ const heroSlides = [
     link: "/classes",
   },
   {
-    img: "./img/heroS/NEET.png",
+    img: IMAGE_PATHS.classes.hero.neet,
     imgPos: "top center",
     tag: "NEET",
     accent: "#7c3aed",
@@ -39,7 +41,7 @@ const heroSlides = [
     link: "/classes",
   },
   {
-    img: "./img/heroS/11_12 PCM, PCB.png",
+    img: IMAGE_PATHS.classes.hero.class1112PcmPcb,
     imgPos: "top center",
     tag: "Class 11th & 12th",
     accent: "#7c3aed",
@@ -50,7 +52,7 @@ const heroSlides = [
     link: "/classes",
   },
   {
-    img: "./img/heroS/9th_10th foundation.png",
+    img: IMAGE_PATHS.classes.hero.class910Foundation,
     imgPos: "top center",
     tag: "Class 9th & 10th",
     accent: "#7c3aed",
@@ -61,12 +63,12 @@ const heroSlides = [
     link: "/classes",
   },
   {
-    img: "./img/heroS/class 6 & 8 foundation.png",
+    img: IMAGE_PATHS.classes.hero.class68Foundation,
     imgPos: "top center",
     tag: "Class 6 – 8",
     accent: "#7c3aed",
     heading: "All Subjects Hindi & CBSE Coaching",
-    sub: "Complete coaching for Class 6 to 8 in all subjects — both Hindi Medium and CBSE English Medium with strong conceptual base.",
+    sub: "Complete coaching for Class 6 to 8 in all subjects – both Hindi Medium and CBSE English Medium with strong conceptual base.",
     stats: [{ val: "Class 6–8", lab: "Level" }, { val: "Hindi + CBSE", lab: "Medium" }, { val: "All Subjects", lab: "Coverage" }, { val: "1 Year", lab: "Course" }],
     btn: "Know More",
     link: "/classes",
@@ -82,7 +84,7 @@ const courses = [
     name: "IIT JEE",
     full: "IIT JEE Mains & Advanced",
     icon: "⚛️",
-    photo: "./img_course_card/IIT JEE.jpg",
+    photo: IMAGE_PATHS.classes.cards.iitJee,
     cat: "Engineering Entrance",
     stats: [{ v: "Class 11–12", l: "Eligibility" }, { v: "300", l: "Total Marks" }, { v: "2 Years", l: "Course" }],
     desc: "Comprehensive JEE preparation covering Physics, Chemistry and Mathematics with IITian faculty, daily practice problems and full mock test series.",
@@ -93,7 +95,7 @@ const courses = [
       { subject: "Mathematics", marks: "100", type: "MCQ + Numerical" },
       { subject: "Total (Mains)", marks: "300", type: "NTA Online" },
     ],
-    selection: ["JEE Mains (NTA — Jan & Apr)", "JEE Advanced (IIT conducted)", "Counselling via JoSAA", "IIT / NIT Admission"],
+    selection: ["JEE Mains (NTA – Jan & Apr)", "JEE Advanced (IIT conducted)", "Counselling via JoSAA", "IIT / NIT Admission"],
     includes: ["Daily Practice Problems (DPP)", "Weekly Mock Tests", "One-on-one Doubt Sessions", "Study Material (Printed + Digital)", "Previous Year Papers"],
   },
   {
@@ -101,7 +103,7 @@ const courses = [
     name: "NEET",
     full: "NEET UG Complete Coaching",
     icon: "🩺",
-    photo: "../img_course_card/NEET.jpg",
+    photo: IMAGE_PATHS.classes.cards.neet,
     cat: "Medical Entrance",
     stats: [{ v: "Class 12 PCB", l: "Eligibility" }, { v: "720", l: "Total Marks" }, { v: "2 Years", l: "Course" }],
     desc: "NCERT-focused NEET preparation with Biology, Chemistry and Physics. Extensive practice tests, lab practicals and revision sessions.",
@@ -120,11 +122,11 @@ const courses = [
     name: "11th & 12th PCM/PCB",
     full: "Class 11th & 12th PCM / PCB Coaching",
     icon: "📗",
-    photo: "./img_course_card/11_12 PCM, PCB.jpg",
+    photo: IMAGE_PATHS.classes.cards.class1112PcmPcb,
     cat: "Senior Secondary",
     stats: [{ v: "Class 10 Passed", l: "Eligibility" }, { v: "PCM / PCB", l: "Streams" }, { v: "1 Year", l: "Course" }],
     desc: "Senior secondary coaching combining board exam preparation with JEE/NEET entrance foundation. Science stream subjects with regular doubt sessions.",
-    eligibility: ["Class 10 passed — any board", "PCM stream: Physics, Chemistry, Math", "PCB stream: Physics, Chemistry, Biology", "CBSE / UP Board both accepted"],
+    eligibility: ["Class 10 passed – any board", "PCM stream: Physics, Chemistry, Math", "PCB stream: Physics, Chemistry, Biology", "CBSE / UP Board both accepted"],
     examPattern: [
       { subject: "Physics", marks: "70+30", type: "Board Written + Practical" },
       { subject: "Chemistry", marks: "70+30", type: "Board Written + Practical" },
@@ -139,7 +141,7 @@ const courses = [
     name: "9th & 10th Foundation",
     full: "Class 9th & 10th All Subjects Foundation",
     icon: "📘",
-    photo: "./img_course_card/9th_10th foundation.jpg",
+    photo: IMAGE_PATHS.classes.cards.class910Foundation,
     cat: "Secondary Foundation",
     stats: [{ v: "Class 8–9 Passed", l: "Eligibility" }, { v: "All Subjects", l: "Coverage" }, { v: "1 Year", l: "Course" }],
     desc: "Strong foundation coaching for Class 9 & 10 with all subjects. Board exam focused with weekly tests, doubt sessions and parent progress reports.",
@@ -156,9 +158,9 @@ const courses = [
   {
     id: "class68",
     name: "Class 6 – 8",
-    full: "Class 6 to 8 All Subjects — Hindi & CBSE",
+    full: "Class 6 to 8 All Subjects – Hindi & CBSE",
     icon: "📙",
-    photo: "./img_course_card/class 6 & 8 foundation.jpg",
+    photo: IMAGE_PATHS.classes.cards.class68Foundation,
     cat: "Middle School",
     stats: [{ v: "Class 5–7 Passed", l: "Eligibility" }, { v: "Hindi + CBSE", l: "Medium" }, { v: "1 Year", l: "Course" }],
     desc: "Complete coaching for Class 6 to 8 in all subjects covering both Hindi Medium and CBSE English Medium with strong conceptual base building.",
@@ -178,12 +180,12 @@ const courses = [
 // FEATURES DATA
 // ─────────────────────────────────────────────────────────
 const features = [
-  { icon: "👨‍🏫", title: "Expert Faculty",        desc: "IITians and top educators with proven track records in JEE and NEET coaching.",        photo: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80&fit=crop&crop=center" },
-  { icon: "📊", title: "Performance Tracking",   desc: "Regular assessments and detailed performance reports shared with parents.",              photo: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&fit=crop&crop=center" },
-  { icon: "📱", title: "Digital Resources",       desc: "Access to online study materials, recorded lectures and practice tests anytime.",        photo: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80&fit=crop&crop=center" },
-  { icon: "🧪", title: "Lab Practicals",          desc: "Well-equipped physics, chemistry and biology labs for hands-on practice.",               photo: "https://images.unsplash.com/photo-1532094349884-543559373729?w=600&q=80&fit=crop&crop=center" },
-  { icon: "🏆", title: "Scholarship Tests",       desc: "Regular scholarship tests with fee concessions for high performers.",                    photo: "https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?w=600&q=80&fit=crop&crop=center" },
-  { icon: "🎯", title: "Personalized Attention",  desc: "Small batch sizes ensuring individual attention and personalized guidance.",              photo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop&crop=center" },
+  { icon: "👨‍🏫", title: "Expert Faculty",        desc: "IITians and top educators with proven track records in JEE and NEET coaching.",        photo: IMAGE_PATHS.classes.features.expertFaculty },
+  { icon: "📊", title: "Performance Tracking",   desc: "Regular assessments and detailed performance reports shared with parents.",              photo: IMAGE_PATHS.classes.features.performanceTracking },
+  { icon: "📱", title: "Digital Resources",       desc: "Access to online study materials, recorded lectures and practice tests anytime.",        photo: IMAGE_PATHS.classes.features.digitalResources },
+  { icon: "🧪", title: "Lab Practicals",          desc: "Well-equipped physics, chemistry and biology labs for hands-on practice.",               photo: IMAGE_PATHS.classes.features.labPracticals },
+  { icon: "🏆", title: "Scholarship Tests",       desc: "Regular scholarship tests with fee concessions for high performers.",                    photo: IMAGE_PATHS.classes.features.scholarshipTests },
+  { icon: "🎯", title: "Personalized Attention",  desc: "Small batch sizes ensuring individual attention and personalized guidance.",              photo: IMAGE_PATHS.classes.features.personalizedAttention },
 ];
 
 // ─────────────────────────────────────────────────────────
@@ -411,7 +413,7 @@ const SniperClasses = () => {
               Coaching <span style={{ color: "#7c3aed" }}>Programs</span>
             </h2>
             <p style={{ color: "#334155", fontSize: "15px", maxWidth: "480px", margin: "0 auto" }}>
-              Expert coaching for every level — click any course to explore full details
+              Expert coaching for every level – click any course to explore full details
             </p>
           </div>
           {courses.map((course, index) => (

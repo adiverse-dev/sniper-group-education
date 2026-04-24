@@ -1,11 +1,12 @@
 import { useState } from "react";
 import HeroSlider from "../sections/HeroSlider";
+import { IMAGE_PATHS } from "../config/imagePaths";
 // ─────────────────────────────────────────────────────────
 // FEE PAGE SLIDER SLIDES
 // ─────────────────────────────────────────────────────────
 const feeSlides = [
   {
-    img: "/img/students/1.jpg",
+    img: IMAGE_PATHS.fees.hero.slide1,
     imgPos: "center top",
     tag: "Fee Structure 2026–27",
     accent: "#e8420a",
@@ -15,7 +16,7 @@ const feeSlides = [
     link: "/fees",
   },
   {
-    img: "/img/students/4.jpg",
+    img: IMAGE_PATHS.fees.hero.slide2,
     imgPos: "center",
     tag: "Public School Fees",
     accent: "#10b981",
@@ -25,7 +26,7 @@ const feeSlides = [
     link: "/fees",
   },
   {
-    img: "/img/students/5.jpg",
+    img: IMAGE_PATHS.fees.hero.slide3,
     imgPos: "center",
     tag: "Scholarships Available",
     accent: "#7c3aed",

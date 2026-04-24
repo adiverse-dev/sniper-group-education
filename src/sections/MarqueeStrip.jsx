@@ -1,13 +1,15 @@
+﻿import { COMPANY_TEXT } from "../config/companyProfile";
+
 const items = [
-  { icon: "🛡️", text: "NDA Batch Starting April 15 — Limited Seats",    badge: "New",  badgeColor: "bg-orange" },
-  { icon: "🎯", text: "1,200+ Defence Selections in 2024",                badge: "",     badgeColor: "" },
-  { icon: "📚", text: "CBSE School Admissions Open — Nursery to Class 8", badge: "Open", badgeColor: "bg-green2" },
-  { icon: "🎓", text: "IIT JEE / NEET Dropper Batch — Enroll Now",        badge: "Hot",  badgeColor: "bg-red-600" },
-  { icon: "🏆", text: "98% Board Result Rate — 2024 Batch",               badge: "",     badgeColor: "" },
-  { icon: "⭐", text: "15+ Years of Excellence in Education",             badge: "",     badgeColor: "" },
-  { icon: "📞", text: "Call / WhatsApp: +91 7060155711",                  badge: "",     badgeColor: "" },
-  { icon: "🎖️", text: "SSB Interview Prep by Ex-Army Officers",           badge: "",     badgeColor: "" },
-  { icon: "🌟", text: "5,000+ Students Trained Across All Wings",         badge: "",     badgeColor: "" },
+  { icon: "ðŸ›¡ï¸", text: "NDA Batch Starting April 15 â€” Limited Seats",    badge: "New",  badgeColor: "bg-orange" },
+  { icon: "ðŸŽ¯", text: "1,200+ Defence Selections in 2024",                badge: "",     badgeColor: "" },
+  { icon: "ðŸ“š", text: "CBSE School Admissions Open â€” Nursery to Class 8", badge: "Open", badgeColor: "bg-green2" },
+  { icon: "ðŸŽ“", text: "IIT JEE / NEET Dropper Batch â€” Enroll Now",        badge: "Hot",  badgeColor: "bg-red-600" },
+  { icon: "ðŸ†", text: "98% Board Result Rate â€” 2024 Batch",               badge: "",     badgeColor: "" },
+  { icon: "â­", text: `${COMPANY_TEXT.yearsPlus} Years of Excellence in Education`,             badge: "",     badgeColor: "" },
+  { icon: "ðŸ“ž", text: "Call / WhatsApp: +91 7060155711",                  badge: "",     badgeColor: "" },
+  { icon: "ðŸŽ–ï¸", text: "SSB Interview Prep by Ex-Army Officers",           badge: "",     badgeColor: "" },
+  { icon: "ðŸŒŸ", text: "5,000+ Students Trained Across All Wings",         badge: "",     badgeColor: "" },
 ];
 
 const doubled = [...items, ...items];
@@ -68,7 +70,7 @@ function MarqueeStrip() {
                 {item.badge}
               </span>
             )}
-            <span style={{ color: "rgba(255,153,51,0.5)", marginLeft: "4px" }}>✦</span>
+            <span style={{ color: "rgba(255,153,51,0.5)", marginLeft: "4px" }}>âœ¦</span>
           </div>
         ))}
       </div>

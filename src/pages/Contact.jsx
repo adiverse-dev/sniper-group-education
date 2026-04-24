@@ -1,5 +1,17 @@
 import { useState } from "react";
 
+const ACADEMY_MAP_URL = "https://www.google.com/maps/place/SNIPER+DEFENCE+ACADEMY/@29.01642,77.7617811,17z/data=!4m15!1m8!3m7!1s0x390c71309f09177d:0x1bee640d4adb5222!2sSNIPER+DEFENCE+ACADEMY!8m2!3d29.01642!4d77.7617811!10e1!16s%2Fg%2F11ql64p14y!3m5!1s0x390c71309f09177d:0x1bee640d4adb5222!8m2!3d29.01642!4d77.7617811!16s%2Fg%2F11ql64p14y!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQyMS4wIKXMDSoASAFQAw%3D%3D";
+const ACADEMY_MAP_EMBED_URL = "https://www.google.com/maps?q=29.01642,77.7617811&z=17&output=embed";
+const ACADEMY_ADDRESS = "NH 34, Rajpura Road, Mawana Rd, opposite HP Petrol Pump, Meerut, Uttar Pradesh 250001";
+const CONTACT_RECEIVER_EMAIL = "aditya.finofits@gmail.com";
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+const isValidUuid = (value) =>
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+    value.trim()
+  );
+
 const infoCards = [
   {
     icon: "📞",
@@ -22,11 +34,11 @@ const infoCards = [
   {
     icon: "📍",
     title: "Our Location",
-    lines: ["Sniper Group of Education", "Uttarakhand, India"],
+    lines: ["Sniper Defence Academy", ACADEMY_ADDRESS],
     sub: "Visit us Mon–Sat",
     color: "#7c3aed",
     bg: "#faf5ff",
-    action: { label: "Get Directions", href: "https://maps.google.com" },
+    action: { label: "Get Directions", href: ACADEMY_MAP_URL },
   },
   {
     icon: "🕐",
@@ -42,14 +54,105 @@ const infoCards = [
 const Contact = () => {
   const [form, setForm]       = useState({ name: "", phone: "", email: "", wing: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [submittedName, setSubmittedName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [errors, setErrors] = useState({ name: "", phone: "", email: "" });
+
+  const isFormValid =
+    form.name.trim().length >= 2 &&
+    form.phone.replace(/\D/g, "").length >= 10 &&
+    isValidEmail(form.email);
 
   function handleChange(field, val) {
+    if (field === "name" || field === "phone" || field === "email") {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
+    setSubmitError("");
     setForm(f => ({ ...f, [field]: val }));
   }
 
-  function handleSubmit() {
-    if (!form.name || !form.phone) return;
-    setSubmitted(true);
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const name = form.name.trim();
+    const phoneDigits = form.phone.replace(/\D/g, "");
+    const email = form.email.trim();
+    const nextErrors = { name: "", phone: "", email: "" };
+
+    if (name.length < 2) {
+      nextErrors.name = "Please enter your full name.";
+    }
+
+    if (phoneDigits.length < 10) {
+      nextErrors.phone = "Please enter a valid phone number.";
+    }
+
+    if (!email) {
+      nextErrors.email = "Email is required.";
+    } else if (!isValidEmail(email)) {
+      nextErrors.email = "Please enter a valid email address.";
+    }
+
+    if (nextErrors.name || nextErrors.phone || nextErrors.email) {
+      setErrors(nextErrors);
+      return;
+    }
+
+    const accessKey = (WEB3FORMS_ACCESS_KEY || "").trim();
+
+    if (!accessKey) {
+      setSubmitError(
+        `Contact form is not configured. Create a Web3Forms key for ${CONTACT_RECEIVER_EMAIL} and set VITE_WEB3FORMS_ACCESS_KEY.`
+      );
+      return;
+    }
+
+    if (!isValidUuid(accessKey)) {
+      setSubmitError(
+        `Invalid VITE_WEB3FORMS_ACCESS_KEY format. Use a valid UUID key created for ${CONTACT_RECEIVER_EMAIL}.`
+      );
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const payload = {
+        access_key: accessKey,
+        subject: `New Contact Form Submission from ${name}`,
+        name,
+        from_name: name,
+        email,
+        replyto: email,
+        phone: form.phone.trim(),
+        wing: form.wing || "Not selected",
+        message: form.message.trim() || "No message provided",
+      };
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Unable to send message. Please try again.");
+      }
+
+      setSubmittedName(name);
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(error.message || "Unable to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   const inputStyle = {
@@ -186,7 +289,7 @@ const Contact = () => {
                   Message Sent!
                 </h3>
                 <p style={{ color: "#64748b", fontSize: "15px", marginBottom: "24px", lineHeight: 1.7 }}>
-                  Thank you <strong>{form.name}</strong>! We'll get back to you within 24 hours.
+                  Thank you <strong>{submittedName}</strong>! We'll get back to you within 24 hours.
                 </p>
                 <a href="tel:+917060155711" style={{
                   display: "inline-flex", alignItems: "center", gap: "8px",
@@ -198,7 +301,7 @@ const Contact = () => {
                 </a>
               </div>
             ) : (
-              <div>
+              <form onSubmit={handleSubmit} noValidate>
                 {/* Row 1 */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
                   <div>
@@ -209,6 +312,11 @@ const Contact = () => {
                       onFocus={e => e.target.style.borderColor = "#e8420a"}
                       onBlur={e => e.target.style.borderColor = "#e2e8f0"}
                     />
+                    {errors.name && (
+                      <p style={{ fontSize: "12px", color: "#dc2626", marginTop: "6px", marginBottom: 0 }}>
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label style={labelStyle}>Phone Number *</label>
@@ -218,19 +326,30 @@ const Contact = () => {
                       onFocus={e => e.target.style.borderColor = "#e8420a"}
                       onBlur={e => e.target.style.borderColor = "#e2e8f0"}
                     />
+                    {errors.phone && (
+                      <p style={{ fontSize: "12px", color: "#dc2626", marginTop: "6px", marginBottom: 0 }}>
+                        {errors.phone}
+                      </p>
+                    )}
                   </div>
                 </div>
 
                 {/* Row 2 */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
                   <div>
-                    <label style={labelStyle}>Email (Optional)</label>
-                    <input type="email" placeholder="your@email.com" value={form.email}
+                    <label style={labelStyle}>Email *</label>
+                    <input type="email" placeholder="snipersainikschoolmeerut@gmail.com" value={form.email}
                       onChange={e => handleChange("email", e.target.value)}
+                      required
                       style={inputStyle}
                       onFocus={e => e.target.style.borderColor = "#e8420a"}
                       onBlur={e => e.target.style.borderColor = "#e2e8f0"}
                     />
+                    {errors.email && (
+                      <p style={{ fontSize: "12px", color: "#dc2626", marginTop: "6px", marginBottom: 0 }}>
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label style={labelStyle}>Interested Wing</label>
@@ -259,19 +378,24 @@ const Contact = () => {
                   />
                 </div>
 
-                <button onClick={handleSubmit} style={{
+                <button type="submit" disabled={!isFormValid || isSubmitting} style={{
                   width: "100%", padding: "14px",
-                  background: form.name && form.phone
+                  background: isFormValid && !isSubmitting
                     ? "linear-gradient(135deg, #e8420a, #ff6b35)"
                     : "#e2e8f0",
-                  color: form.name && form.phone ? "white" : "#94a3b8",
+                  color: isFormValid && !isSubmitting ? "white" : "#94a3b8",
                   border: "none", borderRadius: "10px",
-                  fontSize: "15px", fontWeight: 700, cursor: "pointer",
+                  fontSize: "15px", fontWeight: 700, cursor: isFormValid && !isSubmitting ? "pointer" : "not-allowed",
                   transition: "all 0.2s ease",
                 }}>
-                  Send Message 📩
+                  {isSubmitting ? "Sending..." : "Send Message 📩"}
                 </button>
-              </div>
+                {submitError && (
+                  <p style={{ fontSize: "12px", color: "#dc2626", marginTop: "10px", marginBottom: 0 }}>
+                    {submitError}
+                  </p>
+                )}
+              </form>
             )}
           </div>
         </div>
@@ -305,7 +429,7 @@ const Contact = () => {
             {/* Google Maps iframe */}
             <iframe
               title="Sniper Group of Education Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3489.352743352885!2d77.74708127530361!3d29.006545175462637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c71309f09177d%3A0x1bee640d4adb5222!2sSNIPER%20DEFENCE%20ACADEMY!5e0!3m2!1sen!2sin!4v1773216540508!5m2!1sen!2sin"
+              src={ACADEMY_MAP_EMBED_URL}
               width="100%"
               height="400"
               style={{ border: 0, display: "block" }}
@@ -334,10 +458,10 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 style={{ fontSize: "15px", fontWeight: 700, color: "#0d1b3e", marginBottom: "4px" }}>
-                    Sniper Group of Education
+                    Sniper Defence Academy
                   </h4>
                   <p style={{ fontSize: "13.5px", color: "#64748b", margin: 0 }}>
-                    GP-4, Near PNB, Divider Road, Ganganagar, Meerut City (U.P)
+                    {ACADEMY_ADDRESS}
                   </p>
                 </div>
               </div>
@@ -361,7 +485,7 @@ const Contact = () => {
                   📞 +91 7060155711
                 </div>
                 <a
-                  href="https://www.google.com/maps/search/GP-4+Near+PNB+Divider+Road+Ganganagar+Meerut+Uttar+Pradesh"
+                  href={ACADEMY_MAP_URL}
                   target="_blank" rel="noreferrer"
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
