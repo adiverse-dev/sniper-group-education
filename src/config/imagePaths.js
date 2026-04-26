@@ -28,10 +28,10 @@ export const IMAGE_PATHS = {
       campus: "/img/home/banner/5.png",
     },
     hero: {
-      defence: "/img/home/hero/Crack Every Defence Exam.png",
-      school: "/img/home/hero/Quality CBSE Education.png",
-      classes: "/img/home/hero/Crack Every Exam You Face.png",
-      group: "/img/home/hero/One Trust. Three Wings.png",
+      defence: "/img/home/hero/optimized/Crack Every Defence Exam.jpg",
+      school: "/img/home/hero/optimized/Quality CBSE Education.jpg",
+      classes: "/img/home/hero/optimized/Crack Every Exam You Face.jpg",
+      group: "/img/home/hero/optimized/One Trust. Three Wings.jpg",
     },
     studentBanner: {
       group: "/img/home/student-banner/students-group.jpg",

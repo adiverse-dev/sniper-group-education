@@ -1,17 +1,73 @@
-﻿import { useRef } from "react";
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import {
   Users, Trophy, Star, Award, Quote,
 } from "lucide-react";
-import WhatAreYouLookingFor from "../sections/WhatAreYouLookingFor";
 import HeroSlider from "../sections/HeroSlider";
 import { IMAGE_PATHS } from "../config/imagePaths";
 import { COMPANY_PROFILE, COMPANY_TEXT } from "../config/companyProfile";
 
+const WhatAreYouLookingFor = lazy(() => import("../sections/WhatAreYouLookingFor"));
+
+function preloadImage(src) {
+  return new Promise((resolve) => {
+    if (!src) {
+      resolve({ src, ok: false });
+      return;
+    }
+
+    const img = new Image();
+    img.decoding = "async";
+
+    const finish = async (ok) => {
+      if (ok && typeof img.decode === "function") {
+        try {
+          await img.decode();
+        } catch {
+          // decode failures should not block first paint gating
+        }
+      }
+      resolve({ src, ok });
+    };
+
+    img.onload = () => finish(true);
+    img.onerror = () => finish(false);
+    img.src = src;
+
+    if (img.complete) {
+      finish(true);
+    }
+  });
+}
+
+function addPreloadLinks(sources) {
+  const created = [];
+  const uniqueSources = [...new Set(sources.filter(Boolean))];
+
+  uniqueSources.forEach((src, index) => {
+    const exists = Array.from(
+      document.head.querySelectorAll("link[rel='preload'][as='image']")
+    ).some((link) => link.getAttribute("href") === src);
+
+    if (exists) return;
+
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = src;
+    if (index < 2) link.fetchPriority = "high";
+    document.head.appendChild(link);
+    created.push(link);
+  });
+
+  return () => {
+    created.forEach((link) => link.remove());
+  };
+}
+
 
 // BANNER PHOTOS
-
 const bannerPhotos = [
   { src: IMAGE_PATHS.home.banner.defenceWing, label: "Defence Wing",   bg: "#1a2a3a" },
   { src: IMAGE_PATHS.home.banner.schoolWing,  label: "School Wing",    bg: "#1a3a2e" },
@@ -110,6 +166,9 @@ const HeroBanner = () => (
           <img
             src={p.src}
             alt={p.label}
+            loading="eager"
+            decoding="async"
+            fetchPriority={i < 2 ? "high" : "auto"}
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
             onError={(e) => { e.currentTarget.src = IMAGE_PATHS.home.banner.campus; }}
           />
@@ -167,6 +226,44 @@ const HeroBanner = () => (
       </div>
     </div>
   </div>
+);
+
+const HeroSectionSkeleton = () => (
+  <div style={{ width: "100%" }} aria-hidden="true">
+    <div style={{
+      position: "relative",
+      height: "550px",
+      borderRadius: 0,
+      overflow: "hidden",
+      background: "linear-gradient(120deg, #0d1b3e 0%, #1a3260 45%, #0d1b3e 100%)",
+    }} />
+    <div style={{ marginTop: "-80px", padding: "0 20px", position: "relative", zIndex: 5 }}>
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+        gap: "16px",
+        background: "#ffffff",
+        borderRadius: "20px",
+        padding: "20px",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+      }}>
+        {bannerStats.map((s) => (
+          <div key={s.label} style={{ textAlign: "center" }}>
+            <div style={{ height: "28px", borderRadius: "8px", background: "rgba(13,27,62,0.08)", marginBottom: "8px" }} />
+            <div style={{ height: "12px", borderRadius: "6px", background: "rgba(13,27,62,0.06)" }} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const SliderSkeleton = () => (
+  <div style={{
+    width: "100%",
+    height: "420px",
+    background: "linear-gradient(120deg, #0d1b3e 0%, #1a3260 45%, #0d1b3e 100%)",
+  }} aria-hidden="true" />
 );
 
 
@@ -267,19 +364,56 @@ const StudentPhotoBanner = () => (
 // MAIN PAGE
 
 const HomePortal = () => {
+  const bannerImageSources = useMemo(() => bannerPhotos.map((p) => p.src), []);
+  const sliderImageSources = useMemo(
+    () => homeSlides.map((slide) => slide.img).filter(Boolean),
+    []
+  );
+  const criticalHeroSources = useMemo(
+    () => [...bannerImageSources, sliderImageSources[0]],
+    [bannerImageSources, sliderImageSources]
+  );
+  const [heroReady, setHeroReady] = useState(false);
+
+  useEffect(() => {
+    const cleanupPreload = addPreloadLinks(criticalHeroSources);
+    return cleanupPreload;
+  }, [criticalHeroSources]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const allSources = [...new Set([...bannerImageSources, ...sliderImageSources])];
+
+    Promise.all(allSources.map((src) => preloadImage(src))).then(() => {
+      if (!cancelled) setHeroReady(true);
+    });
+
+    // Safety timeout: avoids blocking UI forever on very slow connections.
+    const fallbackTimer = window.setTimeout(() => {
+      if (!cancelled) setHeroReady(true);
+    }, 4500);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(fallbackTimer);
+    };
+  }, [bannerImageSources, sliderImageSources]);
+
   return (
     <div style={{ minHeight: "100vh", overflowX: "hidden", background: "#f5f7fa" }}>
 
       {/* 1. HERO BANNER */}
       <div style={{ marginBottom: "40px" }}>
-        <HeroBanner />
+        {heroReady ? <HeroBanner /> : <HeroSectionSkeleton />}
       </div>
 
       {/* 2. HERO SLIDER */}
-      <HeroSlider slides={homeSlides} />
+      {heroReady ? <HeroSlider slides={homeSlides} waitForFirstSlide /> : <SliderSkeleton />}
 
       {/* 3. WHAT ARE YOU LOOKING FOR */}
-      <WhatAreYouLookingFor />
+      <Suspense fallback={<div style={{ minHeight: "260px", background: "#f5f7fa" }} aria-hidden="true" />}>
+        <WhatAreYouLookingFor />
+      </Suspense>
 
       {/* 4. MARQUEE */}
       <MarqueeStrip />
@@ -435,3 +569,4 @@ const HomePortal = () => {
 };
 
 export default HomePortal;
+

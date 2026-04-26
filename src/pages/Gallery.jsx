@@ -101,7 +101,6 @@ const videos = [
   { youtubeId: "S-qjZ_xcT4o",  embed: "https://www.youtube.com/embed/S-qjZ_xcT4o?autoplay=1&rel=0&modestbranding=1&playsinline=1&loop=1&playlist=S-qjZ_xcT4o" },
 ];
 
-const wingFilters = ["All", "Defence", "School", "Classes"];
 const catFilters  = ["All", "Events", "Achievements"];
 
 const wingMeta = {
@@ -250,13 +249,12 @@ const ReelCarousel = ({ videos }) => {
 };
 
 const Gallery = () => {
-  const [wing, setWing]         = useState("All");
   const [cat, setCat]           = useState("All");
   const [lightbox, setLightbox] = useState(null);
   const [selectedWing, setSelectedWing] = useState(null);
 
   const filtered = photos.filter(p =>
-    (wing === "All" || p.wing === wing) &&
+    (selectedWing === null || p.wing === selectedWing) &&
     (cat  === "All" || p.category === cat)
   );
 
@@ -304,7 +302,7 @@ const Gallery = () => {
                 const rep = photos.find(p => p.wing === w) || photos[0];
                 return (
                   <div key={w}
-                    onClick={() => { setSelectedWing(w); setWing(w); setCat("All"); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    onClick={() => { setSelectedWing(w); setCat("All"); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     style={{ cursor: "pointer", borderRadius: "12px", overflow: "hidden", position: "relative", height: "260px", border: "1.5px solid #eef1f8", boxShadow: "0 8px 28px rgba(13,27,62,0.04)", transition: "transform 0.18s" }}
                     onMouseEnter={e => e.currentTarget.style.transform = "translateY(-6px)"}
                     onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
@@ -325,9 +323,9 @@ const Gallery = () => {
             <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", gap: "24px", alignItems: "center", flexWrap: "wrap" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <span style={{ fontSize: "15px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "1px" }}>Wing:</span>
-                {wingFilters.map((w) => (
-                  <button key={w} onClick={() => setWing(w)} style={{ padding: "6px 14px", borderRadius: "999px", cursor: "pointer", fontSize: "14px", fontWeight: 600, border: "1.5px solid", borderColor: wing === w ? "#e8420a" : "#e2e8f0", background: wing === w ? "rgba(232,66,10,0.08)" : "white", color: wing === w ? "#e8420a" : "#64748b", transition: "all 0.2s" }}>{w === "All" ? "All Wings" : wingMeta[w].label}</button>
-                ))}
+                <div style={{ padding: "6px 14px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "1.5px solid #e8420a", background: "rgba(232,66,10,0.08)", color: "#e8420a" }}>
+                  {wingMeta[selectedWing].label}
+                </div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <span style={{ fontSize: "15px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "1px" }}>Category:</span>
@@ -337,7 +335,7 @@ const Gallery = () => {
               </div>
               <div style={{ marginLeft: "auto", display: "flex", gap: "12px", alignItems: "center" }}>
                 <div style={{ fontSize: "14px", color: "#64748b", fontWeight: 600 }}>{filtered.length} photo{filtered.length !== 1 ? "s" : ""}</div>
-                <button onClick={() => { setSelectedWing(null); setWing("All"); setCat("All"); }} style={{ padding: "8px 12px", borderRadius: "10px", background: "white", border: "1px solid #e2e8f0", cursor: "pointer", fontWeight: 700 }}>◀ Back to Wings</button>
+                <button onClick={() => { setSelectedWing(null); setCat("All"); }} style={{ padding: "8px 12px", borderRadius: "10px", background: "white", border: "1px solid #e2e8f0", cursor: "pointer", fontWeight: 700 }}>◀ Back to Wings</button>
               </div>
             </div>
           </section>
