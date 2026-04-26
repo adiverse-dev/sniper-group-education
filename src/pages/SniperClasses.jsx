@@ -14,7 +14,7 @@ const heroSlides = [
     accent: "#7c3aed",
     heading: "Crack Every Exam with Expert Guidance",
     sub: `Result-oriented coaching for IIT JEE, NEET, Board Exams and Foundation courses — with expert faculty and proven methods ${COMPANY_TEXT.sinceFounded}.`,
-    stats: [{ val: "350+", lab: "JEE/NEET Qualifiers" }, { val: "99.1%", lab: "Top Percentile" }, { val: COMPANY_TEXT.yearsPlus, lab: "Years Experience" }, { val: "30+", lab: "Expert Faculty" }],
+    
     btn: "Explore Courses",
     link: "/classes",
   },
@@ -25,7 +25,7 @@ const heroSlides = [
     accent: "#7c3aed",
     heading: "IIT JEE Mains & Advanced Coaching",
     sub: "Comprehensive JEE preparation covering Physics, Chemistry and Mathematics with IITian faculty, daily practice problems and mock tests.",
-    stats: [{ val: "AIR 312", lab: "Top Rank" }, { val: "Physics+Chem+Math", lab: "Subjects" }, { val: "2 Years", lab: "Course" }, { val: "Daily DPP", lab: "Practice" }],
+    
     btn: "Know More",
     link: "/classes",
   },
@@ -36,7 +36,7 @@ const heroSlides = [
     accent: "#7c3aed",
     heading: "NEET UG Complete Coaching Program",
     sub: "NCERT-focused NEET preparation with Biology, Chemistry and Physics. Extensive practice tests and lab practical sessions.",
-    stats: [{ val: "650/720", lab: "Top Score" }, { val: "Bio+Chem+Phy", lab: "Subjects" }, { val: "2 Years", lab: "Course" }, { val: "NCERT Focus", lab: "Method" }],
+    
     btn: "Know More",
     link: "/classes",
   },
@@ -47,7 +47,7 @@ const heroSlides = [
     accent: "#7c3aed",
     heading: "PCM / PCB Board Excellence Coaching",
     sub: "Senior secondary coaching combining board preparation with JEE/NEET foundation. Science stream subjects with doubt sessions.",
-    stats: [{ val: "Class 11–12", lab: "Level" }, { val: "PCM / PCB", lab: "Streams" }, { val: "Board + Entrance", lab: "Focus" }, { val: "1 Year", lab: "Course" }],
+    
     btn: "Know More",
     link: "/classes",
   },
@@ -58,7 +58,7 @@ const heroSlides = [
     accent: "#7c3aed",
     heading: "Foundation & Board Exam Prep",
     sub: "Strong foundation for Class 9 & 10 students with all subjects. Weekly tests, doubt sessions and parent progress reports.",
-    stats: [{ val: "Class 9–10", lab: "Level" }, { val: "All Subjects", lab: "Coverage" }, { val: "Board Focus", lab: "Goal" }, { val: "Weekly Tests", lab: "Practice" }],
+    
     btn: "Know More",
     link: "/classes",
   },
@@ -69,7 +69,7 @@ const heroSlides = [
     accent: "#7c3aed",
     heading: "All Subjects Hindi & CBSE Coaching",
     sub: "Complete coaching for Class 6 to 8 in all subjects – both Hindi Medium and CBSE English Medium with strong conceptual base.",
-    stats: [{ val: "Class 6–8", lab: "Level" }, { val: "Hindi + CBSE", lab: "Medium" }, { val: "All Subjects", lab: "Coverage" }, { val: "1 Year", lab: "Course" }],
+    
     btn: "Know More",
     link: "/classes",
   },
@@ -86,7 +86,7 @@ const courses = [
     icon: "⚛️",
     photo: IMAGE_PATHS.classes.cards.iitJee,
     cat: "Engineering Entrance",
-    stats: [{ v: "Class 11–12", l: "Eligibility" }, { v: "300", l: "Total Marks" }, { v: "2 Years", l: "Course" }],
+    
     desc: "Comprehensive JEE preparation covering Physics, Chemistry and Mathematics with IITian faculty, daily practice problems and full mock test series.",
     eligibility: ["Class 11 appearing or passed", "Class 12 appearing or passed", "Age up to 25 years (JEE Advanced)", "PCM in Class 12 mandatory"],
     examPattern: [
@@ -105,7 +105,7 @@ const courses = [
     icon: "🩺",
     photo: IMAGE_PATHS.classes.cards.neet,
     cat: "Medical Entrance",
-    stats: [{ v: "Class 12 PCB", l: "Eligibility" }, { v: "720", l: "Total Marks" }, { v: "2 Years", l: "Course" }],
+    
     desc: "NCERT-focused NEET preparation with Biology, Chemistry and Physics. Extensive practice tests, lab practicals and revision sessions.",
     eligibility: ["Class 12 PCB with minimum 50% marks", "Age: 17 to 25 years", "Indian Nationals / OCI", "Physics, Chemistry, Biology mandatory"],
     examPattern: [
@@ -124,7 +124,7 @@ const courses = [
     icon: "📗",
     photo: IMAGE_PATHS.classes.cards.class1112PcmPcb,
     cat: "Senior Secondary",
-    stats: [{ v: "Class 10 Passed", l: "Eligibility" }, { v: "PCM / PCB", l: "Streams" }, { v: "1 Year", l: "Course" }],
+    
     desc: "Senior secondary coaching combining board exam preparation with JEE/NEET entrance foundation. Science stream subjects with regular doubt sessions.",
     eligibility: ["Class 10 passed – any board", "PCM stream: Physics, Chemistry, Math", "PCB stream: Physics, Chemistry, Biology", "CBSE / UP Board both accepted"],
     examPattern: [
@@ -143,7 +143,7 @@ const courses = [
     icon: "📘",
     photo: IMAGE_PATHS.classes.cards.class910Foundation,
     cat: "Secondary Foundation",
-    stats: [{ v: "Class 8–9 Passed", l: "Eligibility" }, { v: "All Subjects", l: "Coverage" }, { v: "1 Year", l: "Course" }],
+    
     desc: "Strong foundation coaching for Class 9 & 10 with all subjects. Board exam focused with weekly tests, doubt sessions and parent progress reports.",
     eligibility: ["Class 8 passed for Class 9 batch", "Class 9 passed for Class 10 batch", "CBSE / UP Board students", "Hindi & English Medium both"],
     examPattern: [
@@ -162,7 +162,7 @@ const courses = [
     icon: "📙",
     photo: IMAGE_PATHS.classes.cards.class68Foundation,
     cat: "Middle School",
-    stats: [{ v: "Class 5–7 Passed", l: "Eligibility" }, { v: "Hindi + CBSE", l: "Medium" }, { v: "1 Year", l: "Course" }],
+    
     desc: "Complete coaching for Class 6 to 8 in all subjects covering both Hindi Medium and CBSE English Medium with strong conceptual base building.",
     eligibility: ["Class 5 passed for Class 6 batch", "Class 6 / 7 passed for respective batches", "Hindi Medium & CBSE English Medium both", "Any school board accepted"],
     examPattern: [
@@ -336,7 +336,7 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
       >
         {/* IMAGE SIDE */}
         <div style={{ width: isMobile ? "100%" : "42%", flexShrink: 0, position: "relative", overflow: "hidden", minHeight: isMobile ? "220px" : "260px" }}>
-          <img src={course.photo} alt={course.name}
+          <img loading="lazy" decoding="async" src={course.photo} alt={course.name}
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block", transition: "transform 0.5s ease" }}
             onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
           />
@@ -363,13 +363,10 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
             </div>
           </div>
           <p style={{ fontSize: "14px", color: isSelected ? "rgba(255,255,255,0.75)" : "#334155", lineHeight: 1.7, marginBottom: "16px" }}>{course.desc}</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: `1px solid ${isSelected ? "rgba(167,139,250,0.3)" : "#eef1f8"}`, borderRadius: "12px", overflow: "hidden", marginBottom: "18px" }}>
-            {course.stats.map((s, i) => (
-              <div key={i} style={{ padding: "10px 8px", textAlign: "center", borderRight: i < course.stats.length - 1 ? `1px solid ${isSelected ? "rgba(167,139,250,0.2)" : "#eef1f8"}` : "none" }}>
-                <div style={{ fontSize: "13px", fontWeight: 700, color: isSelected ? "white" : "#0d1b3e", lineHeight: 1.2 }}>{s.v}</div>
-                <div style={{ fontSize: "10px", color: isSelected ? "rgba(255,255,255,0.5)" : "#94a3b8", textTransform: "uppercase", letterSpacing: "0.8px", marginTop: "2px" }}>{s.l}</div>
-              </div>
-            ))}
+          <div style={{ padding: "12px 0", marginBottom: "18px" }}>
+            <p style={{ margin: 0, fontSize: "14px", color: isSelected ? "rgba(255,255,255,0.75)" : "#334155", lineHeight: 1.6 }}>
+              Explore course details: eligibility, exam pattern, selection process and what's included. Click "View Details" to open full information for this course.
+            </p>
           </div>
           <div>
             <span style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", fontWeight: 700, color: "#a78bfa", background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.3)", padding: "7px 16px", borderRadius: "999px" }}>
@@ -447,7 +444,7 @@ const SniperClasses = () => {
               >
                 <div style={{ position: "relative", height: "170px", overflow: "hidden" }}>
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #7c3aed, #a78bfa)", zIndex: 3 }} />
-                  <img className="feat-img" src={f.photo} alt={f.title}
+                  <img loading="lazy" decoding="async" className="feat-img" src={f.photo} alt={f.title}
                     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", transition: "transform 0.5s ease" }}
                     onError={e => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
                   />

@@ -97,12 +97,15 @@ const WhatAreYouLookingFor = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {wings.map((wing, i) => (
             <AnimatedSection key={wing.name} delay={i * 0.12}>
-              <div
+              <Link
+                to={wing.link}
                 className="group rounded-3xl overflow-hidden border-2 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full"
                 style={{
                   borderColor: wing.border,
                   background: "white",
                   boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
+                  textDecoration: "none",
+                  color: "inherit",
                 }}
                 onMouseEnter={e => { e.currentTarget.style.boxShadow = `0 20px 48px ${wing.color}25`; }}
                 onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 16px rgba(0,0,0,0.06)"; }}
@@ -112,7 +115,7 @@ const WhatAreYouLookingFor = () => {
                   {/* Colored top bar */}
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: wing.color, zIndex: 3 }} />
 
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={wing.photo}
                     alt={wing.name}
                     className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
@@ -163,16 +166,12 @@ const WhatAreYouLookingFor = () => {
                     ))}
                   </ul>
 
-                  {/* CTA */}
-                  <Link
-                    to={wing.link}
-                    className="inline-flex items-center gap-1.5 text-sm font-bold transition-all duration-200 hover:gap-3"
-                    style={{ color: wing.tagColor }}
-                  >
+                  {/* CTA (card is clickable) */}
+                  <div className="inline-flex items-center gap-1.5 text-sm font-bold transition-all duration-200" style={{ color: wing.tagColor }}>
                     Explore Wing →
-                  </Link>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </AnimatedSection>
           ))}
         </div>

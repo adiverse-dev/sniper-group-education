@@ -256,7 +256,7 @@ const MarqueeStrip = () => {
 const StudentPhotoBanner = () => (
   <div style={{ width: "100%", overflow: "hidden", lineHeight: 0 }}>
     <img
-      src={IMAGE_PATHS.home.studentBanner.group}
+      loading="lazy" decoding="async" src={IMAGE_PATHS.home.studentBanner.group}
       alt="Our Students â€” Sniper Group of Education"
       style={{ width: "100%", display: "block", objectFit: "cover", maxHeight: "240px", objectPosition: "center top" }}
     />
@@ -402,7 +402,7 @@ const HomePortal = () => {
                 >
                   <div style={{ position: "relative", height: "220px", overflow: "hidden", flexShrink: 0 }}>
                     <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: t.wingColor, zIndex: 3 }} />
-                    <img src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", background: "#e2e8f0" }} onError={e => { e.target.onerror = null; e.target.style.display = "none"; }} />
+                    <img loading="lazy" decoding="async" src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", background: "#e2e8f0" }} onError={e => { e.target.onerror = null; e.target.style.display = "none"; }} />
                     <div style={{ position: "absolute", top: "14px", right: "12px", background: t.wingColor, color: "white", fontSize: "9px", fontWeight: 700, padding: "3px 10px", borderRadius: "999px", letterSpacing: "1px", textTransform: "uppercase", zIndex: 2 }}>{t.wingLabel}</div>
                     <div style={{ position: "absolute", bottom: "10px", left: "14px", width: "36px", height: "36px", borderRadius: "10px", background: "white", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: `0 4px 10px ${t.wingColor}30`, zIndex: 2 }}>
                       <Quote size={16} style={{ color: t.wingColor }} />
@@ -415,7 +415,7 @@ const HomePortal = () => {
                     <p style={{ color: "rgba(13,27,62,0.65)", fontSize: "12.5px", lineHeight: 1.75, fontStyle: "italic", flex: 1, marginBottom: "16px" }}>"{t.quote}"</p>
                     <div style={{ display: "flex", alignItems: "center", gap: "12px", paddingTop: "12px", borderTop: `1px solid ${t.wingColor}25` }}>
                       <div style={{ width: "38px", height: "38px", borderRadius: "50%", overflow: "hidden", flexShrink: 0, border: `2px solid ${t.wingColor}40`, background: t.avatarBg, display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "12px", fontWeight: 700 }}>
-                        <img src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
+                        <img loading="lazy" decoding="async" src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
                       </div>
                       <div>
                         <p style={{ fontWeight: 700, color: "#0d1b3e", fontSize: "12.5px", margin: 0 }}>{t.name}</p>

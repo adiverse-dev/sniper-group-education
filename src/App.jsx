@@ -6,6 +6,7 @@ import AppRoutes from "./routes/AppRoutes";
 import AnnouncementBar from "./components/AnnouncementBar";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import SeoManager from "./components/SeoManager";
  import WhatsappButton from "./components/WhatsappButton";
  import CallbackButton from "./components/Callbackbutton";
 
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <div className="app-wrapper">
+      <SeoManager />
 
       {/* ── Top Bar ── */}
       <AnnouncementBar />

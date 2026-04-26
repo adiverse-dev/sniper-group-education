@@ -253,6 +253,7 @@ const Gallery = () => {
   const [wing, setWing]         = useState("All");
   const [cat, setCat]           = useState("All");
   const [lightbox, setLightbox] = useState(null);
+  const [selectedWing, setSelectedWing] = useState(null);
 
   const filtered = photos.filter(p =>
     (wing === "All" || p.wing === wing) &&
@@ -290,65 +291,96 @@ const Gallery = () => {
 
       {/* ── 1. HERO SLIDER ── */}
       <HeroSlider slides={heroSlides} />
-      {/* ── 2. FILTERS ── */}
-      <section style={{ background: "#ffffff", padding: "24px 20px", borderBottom: "1px solid #eef1f8", position: "sticky", top: 0, zIndex: 10, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", gap: "24px", alignItems: "center", flexWrap: "wrap" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ fontSize: "15px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "1px" }}>Wing:</span>
-            {wingFilters.map((w) => (
-              <button key={w} onClick={() => setWing(w)} style={{ padding: "6px 14px", borderRadius: "999px", cursor: "pointer", fontSize: "14px", fontWeight: 600, border: "1.5px solid", borderColor: wing === w ? "#e8420a" : "#e2e8f0", background: wing === w ? "rgba(232,66,10,0.08)" : "white", color: wing === w ? "#e8420a" : "#64748b", transition: "all 0.2s" }}>{w === "All" ? "All Wings" : wingMeta[w].label}</button>
-            ))}
+      {/* ── 2/3. WINGS CARDS (initial) or FILTERS + MASONRY GRID (after select) ── */}
+      {selectedWing === null ? (
+        <section style={{ background: "#f5f7fa", padding: "48px 20px" }}>
+          <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+            <div style={{ textAlign: "center", marginBottom: "24px" }}>
+              <h3 style={{ fontSize: "22px", fontWeight: 800, color: "#0d1b3e" }}>Explore Our Wings</h3>
+              <p style={{ color: "#64748b", marginTop: "6px" }}>Click a wing to view its full gallery</p>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+              {photoWings.map((w) => {
+                const rep = photos.find(p => p.wing === w) || photos[0];
+                return (
+                  <div key={w}
+                    onClick={() => { setSelectedWing(w); setWing(w); setCat("All"); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    style={{ cursor: "pointer", borderRadius: "12px", overflow: "hidden", position: "relative", height: "260px", border: "1.5px solid #eef1f8", boxShadow: "0 8px 28px rgba(13,27,62,0.04)", transition: "transform 0.18s" }}
+                    onMouseEnter={e => e.currentTarget.style.transform = "translateY(-6px)"}
+                    onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
+                  >
+                    <img src={rep.photo} alt={w + " wing"} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,27,62,0.06) 0%, rgba(13,27,62,0.6) 100%)" }} />
+                    <div style={{ position: "absolute", left: "16px", bottom: "18px", color: "white", fontSize: "20px", fontWeight: 800, textShadow: "0 6px 18px rgba(0,0,0,0.45)" }}>{wingMeta[w].label}</div>
+                    <div style={{ position: "absolute", right: "14px", top: "14px", padding: "6px 12px", borderRadius: "999px", background: wingMeta[w].color, color: "white", fontWeight: 700 }}>{photos.filter(p => p.wing === w).length} photos</div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ fontSize: "15px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "1px" }}>Category:</span>
-            {catFilters.map((c) => (
-              <button key={c} onClick={() => setCat(c)} style={{ padding: "6px 14px", borderRadius: "999px", cursor: "pointer", fontSize: "14px", fontWeight: 600, border: "1.5px solid", borderColor: cat === c ? "#e8420a" : "#e2e8f0", background: cat === c ? "rgba(232,66,10,0.08)" : "white", color: cat === c ? "#e8420a" : "#64748b", transition: "all 0.2s" }}>{c}</button>
-            ))}
-          </div>
-          <div style={{ marginLeft: "auto", fontSize: "14px", color: "#64748b", fontWeight: 600 }}>
-            {filtered.length} photo{filtered.length !== 1 ? "s" : ""}
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <>
+          <section style={{ background: "#ffffff", padding: "24px 20px", borderBottom: "1px solid #eef1f8", position: "sticky", top: 0, zIndex: 10, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+            <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", gap: "24px", alignItems: "center", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span style={{ fontSize: "15px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "1px" }}>Wing:</span>
+                {wingFilters.map((w) => (
+                  <button key={w} onClick={() => setWing(w)} style={{ padding: "6px 14px", borderRadius: "999px", cursor: "pointer", fontSize: "14px", fontWeight: 600, border: "1.5px solid", borderColor: wing === w ? "#e8420a" : "#e2e8f0", background: wing === w ? "rgba(232,66,10,0.08)" : "white", color: wing === w ? "#e8420a" : "#64748b", transition: "all 0.2s" }}>{w === "All" ? "All Wings" : wingMeta[w].label}</button>
+                ))}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span style={{ fontSize: "15px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "1px" }}>Category:</span>
+                {catFilters.map((c) => (
+                  <button key={c} onClick={() => setCat(c)} style={{ padding: "6px 14px", borderRadius: "999px", cursor: "pointer", fontSize: "14px", fontWeight: 600, border: "1.5px solid", borderColor: cat === c ? "#e8420a" : "#e2e8f0", background: cat === c ? "rgba(232,66,10,0.08)" : "white", color: cat === c ? "#e8420a" : "#64748b", transition: "all 0.2s" }}>{c}</button>
+                ))}
+              </div>
+              <div style={{ marginLeft: "auto", display: "flex", gap: "12px", alignItems: "center" }}>
+                <div style={{ fontSize: "14px", color: "#64748b", fontWeight: 600 }}>{filtered.length} photo{filtered.length !== 1 ? "s" : ""}</div>
+                <button onClick={() => { setSelectedWing(null); setWing("All"); setCat("All"); }} style={{ padding: "8px 12px", borderRadius: "10px", background: "white", border: "1px solid #e2e8f0", cursor: "pointer", fontWeight: 700 }}>◀ Back to Wings</button>
+              </div>
+            </div>
+          </section>
 
-      {/* ── 3. MASONRY GRID ── */}
-      <section style={{ background: "#f5f7fa", padding: "48px 20px" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          {filtered.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "60px", color: "#64748b", fontSize: "15px" }}>No photos found for selected filters.</div>
-          ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", alignItems: "start" }}>
-              {cols.map((col, ci) => (
-                <div key={ci} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                  {col.map((photo) => (
-                    <div key={photo.id}
-                      onClick={() => openLightbox(photo.filteredIndex)}
-                      style={{ borderRadius: "14px", overflow: "hidden", cursor: "pointer", position: "relative", height: `${photo.height}px`, background: `linear-gradient(135deg, ${photo.color}22, ${photo.color}44)`, border: "1.5px solid #eef1f8", transition: "all 0.25s ease", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
-                      onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.02)"; e.currentTarget.style.boxShadow = `0 12px 28px ${photo.color}30`; e.currentTarget.style.borderColor = photo.color; e.currentTarget.querySelector(".overlay").style.opacity = "1"; }}
-                      onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "#eef1f8"; e.currentTarget.querySelector(".overlay").style.opacity = "0"; }}
-                    >
-                      <img
-                        src={photo.photo}
-                        alt={photo.title}
-                        loading="lazy"
-                        onError={(e) => { e.currentTarget.style.display = "none"; }}
-                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                      />
-                      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,27,62,0.05) 0%, rgba(13,27,62,0.72) 100%)" }} />
-                      <p style={{ position: "absolute", left: "14px", right: "14px", bottom: "12px", fontSize: "14px", fontWeight: 700, color: "white", lineHeight: 1.4, textShadow: "0 2px 6px rgba(0,0,0,0.45)" }}>{photo.title}</p>
-                      <div style={{ position: "absolute", top: "12px", left: "12px", padding: "3px 10px", borderRadius: "999px", background: "rgba(255,255,255,0.9)", fontSize: "14px", fontWeight: 700, color: photo.color, border: `1px solid ${photo.color}33` }}>{wingMeta[photo.wing].label}</div>
-                      <div style={{ position: "absolute", top: "12px", right: "12px", padding: "3px 10px", borderRadius: "999px", background: photo.color, color: "white", fontSize: "14px", fontWeight: 700 }}>{photo.category}</div>
-                      <div className="overlay" style={{ position: "absolute", inset: 0, background: "rgba(13,27,62,0.6)", display: "flex", alignItems: "center", justifyContent: "center", opacity: 0, transition: "opacity 0.25s ease", borderRadius: "12px" }}>
-                        <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px" }}>🔍</div>
-                      </div>
+          <section style={{ background: "#f5f7fa", padding: "48px 20px" }}>
+            <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+              {filtered.length === 0 ? (
+                <div style={{ textAlign: "center", padding: "60px", color: "#64748b", fontSize: "15px" }}>No photos found for selected filters.</div>
+              ) : (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", alignItems: "start" }}>
+                  {cols.map((col, ci) => (
+                    <div key={ci} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                      {col.map((photo) => (
+                        <div key={photo.id}
+                          onClick={() => openLightbox(photo.filteredIndex)}
+                          style={{ borderRadius: "14px", overflow: "hidden", cursor: "pointer", position: "relative", height: `${photo.height}px`, background: `linear-gradient(135deg, ${photo.color}22, ${photo.color}44)`, border: "1.5px solid #eef1f8", transition: "all 0.25s ease", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+                          onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.02)"; e.currentTarget.style.boxShadow = `0 12px 28px ${photo.color}30`; e.currentTarget.style.borderColor = photo.color; e.currentTarget.querySelector(".overlay").style.opacity = "1"; }}
+                          onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "#eef1f8"; e.currentTarget.querySelector(".overlay").style.opacity = "0"; }}
+                        >
+                          <img
+                            src={photo.photo}
+                            alt={photo.title}
+                            loading="lazy"
+                            onError={(e) => { e.currentTarget.style.display = "none"; }}
+                            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                          />
+                          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,27,62,0.05) 0%, rgba(13,27,62,0.72) 100%)" }} />
+                          <p style={{ position: "absolute", left: "14px", right: "14px", bottom: "12px", fontSize: "14px", fontWeight: 700, color: "white", lineHeight: 1.4, textShadow: "0 2px 6px rgba(0,0,0,0.45)" }}>{photo.title}</p>
+                          <div style={{ position: "absolute", top: "12px", left: "12px", padding: "3px 10px", borderRadius: "999px", background: "rgba(255,255,255,0.9)", fontSize: "14px", fontWeight: 700, color: photo.color, border: `1px solid ${photo.color}33` }}>{wingMeta[photo.wing].label}</div>
+                          <div style={{ position: "absolute", top: "12px", right: "12px", padding: "3px 10px", borderRadius: "999px", background: photo.color, color: "white", fontSize: "14px", fontWeight: 700 }}>{photo.category}</div>
+                          <div className="overlay" style={{ position: "absolute", inset: 0, background: "rgba(13,27,62,0.6)", display: "flex", alignItems: "center", justifyContent: "center", opacity: 0, transition: "opacity 0.25s ease", borderRadius: "12px" }}>
+                            <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px" }}>🔍</div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   ))}
                 </div>
-              ))}
+              )}
             </div>
-          )}
-        </div>
-      </section>
+          </section>
+        </>
+      )}
 
       {/* ── 4. VIDEO SECTION — 3D Carousel ── */}
       <section style={{ background: "#f5f7fa", padding: "72px 0", overflow: "hidden" }}>

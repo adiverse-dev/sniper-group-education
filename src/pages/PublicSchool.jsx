@@ -266,7 +266,7 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
       >
         {/* IMAGE SIDE */}
         <div style={{ width: isMobile ? "100%" : "42%", flexShrink: 0, position: "relative", overflow: "hidden", minHeight: isMobile ? "220px" : "260px" }}>
-          <img src={course.photo} alt={course.name}
+          <img loading="lazy" decoding="async" src={course.photo} alt={course.name}
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block", transition: "transform 0.5s ease" }}
             onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
           />
@@ -382,7 +382,7 @@ const PublicSchool = () => {
               >
                 <div style={{ position: "relative", height: "170px", overflow: "hidden" }}>
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, #10b981, #34d399)", zIndex: 3 }} />
-                  <img className="feat-img" src={f.photo} alt={f.title}
+                  <img loading="lazy" decoding="async" className="feat-img" src={f.photo} alt={f.title}
                     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", transition: "transform 0.5s ease" }}
                     onError={e => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
                   />

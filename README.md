@@ -35,3 +35,19 @@ Fields sent in every submission:
 - Email (required)
 - Interested Wing
 - Your Message
+
+## SEO Setup
+
+The project now applies route-wise SEO tags from React.
+
+1. Set your domain in `.env`:
+
+```bash
+VITE_SITE_URL=https://your-domain.com
+```
+
+2. Restart the dev server after updating `.env`.
+
+3. Keep `public/robots.txt` deployed at `https://your-domain.com/robots.txt`.
+
+4. Create a `public/sitemap.xml` with your final production domain before launch.
