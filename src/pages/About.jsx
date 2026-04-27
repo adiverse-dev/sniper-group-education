@@ -264,6 +264,7 @@ const About = () => {
                   src={IMAGE_PATHS.about.leadership.director}
                   alt="Director Sanjeev Parashar"
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => { e.currentTarget.style.display = "none"; }}
                   style={{
                     position: "absolute",

@@ -29,6 +29,7 @@ function VideoSection() {
                 src="https://www.youtube.com/embed/eD2-DaF1zAM?si=H4Shy2_Vs-JOOuPl"
                 title="YouTube video player"
                 frameBorder="0"
+                loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen

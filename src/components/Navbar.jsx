@@ -60,6 +60,9 @@ function Navbar() {
           <img
             src={BRANDING_ASSETS.navbarLogo}
             alt="Sniper Group of Education"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             style={{
               height: scrolled ? "50px" : "70px",
               width: "auto",

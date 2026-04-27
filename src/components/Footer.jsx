@@ -117,6 +117,8 @@ gap:"40px"
 <img
 src="/img/branding/Flogo.svg"
 alt="logo"
+loading="lazy"
+decoding="async"
 style={{height:"52px",marginBottom:"18px"}}
 />
 

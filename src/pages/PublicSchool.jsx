@@ -430,7 +430,7 @@ const PublicSchool = () => {
               >
                 <div style={{ position: "relative", height: "150px", overflow: "hidden" }}>
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: item.color, zIndex: 3 }} />
-                  <img className="sl-img" src={item.photo} alt={item.title}
+                  <img className="sl-img" src={item.photo} alt={item.title} loading="lazy" decoding="async"
                     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", transition: "transform 0.5s ease" }}
                     onError={e => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
                   />

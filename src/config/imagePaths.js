@@ -21,11 +21,11 @@ export const IMAGE_PATHS = {
   },
   home: {
     banner: {
-      defenceWing: "/img/home/banner/1.png",
-      schoolWing: "/img/home/banner/2.png",
-      classesWing: "/img/home/banner/3.png",
-      achievers: "/img/home/banner/4.png",
-      campus: "/img/home/banner/5.png",
+      defenceWing: "/img/home/banner/1.jpg",
+      schoolWing: "/img/home/banner/2.jpg",
+      classesWing: "/img/home/banner/3.jpg",
+      achievers: "/img/home/banner/4.jpg",
+      campus: "/img/home/banner/5.jpg",
     },
     hero: {
       defence: "/img/home/hero/optimized/Crack Every Defence Exam.jpg",
@@ -50,13 +50,13 @@ export const IMAGE_PATHS = {
   },
   defence: {
     hero: {
-      intro: "/img/defence/hero/Crack Every Defence Exam.png",
-      aissee: "/img/defence/hero/AISSEE.png",
-      upssee: "/img/defence/hero/UPSSEE.png",
-      rims: "/img/defence/hero/RIMS.png",
-      rimc: "/img/defence/hero/RIMC.png",
-      cdsNda: "/img/defence/hero/CDS & NDA.png",
-      airforceXy: "/img/defence/hero/Airforce x & y.png",
+      intro: "/img/defence/hero/Crack Every Defence Exam.jpg",
+      aissee: "/img/defence/hero/AISSEE.jpg",
+      upssee: "/img/defence/hero/UPSSEE.jpg",
+      rims: "/img/defence/hero/RIMS.jpg",
+      rimc: "/img/defence/hero/RIMC.jpg",
+      cdsNda: "/img/defence/hero/CDS & NDA.jpg",
+      airforceXy: "/img/defence/hero/Airforce X&Y.jpg",
     },
     cards: {
       aissee: "/img/defence/cards/aissee.jpg",
@@ -77,10 +77,10 @@ export const IMAGE_PATHS = {
   },
   school: {
     hero: {
-      intro: "/img/school/hero/Quality CBSE Education.png",
-      nurseryKg: "/img/school/hero/Nursery KG.png",
-      class15: "/img/school/hero/Class 1-5.png",
-      class68: "/img/school/hero/Class 6-8.png",
+      intro: "/img/school/hero/Quality CBSE Education.jpg",
+      nurseryKg: "/img/school/hero/Nursery KG.jpg",
+      class15: "/img/school/hero/Class 1-5.jpg",
+      class68: "/img/school/hero/Class 6-8.jpg",
     },
     cards: {
       nurseryKg: "/img/school/cards/nursery-kg.jpg",
@@ -96,22 +96,22 @@ export const IMAGE_PATHS = {
       meritScholarships: "/img/school/Why Choose Us/Merit Scholarship.jpg",
     },
     studentLife: {
-      artCraft: "/img/gallery/photos/IMG_20230204_095118.jpg",
-      storyTime: "/img/gallery/photos/IMG_20230204_095259.jpg",
-      sportsPlay: "/img/gallery/photos/IMG_20230403_091736.jpg",
-      scienceActivities: "/img/gallery/photos/IMG_20230403_091954.jpg",
-      musicDance: "/img/gallery/photos/IMG_20230403_092024.jpg",
-      annualEvents: "/img/gallery/photos/IMG_20230513_105126_542.jpg",
+      artCraft: "/img/school/student-life/art-craft.jpg",
+      storyTime: "/img/school/student-life/story-time.jpg",
+      sportsPlay: "/img/school/student-life/sports-play.jpg",
+      scienceActivities: "/img/school/student-life/science-activities.jpg",
+      musicDance: "/img/school/student-life/music-dance.jpg",
+      annualEvents: "/img/school/student-life/annual-events.jpg",
     },
   },
   classes: {
     hero: {
-      intro: "/img/classes/hero/Crack Every Exam You Face.png",
-      iitJee: "/img/classes/hero/IIT JEE.png",
-      neet: "/img/classes/hero/NEET.png",
-      class1112PcmPcb: "/img/classes/hero/11_12 PCM, PCB.png",
-      class910Foundation: "/img/classes/hero/9th_10th foundation.png",
-      class68Foundation: "/img/classes/hero/class 6 & 8 foundation.png",
+      intro: "/img/classes/hero/Crack Every Exam You Face.jpg",
+      iitJee: "/img/classes/hero/IIT JEE.jpg",
+      neet: "/img/classes/hero/NEET.jpg",
+      class1112PcmPcb: "/img/classes/hero/11_12 PCM, PCB.jpg",
+      class910Foundation: "/img/classes/hero/9th_10th foundation.jpg",
+      class68Foundation: "/img/classes/hero/class 6 & 8 foundation.jpg",
     },
     cards: {
       iitJee: "/img/classes/cards/iit-jee.jpg",

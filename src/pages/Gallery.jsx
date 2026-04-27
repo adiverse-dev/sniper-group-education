@@ -102,6 +102,7 @@ const videos = [
 ];
 
 const catFilters  = ["All", "Events", "Achievements"];
+const PHOTOS_BATCH_SIZE = 24;
 
 const wingMeta = {
   Defence: { color: "#FF9933", label: "🛡️ Defence" },
@@ -216,12 +217,12 @@ const ReelCarousel = ({ videos }) => {
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "45%", background: "linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%)", borderRadius: "22px 22px 0 0", pointerEvents: "none" }} />
                   <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "30%", background: "linear-gradient(0deg, rgba(255,255,255,0.05) 0%, transparent 100%)", pointerEvents: "none" }} />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #1a3260, #0d1b3e)" }} />
-                  <img
-                    src={`https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg`}
-                    alt="thumbnail" loading="lazy"
-                    onError={e => { e.target.src = `https://img.youtube.com/vi/${v.youtubeId}/default.jpg`; }}
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: isCenter ? 0.85 : 0.55 }}
-                  />
+	                  <img
+	                    src={`https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg`}
+	                    alt="thumbnail" loading="lazy" decoding="async"
+	                    onError={e => { e.target.src = `https://img.youtube.com/vi/${v.youtubeId}/default.jpg`; }}
+	                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: isCenter ? 0.85 : 0.55 }}
+	                  />
                   <div style={{ position: "absolute", inset: 0, background: isCenter ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.5)", pointerEvents: "none" }} />
                   <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: isCenter ? "58px" : "42px", height: isCenter ? "58px" : "42px", borderRadius: "50%", background: isCenter ? "rgba(232,66,10,0.75)" : "rgba(255,255,255,0.08)", border: isCenter ? "1.5px solid rgba(255,255,255,0.5)" : "1.5px solid rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)", boxShadow: isCenter ? "0 0 30px rgba(232,66,10,0.5)" : "none", transition: "all 0.4s" }}>
                     <div style={{ width: 0, height: 0, borderTop: `${isCenter ? 10 : 7}px solid transparent`, borderBottom: `${isCenter ? 10 : 7}px solid transparent`, borderLeft: `${isCenter ? 18 : 13}px solid ${isCenter ? "white" : "rgba(255,255,255,0.6)"}`, marginLeft: isCenter ? "4px" : "3px" }} />
@@ -252,37 +253,44 @@ const Gallery = () => {
   const [cat, setCat]           = useState("All");
   const [lightbox, setLightbox] = useState(null);
   const [selectedWing, setSelectedWing] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(PHOTOS_BATCH_SIZE);
 
   const filtered = photos.filter(p =>
     (selectedWing === null || p.wing === selectedWing) &&
     (cat  === "All" || p.category === cat)
   );
 
+  useEffect(() => {
+    setVisibleCount(PHOTOS_BATCH_SIZE);
+    setLightbox(null);
+  }, [selectedWing, cat]);
+
+  const visiblePhotos = filtered.slice(0, visibleCount);
   const cols = [[], [], []];
-  filtered.forEach((p, i) => cols[i % 3].push({ ...p, filteredIndex: i }));
+  visiblePhotos.forEach((p, i) => cols[i % 3].push({ ...p, filteredIndex: i }));
 
   const openLightbox  = (index) => setLightbox(index);
   const closeLightbox = ()      => setLightbox(null);
-  const prevPhoto     = (e)     => { e.stopPropagation(); setLightbox((lightbox - 1 + filtered.length) % filtered.length); };
-  const nextPhoto     = (e)     => { e.stopPropagation(); setLightbox((lightbox + 1) % filtered.length); };
+  const prevPhoto     = (e)     => { if (!visiblePhotos.length) return; e.stopPropagation(); setLightbox((lightbox - 1 + visiblePhotos.length) % visiblePhotos.length); };
+  const nextPhoto     = (e)     => { if (!visiblePhotos.length) return; e.stopPropagation(); setLightbox((lightbox + 1) % visiblePhotos.length); };
 
   useEffect(() => {
-    if (lightbox === null) return;
+    if (lightbox === null || !visiblePhotos.length) return;
     const handler = (e) => {
-      if (e.key === "ArrowRight") setLightbox((prev) => (prev + 1) % filtered.length);
-      if (e.key === "ArrowLeft")  setLightbox((prev) => (prev - 1 + filtered.length) % filtered.length);
+      if (e.key === "ArrowRight") setLightbox((prev) => (prev + 1) % visiblePhotos.length);
+      if (e.key === "ArrowLeft")  setLightbox((prev) => (prev - 1 + visiblePhotos.length) % visiblePhotos.length);
       if (e.key === "Escape")     closeLightbox();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [lightbox, filtered.length]);
+  }, [lightbox, visiblePhotos.length]);
 
   useEffect(() => {
     document.body.style.overflow = lightbox !== null ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [lightbox]);
 
-  const activePhoto = lightbox !== null ? filtered[lightbox] : null;
+  const activePhoto = lightbox !== null ? visiblePhotos[lightbox] : null;
 
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
@@ -307,7 +315,7 @@ const Gallery = () => {
                     onMouseEnter={e => e.currentTarget.style.transform = "translateY(-6px)"}
                     onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
                   >
-                    <img src={rep.photo} alt={w + " wing"} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+	                    <img src={rep.photo} alt={w + " wing"} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,27,62,0.06) 0%, rgba(13,27,62,0.6) 100%)" }} />
                     <div style={{ position: "absolute", left: "16px", bottom: "18px", color: "white", fontSize: "20px", fontWeight: 800, textShadow: "0 6px 18px rgba(0,0,0,0.45)" }}>{wingMeta[w].label}</div>
                     <div style={{ position: "absolute", right: "14px", top: "14px", padding: "6px 12px", borderRadius: "999px", background: wingMeta[w].color, color: "white", fontWeight: 700 }}>{photos.filter(p => p.wing === w).length} photos</div>
@@ -334,7 +342,9 @@ const Gallery = () => {
                 ))}
               </div>
               <div style={{ marginLeft: "auto", display: "flex", gap: "12px", alignItems: "center" }}>
-                <div style={{ fontSize: "14px", color: "#64748b", fontWeight: 600 }}>{filtered.length} photo{filtered.length !== 1 ? "s" : ""}</div>
+	                <div style={{ fontSize: "14px", color: "#64748b", fontWeight: 600 }}>
+	                  Showing {Math.min(visibleCount, filtered.length)} of {filtered.length} photo{filtered.length !== 1 ? "s" : ""}
+	                </div>
                 <button onClick={() => { setSelectedWing(null); setCat("All"); }} style={{ padding: "8px 12px", borderRadius: "10px", background: "white", border: "1px solid #e2e8f0", cursor: "pointer", fontWeight: 700 }}>◀ Back to Wings</button>
               </div>
             </div>
@@ -342,10 +352,10 @@ const Gallery = () => {
 
           <section style={{ background: "#f5f7fa", padding: "48px 20px" }}>
             <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-              {filtered.length === 0 ? (
-                <div style={{ textAlign: "center", padding: "60px", color: "#64748b", fontSize: "15px" }}>No photos found for selected filters.</div>
-              ) : (
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", alignItems: "start" }}>
+	              {filtered.length === 0 ? (
+	                <div style={{ textAlign: "center", padding: "60px", color: "#64748b", fontSize: "15px" }}>No photos found for selected filters.</div>
+	              ) : (
+	                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", alignItems: "start" }}>
                   {cols.map((col, ci) => (
                     <div key={ci} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                       {col.map((photo) => (
@@ -355,13 +365,14 @@ const Gallery = () => {
                           onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.02)"; e.currentTarget.style.boxShadow = `0 12px 28px ${photo.color}30`; e.currentTarget.style.borderColor = photo.color; e.currentTarget.querySelector(".overlay").style.opacity = "1"; }}
                           onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "#eef1f8"; e.currentTarget.querySelector(".overlay").style.opacity = "0"; }}
                         >
-                          <img
-                            src={photo.photo}
-                            alt={photo.title}
-                            loading="lazy"
-                            onError={(e) => { e.currentTarget.style.display = "none"; }}
-                            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                          />
+	                          <img
+	                            src={photo.photo}
+	                            alt={photo.title}
+	                            loading="lazy"
+	                            decoding="async"
+	                            onError={(e) => { e.currentTarget.style.display = "none"; }}
+	                            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+	                          />
                           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,27,62,0.05) 0%, rgba(13,27,62,0.72) 100%)" }} />
                           <p style={{ position: "absolute", left: "14px", right: "14px", bottom: "12px", fontSize: "14px", fontWeight: 700, color: "white", lineHeight: 1.4, textShadow: "0 2px 6px rgba(0,0,0,0.45)" }}>{photo.title}</p>
                           <div style={{ position: "absolute", top: "12px", left: "12px", padding: "3px 10px", borderRadius: "999px", background: "rgba(255,255,255,0.9)", fontSize: "14px", fontWeight: 700, color: photo.color, border: `1px solid ${photo.color}33` }}>{wingMeta[photo.wing].label}</div>
@@ -372,11 +383,30 @@ const Gallery = () => {
                         </div>
                       ))}
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </section>
+	                  ))}
+	                </div>
+	              )}
+	              {visibleCount < filtered.length && (
+	                <div style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
+	                  <button
+	                    onClick={() => setVisibleCount((prev) => prev + PHOTOS_BATCH_SIZE)}
+	                    style={{
+	                      padding: "10px 18px",
+	                      borderRadius: "999px",
+	                      border: "1px solid #e2e8f0",
+	                      background: "white",
+	                      color: "#0d1b3e",
+	                      fontSize: "14px",
+	                      fontWeight: 700,
+	                      cursor: "pointer",
+	                    }}
+	                  >
+	                    Load More Photos
+	                  </button>
+	                </div>
+	              )}
+	            </div>
+	          </section>
         </>
       )}
 
@@ -401,7 +431,7 @@ const Gallery = () => {
             onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.25)"}
             onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.15)"}> ✕ </button>
           <div style={{ position: "fixed", top: "24px", left: "50%", transform: "translateX(-50%)", color: "rgba(255,255,255,0.7)", fontSize: "14px", fontWeight: 600, background: "rgba(255,255,255,0.1)", padding: "6px 16px", borderRadius: "999px", backdropFilter: "blur(8px)" }}>
-            {lightbox + 1} / {filtered.length}
+	            {lightbox + 1} / {visiblePhotos.length}
           </div>
           <button onClick={prevPhoto} style={{ position: "fixed", left: "20px", top: "50%", transform: "translateY(-50%)", width: "52px", height: "52px", borderRadius: "50%", background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", color: "white", fontSize: "24px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}
             onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.22)"; e.currentTarget.style.transform = "translateY(-50%) scale(1.1)"; }}
@@ -411,13 +441,14 @@ const Gallery = () => {
             onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; e.currentTarget.style.transform = "translateY(-50%) scale(1)"; }}> › </button>
           <div onClick={e => e.stopPropagation()} style={{ background: "white", borderRadius: "24px", maxWidth: "520px", width: "100%", overflow: "hidden", boxShadow: "0 40px 80px rgba(0,0,0,0.6)", animation: "popIn 0.25s ease" }}>
             <div style={{ height: "320px", background: `linear-gradient(135deg, ${activePhoto.color}20, ${activePhoto.color}45)`, position: "relative" }}>
-              <img
-                src={activePhoto.photo}
-                alt={activePhoto.title}
-                loading="lazy"
-                onError={(e) => { e.currentTarget.style.display = "none"; }}
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-              />
+	              <img
+	                src={activePhoto.photo}
+	                alt={activePhoto.title}
+	                loading="lazy"
+	                decoding="async"
+	                onError={(e) => { e.currentTarget.style.display = "none"; }}
+	                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+	              />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,27,62,0.15) 0%, rgba(13,27,62,0.55) 100%)" }} />
               <div style={{ position: "absolute", top: "14px", left: "14px", padding: "4px 12px", borderRadius: "999px", background: "rgba(255,255,255,0.92)", fontSize: "13px", fontWeight: 700, color: activePhoto.color, border: `1px solid ${activePhoto.color}33` }}>{wingMeta[activePhoto.wing].label}</div>
               <div style={{ position: "absolute", top: "14px", right: "14px", padding: "4px 12px", borderRadius: "999px", background: activePhoto.color, color: "white", fontSize: "13px", fontWeight: 700 }}>{activePhoto.category}</div>
@@ -425,9 +456,9 @@ const Gallery = () => {
             <div style={{ padding: "24px 28px 28px" }}>
               <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "20px", fontWeight: 800, color: "#0d1b3e", marginBottom: "16px", lineHeight: 1.3 }}>{activePhoto.title}</h3>
               <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-                {filtered.map((_, i) => (
-                  <button key={i} onClick={() => setLightbox(i)} style={{ width: i === lightbox ? "20px" : "8px", height: "8px", borderRadius: "999px", background: i === lightbox ? activePhoto.color : "#e2e8f0", border: "none", cursor: "pointer", transition: "all 0.3s ease", padding: 0 }} />
-                ))}
+	                {visiblePhotos.map((_, i) => (
+	                  <button key={i} onClick={() => setLightbox(i)} style={{ width: i === lightbox ? "20px" : "8px", height: "8px", borderRadius: "999px", background: i === lightbox ? activePhoto.color : "#e2e8f0", border: "none", cursor: "pointer", transition: "all 0.3s ease", padding: 0 }} />
+	                ))}
               </div>
             </div>
           </div>

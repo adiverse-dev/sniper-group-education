@@ -6,4 +6,10 @@
 
 main {
   flex: 1;
+  min-width: 0;
+}
+
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
 }

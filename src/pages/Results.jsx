@@ -178,13 +178,14 @@ const Results = () => {
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
                     <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: `linear-gradient(135deg, ${r.color}, ${r.color}99)`, position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "14px", fontWeight: 700 }}>
                       <span>{getInitials(r.name)}</span>
-                      <img
-                        src={r.photo}
-                        alt={r.name}
-                        loading="lazy"
-                        onError={(e) => { e.currentTarget.style.display = "none"; }}
-                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                      />
+	                      <img
+	                        src={r.photo}
+	                        alt={r.name}
+	                        loading="lazy"
+	                        decoding="async"
+	                        onError={(e) => { e.currentTarget.style.display = "none"; }}
+	                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+	                      />
                     </div>
                     <div style={{ background: r.bg, borderRadius: "10px", padding: "6px 12px", textAlign: "center", border: `1px solid ${r.color}33` }}>
                       <div style={{ fontSize: "15px", fontWeight: 800, color: r.color, fontFamily: "'Playfair Display', Georgia, serif" }}>{r.score}</div>
