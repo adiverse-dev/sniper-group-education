@@ -1,7 +1,20 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useLanguage } from "../i18n/LanguageProvider";
 import HeroSlider from "../sections/HeroSlider";
 import { IMAGE_PATHS } from "../config/imagePaths";
 import { COMPANY_TEXT } from "../config/companyProfile";
+import AvatarIcon from "../components/AvatarIcon";
+
+const headingCopy = {
+ en: {
+  whyChooseUs: "WHY CHOOSE US",
+  advantages: "Our Advantages",
+ },
+ hi: {
+  whyChooseUs: "\u0915\u094d\u092f\u094b\u0902 \u091a\u0941\u0928\u0947\u0902",
+  advantages: "\u0939\u092e\u093e\u0930\u0947 \u090f\u0921\u0935\u093e\u0902\u091f\u0947\u091c\u0947\u0938",
+ },
+};
 
 // ---------------------------------------------------------
 // HERO SLIDER SLIDES
@@ -83,7 +96,6 @@ const courses = [
  id: "jee",
  name: "IIT JEE",
  full: "IIT JEE Mains & Advanced",
- icon: "P",
  photo: IMAGE_PATHS.classes.cards.iitJee,
  cat: "Engineering Entrance",
  
@@ -102,7 +114,6 @@ const courses = [
  id: "neet",
  name: "NEET",
  full: "NEET UG Complete Coaching",
- icon: "P",
  photo: IMAGE_PATHS.classes.cards.neet,
  cat: "Medical Entrance",
  
@@ -121,7 +132,6 @@ const courses = [
  id: "class1112",
  name: "11th & 12th PCM/PCB",
  full: "Class 11th & 12th PCM / PCB Coaching",
- icon: "M/B",
  photo: IMAGE_PATHS.classes.cards.class1112PcmPcb,
  cat: "Senior Secondary",
  
@@ -140,7 +150,6 @@ const courses = [
  id: "class910",
  name: "9th & 10th Foundation",
  full: "Class 9th & 10th All Subjects Foundation",
- icon: "F",
  photo: IMAGE_PATHS.classes.cards.class910Foundation,
  cat: "Secondary Foundation",
  
@@ -159,7 +168,6 @@ const courses = [
  id: "class68",
  name: "Class 6 - 8",
  full: "Class 6 to 8 All Subjects - Hindi & CBSE",
- icon: "P",
  photo: IMAGE_PATHS.classes.cards.class68Foundation,
  cat: "Middle School",
  
@@ -180,12 +188,12 @@ const courses = [
 // FEATURES DATA
 // ---------------------------------------------------------
 const features = [
- { icon: "E", title: "Expert Faculty", desc: "IITians and top educators with proven track records in JEE and NEET coaching.", photo: IMAGE_PATHS.classes.features.expertFaculty },
- { icon: "P", title: "Performance Tracking", desc: "Regular assessments and detailed performance reports shared with parents.", photo: IMAGE_PATHS.classes.features.performanceTracking },
- { icon: "P", title: "Digital Resources", desc: "Access to online study materials, recorded lectures and practice tests anytime.", photo: IMAGE_PATHS.classes.features.digitalResources },
- { icon: "P", title: "Lab Practicals", desc: "Well-equipped physics, chemistry and biology labs for hands-on practice.", photo: IMAGE_PATHS.classes.features.labPracticals },
- { icon: "P", title: "Scholarship Tests", desc: "Regular scholarship tests with fee concessions for high performers.", photo: IMAGE_PATHS.classes.features.scholarshipTests },
- { icon: "P", title: "Personalized Attention", desc: "Small batch sizes ensuring individual attention and personalized guidance.", photo: IMAGE_PATHS.classes.features.personalizedAttention },
+ { title: "Expert Faculty", desc: "IITians and top educators with proven track records in JEE and NEET coaching.", photo: IMAGE_PATHS.classes.features.expertFaculty },
+ { title: "Performance Tracking", desc: "Regular assessments and detailed performance reports shared with parents.", photo: IMAGE_PATHS.classes.features.performanceTracking },
+ { title: "Digital Resources", desc: "Access to online study materials, recorded lectures and practice tests anytime.", photo: IMAGE_PATHS.classes.features.digitalResources },
+ { title: "Lab Practicals", desc: "Well-equipped physics, chemistry and biology labs for hands-on practice.", photo: IMAGE_PATHS.classes.features.labPracticals },
+ { title: "Scholarship Tests", desc: "Regular scholarship tests with fee concessions for high performers.", photo: IMAGE_PATHS.classes.features.scholarshipTests },
+ { title: "Personalized Attention", desc: "Small batch sizes ensuring individual attention and personalized guidance.", photo: IMAGE_PATHS.classes.features.personalizedAttention },
 ];
 
 // ---------------------------------------------------------
@@ -212,9 +220,15 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
  >
  {/* Header - no fee displayed */}
  <div style={{ background: "linear-gradient(135deg, #0d1b3e, #2d1b69)", padding: "22px 28px", display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
- <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: "rgba(167,139,250,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "26px", flexShrink: 0 }}>
- {course.icon}
- </div>
+ <AvatarIcon
+ name={course.name}
+ size={52}
+ borderRadius="14px"
+ background="rgba(167,139,250,0.15)"
+ color="#a78bfa"
+ fontSize={20}
+ fontWeight={800}
+ />
  <div style={{ flex: 1 }}>
  <div style={{ fontSize: "16px", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{course.name} - {course.full}</div>
  <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginTop: "3px" }}>{course.desc}</div>
@@ -308,7 +322,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
 const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDetail, setActiveDetail }) => {
  const isReverse = index % 2 === 1;
  const isSelected = selectedCourse?.id === course.id;
- const courseInitial = (course?.name || "").trim().charAt(0).toUpperCase();
  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
  useEffect(() => {
  const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -355,9 +368,15 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
  <div style={{ position: "absolute", top: 0, bottom: 0, width: "4px", background: "linear-gradient(to bottom, #7c3aed, #a78bfa)", ...(isReverse ? { right: 0 } : { left: 0 }) }} />
  )}
 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
-<div style={{ width: "48px", height: "48px", borderRadius: "14px", background: isSelected ? "rgba(167,139,250,0.15)" : "rgba(124,58,237,0.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", flexShrink: 0 }}>
-{courseInitial}
-</div>
+<AvatarIcon
+name={course.name}
+size={48}
+borderRadius="14px"
+background={isSelected ? "rgba(167,139,250,0.15)" : "rgba(124,58,237,0.08)"}
+color={isSelected ? "#c4b5fd" : "#7c3aed"}
+fontSize={18}
+fontWeight={800}
+/>
  <div>
  <div style={{ fontSize: isMobile ? "17px" : "20px", fontWeight: 800, fontFamily: "'Playfair Display', Georgia, serif", color: isSelected ? "white" : "#0d1b3e", lineHeight: 1.2 }}>{course.name}</div>
  <div style={{ fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginTop: "2px" }}>{course.full}</div>
@@ -387,10 +406,13 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
 // MAIN COMPONENT
 // ---------------------------------------------------------
 const SniperClasses = () => {
+ const { lang } = useLanguage();
+ const isHindi = lang === "hi";
+ const text = headingCopy[lang] || headingCopy.en;
  const [selectedCourse, setSelectedCourse] = useState(null);
  const [activeDetail, setActiveDetail] = useState("eligibility");
  return (
- <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
+ <div key={lang} style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
  <style>{`
  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -405,13 +427,13 @@ const SniperClasses = () => {
  <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
  <div style={{ textAlign: "center", marginBottom: "52px" }}>
  <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(124,58,237,0.3)", color: "#7c3aed", background: "rgba(124,58,237,0.07)" }}>
- Our Courses
+ {isHindi ? "हमारे कोर्स" : "Our Courses"}
  </span>
  <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 36px)", color: "#0d1b3e", marginBottom: "10px" }}>
- Coaching <span style={{ color: "#7c3aed" }}>Programs</span>
+ {isHindi ? "कोचिंग" : "Coaching"} <span style={{ color: "#7c3aed" }}>{isHindi ? "प्रोग्राम" : "Programs"}</span>
  </h2>
  <p style={{ color: "#334155", fontSize: "15px", maxWidth: "480px", margin: "0 auto" }}>
- Expert coaching for every level - click any course to explore full details
+ {isHindi ? "हर स्तर के लिए विशेषज्ञ कोचिंग - पूर्ण विवरण के लिए किसी भी कोर्स पर क्लिक करें" : "Expert coaching for every level - click any course to explore full details"}
  </p>
  </div>
  {courses.map((course, index) => (
@@ -431,9 +453,9 @@ const SniperClasses = () => {
  <section style={{ background: "#f5f7fa", padding: "72px 20px" }}>
  <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
  <div style={{ textAlign: "center", marginBottom: "48px" }}>
- <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(124,58,237,0.3)", color: "#7c3aed", background: "rgba(124,58,237,0.07)" }}>WHY THE CLASSES</span>
+ <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(124,58,237,0.3)", color: "#7c3aed", background: "rgba(124,58,237,0.07)" }}>{text.whyChooseUs}</span>
  <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 36px)", color: "#0d1b3e" }}>
- The Classes <span style={{ color: "#7c3aed" }}>Advantage</span>
+ {text.advantages}
  </h2>
  </div>
 <div className="features-grid">
@@ -450,9 +472,16 @@ onMouseLeave={e => { e.currentTarget.style.borderColor = "#eef1f8"; e.currentTar
  onError={e => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
  />
  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "60px", background: "linear-gradient(to top, white, transparent)", pointerEvents: "none" }} />
-<div style={{ position: "absolute", bottom: "10px", left: "16px", width: "44px", height: "44px", borderRadius: "12px", background: "rgba(124,58,237,0.92)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", boxShadow: "0 4px 12px rgba(124,58,237,0.35)", zIndex: 2 }}>
- {(f?.title || "").trim().charAt(0).toUpperCase()}
-</div>
+<AvatarIcon
+name={f.title}
+size={44}
+borderRadius="12px"
+background="rgba(124,58,237,0.92)"
+color="white"
+fontSize={16}
+fontWeight={800}
+style={{ position: "absolute", bottom: "10px", left: "16px", boxShadow: "0 4px 12px rgba(124,58,237,0.35)", zIndex: 2 }}
+/>
 </div>
 <div style={{ padding: "14px 20px 22px" }}>
 <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0d1b3e", marginBottom: "7px" }}>{f.title}</h3>
@@ -468,4 +497,6 @@ onMouseLeave={e => { e.currentTarget.style.borderColor = "#eef1f8"; e.currentTar
 };
 
 export default SniperClasses;
+
+
 

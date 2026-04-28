@@ -1,7 +1,20 @@
 import { useState, useEffect } from "react";
+import { useLanguage } from "../i18n/LanguageProvider";
 import HeroSlider from "../sections/HeroSlider";
 import { IMAGE_PATHS } from "../config/imagePaths";
 import { COMPANY_TEXT } from "../config/companyProfile";
+import AvatarIcon from "../components/AvatarIcon";
+
+const headingCopy = {
+ en: {
+  whyChooseUs: "WHY CHOOSE US",
+  advantages: "Our Advantages",
+ },
+ hi: {
+  whyChooseUs: "\u0915\u094d\u092f\u094b\u0902 \u091a\u0941\u0928\u0947\u0902",
+  advantages: "\u0939\u092e\u093e\u0930\u0947 \u090f\u0921\u0935\u093e\u0902\u091f\u0947\u091c\u0947\u0938",
+ },
+};
 
 // -------------------------------------------------------------
 // DEFENCE SLIDER SLIDES
@@ -91,7 +104,7 @@ const defenceSlides = [
 // -------------------------------------------------------------
 const courses = [
  {
- id: "aissee", name: "AISSEE", full: "All India Sainik School Entrance Exam", icon: "S",
+ id: "aissee", name: "AISSEE", full: "All India Sainik School Entrance Exam",
  photo: IMAGE_PATHS.defence.cards.aissee, cat: "School Level",
  stats: [{ v: "Class 6 & 9", l: "Entry" }, { v: "350", l: "Total Marks" }, { v: "1 Year", l: "Course" }],
  desc: "Comprehensive preparation for All India Sainik School Entrance Examination for Class 6 and Class 9 admissions across all Sainik Schools in India.",
@@ -101,7 +114,7 @@ const courses = [
  physical: ["Good physical health required", "No major physical disability", "Medical fitness as per Sainik School norms"],
  },
  {
- id: "upssee", name: "UPSSEE", full: "Uttar Pradesh Sainik School Entrance Exam", icon: "U",
+ id: "upssee", name: "UPSSEE", full: "Uttar Pradesh Sainik School Entrance Exam",
  photo: IMAGE_PATHS.defence.cards.upssee, cat: "School Level",
  stats: [{ v: "State Level", l: "Exam" }, { v: "250", l: "Total Marks" }, { v: "1 Year", l: "Course" }],
  desc: "Specialized coaching for Uttar Pradesh Sainik School Entrance Examination — state level exam for admission to UP Sainik Schools.",
@@ -111,7 +124,7 @@ const courses = [
  physical: ["Standard physical fitness", "Medical test by school authority", "No serious health conditions"],
  },
  {
- id: "rims", name: "RMS", full: "Rashtriya Military School", icon: "R",
+ id: "rims", name: "RMS", full: "Rashtriya Military School",
  photo: IMAGE_PATHS.defence.cards.rims, cat: "School Level",
  stats: [{ v: "400", l: "Total Marks" }, { v: "Written+Viva", l: "Pattern" }, { v: "1 Year", l: "Course" }],
  desc: "Expert coaching for RMS entrance examination — one of India's premier military schools offering world-class education combined with military training.",
@@ -121,7 +134,7 @@ const courses = [
  physical: ["Physical fitness test", "Height & weight standards", "Vision standards", "Medical board clearance"],
  },
  {
- id: "rimc", name: "RIMC", full: "Rashtriya Indian Military College", icon: "R",
+ id: "rimc", name: "RIMC", full: "Rashtriya Indian Military College",
  photo: IMAGE_PATHS.defence.cards.rimc, cat: "College Level",
  stats: [{ v: "500", l: "Total Marks" }, { v: "SHAPE-1", l: "Medical Std" }, { v: "Age 11.5-13", l: "Eligibility" }],
  desc: "Intensive preparation for RIMC Dehradun — the most prestigious military college in India, gateway to National Defence Academy.",
@@ -131,7 +144,7 @@ const courses = [
  physical: ["SHAPE-1 medical standard", "Height min 152 cm", "Good vision required", "No physical disability"],
  },
  {
- id: "cds-nda", name: "CDS & NDA", full: "Combined Defence Services & National Defence Academy", icon: "N",
+ id: "cds-nda", name: "CDS & NDA", full: "Combined Defence Services & National Defence Academy",
  photo: IMAGE_PATHS.defence.cards.cdsNda, cat: "National Level",
  stats: [{ v: "UPSC", l: "Conducted By" }, { v: "900", l: "NDA Marks" }, { v: "1-2 Yrs", l: "Course" }],
  desc: "Complete coaching for NDA and CDS — India's top defence entrance exams conducted by UPSC for Army, Navy and Air Force.",
@@ -141,7 +154,7 @@ const courses = [
  physical: ["Height: 157 cm (Army), 162 cm (Navy/AF)", "Weight proportional to height", "Vision: 6/6 or correctable", "Full medical fitness required"],
  },
  {
- id: "airforce", name: "Air Force X & Y", full: "Indian Air Force Group X & Y Examination", icon: "A",
+ id: "airforce", name: "Air Force X & Y", full: "Indian Air Force Group X & Y Examination",
  photo: IMAGE_PATHS.defence.cards.airforceXy, cat: "Armed Forces",
  stats: [{ v: "Age 17.5-21", l: "Eligibility" }, { v: "PFT+Written", l: "Pattern" }, { v: "6 Months", l: "Course" }],
  desc: "Focused coaching for Indian Air Force Agniveer Vayu Group X (Technical) and Group Y (Non-Technical) examination.",
@@ -157,32 +170,32 @@ const courses = [
 // -------------------------------------------------------------
 const features = [
  {
- icon: "E", title: "Expert Faculty",
+ title: "Expert Faculty",
  desc: `Ex-defence officers and SSB interview coaches with ${COMPANY_TEXT.yearsPlus} years experience.`,
  photo: IMAGE_PATHS.defence.features.expertFaculty,
  },
  {
- icon: "M", title: "Complete Study Material",
+ title: "Complete Study Material",
  desc: "Comprehensive, exam-focused study material updated every year.",
  photo: IMAGE_PATHS.defence.features.studyMaterial,
  },
  {
- icon: "P", title: "Physical Training",
+ title: "Physical Training",
  desc: "Regular PT sessions to build fitness levels required for defence services.",
  photo: IMAGE_PATHS.defence.features.physicalTraining,
  },
  {
- icon: "T", title: "Mock Tests Series",
+ title: "Mock Tests Series",
  desc: "Weekly mock tests and full-length practice papers to boost performance.",
  photo: IMAGE_PATHS.defence.features.mockTests,
  },
  {
- icon: "S", title: "SSB Guidance",
+ title: "SSB Guidance",
  desc: "Dedicated SSB preparation with psychology tests and GTO tasks.",
  photo: IMAGE_PATHS.defence.features.ssbGuidance,
  },
  {
- icon: "G", title: "Personal Mentoring",
+ title: "Personal Mentoring",
  desc: "One-on-one mentoring sessions to identify and overcome weak areas.",
  photo: IMAGE_PATHS.defence.features.personalMentoring,
  },
@@ -202,9 +215,16 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
  <div id="course-detail" style={{ borderRadius: "20px", overflow: "hidden", border: "2px solid rgba(255,153,0,0.35)", background: "#fffbf5", marginTop: "8px", marginBottom: "8px" }}>
  {/* Header */}
  <div style={{ background: "linear-gradient(135deg, #0d1b3e, #1a3260)", padding: "22px 28px", display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
- <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: "rgba(255,153,0,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", fontWeight: 800, color: "#FF9933", flexShrink: 0, fontFamily: "'Playfair Display', Georgia, serif" }}>
- {course.icon}
- </div>
+ <AvatarIcon
+ name={course.name}
+ size={52}
+ borderRadius="14px"
+ background="rgba(255,153,0,0.15)"
+ color="#FF9933"
+ fontSize={18}
+ fontWeight={800}
+ style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+ />
  <div style={{ flex: 1 }}>
  <div style={{ fontSize: "16px", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{course.name} — {course.full}</div>
  <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginTop: "3px" }}>{course.desc}</div>
@@ -341,9 +361,16 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
  <div style={{ position: "absolute", top: 0, bottom: 0, width: "4px", background: "linear-gradient(to bottom, #FF9933, #ffb347)", ...(isReverse ? { right: 0 } : { left: 0 }) }} />
  )}
  <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "10px" }}>
- <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: isSelected ? "rgba(255,153,0,0.15)" : "rgba(255,153,0,0.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", fontWeight: 800, color: "#FF9933", flexShrink: 0, fontFamily: "'Playfair Display', Georgia, serif" }}>
- {course.icon}
- </div>
+ <AvatarIcon
+ name={course.name}
+ size={52}
+ borderRadius="14px"
+ background={isSelected ? "rgba(255,153,0,0.15)" : "rgba(255,153,0,0.08)"}
+ color="#FF9933"
+ fontSize={18}
+ fontWeight={800}
+ style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+ />
  <div>
  <div style={{ fontSize: "20px", fontWeight: 800, fontFamily: "'Playfair Display', Georgia, serif", color: isSelected ? "white" : "#0d1b3e", lineHeight: 1.2 }}>{course.name}</div>
  <div style={{ fontSize: "12px", fontWeight: 600, color: "#FF9933", marginTop: "2px" }}>{course.full}</div>
@@ -376,10 +403,13 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
 // MAIN COMPONENT
 // -------------------------------------------------------------
 const DefenceAcademy = () => {
+ const { lang } = useLanguage();
+ const isHindi = lang === "hi";
+ const text = headingCopy[lang] || headingCopy.en;
  const [selectedCourse, setSelectedCourse] = useState(null);
  const [activeDetail, setActiveDetail] = useState("eligibility");
  return (
- <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
+ <div key={lang} style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
  <style>{`
  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -396,13 +426,13 @@ const DefenceAcademy = () => {
  <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
  <div style={{ textAlign: "center", marginBottom: "52px" }}>
  <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(255,153,0,0.3)", color: "#FF9933", background: "rgba(255,153,0,0.07)" }}>
- Our Courses
+ {isHindi ? "हमारे कोर्स" : "Our Courses"}
  </span>
  <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 36px)", color: "#0d1b3e", marginBottom: "10px" }}>
- Defence <span style={{ color: "#FF9933" }}>Programs</span>
+ {isHindi ? "डिफेन्स" : "Defence"} <span style={{ color: "#FF9933" }}>{isHindi ? "प्रोग्राम" : "Programs"}</span>
  </h2>
  <p style={{ color: "#334155", fontSize: "15px", maxWidth: "480px", margin: "0 auto" }}>
- {`India's most trusted defence coaching ${COMPANY_TEXT.sinceFounded} — click any course to explore details`}
+ {isHindi ? `भारत की विश्वसनीय डिफेन्स कोचिंग ${COMPANY_TEXT.sinceFounded} - विवरण देखने के लिए किसी भी कोर्स पर क्लिक करें` : `India's most trusted defence coaching ${COMPANY_TEXT.sinceFounded} — click any course to explore details`}
  </p>
  </div>
  {courses.map((course, index) => (
@@ -424,10 +454,10 @@ const DefenceAcademy = () => {
  <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
  <div style={{ textAlign: "center", marginBottom: "48px" }}>
  <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(255,153,0,0.3)", color: "#FF9933", background: "rgba(255,153,0,0.07)" }}>
- Why Choose Us
+ {text.whyChooseUs}
  </span>
  <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 36px)", color: "#0d1b3e" }}>
- The Sniper <span style={{ color: "#FF9933" }}>Advantage</span>
+ {text.advantages}
  </h2>
  </div>
  <div className="features-grid">
@@ -444,9 +474,16 @@ const DefenceAcademy = () => {
  onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
  />
  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "60px", background: "linear-gradient(to top, white, transparent)", pointerEvents: "none" }} />
- <div style={{ position: "absolute", bottom: "10px", left: "16px", width: "44px", height: "44px", borderRadius: "12px", background: "rgba(255,153,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", fontWeight: 800, color: "white", boxShadow: "0 4px 12px rgba(255,153,0,0.35)", zIndex: 2, fontFamily: "'Playfair Display', Georgia, serif" }}>
- {f.icon}
- </div>
+ <AvatarIcon
+ name={f.title}
+ size={44}
+ borderRadius="12px"
+ background="rgba(255,153,0,0.92)"
+ color="white"
+ fontSize={16}
+ fontWeight={800}
+ style={{ position: "absolute", bottom: "10px", left: "16px", boxShadow: "0 4px 12px rgba(255,153,0,0.35)", zIndex: 2, fontFamily: "'Playfair Display', Georgia, serif" }}
+ />
  </div>
  <div style={{ padding: "14px 20px 22px" }}>
  <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0d1b3e", marginBottom: "7px" }}>{f.title}</h3>
@@ -462,3 +499,7 @@ const DefenceAcademy = () => {
 };
 
 export default DefenceAcademy;
+
+
+
+

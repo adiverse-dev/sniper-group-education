@@ -1,6 +1,19 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useLanguage } from "../i18n/LanguageProvider";
 import HeroSlider from "../sections/HeroSlider";
 import { IMAGE_PATHS } from "../config/imagePaths";
+import AvatarIcon from "../components/AvatarIcon";
+
+const headingCopy = {
+ en: {
+  whyChooseUs: "WHY CHOOSE US",
+  advantages: "Our Advantages",
+ },
+ hi: {
+  whyChooseUs: "\u0915\u094d\u092f\u094b\u0902 \u091a\u0941\u0928\u0947\u0902",
+  advantages: "\u0939\u092e\u093e\u0930\u0947 \u090f\u0921\u0935\u093e\u0902\u091f\u0947\u091c\u0947\u0938",
+ },
+};
 // ---------------------------------------------------------
 // SCHOOL SLIDER SLIDES
 // ---------------------------------------------------------
@@ -59,7 +72,6 @@ const courses = [
  name: "Nursery - KG",
  full: "Nursery to Kindergarten - Early Childhood Education",
  fee: "Rs 18,000/yr",
- icon: "N",
  photo: IMAGE_PATHS.school.cards.nurseryKg,
  cat: "Early Childhood",
  stats: [{ v: "Age 3-6", l: "Eligibility" }, { v: "Activity Based", l: "Learning" }, { v: "1 Year", l: "Duration" }],
@@ -79,7 +91,6 @@ const courses = [
  name: "Class 1 - 5",
  full: "Class 1 to 5 - CBSE Foundation",
  fee: "Rs 24,000/yr",
- icon: "N",
  photo: IMAGE_PATHS.school.cards.class15,
  cat: "Primary School",
  stats: [{ v: "Class 1-5", l: "Level" }, { v: "CBSE", l: "Curriculum" }, { v: "1 Year", l: "Duration" }],
@@ -99,7 +110,6 @@ const courses = [
  name: "Class 6 - 8",
  full: "Class 6 to 8 - Middle School Excellence",
  fee: "Rs 36,000/yr",
- icon: "N",
  photo: IMAGE_PATHS.school.cards.class68,
  cat: "Middle School",
  stats: [{ v: "Class 6-8", l: "Level" }, { v: "Science Lab", l: "Facility" }, { v: "1 Year", l: "Duration" }],
@@ -119,12 +129,12 @@ const courses = [
 // FEATURES DATA
 // ---------------------------------------------------------
 const features = [
- { icon: "N", title: "CBSE Affiliated", desc: "Fully affiliated with CBSE board ensuring national standard curriculum.", photo: IMAGE_PATHS.school.features.cbseAffiliated },
- { icon: "N", title: "Modern Labs", desc: "Well-equipped science, computer and language labs for hands-on learning.", photo: IMAGE_PATHS.school.features.modernLabs },
- { icon: "S", title: "Sports & Activities", desc: "Cricket, football, athletics and indoor games for physical development.", photo: IMAGE_PATHS.school.features.sportsActivities },
- { icon: "N", title: "Experienced Teachers", desc: "Qualified and dedicated faculty with years of teaching experience.", photo: IMAGE_PATHS.school.features.experiencedTeachers },
- { icon: "P", title: "Parent Connect", desc: "Regular PTMs and parent-teacher communication for student progress.", photo: IMAGE_PATHS.school.features.parentConnect },
- { icon: "N", title: "Merit Scholarships", desc: "Fee concessions and scholarships for top-performing students.", photo: IMAGE_PATHS.school.features.meritScholarships },
+ { title: "CBSE Affiliated", desc: "Fully affiliated with CBSE board ensuring national standard curriculum.", photo: IMAGE_PATHS.school.features.cbseAffiliated },
+ { title: "Modern Labs", desc: "Well-equipped science, computer and language labs for hands-on learning.", photo: IMAGE_PATHS.school.features.modernLabs },
+ { title: "Sports & Activities", desc: "Cricket, football, athletics and indoor games for physical development.", photo: IMAGE_PATHS.school.features.sportsActivities },
+ { title: "Experienced Teachers", desc: "Qualified and dedicated faculty with years of teaching experience.", photo: IMAGE_PATHS.school.features.experiencedTeachers },
+ { title: "Parent Connect", desc: "Regular PTMs and parent-teacher communication for student progress.", photo: IMAGE_PATHS.school.features.parentConnect },
+ { title: "Merit Scholarships", desc: "Fee concessions and scholarships for top-performing students.", photo: IMAGE_PATHS.school.features.meritScholarships },
 ];
 // ---------------------------------------------------------
 // COURSE DETAIL PANEL
@@ -140,9 +150,15 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
  <div id="course-detail" style={{ borderRadius: "20px", overflow: "hidden", border: "2px solid rgba(16,185,129,0.35)", background: "#f0fdf4", marginTop: "8px", marginBottom: "8px" }}>
  {/* Header */}
  <div style={{ background: "linear-gradient(135deg, #0d1b3e, #0d3d2e)", padding: "22px 28px", display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
- <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: "rgba(16,185,129,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "26px", flexShrink: 0 }}>
- {course.icon}
- </div>
+ <AvatarIcon
+ name={course.name}
+ size={52}
+ borderRadius="14px"
+ background="rgba(16,185,129,0.15)"
+ color="#34d399"
+ fontSize={20}
+ fontWeight={800}
+ />
  <div style={{ flex: 1 }}>
  <div style={{ fontSize: "16px", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{course.name} - {course.full}</div>
  <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginTop: "3px" }}>{course.desc}</div>
@@ -238,7 +254,6 @@ const CourseDetail = ({ course, activeDetail, setActiveDetail }) => {
 const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDetail, setActiveDetail }) => {
  const isReverse = index % 2 === 1;
  const isSelected = selectedCourse?.id === course.id;
- const courseInitial = (course?.name || "").trim().charAt(0).toUpperCase();
  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
  useEffect(() => {
  const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -284,9 +299,15 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
  <div style={{ position: "absolute", top: 0, bottom: 0, width: "4px", background: "linear-gradient(to bottom, #10b981, #34d399)", ...(isReverse ? { right: 0 } : { left: 0 }) }} />
  )}
 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
-<div style={{ width: "48px", height: "48px", borderRadius: "14px", background: isSelected ? "rgba(16,185,129,0.15)" : "rgba(16,185,129,0.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", flexShrink: 0 }}>
-{courseInitial}
-</div>
+<AvatarIcon
+name={course.name}
+size={48}
+borderRadius="14px"
+background={isSelected ? "rgba(16,185,129,0.15)" : "rgba(16,185,129,0.08)"}
+color={isSelected ? "#6ee7b7" : "#10b981"}
+fontSize={18}
+fontWeight={800}
+/>
  <div>
  <div style={{ fontSize: isMobile ? "17px" : "20px", fontWeight: 800, fontFamily: "'Playfair Display', Georgia, serif", color: isSelected ? "white" : "#0d1b3e", lineHeight: 1.2 }}>{course.name}</div>
  <div style={{ fontSize: "12px", fontWeight: 600, color: "#10b981", marginTop: "2px" }}>{course.full}</div>
@@ -318,10 +339,13 @@ const CourseRow = ({ course, index, selectedCourse, setSelectedCourse, activeDet
 // MAIN COMPONENT
 // ---------------------------------------------------------
 const PublicSchool = () => {
+ const { lang } = useLanguage();
+ const isHindi = lang === "hi";
+ const text = headingCopy[lang] || headingCopy.en;
  const [selectedCourse, setSelectedCourse] = useState(null);
  const [activeDetail, setActiveDetail] = useState("eligibility");
  return (
- <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
+ <div key={lang} style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
  <style>{`
  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -341,13 +365,13 @@ const PublicSchool = () => {
  <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
  <div style={{ textAlign: "center", marginBottom: "52px" }}>
  <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(16,185,129,0.3)", color: "#10b981", background: "rgba(16,185,129,0.07)" }}>
- Classes Offered
+ {isHindi ? "उपलब्ध कक्षाएं" : "Classes Offered"}
  </span>
  <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 36px)", color: "#0d1b3e", marginBottom: "10px" }}>
- From <span style={{ color: "#10b981" }}>Nursery to Class 8</span>
+ {isHindi ? "से" : "From"} <span style={{ color: "#10b981" }}>{isHindi ? "नर्सरी से कक्षा 8 तक" : "Nursery to Class 8"}</span>
  </h2>
  <p style={{ color: "#334155", fontSize: "15px", maxWidth: "480px", margin: "0 auto" }}>
- Quality CBSE education at every stage - click any class to explore details
+ {isHindi ? "हर स्तर पर गुणवत्तापूर्ण CBSE शिक्षा - किसी भी कक्षा पर क्लिक करके विवरण देखें" : "Quality CBSE education at every stage - click any class to explore details"}
  </p>
  </div>
  {courses.map((course, index) => (
@@ -368,10 +392,10 @@ const PublicSchool = () => {
  <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
  <div style={{ textAlign: "center", marginBottom: "48px" }}>
  <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(16,185,129,0.3)", color: "#10b981", background: "rgba(16,185,129,0.07)" }}>
-WHY THE CLASSES
+{text.whyChooseUs}
 </span>
 <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 36px)", color: "#0d1b3e" }}>
-The Classes <span style={{ color: "#10b981" }}>Advantage</span>
+{text.advantages}
 </h2>
  </div>
  <div className="features-grid">
@@ -388,9 +412,16 @@ The Classes <span style={{ color: "#10b981" }}>Advantage</span>
  onError={e => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
  />
  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "60px", background: "linear-gradient(to top, white, transparent)", pointerEvents: "none" }} />
- <div style={{ position: "absolute", bottom: "10px", left: "16px", width: "44px", height: "44px", borderRadius: "12px", background: "rgba(16,185,129,0.92)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", boxShadow: "0 4px 12px rgba(16,185,129,0.35)", zIndex: 2 }}>
- {(f?.title || "").trim().charAt(0).toUpperCase()}
- </div>
+ <AvatarIcon
+ name={f.title}
+ size={44}
+ borderRadius="12px"
+ background="rgba(16,185,129,0.92)"
+ color="white"
+ fontSize={16}
+ fontWeight={800}
+ style={{ position: "absolute", bottom: "10px", left: "16px", boxShadow: "0 4px 12px rgba(16,185,129,0.35)", zIndex: 2 }}
+ />
  </div>
  <div style={{ padding: "14px 20px 22px" }}>
  <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0d1b3e", marginBottom: "7px" }}>{f.title}</h3>
@@ -406,23 +437,23 @@ The Classes <span style={{ color: "#10b981" }}>Advantage</span>
  <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
  <div style={{ textAlign: "center", marginBottom: "48px" }}>
  <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "12px", border: "1px solid rgba(16,185,129,0.3)", color: "#10b981", background: "rgba(16,185,129,0.07)" }}>
- Student Life
+ {isHindi ? "स्टूडेंट लाइफ" : "Student Life"}
  </span>
  <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 34px)", color: "#0d1b3e" }}>
- A Day at <span style={{ color: "#10b981" }}>Sniper School</span>
+ {isHindi ? "एक दिन" : "A Day at"} <span style={{ color: "#10b981" }}>{isHindi ? "स्नाइपर स्कूल में" : "Sniper School"}</span>
  </h2>
  <p style={{ color: "#334155", fontSize: "15px", maxWidth: "500px", margin: "12px auto 0" }}>
- Every child's journey is special - we make learning joyful, safe and inspiring from Day 1
+ {isHindi ? "हर बच्चे की यात्रा खास है - हम सीखने को आनंदमय, सुरक्षित और प्रेरणादायक बनाते हैं" : "Every child's journey is special - we make learning joyful, safe and inspiring from Day 1"}
  </p>
  </div>
  <div className="student-life-grid">
  {[
- { emoji: "A", title: "Art & Craft", desc: "Creative activities that develop fine motor skills and imagination in young learners.", color: "#FF9933", photo: IMAGE_PATHS.school.studentLife.artCraft },
- { emoji: "A", title: "Story Time", desc: "Daily reading sessions to build language skills, vocabulary and love for books.", color: "#10b981", photo: IMAGE_PATHS.school.studentLife.storyTime },
- { emoji: "S", title: "Sports & Play", desc: "Structured outdoor play and sports to build teamwork, fitness and confidence.", color: "#7c3aed", photo: IMAGE_PATHS.school.studentLife.sportsPlay },
- { emoji: "A", title: "Science Activities", desc: "Fun experiments and activities that spark curiosity and scientific thinking from Class 3+.", color: "#e8420a", photo: IMAGE_PATHS.school.studentLife.scienceActivities },
- { emoji: "A", title: "Music & Dance", desc: "Cultural activities that nurture creativity, rhythm and self-expression in children.", color: "#10b981", photo: IMAGE_PATHS.school.studentLife.musicDance },
- { emoji: "A", title: "Annual Events", desc: "Sports day, annual function, science fair and cultural events for holistic development.", color: "#FF9933", photo: IMAGE_PATHS.school.studentLife.annualEvents },
+ { title: "Art & Craft", desc: "Creative activities that develop fine motor skills and imagination in young learners.", color: "#FF9933", photo: IMAGE_PATHS.school.studentLife.artCraft },
+ { title: "Story Time", desc: "Daily reading sessions to build language skills, vocabulary and love for books.", color: "#10b981", photo: IMAGE_PATHS.school.studentLife.storyTime },
+ { title: "Sports & Play", desc: "Structured outdoor play and sports to build teamwork, fitness and confidence.", color: "#7c3aed", photo: IMAGE_PATHS.school.studentLife.sportsPlay },
+ { title: "Science Activities", desc: "Fun experiments and activities that spark curiosity and scientific thinking from Class 3+.", color: "#e8420a", photo: IMAGE_PATHS.school.studentLife.scienceActivities },
+ { title: "Music & Dance", desc: "Cultural activities that nurture creativity, rhythm and self-expression in children.", color: "#10b981", photo: IMAGE_PATHS.school.studentLife.musicDance },
+ { title: "Annual Events", desc: "Sports day, annual function, science fair and cultural events for holistic development.", color: "#FF9933", photo: IMAGE_PATHS.school.studentLife.annualEvents },
  ].map((item, i) => (
  <div key={i}
  style={{ background: "white", borderRadius: "16px", border: "1.5px solid #eef1f8", overflow: "hidden", transition: "all 0.3s ease", boxShadow: "0 2px 12px rgba(0,0,0,0.06)", cursor: "default" }}
@@ -436,9 +467,16 @@ The Classes <span style={{ color: "#10b981" }}>Advantage</span>
  onError={e => { e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&fit=crop"; }}
  />
  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "50px", background: "linear-gradient(to top, white, transparent)", pointerEvents: "none" }} />
- <div style={{ position: "absolute", bottom: "8px", left: "14px", width: "40px", height: "40px", borderRadius: "10px", background: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", boxShadow: `0 4px 10px ${item.color}30`, zIndex: 2 }}>
- {(item?.title || "").trim().charAt(0).toUpperCase()}
- </div>
+ <AvatarIcon
+ name={item.title}
+ size={40}
+ borderRadius="10px"
+ background="white"
+ color={item.color}
+ fontSize={14}
+ fontWeight={800}
+ style={{ position: "absolute", bottom: "8px", left: "14px", boxShadow: `0 4px 10px ${item.color}30`, zIndex: 2 }}
+ />
  </div>
  <div style={{ padding: "12px 16px 18px" }}>
  <h3 style={{ fontSize: "14px", fontWeight: 700, color: "#0d1b3e", marginBottom: "6px" }}>{item.title}</h3>
@@ -453,5 +491,7 @@ The Classes <span style={{ color: "#10b981" }}>Advantage</span>
  );
 };
 export default PublicSchool;
+
+
 
 
