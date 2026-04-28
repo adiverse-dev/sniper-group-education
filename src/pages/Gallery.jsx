@@ -81,7 +81,7 @@ const photos = IMAGE_PATHS.gallery.photos.map((photoPath, index) => {
     id,
     wing,
     category,
-    title: `Gallery Photo ${String(id).padStart(3, "0")}`,
+    title: `${wing} ${category} Photo ${String(id).padStart(3, "0")}`,
     color: photoColors[wing],
     height: photoHeights[index % photoHeights.length],
     photo: photoPath,
@@ -217,12 +217,23 @@ const ReelCarousel = ({ videos }) => {
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "45%", background: "linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%)", borderRadius: "22px 22px 0 0", pointerEvents: "none" }} />
                   <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "30%", background: "linear-gradient(0deg, rgba(255,255,255,0.05) 0%, transparent 100%)", pointerEvents: "none" }} />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #1a3260, #0d1b3e)" }} />
-	                  <img
-	                    src={`https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg`}
-	                    alt="thumbnail" loading="lazy" decoding="async"
-	                    onError={e => { e.target.src = `https://img.youtube.com/vi/${v.youtubeId}/default.jpg`; }}
-	                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: isCenter ? 0.85 : 0.55 }}
-	                  />
+                  <img
+                    src={`https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg`}
+                    alt={`Sniper Group video preview ${i + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      e.target.src = `https://img.youtube.com/vi/${v.youtubeId}/default.jpg`;
+                    }}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      opacity: isCenter ? 0.85 : 0.55,
+                    }}
+                  />
                   <div style={{ position: "absolute", inset: 0, background: isCenter ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.5)", pointerEvents: "none" }} />
                   <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: isCenter ? "58px" : "42px", height: isCenter ? "58px" : "42px", borderRadius: "50%", background: isCenter ? "rgba(232,66,10,0.75)" : "rgba(255,255,255,0.08)", border: isCenter ? "1.5px solid rgba(255,255,255,0.5)" : "1.5px solid rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)", boxShadow: isCenter ? "0 0 30px rgba(232,66,10,0.5)" : "none", transition: "all 0.4s" }}>
                     <div style={{ width: 0, height: 0, borderTop: `${isCenter ? 10 : 7}px solid transparent`, borderBottom: `${isCenter ? 10 : 7}px solid transparent`, borderLeft: `${isCenter ? 18 : 13}px solid ${isCenter ? "white" : "rgba(255,255,255,0.6)"}`, marginLeft: isCenter ? "4px" : "3px" }} />
@@ -260,14 +271,32 @@ const Gallery = () => {
     (cat  === "All" || p.category === cat)
   );
 
-  useEffect(() => {
-    setVisibleCount(PHOTOS_BATCH_SIZE);
-    setLightbox(null);
-  }, [selectedWing, cat]);
-
   const visiblePhotos = filtered.slice(0, visibleCount);
   const cols = [[], [], []];
   visiblePhotos.forEach((p, i) => cols[i % 3].push({ ...p, filteredIndex: i }));
+
+  const resetGalleryState = () => {
+    setVisibleCount(PHOTOS_BATCH_SIZE);
+    setLightbox(null);
+  };
+
+  const handleWingSelect = (wing) => {
+    setSelectedWing(wing);
+    setCat("All");
+    resetGalleryState();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleCategoryChange = (nextCategory) => {
+    setCat(nextCategory);
+    resetGalleryState();
+  };
+
+  const handleBackToWings = () => {
+    setSelectedWing(null);
+    setCat("All");
+    resetGalleryState();
+  };
 
   const openLightbox  = (index) => setLightbox(index);
   const closeLightbox = ()      => setLightbox(null);
@@ -310,12 +339,18 @@ const Gallery = () => {
                 const rep = photos.find(p => p.wing === w) || photos[0];
                 return (
                   <div key={w}
-                    onClick={() => { setSelectedWing(w); setCat("All"); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    onClick={() => handleWingSelect(w)}
                     style={{ cursor: "pointer", borderRadius: "12px", overflow: "hidden", position: "relative", height: "260px", border: "1.5px solid #eef1f8", boxShadow: "0 8px 28px rgba(13,27,62,0.04)", transition: "transform 0.18s" }}
                     onMouseEnter={e => e.currentTarget.style.transform = "translateY(-6px)"}
                     onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
                   >
-	                    <img src={rep.photo} alt={w + " wing"} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    <img
+                      src={rep.photo}
+                      alt={`${w} wing activities at Sniper Group`}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
                     <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,27,62,0.06) 0%, rgba(13,27,62,0.6) 100%)" }} />
                     <div style={{ position: "absolute", left: "16px", bottom: "18px", color: "white", fontSize: "20px", fontWeight: 800, textShadow: "0 6px 18px rgba(0,0,0,0.45)" }}>{wingMeta[w].label}</div>
                     <div style={{ position: "absolute", right: "14px", top: "14px", padding: "6px 12px", borderRadius: "999px", background: wingMeta[w].color, color: "white", fontWeight: 700 }}>{photos.filter(p => p.wing === w).length} photos</div>
@@ -338,14 +373,14 @@ const Gallery = () => {
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <span style={{ fontSize: "15px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "1px" }}>Category:</span>
                 {catFilters.map((c) => (
-                  <button key={c} onClick={() => setCat(c)} style={{ padding: "6px 14px", borderRadius: "999px", cursor: "pointer", fontSize: "14px", fontWeight: 600, border: "1.5px solid", borderColor: cat === c ? "#e8420a" : "#e2e8f0", background: cat === c ? "rgba(232,66,10,0.08)" : "white", color: cat === c ? "#e8420a" : "#64748b", transition: "all 0.2s" }}>{c}</button>
+                  <button key={c} onClick={() => handleCategoryChange(c)} style={{ padding: "6px 14px", borderRadius: "999px", cursor: "pointer", fontSize: "14px", fontWeight: 600, border: "1.5px solid", borderColor: cat === c ? "#e8420a" : "#e2e8f0", background: cat === c ? "rgba(232,66,10,0.08)" : "white", color: cat === c ? "#e8420a" : "#64748b", transition: "all 0.2s" }}>{c}</button>
                 ))}
               </div>
               <div style={{ marginLeft: "auto", display: "flex", gap: "12px", alignItems: "center" }}>
 	                <div style={{ fontSize: "14px", color: "#64748b", fontWeight: 600 }}>
 	                  Showing {Math.min(visibleCount, filtered.length)} of {filtered.length} photo{filtered.length !== 1 ? "s" : ""}
 	                </div>
-                <button onClick={() => { setSelectedWing(null); setCat("All"); }} style={{ padding: "8px 12px", borderRadius: "10px", background: "white", border: "1px solid #e2e8f0", cursor: "pointer", fontWeight: 700 }}>◀ Back to Wings</button>
+                <button onClick={handleBackToWings} style={{ padding: "8px 12px", borderRadius: "10px", background: "white", border: "1px solid #e2e8f0", cursor: "pointer", fontWeight: 700 }}>Back to Wings</button>
               </div>
             </div>
           </section>

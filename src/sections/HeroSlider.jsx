@@ -36,7 +36,7 @@ function HeroSlider({ slides, waitForFirstSlide = false }) {
   const total = slides?.length || 0;
   const [cur, setCur] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
-  const [isReady, setIsReady] = useState(!waitForFirstSlide || !slides?.[0]?.img);
+  const [firstSlideLoaded, setFirstSlideLoaded] = useState(false);
 
   const curRef = useRef(0);
   const isTransitioningRef = useRef(false);
@@ -46,6 +46,8 @@ function HeroSlider({ slides, waitForFirstSlide = false }) {
     () => (slides || []).map((slide) => slide.img).filter(Boolean),
     [slides]
   );
+  const needsFirstSlideWait = waitForFirstSlide && Boolean(imageSources[0]);
+  const isReady = !needsFirstSlideWait || firstSlideLoaded;
 
   useEffect(() => {
     curRef.current = cur;
@@ -56,25 +58,24 @@ function HeroSlider({ slides, waitForFirstSlide = false }) {
   }, [transitioning]);
 
   useEffect(() => {
-    if (!waitForFirstSlide || !imageSources[0]) {
-      setIsReady(true);
+    if (!needsFirstSlideWait) {
       return;
     }
 
     let cancelled = false;
     preloadImage(imageSources[0]).then(() => {
-      if (!cancelled) setIsReady(true);
+      if (!cancelled) setFirstSlideLoaded(true);
     });
 
     const fallbackTimer = window.setTimeout(() => {
-      if (!cancelled) setIsReady(true);
+      if (!cancelled) setFirstSlideLoaded(true);
     }, 2500);
 
     return () => {
       cancelled = true;
       window.clearTimeout(fallbackTimer);
     };
-  }, [waitForFirstSlide, imageSources]);
+  }, [needsFirstSlideWait, imageSources]);
 
   useEffect(() => {
     return () => {
@@ -162,7 +163,13 @@ function HeroSlider({ slides, waitForFirstSlide = false }) {
             {slide.img && (
               <img
                 src={slide.img}
-                alt={slide.tag}
+                alt={
+                  slide.alt ||
+                  slide.heading ||
+                  [slide.title, slide.highlight, slide.title2].filter(Boolean).join(" ") ||
+                  slide.tag ||
+                  "Sniper Group banner image"
+                }
                 loading={isActive ? "eager" : "lazy"}
                 decoding="async"
                 fetchPriority={i === 0 ? "high" : "auto"}

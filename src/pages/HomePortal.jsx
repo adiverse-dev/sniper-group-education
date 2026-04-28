@@ -37,7 +37,7 @@ const homeSlides = [
     tag: "Defence Academy",
     accent: "#e8420a",
     heading: "Crack Every Defence Exam",
-    sub: "AISSEE Â· RMS Â· RIMC Â· NDA Â· CDS Â· Air Force",
+    sub: "AISSEE � RMS � RIMC � NDA � CDS � Air Force",
     btn: "Explore Courses",
     link: "/defence",
   },
@@ -47,7 +47,7 @@ const homeSlides = [
     tag: "Public School",
     accent: "#10b981",
     heading: "Quality CBSE Education",
-    sub: "Nursery to Class 8 â€” Building strong foundations",
+    sub: "Nursery to Class 8 - Building strong foundations",
     btn: "Explore School",
     link: "/school",
   },
@@ -57,7 +57,7 @@ const homeSlides = [
     tag: "Sniper Classes",
     accent: "#7c3aed",
     heading: "Crack Every Exam You Face",
-    sub: "IIT JEE Â· NEET Â· 9th to 12th Foundation",
+    sub: "IIT JEE � NEET � 9th to 12th Foundation",
     btn: "Explore Classes",
     link: "/classes",
   },
@@ -146,7 +146,7 @@ const HeroBanner = () => (
           {`Empowering Dreams ${COMPANY_TEXT.sinceFounded}`}
         </h1>
         <p style={{ marginTop: "14px", fontSize: "15px", color: "rgba(255,255,255,0.8)" }}>
-          {`Sniper Group of Education â€” ${COMPANY_TEXT.cityTierText}`}
+          {`Sniper Group of Education - ${COMPANY_TEXT.cityTierText}`}
         </p>
       </div>
     </div>
@@ -258,7 +258,7 @@ const StudentPhotoBanner = () => (
   <div style={{ width: "100%", overflow: "hidden", lineHeight: 0 }}>
     <img
       loading="lazy" decoding="async" src={IMAGE_PATHS.home.studentBanner.group}
-      alt="Our Students â€” Sniper Group of Education"
+      alt="Our students at Sniper Group of Education"
       style={{ width: "100%", display: "block", objectFit: "cover", maxHeight: "240px", objectPosition: "center top" }}
     />
   </div>
@@ -298,7 +298,7 @@ const HomePortal = () => {
                 </span>
                 <div style={{ width: "40px", height: "4px", background: "#e8420a", borderRadius: "2px", marginBottom: "24px" }} />
                 <blockquote style={{ fontFamily: "Georgia, serif", fontSize: "clamp(15px, 1.8vw, 17px)", color: "#0d1b3e", lineHeight: 1.8, fontStyle: "italic", borderLeft: "3px solid #e8420a", paddingLeft: "20px", margin: "0 0 24px 0" }}>
-                  "At Sniper Group of Education, we do not just teach â€” we transform. Every student who walks through our doors carries within them the potential to serve the nation, excel academically, and rise beyond their circumstances."
+                  "At Sniper Group of Education, we do not just teach - we transform. Every student who walks through our doors carries within them the potential to serve the nation, excel academically, and rise beyond their circumstances."
                 </blockquote>
                 <div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", borderRadius: "16px", overflow: "hidden", marginBottom: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
                   <iframe
@@ -318,7 +318,7 @@ const HomePortal = () => {
                   </div>
                   <div>
                     <p style={{ fontWeight: 700, color: "#0d1b3e", fontSize: "15px", margin: 0 }}>Director, Sniper Group of Education</p>
-                    <p style={{ color: "rgba(13,27,62,0.5)", fontSize: "12px", margin: "3px 0 0" }}>{`${COMPANY_TEXT.cityTierText} Â· ${COMPANY_TEXT.estText}`}</p>
+                    <p style={{ color: "rgba(13,27,62,0.5)", fontSize: "12px", margin: "3px 0 0" }}>{`${COMPANY_TEXT.cityTierText} � ${COMPANY_TEXT.estText}`}</p>
                   </div>
                 </div>
               </div>
@@ -334,7 +334,7 @@ const HomePortal = () => {
                   Bhagwan Parshuram Education &amp; Charitable Trust
                 </h3>
                 <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", lineHeight: 1.75, marginBottom: "24px" }}>
-                  Registered under the Societies Registration Act, our trust is the legal backbone of all three wings. Based in {COMPANY_PROFILE.city} â€” a {COMPANY_PROFILE.cityTier} â€” we are committed to making quality education accessible, affordable, and excellence-driven for every child.
+                  Registered under the Societies Registration Act, our trust is the legal backbone of all three wings. Based in {COMPANY_PROFILE.city} - a {COMPANY_PROFILE.cityTier} - we are committed to making quality education accessible, affordable, and excellence-driven for every child.
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                   {[
@@ -439,4 +439,5 @@ const HomePortal = () => {
 };
 
 export default HomePortal;
+
 

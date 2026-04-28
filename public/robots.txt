@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://snipergroupofeducation.netlify.app/sitemap.xml
