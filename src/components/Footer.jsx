@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import LocalizedLink from "./LocalizedLink";
+import { useLanguage } from "../i18n/LanguageProvider";
 
 const FacebookIcon = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
@@ -21,15 +22,7 @@ const InstagramIcon = () => (
       </radialGradient>
     </defs>
     <rect width="24" height="24" rx="6" fill="url(#ig-grad1)" />
-    <rect
-      x="6.5"
-      y="6.5"
-      width="11"
-      height="11"
-      rx="3.5"
-      stroke="white"
-      strokeWidth="1.6"
-    />
+    <rect x="6.5" y="6.5" width="11" height="11" rx="3.5" stroke="white" strokeWidth="1.6" />
     <circle cx="12" cy="12" r="2.8" stroke="white" strokeWidth="1.6" />
     <circle cx="16.2" cy="7.8" r="0.9" fill="white" />
   </svg>
@@ -55,20 +48,6 @@ const WhatsAppIcon = () => (
     />
   </svg>
 );
-
-const instituteLinks = [
-  { label: "Defence Academy", path: "/defence" },
-  { label: "Public School", path: "/school" },
-  { label: "Sniper Classes", path: "/classes" },
-];
-
-const quickLinks = [
-  { label: "About Us", path: "/about" },
-  { label: "Results", path: "/results" },
-  { label: "Fee Structure", path: "/fees" },
-  { label: "Gallery", path: "/gallery" },
-  { label: "Contact Us", path: "/contact" },
-];
 
 const socialLinks = [
   {
@@ -101,6 +80,7 @@ const linkListStyle = { listStyle: "none", padding: 0, display: "grid", gap: "12
 const linkStyle = { color: "#bbb", textDecoration: "none" };
 
 const Footer = () => {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
@@ -123,13 +103,7 @@ const Footer = () => {
         </svg>
       </div>
 
-      <footer
-        style={{
-          background: "#0a1628",
-          color: "#fff",
-          fontFamily: "Poppins,sans-serif",
-        }}
-      >
+      <footer style={{ background: "#0a1628", color: "#fff", fontFamily: "Poppins,sans-serif" }}>
         <div
           style={{
             background: "linear-gradient(90deg,#e8420a,#ff6b35)",
@@ -140,10 +114,7 @@ const Footer = () => {
             gap: "12px",
           }}
         >
-          <p style={{ margin: 0, fontWeight: 700 }}>
-            Admissions Open 2026-27 - Limited Seats Available
-          </p>
-
+          <p style={{ margin: 0, fontWeight: 700 }}>{t("footer.admissions")}</p>
           <a
             href="https://wa.me/917060155711"
             target="_blank"
@@ -157,7 +128,7 @@ const Footer = () => {
               textDecoration: "none",
             }}
           >
-            Enquire Now
+            {t("footer.enquireNow")}
           </a>
         </div>
 
@@ -180,7 +151,6 @@ const Footer = () => {
               decoding="async"
               style={{ height: "52px", marginBottom: "18px" }}
             />
-
             <p
               style={{
                 fontSize: "14px",
@@ -189,12 +159,7 @@ const Footer = () => {
                 marginBottom: "22px",
               }}
             >
-              <strong style={{ color: "#fff" }}>Sniper Group of Education</strong>,
-              governed by{" "}
-              <strong style={{ color: "#fff" }}>
-                Bhagwan Parshuram Education and Charitable Trust
-              </strong>
-              , is dedicated to quality education and defence training in Meerut.
+              {t("footer.trustText")}
             </p>
 
             <div style={{ display: "flex", gap: "10px" }}>
@@ -223,45 +188,68 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 style={sectionTitleStyle}>Our Institutes</h4>
-            <ul style={linkListStyle}>
-              {instituteLinks.map((item) => (
-                <li key={item.path}>
-                  <Link to={item.path} style={linkStyle}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 style={sectionTitleStyle}>Quick Links</h4>
+            <h4 style={sectionTitleStyle}>{t("footer.institutes")}</h4>
             <ul style={linkListStyle}>
               <li>
-                <Link to="/" style={linkStyle}>
-                  Home
-                </Link>
+                <LocalizedLink to="/defence" style={linkStyle}>
+                  {t("wings.defenceName")}
+                </LocalizedLink>
               </li>
-              {quickLinks.map((item) => (
-                <li key={item.path}>
-                  <Link to={item.path} style={linkStyle}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <LocalizedLink to="/school" style={linkStyle}>
+                  {t("wings.schoolName")}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink to="/classes" style={linkStyle}>
+                  {t("wings.classesName")}
+                </LocalizedLink>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 style={sectionTitleStyle}>Contact Us</h4>
+            <h4 style={sectionTitleStyle}>{t("footer.quickLinks")}</h4>
+            <ul style={linkListStyle}>
+              <li>
+                <LocalizedLink to="/" style={linkStyle}>
+                  {t("nav.home")}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink to="/about" style={linkStyle}>
+                  {t("footer.about")}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink to="/results" style={linkStyle}>
+                  {t("footer.results")}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink to="/fees" style={linkStyle}>
+                  {t("footer.fees")}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink to="/gallery" style={linkStyle}>
+                  {t("footer.gallery")}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink to="/contact" style={linkStyle}>
+                  {t("footer.contact")}
+                </LocalizedLink>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style={sectionTitleStyle}>{t("footer.contactUs")}</h4>
             <div style={{ display: "grid", gap: "14px", color: "#bbb" }}>
-              <div>
-                NH 34, Rajpura Road, Mawana Rd, opposite HP Petrol Pump, Meerut,
-                Uttar Pradesh 250001
-              </div>
+              <div>{t("footer.address")}</div>
               <div>+91 7060155711</div>
-              <div>Mon-Sat: 8:00 AM - 7:00 PM</div>
+              <div>{t("footer.schedule")}</div>
             </div>
           </div>
         </div>
@@ -282,11 +270,11 @@ const Footer = () => {
           }}
         >
           <p style={{ fontSize: "13px", color: "rgba(255,255,255,.45)", margin: 0 }}>
-            Copyright {year} Sniper Group of Education. All rights reserved.
+            Copyright {year} Sniper Group of Education. {t("footer.rights")}
           </p>
 
           <p style={{ fontSize: "13px", color: "rgba(255,255,255,.45)", margin: 0 }}>
-            Designed and Developed by Finofits Consulting.
+            {t("footer.madeBy")}
           </p>
         </div>
 
@@ -309,3 +297,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

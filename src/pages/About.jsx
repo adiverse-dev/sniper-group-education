@@ -1,182 +1,244 @@
 ﻿import HeroSlider from "../sections/HeroSlider";
 import { IMAGE_PATHS } from "../config/imagePaths";
 import { COMPANY_PROFILE, COMPANY_TEXT } from "../config/companyProfile";
+import { useLanguage } from "../i18n/LanguageProvider";
 
-// ─────────────────────────────────────────────────────────────
-// HERO SLIDER SLIDES
-// ─────────────────────────────────────────────────────────────
-const heroSlides = [
-  {
-    img: IMAGE_PATHS.about.hero.slide1,
-    imgPos: "center top",
-    tag: "Fee Structure 2026-27",
-    accent: "#e8420a",
-    heading: "Transparent & Affordable Fees",
-    sub: "Quality education at accessible prices — scholarships available for deserving students.",
-    btn: "View Fee Details",
-    link: "/fees",
-  },
-  {
-    img: IMAGE_PATHS.about.hero.slide2,
-    imgPos: "center",
-    tag: "Public School Fees",
-    accent: "#10b981",
-    heading: "Sniper Sainik School — Session 2026-27",
-    sub: "Nursery to Class 8 — CBSE Affiliated. Quarterly fee payment options available.",
-    btn: "View School Fees",
-    link: "/fees",
-  },
-  {
-    img: IMAGE_PATHS.about.hero.slide3,
-    imgPos: "center",
-    tag: "Scholarships Available",
-    accent: "#7c3aed",
-    heading: "Merit Scholarships & Discounts",
-    sub: "Staff wards and army families get 20% off. Old students get 50% off admission fees.",
-    btn: "Know More",
-    link: "/fees",
-  },
-];
+function getSlides(lang) {
+  if (lang === "hi") {
+    return [
+      {
+        img: IMAGE_PATHS.about.hero.slide1,
+        imgPos: "center top",
+        tag: "हमारी कहानी",
+        accent: "#e8420a",
+        heading: "अनुशासन और उत्कृष्टता की विरासत",
+        sub: "स्नाइपर ग्रुप शिक्षा और डिफेन्स तैयारी को क्षेत्रीय छात्रों तक पहुंचाने के लिए समर्पित है।",
+        btn: "और जानें",
+        link: "/about",
+      },
+      {
+        img: IMAGE_PATHS.about.hero.slide2,
+        imgPos: "center",
+        tag: "नेतृत्व",
+        accent: "#10b981",
+        heading: "अनुभवी मार्गदर्शन, स्पष्ट दिशा",
+        sub: "समर्पित नेतृत्व, अनुभवी फैकल्टी और परिणाम-आधारित दृष्टिकोण।",
+        btn: "डायरेक्टर संदेश",
+        link: "/about",
+      },
+      {
+        img: IMAGE_PATHS.about.hero.slide3,
+        imgPos: "center",
+        tag: "हमारा ट्रस्ट",
+        accent: "#7c3aed",
+        heading: "शिक्षा और समाज सेवा के लिए प्रतिबद्ध",
+        sub: "Bhagwan Parshuram Education & Charitable Trust के अंतर्गत संचालित।",
+        btn: "ट्रस्ट विवरण",
+        link: "/about",
+      },
+    ];
+  }
 
-// ─────────────────────────────────────────────────────────────
-// MAIN COMPONENT
-// ─────────────────────────────────────────────────────────────
-const About = () => {
+  return [
+    {
+      img: IMAGE_PATHS.about.hero.slide1,
+      imgPos: "center top",
+      tag: "Our Story",
+      accent: "#e8420a",
+      heading: "A Legacy of Discipline and Excellence",
+      sub: "Sniper Group is committed to accessible, high-quality education and defence preparation.",
+      btn: "Know More",
+      link: "/about",
+    },
+    {
+      img: IMAGE_PATHS.about.hero.slide2,
+      imgPos: "center",
+      tag: "Leadership",
+      accent: "#10b981",
+      heading: "Experienced Guidance, Clear Direction",
+      sub: "Dedicated leadership, experienced faculty and a result-focused approach.",
+      btn: "Director Message",
+      link: "/about",
+    },
+    {
+      img: IMAGE_PATHS.about.hero.slide3,
+      imgPos: "center",
+      tag: "Our Trust",
+      accent: "#7c3aed",
+      heading: "Committed to Education and Social Welfare",
+      sub: "Operated under Bhagwan Parshuram Education & Charitable Trust.",
+      btn: "Trust Details",
+      link: "/about",
+    },
+  ];
+}
+
+const copy = {
+  en: {
+    storyTag: "Our Story",
+    storyTitleA: "A Legacy Built on",
+    storyTitleB: "Discipline",
+    storyTitleC: "and Excellence",
+    storyP1:
+      "Sniper Group of Education started with a clear purpose: provide structured, result-oriented education to regional students.",
+    storyP2:
+      "What began as a defence-focused initiative has grown into three dedicated wings serving school students, defence aspirants and competitive exam learners.",
+    storyP3:
+      "Today, families across the district trust us for sincere guidance, consistent effort and measurable outcomes.",
+    timeline: [
+      { year: "2020", title: "Foundation", desc: "Started as Sniper Defence Academy." },
+      { year: "2021", title: "School Wing", desc: "Launched Public School from Nursery to Class 8." },
+      { year: "2022", title: "Classes Wing", desc: "Started JEE/NEET and board preparation batches." },
+      { year: "2024", title: "Growth", desc: "Expanded student success across all three wings." },
+    ],
+    leaderTag: "Leadership",
+    leaderTitleA: "Director",
+    leaderTitleB: "Message",
+    leaderRole: "Director and Founder",
+    leaderBody1:
+      "Our mission has always been to bring metro-level preparation and mentorship to students in our own region.",
+    leaderBody2:
+      "Discipline, consistency and the right learning environment are the pillars on which we build every student journey.",
+    leaderBody3: "Together, we are shaping confident, capable leaders for tomorrow.",
+    trustTag: "Our Trust",
+    trustTitleA: "Bhagwan Parshuram Education and",
+    trustTitleB: "Charitable Trust",
+    trustSub: "The foundation behind every initiative at Sniper Group of Education.",
+    trustPoints: [
+      "Registered charitable trust with transparent operations.",
+      "Merit scholarships and fee support for deserving students.",
+      "Community-focused educational and welfare initiatives.",
+      "Special concessions for defence and staff families.",
+    ],
+    purposeTag: "Our Purpose",
+    purposeTitleA: "Vision and",
+    purposeTitleB: "Mission",
+    cards: [
+      {
+        icon: "V",
+        title: "Our Vision",
+        desc: "To be the most trusted institution in our region, where every student gets a fair chance to succeed.",
+      },
+      {
+        icon: "M",
+        title: "Our Mission",
+        desc: "To deliver focused, practical and disciplined education for school, defence and competitive exams.",
+      },
+      {
+        icon: "U",
+        title: "Our Values",
+        desc: "Discipline, sincerity, respect and hard work shape our daily culture.",
+      },
+      {
+        icon: "C",
+        title: "Our Commitment",
+        desc: "Every learner receives honest guidance, faculty support and a growth-oriented environment.",
+      },
+    ],
+  },
+  hi: {
+    storyTag: "हमारी कहानी",
+    storyTitleA: "अनुशासन और",
+    storyTitleB: "उत्कृष्टता",
+    storyTitleC: "की विरासत",
+    storyP1:
+      "स्नाइपर ग्रुप ऑफ एजुकेशन की शुरुआत एक स्पष्ट उद्देश्य के साथ हुई: क्षेत्रीय छात्रों को व्यवस्थित और परिणाम-उन्मुख शिक्षा देना।",
+    storyP2:
+      "जो पहल डिफेन्स तैयारी से शुरू हुई, वह आज तीन समर्पित विंग्स के रूप में स्कूल, डिफेन्स और प्रतियोगी परीक्षा छात्रों की सेवा कर रही है।",
+    storyP3:
+      "आज जिले भर के परिवार ईमानदार मार्गदर्शन, निरंतर प्रयास और वास्तविक परिणामों के लिए हम पर भरोसा करते हैं।",
+    timeline: [
+      { year: "2020", title: "स्थापना", desc: "Sniper Defence Academy की शुरुआत।" },
+      { year: "2021", title: "स्कूल विंग", desc: "Nursery से Class 8 तक Public School शुरू किया।" },
+      { year: "2022", title: "क्लासेस विंग", desc: "JEE/NEET और बोर्ड तैयारी बैच शुरू हुए।" },
+      { year: "2024", title: "विकास", desc: "तीनों विंग्स में छात्रों की सफलता का विस्तार।" },
+    ],
+    leaderTag: "नेतृत्व",
+    leaderTitleA: "डायरेक्टर का",
+    leaderTitleB: "संदेश",
+    leaderRole: "डायरेक्टर और फाउंडर",
+    leaderBody1:
+      "हमारा लक्ष्य हमेशा यह रहा है कि हमारे क्षेत्र के छात्रों को भी महानगरों जैसी तैयारी और मेंटरशिप मिले।",
+    leaderBody2:
+      "अनुशासन, निरंतरता और सही सीखने का माहौल हर छात्र की यात्रा का आधार है।",
+    leaderBody3: "हम मिलकर कल के आत्मविश्वासी और सक्षम लीडर्स तैयार कर रहे हैं।",
+    trustTag: "हमारा ट्रस्ट",
+    trustTitleA: "भगवान परशुराम एजुकेशन एंड",
+    trustTitleB: "चैरिटेबल ट्रस्ट",
+    trustSub: "Sniper Group की हर पहल के पीछे यही मजबूत आधार है।",
+    trustPoints: [
+      "पारदर्शी संचालन के साथ पंजीकृत चैरिटेबल ट्रस्ट।",
+      "योग्य छात्रों के लिए स्कॉलरशिप और फीस सहायता।",
+      "शिक्षा और सामाजिक कल्याण से जुड़ी सामुदायिक पहल।",
+      "डिफेन्स और स्टाफ परिवारों के लिए विशेष रियायतें।",
+    ],
+    purposeTag: "हमारा उद्देश्य",
+    purposeTitleA: "विजन और",
+    purposeTitleB: "मिशन",
+    cards: [
+      {
+        icon: "V",
+        title: "हमारा विजन",
+        desc: "अपने क्षेत्र का सबसे विश्वसनीय संस्थान बनना, जहां हर छात्र को आगे बढ़ने का समान अवसर मिले।",
+      },
+      {
+        icon: "M",
+        title: "हमारा मिशन",
+        desc: "स्कूल, डिफेन्स और प्रतियोगी परीक्षाओं के लिए केंद्रित, व्यवहारिक और अनुशासित शिक्षा देना।",
+      },
+      {
+        icon: "U",
+        title: "हमारे मूल्य",
+        desc: "अनुशासन, ईमानदारी, सम्मान और मेहनत हमारी दैनिक कार्यसंस्कृति का हिस्सा हैं।",
+      },
+      {
+        icon: "C",
+        title: "हमारी प्रतिबद्धता",
+        desc: "हर छात्र को सही मार्गदर्शन, फैकल्टी सपोर्ट और विकास-केंद्रित वातावरण देना।",
+      },
+    ],
+  },
+};
+
+export default function About() {
+  const { lang } = useLanguage();
+  const t = copy[lang] || copy.en;
+  const slides = getSlides(lang);
+
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7fa", overflowX: "hidden" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
-        @media (max-width: 768px) {
-          .about-story-grid      { grid-template-columns: 1fr !important; }
-          .about-principal-grid  { grid-template-columns: 1fr !important; text-align: center; }
-          .about-trust-grid      { grid-template-columns: 1fr !important; }
-          .about-vm-grid         { grid-template-columns: 1fr 1fr !important; }
-        }
-        @media (max-width: 480px) {
-          .about-vm-grid { grid-template-columns: 1fr !important; }
-        }
-        .trust-stat-card {
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 16px;
-          padding: 24px 20px;
-          text-align: center;
-          transition: all 0.25s ease;
-        }
-        .trust-stat-card:hover {
-          background: rgba(255,255,255,0.09);
-          border-color: rgba(232,66,10,0.35);
-          transform: translateY(-3px);
-        }
-        .trust-item-row {
-          display: flex;
-          gap: 16px;
-          align-items: flex-start;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
-          border-radius: 14px;
-          padding: 18px 20px;
-          transition: all 0.25s ease;
-          cursor: default;
-        }
-        .trust-item-row:hover {
-          background: rgba(255,255,255,0.08);
-        }
+        .about-grid-two { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+        .about-grid-four { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+        @media (max-width: 900px) { .about-grid-two { grid-template-columns:1fr; } }
       `}</style>
 
-      {/* 1. HERO SLIDER */}
-      <HeroSlider slides={heroSlides} />
+      <HeroSlider slides={slides} />
 
-      {/* 2. OUR STORY */}
       <section style={{ background: "#ffffff", padding: "72px 20px" }}>
-        <div
-          className="about-story-grid"
-          style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "60px",
-            alignItems: "center",
-          }}
-        >
+        <div className="about-grid-two" style={{ maxWidth: "1100px", margin: "0 auto", alignItems: "center" }}>
           <div>
-            <span
-              style={{
-                display: "inline-block",
-                padding: "4px 14px",
-                borderRadius: "999px",
-                fontSize: "14px",
-                fontWeight: 700,
-                letterSpacing: "2.5px",
-                textTransform: "uppercase",
-                marginBottom: "14px",
-                border: "1px solid rgba(232,66,10,0.3)",
-                color: "#e8420a",
-                background: "rgba(232,66,10,0.07)",
-              }}
-            >
-              Our Story
+            <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "14px", border: "1px solid rgba(232,66,10,0.3)", color: "#e8420a", background: "rgba(232,66,10,0.07)" }}>
+              {t.storyTag}
             </span>
-            <h2
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontWeight: 800,
-                fontSize: "clamp(24px, 2.8vw, 34px)",
-                color: "#0d1b3e",
-                marginBottom: "16px",
-                lineHeight: 1.25,
-              }}
-            >
-              A Legacy Built on{" "}
-              <span style={{ color: "#e8420a" }}>Discipline</span> &amp; Excellence
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px, 2.8vw, 34px)", color: "#0d1b3e", marginBottom: "16px", lineHeight: 1.25 }}>
+              {t.storyTitleA} <span style={{ color: "#e8420a" }}>{t.storyTitleB}</span> {t.storyTitleC}
             </h2>
-            <p style={{ color: "#334155", fontSize: "15px", lineHeight: 1.8, marginBottom: "14px" }}>
-              Sniper Group of Education was established in 2020 with a clear purpose — to bring
-              structured, result-oriented education to students of our region who deserve the same
-              quality of coaching available in bigger cities.
-            </p>
-            <p style={{ color: "#334155", fontSize: "15px", lineHeight: 1.8, marginBottom: "14px" }}>
-              Starting as a focused defence coaching centre, we quickly expanded into a
-              full-fledged educational group with three dedicated wings — each serving a distinct
-              need of our students and their families.
-            </p>
-            <p style={{ color: "#334155", fontSize: "15px", lineHeight: 1.8 }}>
-              In just a few years, Sniper Group has earned the trust of thousands of families
-              across the district, with hundreds of students clearing defence and competitive
-              examinations every year.
-            </p>
+            <p style={{ color: "#334155", fontSize: "15px", lineHeight: 1.85, marginBottom: "12px" }}>{t.storyP1}</p>
+            <p style={{ color: "#334155", fontSize: "15px", lineHeight: 1.85, marginBottom: "12px" }}>{t.storyP2}</p>
+            <p style={{ color: "#334155", fontSize: "15px", lineHeight: 1.85 }}>{t.storyP3}</p>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            {[
-              { year: "2020", title: "Foundation",     desc: "Started as Sniper Defence Academy with a small but committed batch of students", color: "#FF9933" },
-              { year: "2021", title: "School Wing",    desc: "Launched Sniper Sainik Public School — CBSE affiliated, Nursery to Class 8",    color: "#10b981" },
-              { year: "2022", title: "Classes Wing",   desc: "Opened Sniper Classes for JEE, NEET, and board exam coaching",                   color: "#7c3aed" },
-              { year: "2024", title: "Growing Strong", desc: "Thousands of students enrolled, hundreds of defence selections achieved",         color: "#e8420a" },
-            ].map((t, i) => (
-              <div key={i} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                <div
-                  style={{
-                    width: "52px",
-                    height: "52px",
-                    borderRadius: "12px",
-                    background: `${t.color}15`,
-                    border: `2px solid ${t.color}40`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "15px",
-                    fontWeight: 800,
-                    color: t.color,
-                    flexShrink: 0,
-                  }}
-                >
-                  {t.year}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            {t.timeline.map((item) => (
+              <div key={item.year} style={{ display: "flex", gap: "14px", alignItems: "flex-start", background: "#f8fafc", border: "1px solid #eef2f7", borderRadius: "14px", padding: "16px" }}>
+                <div style={{ width: "52px", height: "52px", borderRadius: "12px", background: "rgba(232,66,10,0.12)", color: "#e8420a", fontWeight: 800, fontSize: "14px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  {item.year}
                 </div>
                 <div>
-                  <h4 style={{ fontSize: "14px", fontWeight: 700, color: "#0d1b3e", marginBottom: "3px" }}>{t.title}</h4>
-                  <p style={{ fontSize: "15px", color: "#334155", margin: 0 }}>{t.desc}</p>
+                  <h4 style={{ fontSize: "14px", fontWeight: 700, color: "#0d1b3e", marginBottom: "4px" }}>{item.title}</h4>
+                  <p style={{ margin: 0, fontSize: "14px", color: "#334155", lineHeight: 1.6 }}>{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -184,460 +246,79 @@ const About = () => {
         </div>
       </section>
 
-      {/* 3. DIRECTOR'S MESSAGE */}
       <section style={{ background: "#f5f7fa", padding: "72px 20px" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "44px" }}>
-            <span
-              style={{
-                display: "inline-block",
-                padding: "4px 14px",
-                borderRadius: "999px",
-                fontSize: "14px",
-                fontWeight: 700,
-                letterSpacing: "2.5px",
-                textTransform: "uppercase",
-                marginBottom: "12px",
-                border: "1px solid rgba(232,66,10,0.3)",
-                color: "#e8420a",
-                background: "rgba(232,66,10,0.07)",
-              }}
-            >
-              Leadership
+        <div style={{ maxWidth: "1100px", margin: "0 auto", background: "white", borderRadius: "24px", padding: "40px", border: "1px solid #eaf0f8", boxShadow: "0 8px 32px rgba(13,27,62,0.08)" }}>
+          <div style={{ textAlign: "center", marginBottom: "26px" }}>
+            <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px", border: "1px solid rgba(232,66,10,0.3)", color: "#e8420a", background: "rgba(232,66,10,0.07)" }}>
+              {t.leaderTag}
             </span>
-            <h2
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontWeight: 800,
-                fontSize: "clamp(24px, 2.8vw, 34px)",
-                color: "#0d1b3e",
-              }}
-            >
-              Director's <span style={{ color: "#e8420a" }}>Message</span>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px,2.8vw,34px)", color: "#0d1b3e" }}>
+              {t.leaderTitleA} <span style={{ color: "#e8420a" }}>{t.leaderTitleB}</span>
             </h2>
           </div>
 
-          <div
-            className="about-principal-grid"
-            style={{
-              background: "white",
-              borderRadius: "24px",
-              padding: "52px",
-              border: "1.5px solid #eef1f8",
-              boxShadow: "0 8px 40px rgba(13,27,62,0.08)",
-              display: "grid",
-              gridTemplateColumns: "320px 1fr",
-              gap: "48px",
-              alignItems: "start",
-            }}
-          >
-            {/* Photo — bigger, rectangular portrait style */}
+          <div className="about-grid-two" style={{ alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
-              <div
-                style={{
-                  width: "280px",
-                  height: "280px",
-                  borderRadius: "50%",
-                  background: "linear-gradient(135deg, #0d1b3e, #1a3260)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 auto 18px",
-                  border: "4px solid rgba(232,66,10,0.2)",
-                  position: "relative",
-                  overflow: "hidden",
-                  boxShadow: "0 16px 40px rgba(13,27,62,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    position: "absolute",
-                    fontSize: "30px",
-                    fontWeight: 700,
-                    color: "rgba(255,255,255,0.2)",
-                    letterSpacing: "2px",
-                  }}
-                >
-                  DIR
-                </span>
-                <img
-                  src={IMAGE_PATHS.about.leadership.director}
-                  alt="Director Sanjeev Parashar"
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => { e.currentTarget.style.display = "none"; }}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center top",
-                  }}
-                />
-                {/* Bottom fade */}
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: "64px",
-                    background: "linear-gradient(to top, rgba(13,27,62,0.55), transparent)",
-                  }}
-                />
+              <div style={{ width: "260px", height: "260px", margin: "0 auto 14px", borderRadius: "50%", overflow: "hidden", border: "4px solid rgba(232,66,10,0.2)", boxShadow: "0 16px 34px rgba(13,27,62,0.16)" }}>
+                <img src={IMAGE_PATHS.about.leadership.director} alt="Director Sanjeev Parashar" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
               </div>
-
-              <div style={{ width: "48px", height: "3px", background: "#e8420a", borderRadius: "2px", margin: "0 auto 14px" }} />
-              <h4 style={{ fontSize: "17px", fontWeight: 800, color: "#0d1b3e", marginBottom: "5px" }}>Sanjeev Parashar</h4>
-              <p style={{ fontSize: "12px", fontWeight: 700, color: "#64748b", letterSpacing: "1.5px", textTransform: "uppercase", margin: "0 0 8px" }}>
-                Ex AIG, Indian Army
-              </p>
-              <span
-                style={{
-                  fontSize: "13px",
-                  color: "#e8420a",
-                  fontWeight: 700,
-                  background: "rgba(232,66,10,0.07)",
-                  padding: "3px 14px",
-                  borderRadius: "999px",
-                  display: "inline-block",
-                  marginBottom: "6px",
-                }}
-              >
-                Director &amp; Founder
-              </span>
-              <p style={{ fontSize: "13px", color: "#64748b", margin: 0 }}>Sniper Group of Education</p>
+              <h4 style={{ fontSize: "17px", fontWeight: 800, color: "#0d1b3e", marginBottom: "4px" }}>Sanjeev Parashar</h4>
+              <p style={{ margin: 0, color: "#64748b", fontSize: "12px", letterSpacing: "1px", textTransform: "uppercase" }}>Ex AIG, Indian Army</p>
+              <p style={{ margin: "8px 0 0", color: "#e8420a", fontWeight: 700, fontSize: "13px" }}>{t.leaderRole}</p>
             </div>
-
-            {/* Message */}
-            <div style={{ paddingTop: "8px" }}>
-              <div
-                style={{
-                  fontSize: "80px",
-                  color: "#e8420a",
-                  opacity: 0.1,
-                  lineHeight: 0.8,
-                  marginBottom: "8px",
-                  fontFamily: "'Playfair Display', Georgia, serif",
-                  userSelect: "none",
-                }}
-              >
-                &ldquo;
-              </div>
-              <p style={{ color: "#334155", fontSize: "16px", lineHeight: 1.9, marginBottom: "18px" }}>
-                When we started Sniper Group in 2020, our goal was simple — give students in our
-                district the same standard of coaching and guidance that was only available in
-                metros. Every child here has the capability; what they need is the right environment
-                and the right push.
-              </p>
-              <p style={{ color: "#334155", fontSize: "16px", lineHeight: 1.9, marginBottom: "18px" }}>
-                My army background taught me that discipline is not a restriction — it is a
-                foundation. We have built this institution on that belief, and the results our
-                students achieve year after year prove that it works.
-              </p>
-              <p
-                style={{
-                  color: "#0d1b3e",
-                  fontSize: "16px",
-                  lineHeight: 1.9,
-                  fontWeight: 700,
-                  borderLeft: "3px solid #e8420a",
-                  paddingLeft: "16px",
-                  marginTop: "24px",
-                }}
-              >
-                Together, we are shaping leaders for tomorrow.
-              </p>
+            <div>
+              <p style={{ color: "#334155", fontSize: "16px", lineHeight: 1.9, marginBottom: "12px" }}>{t.leaderBody1}</p>
+              <p style={{ color: "#334155", fontSize: "16px", lineHeight: 1.9, marginBottom: "12px" }}>{t.leaderBody2}</p>
+              <p style={{ color: "#0d1b3e", fontSize: "16px", lineHeight: 1.9, fontWeight: 700, borderLeft: "3px solid #e8420a", paddingLeft: "14px", marginTop: "18px" }}>{t.leaderBody3}</p>
+              <p style={{ color: "#64748b", fontSize: "12px", marginTop: "10px" }}>{`${COMPANY_TEXT.cityTierText} | ${COMPANY_TEXT.estText}`}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. OUR TRUST — redesigned */}
-      <section
-        style={{
-          background: "linear-gradient(160deg, #0b1830 0%, #112244 55%, #0d1b3e 100%)",
-          padding: "80px 20px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Decorative glows */}
-        <div style={{ position: "absolute", top: "-100px", right: "-100px", width: "440px", height: "440px", borderRadius: "50%", background: "radial-gradient(circle, rgba(232,66,10,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: "-80px", left: "-80px", width: "320px", height: "320px", borderRadius: "50%", background: "radial-gradient(circle, rgba(255,107,53,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
-
-        <div style={{ maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
-
-          {/* Header */}
-          <div style={{ textAlign: "center", marginBottom: "56px" }}>
-            <span
-              style={{
-                display: "inline-block",
-                padding: "4px 14px",
-                borderRadius: "999px",
-                fontSize: "14px",
-                fontWeight: 700,
-                letterSpacing: "2.5px",
-                textTransform: "uppercase",
-                marginBottom: "12px",
-                border: "1px solid rgba(232,66,10,0.4)",
-                color: "#ff6b35",
-                background: "rgba(232,66,10,0.12)",
-              }}
-            >
-              Our Trust
+      <section style={{ background: "linear-gradient(160deg, #0b1830 0%, #112244 55%, #0d1b3e 100%)", padding: "78px 20px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "40px" }}>
+            <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px", border: "1px solid rgba(232,66,10,0.4)", color: "#ff6b35", background: "rgba(232,66,10,0.12)" }}>
+              {t.trustTag}
             </span>
-            <h2
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontWeight: 800,
-                fontSize: "clamp(24px, 2.8vw, 36px)",
-                color: "white",
-                marginBottom: "10px",
-              }}
-            >
-              Bhagwan Parshuram Education &amp;{" "}
-              <span style={{ color: "#ff6b35" }}>Charitable Trust</span>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px,2.8vw,36px)", color: "white", marginBottom: "8px" }}>
+              {t.trustTitleA} <span style={{ color: "#ff6b35" }}>{t.trustTitleB}</span>
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "15px", maxWidth: "500px", margin: "0 auto" }}>
-              The foundation behind every initiative at Sniper Group of Education
-            </p>
+            <p style={{ color: "rgba(255,255,255,0.62)", fontSize: "15px", maxWidth: "620px", margin: "0 auto" }}>{t.trustSub}</p>
           </div>
 
-          {/* Two-column content */}
-          <div
-            className="about-trust-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "28px",
-              marginBottom: "28px",
-            }}
-          >
-            {/* Left — trust description */}
-            <div
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                borderRadius: "20px",
-                padding: "36px",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              {/* Left accent bar */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "4px",
-                  height: "100%",
-                  background: "linear-gradient(to bottom, #e8420a, #ff6b35)",
-                }}
-              />
-              <h3
-                style={{
-                  fontSize: "19px",
-                  fontWeight: 800,
-                  color: "white",
-                  marginBottom: "16px",
-                  fontFamily: "'Playfair Display', Georgia, serif",
-                }}
-              >
-                About the Trust
-              </h3>
-              <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "15px", lineHeight: 1.9, marginBottom: "16px" }}>
-                Sniper Group operates under{" "}
-                <strong style={{ color: "white" }}>
-                  Bhagwan Parshuram Education &amp; Charitable Trust
-                </strong>{" "}
-                — committed to making quality education accessible to every child, regardless of
-                their family's financial situation.
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "15px", lineHeight: 1.9, marginBottom: "28px" }}>
-                The Trust actively supports merit scholarships, fee concessions for deserving
-                students, and community welfare programs within the district.
-              </p>
-              <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "20px" }}>
-                <p
-                  style={{
-                    color: "#ff8c42",
-                    fontSize: "20px",
-                    fontWeight: 800,
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                    letterSpacing: "0.5px",
-                    margin: 0,
-                  }}
-                >
-                  दादा परशुराम की जय
-                </p>
-              </div>
-            </div>
-
-            {/* Right — 4 feature rows */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-              {[
-                { letter: "R", label: "Registered Charitable Trust",   sub: "Legally registered, transparent, and accountable in all operations.",               color: "#FF9933" },
-                { letter: "S", label: "Merit Scholarships",             sub: "Financial support for academically deserving students from all backgrounds.",         color: "#10b981" },
-                { letter: "W", label: "Community Welfare",              sub: "Programs benefiting students and families across the district.",                      color: "#7c3aed" },
-                { letter: "A", label: "Army Family Concessions",        sub: "Special fee discounts for staff wards and defence families.",                         color: "#e8420a" },
-              ].map((item, i) => (
-                <div
-                  className="trust-item-row"
-                  key={i}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = item.color + "44"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
-                >
-                  <div
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "10px",
-                      background: `${item.color}20`,
-                      border: `1.5px solid ${item.color}40`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "15px",
-                      fontWeight: 800,
-                      color: item.color,
-                      flexShrink: 0,
-                      fontFamily: "'Playfair Display', Georgia, serif",
-                    }}
-                  >
-                    {item.letter}
-                  </div>
-                  <div>
-                    <p style={{ fontSize: "14px", fontWeight: 700, color: "white", margin: "0 0 3px" }}>{item.label}</p>
-                    <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.52)", margin: 0, lineHeight: 1.6 }}>{item.sub}</p>
-                  </div>
+          <div className="about-grid-four">
+            {t.trustPoints.map((point, idx) => (
+              <div key={point} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "16px", padding: "22px" }}>
+                <div style={{ width: "36px", height: "36px", borderRadius: "10px", background: "rgba(232,66,10,0.16)", color: "#ff8a57", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "10px" }}>
+                  {idx + 1}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom stats strip */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-              gap: "16px",
-            }}
-          >
-            {[
-              { num: "2020", label: "Year Established",              color: "#FF9933" },
-              { num: "3",    label: "Educational Wings",             color: "#10b981" },
-              { num: "20%",  label: "Discount for Army Families",    color: "#7c3aed" },
-              { num: "50%",  label: "Off Admission for Old Students", color: "#e8420a" },
-            ].map((s, i) => (
-              <div className="trust-stat-card" key={i}>
-                <p
-                  style={{
-                    fontSize: "30px",
-                    fontWeight: 900,
-                    color: s.color,
-                    margin: "0 0 4px",
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                  }}
-                >
-                  {s.num}
-                </p>
-                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.52)", margin: 0, lineHeight: 1.5 }}>
-                  {s.label}
-                </p>
+                <p style={{ color: "rgba(255,255,255,0.82)", margin: 0, fontSize: "14px", lineHeight: 1.8 }}>{point}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 5. VISION & MISSION */}
       <section style={{ background: "#0d1b3e", padding: "72px 20px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <span
-              style={{
-                display: "inline-block",
-                padding: "4px 14px",
-                borderRadius: "999px",
-                fontSize: "14px",
-                fontWeight: 700,
-                letterSpacing: "2.5px",
-                textTransform: "uppercase",
-                marginBottom: "12px",
-                border: "1px solid rgba(232,66,10,0.4)",
-                color: "#ff6b35",
-                background: "rgba(232,66,10,0.12)",
-              }}
-            >
-              Our Purpose
+          <div style={{ textAlign: "center", marginBottom: "44px" }}>
+            <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px", border: "1px solid rgba(232,66,10,0.4)", color: "#ff6b35", background: "rgba(232,66,10,0.12)" }}>
+              {t.purposeTag}
             </span>
-            <h2
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontWeight: 800,
-                fontSize: "clamp(24px, 2.8vw, 34px)",
-                color: "white",
-              }}
-            >
-              Vision &amp; <span style={{ color: "#ff6b35" }}>Mission</span>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, fontSize: "clamp(24px,2.8vw,34px)", color: "white" }}>
+              {t.purposeTitleA} <span style={{ color: "#ff6b35" }}>{t.purposeTitleB}</span>
             </h2>
           </div>
-
-          <div
-            className="about-vm-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-              gap: "20px",
-            }}
-          >
-            {[
-              { icon: "V", title: "Our Vision",      color: "#FF9933", desc: "To become the most trusted educational institution in our region — where every student, regardless of background, gets a genuine shot at a successful future." },
-              { icon: "M", title: "Our Mission",     color: "#10b981", desc: "To deliver focused, practical, and disciplined education that prepares students for defence services, board exams, and competitive examinations — right here in their hometown." },
-              { icon: "V", title: "Our Values",      color: "#7c3aed", desc: "Discipline, sincerity, respect, and hard work are the principles we live by at Sniper Group. These values are not just taught — they are practised every day." },
-              { icon: "C", title: "Our Commitment",  color: "#e8420a", desc: "Every student who walks through our doors receives honest guidance, dedicated faculty attention, and a learning environment built for real results." },
-            ].map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  borderRadius: "16px",
-                  padding: "28px",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  transition: "all 0.25s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.09)";
-                  e.currentTarget.style.borderColor = item.color + "55";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                }}
-              >
-                <div
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "12px",
-                    background: `${item.color}20`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "18px",
-                    fontWeight: 800,
-                    color: item.color,
-                    marginBottom: "16px",
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                  }}
-                >
-                  {item.icon}
+          <div className="about-grid-four">
+            {t.cards.map((card, index) => (
+              <div key={`${card.title}-${index}`} style={{ background: "rgba(255,255,255,0.06)", borderRadius: "16px", padding: "24px", border: "1px solid rgba(255,255,255,0.12)" }}>
+                <div style={{ width: "46px", height: "46px", borderRadius: "12px", background: "rgba(255,107,53,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#ff8a57", fontWeight: 800, marginBottom: "14px" }}>
+                  {card.icon}
                 </div>
-                <h3 style={{ fontSize: "16px", fontWeight: 700, color: "white", marginBottom: "10px" }}>{item.title}</h3>
-                <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.80)", lineHeight: 1.8, margin: 0 }}>{item.desc}</p>
+                <h3 style={{ color: "white", fontSize: "16px", fontWeight: 700, marginBottom: "8px" }}>{card.title}</h3>
+                <p style={{ margin: 0, color: "rgba(255,255,255,0.8)", fontSize: "14px", lineHeight: 1.8 }}>{card.desc}</p>
               </div>
             ))}
           </div>
@@ -645,6 +326,4 @@ const About = () => {
       </section>
     </div>
   );
-};
-
-export default About;
+}

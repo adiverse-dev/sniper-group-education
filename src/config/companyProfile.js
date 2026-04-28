@@ -5,7 +5,7 @@ export const COMPANY_PROFILE = {
   foundedYear: 2020,
   completedYears: 6,
   city: "Meerut, Uttar Pradesh",
-  cityTier: "Tier-2 city in India",
+  cityTier: "",
 };
 
 export const COMPANY_TEXT = {
@@ -13,5 +13,5 @@ export const COMPANY_TEXT = {
   sinceFounded: `since ${COMPANY_PROFILE.foundedYear}`,
   estText: `Est. ${COMPANY_PROFILE.foundedYear}`,
   trustSinceText: `Since ${COMPANY_PROFILE.foundedYear}`,
-  cityTierText: `${COMPANY_PROFILE.city} · ${COMPANY_PROFILE.cityTier}`,
+  cityTierText: COMPANY_PROFILE.city,
 };

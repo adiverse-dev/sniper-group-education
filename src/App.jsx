@@ -1,39 +1,34 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
-
-// ── Shared Components (banayenge step by step) ──
 import AnnouncementBar from "./components/AnnouncementBar";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SeoManager from "./components/SeoManager";
- import WhatsappButton from "./components/WhatsappButton";
- import CallbackButton from "./components/Callbackbutton";
-
+import WhatsappButton from "./components/WhatsappButton";
+import { LanguageProvider } from "./i18n/LanguageProvider";
 import "./index.css";
 import "./App.css";
 
-function App() {
+function AppShell() {
   const location = useLocation();
 
-  // Har page change pe scroll to top
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname]);
 
-  // Fade-in on scroll — global observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) e.target.classList.add("visible");
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
         });
       },
       { threshold: 0.08 }
     );
 
     const elements = document.querySelectorAll(".fade-in");
-    elements.forEach((el) => observer.observe(el));
+    elements.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
   }, [location.pathname]);
@@ -41,28 +36,24 @@ function App() {
   return (
     <div className="app-wrapper">
       <SeoManager />
-
-      {/* ── Top Bar ── */}
       <AnnouncementBar />
-
-      {/* ── Navbar ── */}
       <Navbar />
-
-      {/* ── Page Content ── */}
       <main>
         <AppRoutes />
       </main>
-
-      {/* ── Footer ── */}
-      {<Footer /> }
-
-      {/* ── Floating Buttons ── */}
-      { <WhatsappButton /> }
-      
-      
-
+      <Footer />
+      <WhatsappButton />
     </div>
   );
 }
 
+function App() {
+  return (
+    <LanguageProvider>
+      <AppShell />
+    </LanguageProvider>
+  );
+}
+
 export default App;
+

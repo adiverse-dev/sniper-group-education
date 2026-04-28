@@ -61,7 +61,7 @@ function VideoSection() {
               We are governed by <strong style={{ color: "#0d1b3e" }}>{COMPANY_PROFILE.trustName}</strong> — a registered trust committed to uplifting society through quality education and character-building {COMPANY_TEXT.sinceFounded}.
             </p>
             <p style={{ fontSize: "15px", color: "#475569", lineHeight: 1.85 }}>
-              Based in {COMPANY_PROFILE.city} — a {COMPANY_PROFILE.cityTier} — our mission is to make world-class education and defence training accessible to every child, regardless of background.
+              Based in {COMPANY_PROFILE.city}, our mission is to make world-class education and defence training accessible to every child, regardless of background.
             </p>
           </div>
 

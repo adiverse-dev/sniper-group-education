@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../i18n/LanguageProvider";
+import { buildLocalizedPath } from "../i18n/language";
 
 function preloadImage(src) {
   return new Promise((resolve) => {
@@ -33,6 +35,7 @@ function preloadImage(src) {
 }
 
 function HeroSlider({ slides, waitForFirstSlide = false }) {
+  const { lang } = useLanguage();
   const total = slides?.length || 0;
   const [cur, setCur] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
@@ -136,6 +139,8 @@ function HeroSlider({ slides, waitForFirstSlide = false }) {
   }
 
   const s = slides[cur];
+  const primaryLink = s.link ? buildLocalizedPath(s.link, lang) : null;
+  const contactLink = buildLocalizedPath("/contact", lang);
 
   return (
     <div style={{ position: "relative", width: "100%", height: "420px", overflow: "hidden" }}>
@@ -326,9 +331,9 @@ function HeroSlider({ slides, waitForFirstSlide = false }) {
         )}
 
         <div className="hs-cta" style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          {s.link && (
+          {primaryLink && (
             <Link
-              to={s.link}
+              to={primaryLink}
               style={{
                 padding: "11px 26px",
                 borderRadius: "8px",
@@ -347,7 +352,7 @@ function HeroSlider({ slides, waitForFirstSlide = false }) {
             </Link>
           )}
           <Link
-            to="/contact"
+            to={contactLink}
             style={{
               padding: "11px 24px",
               borderRadius: "8px",

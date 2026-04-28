@@ -24,19 +24,41 @@ function RouteFallback() {
   );
 }
 
+const PAGE_ROUTES = [
+  { path: "/", element: <HomePortal /> },
+  { path: "/defence", element: <DefenceAcademy /> },
+  { path: "/school", element: <PublicSchool /> },
+  { path: "/classes", element: <SniperClasses /> },
+  { path: "/about", element: <About /> },
+  { path: "/results", element: <Results /> },
+  { path: "/fees", element: <FeeStructure /> },
+  { path: "/gallery", element: <Gallery /> },
+  { path: "/contact", element: <Contact /> },
+];
+
+function languagePaths(basePath) {
+  if (basePath === "/") return ["/en", "/hi"];
+  return [`/en${basePath}`, `/hi${basePath}`];
+}
+
 function AppRoutes() {
   return (
     <Suspense fallback={<RouteFallback />}>
       <Routes>
-        <Route path="/" element={<HomePortal />} />
-        <Route path="/defence" element={<DefenceAcademy />} />
-        <Route path="/school" element={<PublicSchool />} />
-        <Route path="/classes" element={<SniperClasses />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/results" element={<Results />} />
-        <Route path="/fees" element={<FeeStructure />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/contact" element={<Contact />} />
+        {PAGE_ROUTES.map((routeItem) => (
+          <Route key={`base-${routeItem.path}`} path={routeItem.path} element={routeItem.element} />
+        ))}
+
+        {PAGE_ROUTES.flatMap((routeItem) =>
+          languagePaths(routeItem.path).map((localizedPath) => (
+            <Route
+              key={`${localizedPath}`}
+              path={localizedPath}
+              element={routeItem.element}
+            />
+          ))
+        )}
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
@@ -44,3 +66,4 @@ function AppRoutes() {
 }
 
 export default AppRoutes;
+
