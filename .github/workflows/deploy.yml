@@ -1,4 +1,4 @@
-name: Deploy React App to Hostinger
+name: Deploy Vite App
  
 on:
   push:
@@ -10,21 +10,23 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
  
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
  
-      - name: Build React App
+      - name: Build project
         run: npm run build
+ 
+      - name: Check build output
+        run: ls -R
  
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
-          server: your-ftp-host
+          server: ftp://145.223.17.185
           username: u969966385
           password: SniperX213
-          local-dir: build/
-          server-dir: public_html/
+          local-dir: dist/
  
